@@ -8,6 +8,7 @@ import { firstName, money, relDays } from "@/lib/format";
 import type { CaseRow, DeadlineRow } from "@/lib/types";
 import { getPlan } from "@/lib/plan";
 import Upsell from "@/components/Upsell";
+import InstallPrompt from "@/components/InstallPrompt";
 
 export default async function Today({ searchParams }: { searchParams: Promise<{ upgraded?: string }> }) {
   const { upgraded } = await searchParams;
@@ -54,6 +55,7 @@ export default async function Today({ searchParams }: { searchParams: Promise<{ 
           <Link href="/app/scan" aria-label="Add a document" className="icon-btn"><PlusIcon /></Link>
         </div>
         {toast}
+        <InstallPrompt />
         <div className="card stack g8"><Greeting name={name} style={{ fontSize: 22 }} /><p style={{ margin: 0 }}>Nothing needs you today. Enjoy it.</p></div>
         <div className="stack g12 center" style={{ alignItems: "center", marginTop: 72 }}>
           <svg width="120" height="88" viewBox="0 0 120 88" aria-hidden="true"><path d="M14 52h92l-8 28H22z" fill="#fff" stroke="#1A1A1A" strokeWidth="1.8" strokeLinejoin="round" /><path d="M14 52l10-16h72l10 16" fill="none" stroke="#1A1A1A" strokeWidth="1.8" strokeLinejoin="round" /><path d="M44 52a16 6 0 0 0 32 0" fill="none" stroke="#1A1A1A" strokeWidth="1.8" /><circle cx="92" cy="18" r="8" fill="#FDEEE7" stroke="#BF4F28" strokeWidth="1.8" /></svg>
@@ -82,6 +84,7 @@ export default async function Today({ searchParams }: { searchParams: Promise<{ 
 
       <div className="stack g20">
         {toast}
+        <InstallPrompt />
         {profile?.morning_briefing !== false && (
           <div className="card stack g8" style={{ borderRadius: 24 }}>
             <Greeting name={name} style={{ fontSize: 24 }} />

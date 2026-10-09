@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#ffffff" />
+<title>You're offline · Take it back</title>
+<style>
+  :root { color-scheme: light; }
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #fff; color: #1A1A1A; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; padding: 24px; box-sizing: border-box; }
+  main { max-width: 360px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  h1 { font-family: Georgia, serif; font-weight: 400; font-size: 34px; line-height: 1.1; margin: 8px 0 0; letter-spacing: -0.02em; }
+  em { color: #BF4F28; }
+  p { margin: 0; color: #5E5E5E; font-size: 16px; line-height: 1.5; }
+  button { margin-top: 10px; min-height: 48px; padding: 0 26px; border-radius: 999px; border: 0; background: #1A1A1A; color: #fff; font-size: 16px; font-weight: 500; cursor: pointer; }
+</style>
+</head>
+<body>
+<main>
+  <svg width="56" height="56" viewBox="0 0 64 64" aria-hidden="true"><path d="M47 54V32a15 15 0 0 0-15-15H15" fill="none" stroke="#BF4F28" stroke-width="8.5" stroke-linecap="round"/><path d="M26 6L15 17l11 11" fill="none" stroke="#BF4F28" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="47" cy="54" r="4.25" fill="#1A1A1A"/></svg>
+  <h1>You're <em>offline</em></h1>
+  <p>Your cases are saved safely. Reconnect to pick up where you left off.</p>
+  <button onclick="location.reload()">Try again</button>
+</main>
+</body>
+</html>
