@@ -162,6 +162,6 @@ export async function draftLetter(caseContext: string, kind: string, senderName:
       },
       required: ["recipient", "subject", "body"],
     },
-    [{ type: "text", text: `Write a ${kind} letter for this case.\nSender: ${senderName || "[YOUR NAME]"}\n${caseContext}\nAsk for the specific fix, cite rules only where the case notes support them, ask for a written response, and request copies of anything the person is entitled to (itemized bill, claim file, validation of the debt) when relevant.` }]
+    [{ type: "text", text: `Write this letter for the case: ${kind}\nSender: ${senderName || "[YOUR NAME]"}\n${caseContext}\nAsk for the specific fix, cite rules only where the case notes support them, ask for a written response, and request copies of anything the person is entitled to (itemized bill, claim file, validation of the debt) when relevant.` }]
   );
 }

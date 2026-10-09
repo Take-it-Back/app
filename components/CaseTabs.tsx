@@ -7,9 +7,12 @@ import { useEffect, useRef } from "react";
 const TABS: [string, string][] = [
   ["", "Overview"],
   ["/found", "What we found"],
-  ["/letter", "Letters"],
+  ["/write", "Letters"],
+  ["/calls", "Calls"],
+  ["/escalate", "Escalate"],
   ["/reply", "Their reply"],
   ["/docs", "Files"],
+  ["/share", "Helpers"],
   ["/packet", "Packet"],
 ];
 

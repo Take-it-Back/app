@@ -19,10 +19,16 @@ export async function getPlan(supabase: SupabaseClient, userId: string): Promise
   return { premium, status: data?.plan_status ?? null, periodEnd: data?.current_period_end ?? null, customer: data?.stripe_customer_id ?? null };
 }
 
+/** Premium for this case: your own plan, or the case owner's when you're a helper on it. */
+export async function getCasePremium(supabase: SupabaseClient, userId: string, caseId: string) {
+  const [plan, { data }] = await Promise.all([getPlan(supabase, userId), supabase.rpc("case_premium", { p_case: caseId })]);
+  return plan.premium || data === true;
+}
+
 export async function scansThisMonth(supabase: SupabaseClient) {
   const now = new Date();
   const start = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)).toISOString();
-  const { count } = await supabase.from("cases").select("id", { count: "exact", head: true }).gte("created_at", start);
+  const { count } = await supabase.from("cases").select("id", { count: "exact", head: true }).gte("created_at", start).eq("is_demo", false);
   return count ?? 0;
 }
 

@@ -8,7 +8,7 @@ import { CATEGORY_INFO, daysUntil } from "@/lib/rules";
 import { money, relDays, shortDate } from "@/lib/format";
 import { addDeadline, addNote, closeCase, deleteCase, toggleDeadline, updateCaseBasics, updateDeadline } from "@/lib/actions";
 import type { CaseRow, DeadlineRow, EventRow, LetterRow } from "@/lib/types";
-import { getPlan } from "@/lib/plan";
+import { getCasePremium } from "@/lib/plan";
 import Upsell from "@/components/Upsell";
 
 export default async function CasePage({ params }: { params: Promise<{ id: string }> }) {
@@ -20,7 +20,7 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
     supabase.from("events").select("*").eq("case_id", id).order("happened_at", { ascending: false }),
     supabase.from("letters").select("*").eq("case_id", id).order("created_at", { ascending: false }),
     supabase.from("documents").select("id", { count: "exact", head: true }).eq("case_id", id),
-    getPlan(supabase, user.id),
+    getCasePremium(supabase, user.id, id).then((premium) => ({ premium })),
   ]);
   if (!cData) notFound();
   const c = cData as CaseRow;
@@ -115,7 +115,7 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
                 <CtaLink href={`/app/cases/${id}/letter?id=${draft.id}`} variant="orange" block>Review your letter</CtaLink>
               ) : c.status === "waiting" ? (
                 <>
-                  <UploadButton caseId={id} userId={user.id} kind="reply" label="They replied — add their letter" analyze />
+                  <UploadButton caseId={id} userId={user.id} ownerId={c.user_id} kind="reply" label="They replied — add their letter" analyze />
                   <span className="hand muted" style={{ fontSize: 20 }}>no reply by the date? we'll help you follow up</span>
                   <WriteLetterButton caseId={id} kind="followup" label="Write a follow-up" variant="ink" />
                 </>
@@ -124,6 +124,15 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
               )}
               {c.findings?.length > 0 && <Link href={`/app/cases/${id}/found`} style={{ fontSize: 15, fontWeight: 500 }}>See what we found</Link>}
             </div>
+          )}
+
+          {!done && (
+            <nav aria-label="More moves" className="quick">
+              <Link href={`/app/cases/${id}/write`} className="o">All letters</Link>
+              <Link href={`/app/cases/${id}/calls`}>Call script</Link>
+              <Link href={`/app/cases/${id}/escalate`}>Escalate</Link>
+              <Link href={`/app/cases/${id}/share`}>Add a helper</Link>
+            </nav>
           )}
 
           {c.next_steps?.length > 0 && !done && (

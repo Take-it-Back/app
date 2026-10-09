@@ -4,6 +4,7 @@ import { requireUser } from "@/lib/supabase/server";
 import { getPlan } from "@/lib/plan";
 import { Avatar } from "@/components/ui";
 import { TOOLS } from "@/lib/tools";
+import { createDemoCase } from "@/lib/actions";
 
 export const metadata: Metadata = { title: "More" };
 
@@ -50,6 +51,11 @@ export default async function ToolsPage() {
             </div>
           </section>
         ))}
+
+        <form action={createDemoCase} className="panel-gray row g12 wrap" style={{ alignItems: "center", justifyContent: "space-between" }}>
+          <span className="stack g4"><span style={{ fontWeight: 600 }}>Try a sample case</span><span className="muted small">See how a fight plays out, start to finish. Delete it anytime.</span></span>
+          <button className="btn-plain">Open sample</button>
+        </form>
 
         {!plan.premium && (
           <Link href="/app/upgrade" className="panel-orange stack g4" style={{ textDecoration: "none" }}>

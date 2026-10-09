@@ -399,6 +399,14 @@ export const PLAN_ROWS: [string, string, string][] = [
   ["Case tracker and timeline", "—", "Yes"],
   ["Their replies read and explained", "—", "Yes"],
   ["Document vault and case packet", "—", "Yes"],
+  ["Call scripts for every fight", "Yes", "Yes, with a call log"],
+  ["Lower-my-bill letters and payment plans", "—", "Yes"],
+  ["Complaints to regulators and credit disputes", "—", "Yes"],
+  ["Small claims kit", "Steps only", "Yes, with your statement"],
+  ["Forward bills by email", "—", "Yes"],
+  ["Text and email reminders", "—", "Yes"],
+  ["Family helpers on a case", "—", "Up to 4"],
+  ["We mail or fax it for you", "—", "$8.99 certified mail, $1.99 fax"],
 ];
 
 export const FAQ_GROUPS: { title: string; items: [string, string][] }[] = [

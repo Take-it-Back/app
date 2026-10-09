@@ -14,7 +14,8 @@ const FILTERS = [
 
 export default async function CasesPage({ searchParams }: { searchParams: Promise<{ f?: string; c?: string }> }) {
   const { f = "all", c: cat } = await searchParams;
-  const { supabase } = await requireUser();
+  const { supabase, user } = await requireUser();
+  await supabase.rpc("claim_case_shares");
   const [{ data: casesData }, { data: dl }] = await Promise.all([
     supabase.from("cases").select("*").order("updated_at", { ascending: false }),
     supabase.from("deadlines").select("*").eq("done", false).order("due_date"),
@@ -60,7 +61,7 @@ export default async function CasesPage({ searchParams }: { searchParams: Promis
           {groups.map((g) => (
             <section key={g.key} className="stack" style={{ marginBottom: 22 }}>
               <div className="sec-head"><h2>{g.label} <span className="n">{g.items.length}</span></h2></div>
-              {g.items.map((c) => <CaseRowLink key={c.id} c={c} deadline={byCase.get(c.id)} showDays={g.key !== "done" && byCase.has(c.id)} />)}
+              {g.items.map((c) => <CaseRowLink key={c.id} c={c} viewerId={user.id} deadline={byCase.get(c.id)} showDays={g.key !== "done" && byCase.has(c.id)} />)}
               {!g.items.length && <span className="muted small" style={{ padding: "8px 0" }}>Nothing here.</span>}
             </section>
           ))}

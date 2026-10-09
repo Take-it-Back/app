@@ -4,7 +4,7 @@ import { requireUser } from "@/lib/supabase/server";
 import { BackLink, CtaLink } from "@/components/ui";
 import { WriteLetterButton } from "@/components/CaseActions";
 import { CATEGORY_INFO, firstDeadline } from "@/lib/rules";
-import { getPlan } from "@/lib/plan";
+import { getCasePremium } from "@/lib/plan";
 import Upsell, { LockedNote } from "@/components/Upsell";
 import { money, shortDate } from "@/lib/format";
 import type { CaseRow, DeadlineRow } from "@/lib/types";
@@ -16,7 +16,7 @@ export default async function FoundPage({ params, searchParams }: { params: Prom
   const [{ data }, { data: dl }, plan] = await Promise.all([
     supabase.from("cases").select("*").eq("id", id).maybeSingle(),
     supabase.from("deadlines").select("*").eq("case_id", id).eq("owner", "you").eq("done", false).order("due_date").limit(1),
-    getPlan(supabase, user.id),
+    getCasePremium(supabase, user.id, id).then((premium) => ({ premium })),
   ]);
   if (!data) notFound();
   const c = data as CaseRow;

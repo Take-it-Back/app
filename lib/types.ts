@@ -25,6 +25,7 @@ export interface NextStep {
 export interface CaseRow {
   id: string;
   user_id: string;
+  is_demo?: boolean;
   category: Category;
   title: string;
   counterparty: string | null;

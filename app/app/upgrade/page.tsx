@@ -4,7 +4,7 @@ import { BackLink, CtaButton } from "@/components/ui";
 import { PRICES, TRIAL_DAYS, getPlan } from "@/lib/plan";
 
 const FREE = ["Scan up to 3 papers a month", "A plain-English summary", "General next steps and red flags", "Free legal aid finder"];
-const PREMIUM = ["Unlimited scans", "Every problem we found, in full, with the rule behind it", "Letters written for you, ready to print or email", "Every deadline tracked, with email reminders", "Their replies read and explained", "Your whole case file and a printable case packet"];
+const PREMIUM = ["Unlimited scans", "Every problem we found, in full, with the rule behind it", "Letters written for you, ready to print or email", "Every deadline tracked, with email reminders", "Their replies read and explained", "Your whole case file and a printable case packet", "Complaints to regulators and credit report disputes", "Forward bills by email, text reminders and family helpers"];
 
 function Check({ on = true }: { on?: boolean }) {
   return (

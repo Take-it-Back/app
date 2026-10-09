@@ -15,7 +15,7 @@ export function nextLine(c: CaseRow, d?: DeadlineRow) {
   return c.amount_at_stake ? `${money(c.amount_at_stake)} at stake` : c.summary?.slice(0, 50) || "";
 }
 
-export default function CaseRowLink({ c, deadline, showDays }: { c: CaseRow; deadline?: DeadlineRow; showDays?: boolean }) {
+export default function CaseRowLink({ c, deadline, showDays, viewerId }: { c: CaseRow; deadline?: DeadlineRow; showDays?: boolean; viewerId?: string }) {
   const days = deadline ? daysUntil(deadline.due_date) : null;
   return (
     <Link href={caseHref(c)} className="list-row">
@@ -23,7 +23,7 @@ export default function CaseRowLink({ c, deadline, showDays }: { c: CaseRow; dea
         <CategoryIcon category={c.category} />
       </span>
       <span className="stack grow">
-        <span style={{ fontWeight: 500, fontSize: 15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.title}</span>
+        <span style={{ fontWeight: 500, fontSize: 15, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{c.is_demo ? <span className="pill-free" style={{ marginLeft: 0, marginRight: 6 }}>Sample</span> : null}{viewerId && c.user_id !== viewerId ? <span className="pill-pro" style={{ marginLeft: 0, marginRight: 6 }}>Shared</span> : null}{c.title}</span>
         <span className="muted small" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{nextLine(c, deadline)}</span>
       </span>
       {showDays && days !== null ? (

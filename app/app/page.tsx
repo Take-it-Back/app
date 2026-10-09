@@ -9,10 +9,12 @@ import type { CaseRow, DeadlineRow } from "@/lib/types";
 import { getPlan } from "@/lib/plan";
 import Upsell from "@/components/Upsell";
 import InstallPrompt from "@/components/InstallPrompt";
+import { createDemoCase } from "@/lib/actions";
 
 export default async function Today({ searchParams }: { searchParams: Promise<{ upgraded?: string }> }) {
   const { upgraded } = await searchParams;
   const { supabase, user } = await requireUser();
+  await supabase.rpc("claim_case_shares");
   const [{ data: profile }, { data: casesData }, { data: dlData }, { data: letters }, plan] = await Promise.all([
     supabase.from("profiles").select("full_name, morning_briefing").eq("id", user.id).maybeSingle(),
     supabase.from("cases").select("*").order("updated_at", { ascending: false }),
@@ -62,6 +64,7 @@ export default async function Today({ searchParams }: { searchParams: Promise<{ 
           <span className="hand" style={{ fontSize: 34, lineHeight: 1 }}>a clear desk</span>
           <p className="muted" style={{ margin: 0, maxWidth: 300 }}>When a bill, denial or notice shows up, snap it and we'll take it from there.</p>
           <div style={{ marginTop: 8 }}><CtaLink href="/app/scan" variant="orange">Scan your first document</CtaLink></div>
+          <form action={createDemoCase}><button className="btn-text" style={{ fontSize: 15 }}>Or explore a sample case first</button></form>
         </div>
       </main>
     );
@@ -130,7 +133,7 @@ export default async function Today({ searchParams }: { searchParams: Promise<{ 
           <section className="a">
             <div className="sec-head"><h2>Your fights <span className="n">{open.length}</span></h2><Link href="/app/cases">See all</Link></div>
             <div className="card" style={{ padding: "4px 18px" }}>
-              {open.slice(0, 8).map((c) => <CaseRowLink key={c.id} c={c} deadline={byCase.get(c.id)} />)}
+              {open.slice(0, 8).map((c) => <CaseRowLink key={c.id} c={c} viewerId={user.id} deadline={byCase.get(c.id)} />)}
               {!open.length && <p className="muted">No open fights. Nice.</p>}
             </div>
           </section>

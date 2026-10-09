@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
-import { getPlan } from "@/lib/plan";
+import { getCasePremium } from "@/lib/plan";
 import Upsell from "@/components/Upsell";
 import { BackLink } from "@/components/ui";
 import { WriteLetterButton } from "@/components/CaseActions";
@@ -12,7 +12,7 @@ export default async function ReplyPage({ params, searchParams }: { params: Prom
   const { id } = await params;
   const { doc, note } = await searchParams;
   const { supabase, user } = await requireUser();
-  if (!(await getPlan(supabase, user.id)).premium) {
+  if (!(await getCasePremium(supabase, user.id, id))) {
     return (
       <main className="app-main">
         <BackLink href={`/app/cases/${id}`} />

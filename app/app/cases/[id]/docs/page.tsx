@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
-import { getPlan } from "@/lib/plan";
+import { getCasePremium } from "@/lib/plan";
 import Upsell from "@/components/Upsell";
 import { BackLink } from "@/components/ui";
 import { UploadButton } from "@/components/CaseActions";
@@ -12,7 +12,7 @@ const KIND_LABEL: Record<string, string> = { original: "From them", reply: "Thei
 export default async function DocsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { supabase, user } = await requireUser();
-  if (!(await getPlan(supabase, user.id)).premium) {
+  if (!(await getCasePremium(supabase, user.id, id))) {
     return (
       <main className="app-main">
         <BackLink href={`/app/cases/${id}`} />
@@ -22,7 +22,7 @@ export default async function DocsPage({ params }: { params: Promise<{ id: strin
     );
   }
   const [{ data: c }, { data: docsData }, { data: notes }] = await Promise.all([
-    supabase.from("cases").select("title").eq("id", id).maybeSingle(),
+    supabase.from("cases").select("title, user_id").eq("id", id).maybeSingle(),
     supabase.from("documents").select("*").eq("case_id", id).order("created_at"),
     supabase.from("events").select("*").eq("case_id", id).in("kind", ["note", "call"]).order("happened_at", { ascending: false }),
   ]);
@@ -36,7 +36,7 @@ export default async function DocsPage({ params }: { params: Promise<{ id: strin
     <main className="app-main wide">
       <div className="row between">
         <BackLink href={`/app/cases/${id}`} />
-        <UploadButton caseId={id} userId={user.id} kind="evidence" label="Add a file" />
+        <UploadButton caseId={id} userId={user.id} ownerId={c.user_id} kind="evidence" label="Add a file" />
       </div>
       <div className="stack g4" style={{ margin: "6px 0 18px" }}>
         <h1 className="page-title" style={{ fontSize: 38 }}>Documents</h1>

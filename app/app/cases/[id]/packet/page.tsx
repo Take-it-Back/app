@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
-import { getPlan } from "@/lib/plan";
+import { getCasePremium } from "@/lib/plan";
 import Upsell from "@/components/Upsell";
 import { BackLink } from "@/components/ui";
 import PrintButton from "@/components/PrintButton";
@@ -11,7 +11,7 @@ import type { CaseRow, DeadlineRow, DocumentRow, EventRow, LetterRow } from "@/l
 export default async function PacketPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { supabase, user } = await requireUser();
-  if (!(await getPlan(supabase, user.id)).premium) {
+  if (!(await getCasePremium(supabase, user.id, id))) {
     return (
       <main className="app-main">
         <BackLink href={`/app/cases/${id}`} />
