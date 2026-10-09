@@ -4,11 +4,15 @@ import ConfirmSubmit from "@/components/ConfirmSubmit";
 import { deleteAccount, updateProfile } from "@/lib/actions";
 import { US_STATES } from "@/lib/states";
 import PasswordReset from "./PasswordReset";
+import { getPlan } from "@/lib/plan";
+import { CtaLink } from "@/components/ui";
+import { shortDate } from "@/lib/format";
 
 export default async function YouPage({ searchParams }: { searchParams: Promise<{ reset?: string }> }) {
   const { reset } = await searchParams;
   const { supabase, user } = await requireUser();
-  const { data: p } = await supabase.from("profiles").select("*").eq("id", user.id).maybeSingle();
+  const [{ data: p }, plan] = await Promise.all([supabase.from("profiles").select("*").eq("id", user.id).maybeSingle(), getPlan(supabase, user.id)]);
+  const ends = plan.periodEnd ? shortDate(plan.periodEnd.slice(0, 10)) : null;
 
   return (
     <main className="app-main">
@@ -21,10 +25,22 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
 
         {reset && <PasswordReset />}
 
-        <div className="panel-orange stack g8">
-          <span className="serif" style={{ fontSize: 22 }}>Free while we're in <em className="o">early access</em></span>
-          <span className="small" style={{ color: "#4A4A4A" }}>Every feature is included right now. Premium, with certified mail sent for you and family members, is coming. Early users will get a free trial.</span>
-        </div>
+        {plan.premium ? (
+          <div className="panel-orange stack g8">
+            <span className="serif" style={{ fontSize: 22 }}>You're on <em className="o">Premium</em></span>
+            <span className="small" style={{ color: "#4A4A4A" }}>
+              {plan.status === "trialing" ? `Free trial${ends ? ` until ${ends}` : ""}.` : plan.status === "past_due" ? "Your last payment didn't go through. Please update your card." : ends ? `Renews ${ends}.` : "Active."}
+            </span>
+            <form action="/api/stripe/portal" method="post"><button className="btn-plain">Manage billing</button></form>
+          </div>
+        ) : (
+          <div className="panel-gray stack g8">
+            <span className="serif" style={{ fontSize: 22 }}>You're on <em className="o">Free</em></span>
+            <span className="small muted">3 scans a month with a summary and general next steps. Premium writes your letters, tracks every deadline and reads their replies.</span>
+            <CtaLink href="/app/upgrade" variant="orange">See Premium</CtaLink>
+            {plan.customer && <form action="/api/stripe/portal" method="post"><button className="btn-text small">Billing history</button></form>}
+          </div>
+        )}
 
         <form action={updateProfile} className="stack g12">
           <span className="eyebrow">Your details</span>

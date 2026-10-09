@@ -8,16 +8,19 @@ import { CATEGORY_INFO, daysUntil } from "@/lib/rules";
 import { money, relDays, shortDate } from "@/lib/format";
 import { addDeadline, addNote, closeCase, deleteCase, toggleDeadline, updateCaseBasics, updateDeadline } from "@/lib/actions";
 import type { CaseRow, DeadlineRow, EventRow, LetterRow } from "@/lib/types";
+import { getPlan } from "@/lib/plan";
+import Upsell from "@/components/Upsell";
 
 export default async function CasePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { supabase, user } = await requireUser();
-  const [{ data: cData }, { data: dl }, { data: ev }, { data: lt }, { count: docCount }] = await Promise.all([
+  const [{ data: cData }, { data: dl }, { data: ev }, { data: lt }, { count: docCount }, plan] = await Promise.all([
     supabase.from("cases").select("*").eq("id", id).maybeSingle(),
     supabase.from("deadlines").select("*").eq("case_id", id).order("due_date"),
     supabase.from("events").select("*").eq("case_id", id).order("happened_at", { ascending: false }),
     supabase.from("letters").select("*").eq("case_id", id).order("created_at", { ascending: false }),
     supabase.from("documents").select("id", { count: "exact", head: true }).eq("case_id", id),
+    getPlan(supabase, user.id),
   ]);
   if (!cData) notFound();
   const c = cData as CaseRow;
@@ -29,6 +32,33 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
   const theirs = deadlines.find((d) => d.owner === "them" && !d.done);
   const info = CATEGORY_INFO[c.category];
   const done = ["won", "settled", "closed"].includes(c.status);
+
+  if (!plan.premium) {
+    return (
+      <main className="app-main">
+        <BackLink href="/app/cases" />
+        <div className="stack g8" style={{ margin: "8px 0 20px" }}>
+          <span className="tag tag-gray row g4" style={{ alignSelf: "flex-start" }}><CategoryIcon category={c.category} size={14} />{info.label}</span>
+          <h1 className="page-title" style={{ fontSize: 36 }}>{c.title}</h1>
+          <span className="muted" style={{ fontSize: 15 }}>{[c.counterparty, c.amount_at_stake ? `${money(c.amount_at_stake)} at stake` : null].filter(Boolean).join(" · ")}</span>
+        </div>
+        <div className="stack g20">
+          {c.red_flag && (
+            <Link href="/app/help" className="panel-orange stack g4" style={{ textDecoration: "none" }}>
+              <span className="eyebrow" style={{ color: "#A8441F" }}>This may need a real person</span>
+              <span style={{ fontSize: 15 }}>{c.red_flag_reason || "Something here moves fast."} Tap for help finding legal aid.</span>
+            </Link>
+          )}
+          {c.summary && <p style={{ margin: 0, fontSize: 17 }}>{c.summary}</p>}
+          <CtaLink href={`/app/cases/${id}/found`} variant="ink" block>See where you stand</CtaLink>
+          <Upsell title="Track this fight from start to finish" />
+          <form action={deleteCase.bind(null, id)}>
+            <ConfirmSubmit message="Delete this case and its files? This can't be undone." className="btn-text" style={{ color: "#A8441F" }}>Delete this case and its files</ConfirmSubmit>
+          </form>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="app-main wide">

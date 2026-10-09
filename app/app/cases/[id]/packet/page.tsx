@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
+import { getPlan } from "@/lib/plan";
+import Upsell from "@/components/Upsell";
 import { BackLink } from "@/components/ui";
 import PrintButton from "@/components/PrintButton";
 import { CATEGORY_INFO } from "@/lib/rules";
@@ -9,6 +11,15 @@ import type { CaseRow, DeadlineRow, DocumentRow, EventRow, LetterRow } from "@/l
 export default async function PacketPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { supabase, user } = await requireUser();
+  if (!(await getPlan(supabase, user.id)).premium) {
+    return (
+      <main className="app-main">
+        <BackLink href={`/app/cases/${id}`} />
+        <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 20px" }}>Case <em className="o">packet</em></h1>
+        <Upsell title="One packet with everything" body="Premium builds a printable packet with your timeline, letters and documents for a regulator, lawyer or court." />
+      </main>
+    );
+  }
   const [{ data: cd }, { data: ev }, { data: lt }, { data: dl }, { data: dc }, { data: profile }] = await Promise.all([
     supabase.from("cases").select("*").eq("id", id).maybeSingle(),
     supabase.from("events").select("*").eq("case_id", id).order("happened_at"),

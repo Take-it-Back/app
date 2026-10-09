@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { aiConfigured, analyzeReply } from "@/lib/ai";
 import { loadMedia } from "@/lib/media";
+import { getPlan } from "@/lib/plan";
 
 export const maxDuration = 60;
 
@@ -11,6 +12,8 @@ export async function POST(request: Request) {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "Please sign in." }, { status: 401 });
+  if (!(await getPlan(supabase, user.id)).premium)
+    return NextResponse.json({ error: "Reading their reply is part of Premium. Start a free 7-day trial to use it.", upgrade: true }, { status: 402 });
 
   const { caseId, documentId } = (await request.json().catch(() => ({}))) as { caseId?: string; documentId?: string };
   if (!caseId || !documentId) return NextResponse.json({ error: "Missing details." }, { status: 400 });

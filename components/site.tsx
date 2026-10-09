@@ -1,23 +1,14 @@
 import Link from "next/link";
 import { CtaLink, Logo } from "./ui";
+import SiteNav from "./SiteNav";
+import { FEATURES, PROBLEMS } from "@/lib/marketing";
 
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <div className="wrap-1200 row wrap between g12" style={{ paddingTop: 14, paddingBottom: 14 }}>
+      <div className="wrap-1200 row between g12" style={{ paddingTop: 12, paddingBottom: 12 }}>
         <Logo />
-        <nav aria-label="Main" className="row wrap g20" style={{ fontSize: 15 }}>
-          <Link href="/#features" style={{ textDecoration: "none", padding: "10px 0" }}>Features</Link>
-          <Link href="/#pricing" style={{ textDecoration: "none", padding: "10px 0" }}>Pricing</Link>
-          <Link href="/#faq" style={{ textDecoration: "none", padding: "10px 0" }}>Help</Link>
-          <Link href="/login" style={{ textDecoration: "none", padding: "10px 0" }}>Sign in</Link>
-          <Link href="/login?mode=signup" className="btn btn-ink" style={{ minHeight: 44, padding: "4px 4px 4px 16px", fontSize: 14 }}>
-            Start free
-            <span className="dot" style={{ width: 36, height: 36 }}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14" /><path d="M13 6l6 6-6 6" /></svg>
-            </span>
-          </Link>
-        </nav>
+        <SiteNav />
       </div>
     </header>
   );
@@ -33,7 +24,7 @@ export function CtaBand({ title, italic, sub }: { title: string; italic: string;
           </h2>
           {sub && <p style={{ margin: 0, fontSize: 17, color: "#D4D4D4" }}>{sub}</p>}
         </div>
-        <CtaLink href="/login?mode=signup" variant="light">Scan your first letter</CtaLink>
+        <div className="stack g8"><CtaLink href="/login?mode=signup" variant="light">Start free</CtaLink><span style={{ color: "#BDBDBD", fontSize: 13 }}>No card needed. Premium trial is 7 days free.</span></div>
       </div>
     </section>
   );
@@ -48,20 +39,21 @@ export function SiteFooter() {
             <Logo />
             <span className="muted" style={{ fontSize: 14 }}>Your rights, on the clock.</span>
           </div>
-          <nav aria-label="Product" className="stack g8" style={{ fontSize: 15 }}>
-            <span className="eyebrow">Product</span>
-            <Link href="/#features" style={{ textDecoration: "none" }}>Features</Link>
-            <Link href="/features/case-tracker" style={{ textDecoration: "none" }}>Case tracker</Link>
-            <Link href="/#pricing" style={{ textDecoration: "none" }}>Pricing</Link>
+          <nav aria-label="Features" className="stack g8" style={{ fontSize: 15 }}>
+            <span className="eyebrow">Features</span>
+            {FEATURES.map((f) => <Link key={f.slug} href={`/features/${f.slug}`} style={{ textDecoration: "none" }}>{f.name}</Link>)}
           </nav>
-          <nav aria-label="Help" className="stack g8" style={{ fontSize: 15 }}>
-            <span className="eyebrow">Help</span>
-            <Link href="/#faq" style={{ textDecoration: "none" }}>Questions</Link>
-            <a href="https://www.lawhelp.org" style={{ textDecoration: "none" }}>Find legal aid</a>
-            <a href="mailto:hello@takeitback.app" style={{ textDecoration: "none" }}>Contact us</a>
+          <nav aria-label="Who it helps" className="stack g8" style={{ fontSize: 15 }}>
+            <span className="eyebrow">Who it helps</span>
+            {PROBLEMS.map((p) => <Link key={p.slug} href={`/help-with/${p.slug}`} style={{ textDecoration: "none" }}>{p.name}</Link>)}
           </nav>
           <nav aria-label="Company" className="stack g8" style={{ fontSize: 15 }}>
             <span className="eyebrow">Company</span>
+            <Link href="/how-it-works" style={{ textDecoration: "none" }}>How it works</Link>
+            <Link href="/pricing" style={{ textDecoration: "none" }}>Pricing</Link>
+            <Link href="/faq" style={{ textDecoration: "none" }}>FAQ</Link>
+            <Link href="/about" style={{ textDecoration: "none" }}>About</Link>
+            <a href="mailto:hello@takeitback.app" style={{ textDecoration: "none" }}>Contact us</a>
             <Link href="/privacy" style={{ textDecoration: "none" }}>Privacy</Link>
             <Link href="/terms" style={{ textDecoration: "none" }}>Terms</Link>
           </nav>

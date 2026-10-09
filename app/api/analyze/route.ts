@@ -5,6 +5,7 @@ import { loadMedia } from "@/lib/media";
 import { firstDeadline } from "@/lib/rules";
 import { todayISO } from "@/lib/format";
 import type { Category } from "@/lib/types";
+import { getPlan } from "@/lib/plan";
 
 export const maxDuration = 60;
 
@@ -71,9 +72,12 @@ export async function POST(request: Request) {
   const { error } = await supabase.from("cases").update(update).eq("id", caseId);
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
+  const premium = (await getPlan(supabase, user.id)).premium;
   const fd = firstDeadline(category, received, c.insured);
   await Promise.all([
-    supabase.from("deadlines").insert({ case_id: caseId, user_id: user.id, title: fd.title, due_date: fd.due, owner: "you", rule_note: fd.note }),
+    premium
+      ? supabase.from("deadlines").insert({ case_id: caseId, user_id: user.id, title: fd.title, due_date: fd.due, owner: "you", rule_note: fd.note })
+      : Promise.resolve(),
     supabase.from("events").insert({ case_id: caseId, user_id: user.id, title: "Document scanned", detail: docs?.length ? `${docs.length} page${docs.length > 1 ? "s" : ""} added` : null }),
   ]);
 

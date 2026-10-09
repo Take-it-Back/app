@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { CtaButton } from "@/components/ui";
+import { CtaButton, Mark } from "@/components/ui";
 import { US_STATES } from "@/lib/states";
 import { todayISO } from "@/lib/format";
 
@@ -80,7 +80,7 @@ export default function ScanFlow({ userId, defaultState }: { userId: string; def
   if (busy)
     return (
       <div className="stack g16 center" style={{ alignItems: "center", paddingTop: 120 }} role="status" aria-live="polite">
-        <svg width="56" height="56" viewBox="0 0 48 48" aria-hidden="true" style={{ animation: "wig 1.2s ease infinite" }}><path d="M11 8h26a7 7 0 0 1 7 7v14a7 7 0 0 1-7 7H23l-8 7v-7h-4a7 7 0 0 1-7-7V15a7 7 0 0 1 7-7z" fill="#1A1A1A" /><circle cx="16" cy="22" r="2.8" fill="#fff" /><circle cx="24" cy="22" r="2.8" fill="#fff" /><circle cx="32" cy="22" r="2.8" fill="#BF4F28" /></svg>
+        <span style={{ animation: "wig 1.2s ease infinite", display: "inline-flex" }}><Mark size={56} /></span>
         <span className="serif" style={{ fontSize: 28 }}>{busy}</span>
         <span className="hand muted" style={{ fontSize: 24 }}>this takes about half a minute</span>
       </div>

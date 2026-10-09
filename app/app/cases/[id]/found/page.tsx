@@ -3,22 +3,27 @@ import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
 import { BackLink, CtaLink } from "@/components/ui";
 import { WriteLetterButton } from "@/components/CaseActions";
-import { CATEGORY_INFO } from "@/lib/rules";
+import { CATEGORY_INFO, firstDeadline } from "@/lib/rules";
+import { getPlan } from "@/lib/plan";
+import Upsell, { LockedNote } from "@/components/Upsell";
 import { money, shortDate } from "@/lib/format";
 import type { CaseRow, DeadlineRow } from "@/lib/types";
 
 export default async function FoundPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ note?: string }> }) {
   const { id } = await params;
   const { note } = await searchParams;
-  const { supabase } = await requireUser();
-  const [{ data }, { data: dl }] = await Promise.all([
+  const { supabase, user } = await requireUser();
+  const [{ data }, { data: dl }, plan] = await Promise.all([
     supabase.from("cases").select("*").eq("id", id).maybeSingle(),
     supabase.from("deadlines").select("*").eq("case_id", id).eq("owner", "you").eq("done", false).order("due_date").limit(1),
+    getPlan(supabase, user.id),
   ]);
   if (!data) notFound();
   const c = data as CaseRow;
   const d = (dl?.[0] || null) as DeadlineRow | null;
   const hasFindings = c.findings?.length > 0;
+  const premium = plan.premium;
+  const rule = !premium ? firstDeadline(c.category, c.received_date || c.created_at.slice(0, 10), c.insured) : null;
 
   return (
     <main className="app-main">
@@ -57,9 +62,15 @@ export default async function FoundPage({ params, searchParams }: { params: Prom
               <li key={i} className="row g12" style={{ padding: "14px 0", borderBottom: i < c.findings.length - 1 ? "1px solid #EBEBEB" : 0, alignItems: "flex-start" }}>
                 <span className="serif" style={{ fontSize: 20, color: "#BF4F28", width: 18 }}>{i + 1}</span>
                 <span className="stack g4 grow">
-                  <span className="row between g8"><span style={{ fontWeight: 500, fontSize: 15 }}>{f.title}</span>{f.amount ? <span style={{ fontWeight: 500 }}>{money(f.amount)}</span> : null}</span>
-                  <span className="muted small">{f.detail}</span>
-                  {f.rule_name && <span className="small" style={{ color: "#A8441F", fontWeight: 500 }}>{f.rule_name}</span>}
+                  <span className="row between g8"><span style={{ fontWeight: 500, fontSize: 15 }}>{f.title}</span>{f.amount && premium ? <span style={{ fontWeight: 500 }}>{money(f.amount)}</span> : null}</span>
+                  {premium ? (
+                    <>
+                      <span className="muted small">{f.detail}</span>
+                      {f.rule_name && <span className="small" style={{ color: "#A8441F", fontWeight: 500 }}>{f.rule_name}</span>}
+                    </>
+                  ) : (
+                    <LockedNote>Full details and the rule behind it are in Premium</LockedNote>
+                  )}
                 </span>
               </li>
             ))}
@@ -75,7 +86,23 @@ export default async function FoundPage({ params, searchParams }: { params: Prom
           </div>
         )}
 
-        {c.red_flag ? <CtaLink href="/app/help" variant="orange" block>Find real help now</CtaLink> : <WriteLetterButton caseId={id} kind={c.next_steps?.[0]?.letter_kind || (c.category === "insurance" ? "appeal" : c.category === "debt" ? "validation" : "dispute")} />}
+        {!premium && rule && (
+          <div className="panel-gray stack g4" style={{ padding: "12px 14px" }}>
+            <span style={{ fontSize: 14, fontWeight: 500 }}>General rule: {rule.title.toLowerCase()} by about {shortDate(rule.due)}</span>
+            <span className="muted small">{rule.note} Check the date on your own letter.</span>
+          </div>
+        )}
+
+        {!premium && c.next_steps?.length > 0 && (
+          <section className="stack g8">
+            <span className="eyebrow">Your options</span>
+            {c.next_steps.map((n, i) => (
+              <span key={i} className="stack" style={{ padding: "6px 0" }}><span style={{ fontWeight: 500 }}>{i + 1}. {n.title}</span><span className="muted small">{n.detail}</span></span>
+            ))}
+          </section>
+        )}
+
+        {c.red_flag ? <CtaLink href="/app/help" variant="orange" block>Find real help now</CtaLink> : !premium ? <Upsell title="Want us to write the letter?" /> : <WriteLetterButton caseId={id} kind={c.next_steps?.[0]?.letter_kind || (c.category === "insurance" ? "appeal" : c.category === "debt" ? "validation" : "dispute")} />}
         <p className="muted small center" style={{ margin: 0 }}>Information, not legal advice. Check every date against your own letter.</p>
       </div>
     </main>

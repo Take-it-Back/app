@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
+import { getPlan } from "@/lib/plan";
+import Upsell from "@/components/Upsell";
 import { BackLink } from "@/components/ui";
 import { UploadButton } from "@/components/CaseActions";
 import { shortDate } from "@/lib/format";
@@ -10,6 +12,15 @@ const KIND_LABEL: Record<string, string> = { original: "From them", reply: "Thei
 export default async function DocsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { supabase, user } = await requireUser();
+  if (!(await getPlan(supabase, user.id)).premium) {
+    return (
+      <main className="app-main">
+        <BackLink href={`/app/cases/${id}`} />
+        <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 20px" }}>Case <em className="o">file</em></h1>
+        <Upsell title="Keep every paper in one place" body="Premium keeps their letters, your proof and every note together, ready when you need it." />
+      </main>
+    );
+  }
   const [{ data: c }, { data: docsData }, { data: notes }] = await Promise.all([
     supabase.from("cases").select("title").eq("id", id).maybeSingle(),
     supabase.from("documents").select("*").eq("case_id", id).order("created_at"),

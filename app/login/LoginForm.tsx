@@ -15,7 +15,8 @@ export default function LoginForm() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(params.get("error"));
   const [notice, setNotice] = useState<string | null>(null);
-  const next = params.get("next") || "/app";
+  const rawNext = params.get("next") || "/app";
+  const next = rawNext.startsWith("/") && !rawNext.startsWith("//") ? rawNext : "/app";
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();

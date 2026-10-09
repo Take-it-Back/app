@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { requireUser } from "@/lib/supabase/server";
+import { getPlan } from "@/lib/plan";
+import Upsell from "@/components/Upsell";
+import { BackLink } from "@/components/ui";
 import { daysUntil } from "@/lib/rules";
 import { todayISO } from "@/lib/format";
 import type { DeadlineRow } from "@/lib/types";
@@ -10,7 +13,16 @@ function dayParts(iso: string) {
 }
 
 export default async function DatesPage() {
-  const { supabase } = await requireUser();
+  const { supabase, user } = await requireUser();
+  if (!(await getPlan(supabase, user.id)).premium) {
+    return (
+      <main className="app-main">
+        <BackLink href="/app" />
+        <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 20px" }}>Your <em className="o">dates</em></h1>
+        <Upsell title="Never miss a deadline" body="Premium works out every deadline from the rules, tracks the other side's dates too, and emails you before anything is due." />
+      </main>
+    );
+  }
   const [{ data: dl }, { data: cases }] = await Promise.all([
     supabase.from("deadlines").select("*").eq("done", false).order("due_date"),
     supabase.from("cases").select("id, title"),

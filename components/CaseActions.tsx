@@ -14,6 +14,10 @@ export function WriteLetterButton({ caseId, kind = "dispute", label = "Write my 
     setErr(null);
     const res = await fetch("/api/letter", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ caseId, kind }) });
     const json = await res.json().catch(() => ({}));
+    if (res.status === 402) {
+      router.push("/app/upgrade");
+      return;
+    }
     if (!res.ok) {
       setErr(json.error || "Couldn't write the letter. Try again.");
       setBusy(false);

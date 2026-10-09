@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { aiConfigured, draftLetter } from "@/lib/ai";
 import { templateLetter } from "@/lib/templates";
 import type { CaseRow } from "@/lib/types";
+import { getPlan } from "@/lib/plan";
 
 export const maxDuration = 60;
 
@@ -12,6 +13,8 @@ export async function POST(request: Request) {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "Please sign in." }, { status: 401 });
+  if (!(await getPlan(supabase, user.id)).premium)
+    return NextResponse.json({ error: "Letters are part of Premium. Start a free 7-day trial to draft this.", upgrade: true }, { status: 402 });
 
   const { caseId, kind = "dispute", instructions = "" } = (await request.json().catch(() => ({}))) as {
     caseId?: string;

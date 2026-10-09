@@ -6,15 +6,20 @@ import CaseRowLink from "@/components/CaseRowLink";
 import { daysUntil } from "@/lib/rules";
 import { firstName, money, relDays } from "@/lib/format";
 import type { CaseRow, DeadlineRow } from "@/lib/types";
+import { getPlan } from "@/lib/plan";
+import Upsell from "@/components/Upsell";
 
-export default async function Today() {
+export default async function Today({ searchParams }: { searchParams: Promise<{ upgraded?: string }> }) {
+  const { upgraded } = await searchParams;
   const { supabase, user } = await requireUser();
-  const [{ data: profile }, { data: casesData }, { data: dlData }, { data: letters }] = await Promise.all([
+  const [{ data: profile }, { data: casesData }, { data: dlData }, { data: letters }, plan] = await Promise.all([
     supabase.from("profiles").select("full_name, morning_briefing").eq("id", user.id).maybeSingle(),
     supabase.from("cases").select("*").order("updated_at", { ascending: false }),
     supabase.from("deadlines").select("*").eq("done", false).order("due_date"),
     supabase.from("letters").select("id, case_id, status").eq("status", "draft").order("created_at", { ascending: false }),
+    getPlan(supabase, user.id),
   ]);
+  const toast = upgraded ? <p className="notice" role="status" style={{ marginTop: 0 }}>Welcome to Premium. Letters, deadlines and reply help are now switched on.</p> : null;
   const cases = (casesData || []) as CaseRow[];
   const deadlines = (dlData || []) as DeadlineRow[];
   const name = firstName(profile?.full_name);
@@ -48,6 +53,7 @@ export default async function Today() {
           <h1 className="page-title">Today</h1>
           <Link href="/app/scan" aria-label="Add a document" className="icon-btn"><PlusIcon /></Link>
         </div>
+        {toast}
         <div className="card stack g8"><Greeting name={name} style={{ fontSize: 22 }} /><p style={{ margin: 0 }}>Nothing needs you today. Enjoy it.</p></div>
         <div className="stack g12 center" style={{ alignItems: "center", marginTop: 72 }}>
           <svg width="120" height="88" viewBox="0 0 120 88" aria-hidden="true"><path d="M14 52h92l-8 28H22z" fill="#fff" stroke="#1A1A1A" strokeWidth="1.8" strokeLinejoin="round" /><path d="M14 52l10-16h72l10 16" fill="none" stroke="#1A1A1A" strokeWidth="1.8" strokeLinejoin="round" /><path d="M44 52a16 6 0 0 0 32 0" fill="none" stroke="#1A1A1A" strokeWidth="1.8" /><circle cx="92" cy="18" r="8" fill="#FDEEE7" stroke="#BF4F28" strokeWidth="1.8" /></svg>
@@ -75,6 +81,7 @@ export default async function Today() {
       </div>
 
       <div className="stack g20">
+        {toast}
         {profile?.morning_briefing !== false && (
           <div className="card stack g8" style={{ borderRadius: 24 }}>
             <Greeting name={name} style={{ fontSize: 24 }} />
@@ -106,6 +113,8 @@ export default async function Today() {
         <div style={{ maxWidth: 520 }}>
           <CtaLink href={cta.href} variant="orange" block>{cta.label}</CtaLink>
         </div>
+
+        {!plan.premium && <Upsell compact title="Let Premium write the letters and keep every date" />}
 
         <div className="split">
           <section className="a card">

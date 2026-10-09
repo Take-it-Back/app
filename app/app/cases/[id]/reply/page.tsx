@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
+import { getPlan } from "@/lib/plan";
+import Upsell from "@/components/Upsell";
 import { BackLink } from "@/components/ui";
 import { WriteLetterButton } from "@/components/CaseActions";
 import { shortDate } from "@/lib/format";
@@ -9,7 +11,16 @@ import type { ReplyAnalysis } from "@/lib/ai";
 export default async function ReplyPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ doc?: string; note?: string }> }) {
   const { id } = await params;
   const { doc, note } = await searchParams;
-  const { supabase } = await requireUser();
+  const { supabase, user } = await requireUser();
+  if (!(await getPlan(supabase, user.id)).premium) {
+    return (
+      <main className="app-main">
+        <BackLink href={`/app/cases/${id}`} />
+        <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 20px" }}>Their <em className="o">reply</em></h1>
+        <Upsell title="We'll read their reply for you" body="Premium explains what they said, whether it's a win, and writes your next letter." />
+      </main>
+    );
+  }
   let q = supabase.from("documents").select("id, analysis, created_at").eq("case_id", id).eq("kind", "reply");
   q = doc ? q.eq("id", doc) : q.order("created_at", { ascending: false }).limit(1);
   const [{ data: docs }, { data: c }] = await Promise.all([q, supabase.from("cases").select("title, category, red_flag").eq("id", id).maybeSingle()]);

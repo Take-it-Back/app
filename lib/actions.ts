@@ -1,4 +1,5 @@
 "use server";
+import { getPlan } from "@/lib/plan";
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -73,6 +74,7 @@ export async function addDeadline(caseId: string, formData: FormData) {
   const due = String(formData.get("due_date") || "");
   const owner = formData.get("owner") === "them" ? "them" : "you";
   if (!title || !/^\d{4}-\d{2}-\d{2}$/.test(due)) return;
+  if (!(await getPlan(supabase, user.id)).premium) return;
   await supabase.from("deadlines").insert({ case_id: caseId, user_id: user.id, title, due_date: due, owner });
   revalidatePath("/app", "layout");
 }

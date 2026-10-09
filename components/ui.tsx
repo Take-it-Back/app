@@ -3,24 +3,22 @@ import type { Category } from "@/lib/types";
 import { STATUS_INFO } from "@/lib/rules";
 import type { CaseStatus } from "@/lib/types";
 
-export function Mark({ size = 32 }: { size?: number }) {
+export function Mark({ size = 32, inverse = false }: { size?: number; inverse?: boolean }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true">
-      <path d="M11 8h26a7 7 0 0 1 7 7v14a7 7 0 0 1-7 7H23l-8 7v-7h-4a7 7 0 0 1-7-7V15a7 7 0 0 1 7-7z" fill="#1A1A1A" />
-      <circle cx="16" cy="22" r="2.8" fill="#fff" />
-      <circle cx="24" cy="22" r="2.8" fill="#fff" />
-      <circle cx="32" cy="22" r="2.8" fill="#BF4F28" />
+    <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
+      <rect width="64" height="64" rx="16" fill={inverse ? "#BF4F28" : "#1A1A1A"} />
+      <path d="M44 42V30a10 10 0 0 0-10-10H18" fill="none" stroke={inverse ? "#fff" : "#BF4F28"} strokeWidth="7" strokeLinecap="round" />
+      <path d="M26 11l-9 9 9 9" fill="none" stroke={inverse ? "#fff" : "#BF4F28"} strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
+      {!inverse && <circle cx="44" cy="49" r="3.5" fill="#fff" />}
     </svg>
   );
 }
 
-export function Logo({ href = "/", size = 22 }: { href?: string; size?: number }) {
+export function Logo({ href = "/", size = 22, inverse = false }: { href?: string; size?: number; inverse?: boolean }) {
   return (
-    <Link href={href} className="logo" aria-label="Take it back home">
-      <Mark size={size + 10} />
-      <span className="serif" style={{ fontSize: size }}>
-        Take it <em className="o">back</em>
-      </span>
+    <Link href={href} className="logo" aria-label="Take it back home" style={{ color: inverse ? "#fff" : "#1A1A1A" }}>
+      <Mark size={Math.round(size * 1.35)} inverse={inverse} />
+      <span style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: size, letterSpacing: "-0.03em" }}>take it back</span>
     </Link>
   );
 }
