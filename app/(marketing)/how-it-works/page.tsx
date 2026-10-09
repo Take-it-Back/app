@@ -25,7 +25,7 @@ export default function HowItWorks() {
 
       {STEPS.map((st, i) => (
         <section key={st.n} className="m-section">
-          <div className={i % 2 ? "panel-sec gray" : "panel-sec"} style={i % 2 ? undefined : { paddingTop: 0, paddingBottom: 0 }}>
+          <div className="panel-sec open">
           <div className="inner row wrap" style={{ gap: 48, alignItems: "center", flexDirection: i % 2 ? "row-reverse" : "row" }}>
             <div className="stack g16" style={{ flex: "1 1 400px", minWidth: 0 }}>
               <span className="row g12"><span className="serif" style={{ fontSize: 64, lineHeight: 0.9, color: "#BF4F28" }}>{st.n}</span><span className={st.plan === "Premium" ? "pill-pro" : "pill-free"} style={{ marginLeft: 0 }}>{st.plan}</span></span>
@@ -50,11 +50,11 @@ export default function HowItWorks() {
       ))}
 
       <section className="m-section">
-        <div className="panel-sec ink">
+        <div className="panel-sec open">
         <div className="inner stack g20">
-        <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>And on your <em style={{ color: "#F0A07E" }}>computer</em></h2>
+        <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>And on your <em className="o">computer</em></h2>
         <Desktop s="insurance" />
-        <p style={{ margin: 0, color: "#BDBDBD" }}>Everything syncs. <Link href="/features" style={{ color: "#fff" }}>See every feature</Link> or <Link href="/pricing" style={{ color: "#fff" }}>compare plans</Link>.</p>
+        <p className="muted" style={{ margin: 0 }}>Everything syncs. <Link href="/features">See every feature</Link> or <Link href="/pricing">compare plans</Link>.</p>
         </div>
         </div>
       </section>

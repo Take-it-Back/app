@@ -64,13 +64,13 @@ export default function Home() {
       </section>
 
       <section className="m-section">
-        <div className="panel-sec orange">
+        <div className="panel-sec open">
           <div className="inner row wrap between g16" style={{ marginBottom: 28, alignItems: "flex-end" }}>
             <div className="stack g8">
-              <span className="eyebrow" style={{ fontSize: 13, color: "#A8441F" }}>What it does</span>
+              <span className="eyebrow" style={{ fontSize: 13 }}>What it does</span>
               <h2 className="h-l">From scary letter to <em className="o">settled</em>.</h2>
             </div>
-            <Link href="/how-it-works" className="btn-plain" style={{ background: "transparent", borderColor: "#1A1A1A" }}>Walk through a full case</Link>
+            <Link href="/how-it-works" className="btn-plain">Walk through a full case</Link>
           </div>
           <div className="strip">
             <div>
@@ -79,7 +79,7 @@ export default function Home() {
                   <Phone kind={st.kind} s={st.s} size="sm" label={st.title} />
                   <figcaption className="stack g4">
                     <span className="row g8"><span className="serif" style={{ fontSize: 26, color: "#BF4F28", lineHeight: 1 }}>{i + 1}</span><span style={{ fontWeight: 500, fontSize: 17 }}>{st.title}</span></span>
-                    <span style={{ color: "#4A4A4A" }}>{st.body}</span>
+                    <span className="muted">{st.body}</span>
                   </figcaption>
                 </figure>
               ))}
@@ -115,14 +115,14 @@ export default function Home() {
       </section>
 
       <section className="m-section">
-        <div className="m-band">
-          <div className="wrap-1200 row wrap g32" style={{ paddingTop: 88, paddingBottom: 88, alignItems: "center", gap: 48 }}>
+        <div>
+          <div className="wrap-1200 row wrap g32" style={{ alignItems: "center", gap: 48 }}>
             <div className="stack g16" style={{ flex: "1 1 320px" }}>
               <span className="eyebrow" style={{ fontSize: 13 }}>Phone and computer</span>
               <h2 className="h-l" style={{ fontSize: "clamp(34px, 3.8vw, 50px)" }}>Snap it on your phone. <em className="o">Finish</em> it at your desk.</h2>
               <p className="lede" style={{ fontSize: 17 }}>Your cases sync everywhere. Edit letters on a big screen, print your case packet, and see every fight at a glance.</p>
             </div>
-            <div style={{ flex: "2 1 520px", minWidth: 0 }}><Desktop s="insurance" /></div>
+            <div className="shot-stage" style={{ flex: "2 1 520px", minWidth: 0, display: "block", padding: "clamp(20px, 3vw, 40px)" }}><Desktop s="insurance" /></div>
           </div>
         </div>
       </section>

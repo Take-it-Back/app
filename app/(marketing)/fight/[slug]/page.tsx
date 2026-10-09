@@ -43,10 +43,10 @@ export default async function ProblemPage({ params }: { params: Promise<{ slug: 
       </section>
 
       <section className="m-section">
-        <div className="panel-sec orange">
+        <div className="panel-sec open">
         <div className="inner stack g24">
         <div className="stack g8">
-          <span className="eyebrow" style={{ fontSize: 13, color: "#A8441F" }}>What we catch</span>
+          <span className="eyebrow" style={{ fontSize: 13 }}>What we catch</span>
           <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>The things that go <em className="o">wrong</em> most</h2>
         </div>
         <ul className="check-list">
@@ -106,7 +106,7 @@ export default async function ProblemPage({ params }: { params: Promise<{ slug: 
       </section>
 
       <section className="m-section">
-        <div className="panel-sec gray">
+        <div className="panel-sec open">
         <div className="inner stack g32">
         <div className="stack g8">
           <span className="eyebrow" style={{ fontSize: 13 }}>Three steps</span>

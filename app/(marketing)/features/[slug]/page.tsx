@@ -47,20 +47,20 @@ export default async function FeaturePage({ params }: { params: Promise<{ slug: 
       </section>
 
       <section className="m-section">
-        <div className="panel-sec ink">
+        <div className="panel-sec open">
         <div className="inner row wrap" style={{ alignItems: "flex-start", gap: 56 }}>
         <div className="stack g16" style={{ flex: "1 1 420px" }}>
-          <span className="eyebrow" style={{ fontSize: 13, color: "#F0A07E" }}>Why it matters</span>
+          <span className="eyebrow" style={{ fontSize: 13 }}>Why it matters</span>
           {f.story.map((p, i) => (
-            <p key={i} className={i === 0 ? "serif" : "lede"} style={i === 0 ? { margin: 0, fontSize: "clamp(24px, 2.6vw, 32px)", lineHeight: 1.25 } : { fontSize: 17, color: "#D4D4D4" }}>{p}</p>
+            <p key={i} className={i === 0 ? "serif" : "lede"} style={i === 0 ? { margin: 0, fontSize: "clamp(24px, 2.6vw, 32px)", lineHeight: 1.25 } : { fontSize: 17 }}>{p}</p>
           ))}
-          <p style={{ margin: "8px 0 0", fontSize: 15, background: "#242424", border: "1px solid #333", borderRadius: 18, padding: "14px 18px" }}><strong style={{ fontWeight: 600 }}>On your plan: </strong>{f.planNote}</p>
+          <p className="panel-gray" style={{ margin: "8px 0 0", fontSize: 15 }}><strong style={{ fontWeight: 600 }}>On your plan: </strong>{f.planNote}</p>
         </div>
         <ul className="stack" style={{ flex: "1 1 360px", margin: 0, padding: 0, listStyle: "none" }}>
           {f.benefits.map(([t, b], i) => (
-            <li key={t} className="row g16" style={{ padding: "20px 0", borderBottom: i < f.benefits.length - 1 ? "1px solid #333" : 0, alignItems: "flex-start" }}>
+            <li key={t} className="row g16" style={{ padding: "20px 0", borderBottom: i < f.benefits.length - 1 ? "1px solid #EBEBEB" : 0, alignItems: "flex-start" }}>
               <span className="serif" style={{ fontSize: 34, lineHeight: 1, color: "#BF4F28", width: 28 }}>{i + 1}</span>
-              <span className="stack g4"><span style={{ fontWeight: 500, fontSize: 18 }}>{t}</span><span style={{ fontSize: 15, color: "#BDBDBD" }}>{b}</span></span>
+              <span className="stack g4"><span style={{ fontWeight: 500, fontSize: 18 }}>{t}</span><span className="muted" style={{ fontSize: 15 }}>{b}</span></span>
             </li>
           ))}
         </ul>
@@ -69,10 +69,10 @@ export default async function FeaturePage({ params }: { params: Promise<{ slug: 
       </section>
 
       <section className="m-section">
-        <div className="panel-sec orange">
+        <div className="panel-sec open">
           <div className="inner stack g24">
             <div className="stack g8">
-              <span className="eyebrow" style={{ fontSize: 13, color: "#A8441F" }}>Related</span>
+              <span className="eyebrow" style={{ fontSize: 13 }}>Related</span>
               <h2 className="serif" style={{ margin: 0, fontSize: "clamp(32px, 3.6vw, 46px)" }}>Works <em className="o">well</em> with</h2>
             </div>
             <div className="grid-auto">

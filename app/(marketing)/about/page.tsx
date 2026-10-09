@@ -32,7 +32,7 @@ export default function AboutPage() {
         <div style={{ flex: "1 1 320px", display: "flex", justifyContent: "center" }}><Phone kind="today" s="medical" label="Today screen with a morning briefing" /></div>
       </section>
       <section className="m-section">
-        <div className="panel-sec orange">
+        <div className="panel-sec open">
         <div className="inner stack g24">
         <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>Our <em className="o">promises</em></h2>
         <ul className="check-list">
@@ -43,7 +43,7 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
-        <p className="small" style={{ margin: 0, color: "#4A4A4A" }}>Questions or ideas? Email <a href="mailto:hello@takeitback.app">hello@takeitback.app</a>.</p>
+        <p className="muted small" style={{ margin: 0 }}>Questions or ideas? Email <a href="mailto:hello@takeitback.app">hello@takeitback.app</a>.</p>
         </div>
         </div>
       </section>

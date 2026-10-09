@@ -45,7 +45,7 @@ export default function PricingPage() {
       </section>
 
       <section className="m-section">
-        <div className="panel-sec gray">
+        <div className="panel-sec open">
         <div className="inner stack g20">
         <h2 className="h-l" style={{ fontSize: "clamp(32px, 3.6vw, 46px)" }}>Compare <em className="o">plans</em></h2>
         <div className="card" style={{ padding: "8px 12px", borderRadius: 26 }}>

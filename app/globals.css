@@ -357,3 +357,7 @@ details.faq[open] .chev { transform: rotate(45deg); }
 .panel-sec.ink .check-list li { border-color: #333; }
 .panel-sec.orange .check-list li { border-color: #F3D5C8; }
 html, body { overflow-x: clip; }
+.panel-sec.open { background: none; border-radius: 0; padding: 0; max-width: 1200px; color: inherit; }
+.panel-sec.open > .inner { padding: 44px 24px 0; position: relative; }
+.panel-sec.open > .inner::before { content: ""; position: absolute; top: 0; left: 24px; right: 24px; border-top: 1px solid var(--ink); }
+@media (max-width: 1260px) { .panel-sec.open { margin: 0 auto; } }
