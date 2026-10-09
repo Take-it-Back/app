@@ -9,10 +9,17 @@ export const metadata: Metadata = {
   icons: { icon: "/icon.svg" },
   openGraph: {
     title: "Take it back",
-    description: "They count on you giving up. Take it back.",
+    description: "Fight back against hospitals, insurers, landlords and debt collectors. They count on you giving up. Take it back.",
     url: "https://www.takeitback.app",
     siteName: "Take it back",
     type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Take it back: fight back against hospitals, insurers, landlords and debt collectors" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Take it back",
+    description: "Fight back against hospitals, insurers, landlords and debt collectors.",
+    images: ["/og.png"],
   },
 };
 
