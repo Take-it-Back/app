@@ -34,7 +34,7 @@ export function TabBar() {
   );
 }
 
-export function SideBar({ name, counts }: { name: string; counts: Record<string, number> }) {
+export function SideBar({ name, counts, admin = false }: { name: string; counts: Record<string, number>; admin?: boolean }) {
   const path = usePathname();
   const params = useSearchParams();
   const cat = params.get("c");
@@ -60,6 +60,7 @@ export function SideBar({ name, counts }: { name: string; counts: Record<string,
         )}
         <span className="side-group">Support</span>
         {link("/app/help", "Get real help", path.startsWith("/app/help"))}
+        {admin && link("/app/admin", "Admin", path.startsWith("/app/admin"))}
       </nav>
       <Link href="/app/you" className="row g12" style={{ marginTop: "auto", borderTop: "1px solid #EBEBEB", padding: "16px 8px 0", textDecoration: "none" }}>
         <Avatar size={36} />

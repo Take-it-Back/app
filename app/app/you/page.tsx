@@ -59,6 +59,7 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
         </form>
 
         <div className="stack">
+          {p?.is_admin && <a href="/app/admin" className="list-row" style={{ fontWeight: 500 }}>Admin dashboard</a>}
           <span className="eyebrow">Privacy</span>
           <p className="muted small" style={{ margin: "6px 0" }}>Your documents are private to you, never sold and never used for ads.</p>
           <a href="/api/export" className="list-row">Download all my data</a>

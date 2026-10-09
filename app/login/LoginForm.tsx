@@ -40,7 +40,8 @@ export default function LoginForm() {
           setNotice("Check your email for a link to confirm your account. Then come back and sign in.");
         }
       } else if (mode === "signin") {
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const login = email.trim().toLowerCase() === "admin" ? "admin@takeitback.app" : email.trim();
+        const { error } = await supabase.auth.signInWithPassword({ email: login, password });
         if (error) throw error;
         router.push(next);
         router.refresh();
@@ -72,7 +73,7 @@ export default function LoginForm() {
       )}
       <div className="field">
         <label htmlFor="email">Email</label>
-        <input id="email" type="email" className="input" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" required />
+        <input id="email" type={mode === "signin" ? "text" : "email"} inputMode="email" autoCapitalize="none" spellCheck={false} className="input" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete={mode === "signin" ? "username" : "email"} required />
       </div>
       {mode !== "reset" && (
         <div className="field">
