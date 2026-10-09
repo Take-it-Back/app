@@ -73,7 +73,7 @@ export function Screen({ kind, s = "medical" }: { kind: ShotKind; s?: ScenarioKe
             <span className="row between" style={{ fontSize: 10, marginTop: 6 }}><span>Amount due</span><b>{c.amount}</b></span>
             <span className="s-line" />
             <span className="s-line" style={{ width: "70%" }} />
-            <i className="s-corner tl" /><i className="s-corner tr" /><i className="s-corner bl" /><i className="s-corner br" />
+            <svg className="s-frame" viewBox="0 0 206 266" preserveAspectRatio="none" aria-hidden="true"><path d="M3 23V9a6 6 0 0 1 6-6h14M183 3h14a6 6 0 0 1 6 6v14M203 243v14a6 6 0 0 1-6 6h-14M23 263H9a6 6 0 0 1-6-6v-14" fill="none" stroke="#BF4F28" strokeWidth="3" strokeLinecap="round" /></svg>
           </div>
           <div className="row between" style={{ width: "100%", padding: "0 14px", color: "#fff", fontSize: 12 }}>
             <span>Upload PDF</span>

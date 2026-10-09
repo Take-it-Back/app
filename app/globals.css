@@ -267,11 +267,7 @@ details.faq[open] .chev { transform: rotate(45deg); }
 .s-camera { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 44px 0 30px; }
 .s-doc { width: 190px; height: 250px; background: #F4F4F4; border-radius: 4px; transform: rotate(-3deg); padding: 18px 14px; display: flex; flex-direction: column; gap: 7px; position: relative; color: var(--ink); }
 .s-line { height: 4px; border-radius: 2px; background: #D4D4D4; display: block; }
-.s-corner { position: absolute; width: 20px; height: 20px; border-color: var(--orange); border-style: solid; border-width: 0; }
-.s-corner.tl { top: -8px; left: -8px; border-top-width: 3px; border-left-width: 3px; border-top-left-radius: 6px; }
-.s-corner.tr { top: -8px; right: -8px; border-top-width: 3px; border-right-width: 3px; border-top-right-radius: 6px; }
-.s-corner.bl { bottom: -8px; left: -8px; border-bottom-width: 3px; border-left-width: 3px; border-bottom-left-radius: 6px; }
-.s-corner.br { bottom: -8px; right: -8px; border-bottom-width: 3px; border-right-width: 3px; border-bottom-right-radius: 6px; }
+.s-frame { position: absolute; inset: -8px; width: calc(100% + 16px); height: calc(100% + 16px); }
 .s-shutter { width: 60px; height: 60px; border-radius: 30px; background: #fff; box-shadow: 0 0 0 4px #222, 0 0 0 7px var(--orange); }
 .peek { height: 240px; overflow: hidden; border-radius: 18px; background: var(--gray-soft); padding: 20px 28px 0; display: flex; justify-content: center; }
 .peek .phone-in { width: 260px; flex: none; border-radius: 26px 26px 0 0; height: 520px; zoom: 0.86; box-shadow: 0 6px 18px rgba(26,26,26,0.08); }
