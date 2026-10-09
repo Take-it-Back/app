@@ -3,17 +3,12 @@ import { getPlan } from "@/lib/plan";
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createClient } from "./supabase/server";
+import { createClient, requireUser } from "./supabase/server";
 import { theirDeadline } from "./rules";
 import type { Category } from "./types";
 
 async function ctx() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
-  return { supabase, user };
+  return requireUser();
 }
 
 export async function saveLetter(letterId: string, fields: { body: string; subject: string; recipient: string }) {

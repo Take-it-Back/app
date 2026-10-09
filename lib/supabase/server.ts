@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { cache } from "react";
 
 export async function createClient() {
   const cookieStore = await cookies();
@@ -26,12 +27,23 @@ export async function createClient() {
   );
 }
 
+export type SessionUser = { id: string; email: string | null };
+
+/**
+ * Signed-in user for this request. Verifies the session token locally (no network round trip
+ * with asymmetric signing keys) and is shared by the layout and page of the same request.
+ */
+export const getSessionUser = cache(async () => {
+  const supabase = await createClient();
+  const { data } = await supabase.auth.getClaims();
+  const c = data?.claims;
+  const user: SessionUser | null = c?.sub ? { id: c.sub, email: (c.email as string | undefined) ?? null } : null;
+  return { supabase, user };
+});
+
 /** Returns a client and the signed-in user, or redirects to /login. */
 export async function requireUser() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { supabase, user } = await getSessionUser();
   if (!user) redirect("/login");
   return { supabase, user };
 }

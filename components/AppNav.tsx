@@ -9,6 +9,7 @@ const I = {
   cases: <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />,
   dates: <><path d="M4 6h16v14H4z" /><path d="M4 10h16" /><path d="M8 3v4" /><path d="M16 3v4" /></>,
   you: <><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></>,
+  more: <><rect x="4" y="4" width="6.5" height="6.5" rx="1.5" /><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5" /><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5" /><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5" /></>,
   help: <><circle cx="12" cy="12" r="9" /><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14" /><path d="M12 17h.01" /></>,
 };
 
@@ -29,7 +30,7 @@ export function TabBar() {
       <Link href="/app/cases" className={on("/app/cases") ? "on" : ""}><Icon d={I.cases} />Cases</Link>
       <Link href="/app/scan" aria-label="Scan a document" className="scan"><Icon d={scanIcon} size={24} /></Link>
       <Link href="/app/dates" className={on("/app/dates") ? "on" : ""}><Icon d={I.dates} />Dates</Link>
-      <Link href="/app/you" className={on("/app/you") ? "on" : ""}><Icon d={I.you} />You</Link>
+      <Link href="/app/tools" className={["/app/tools", "/app/you", "/app/help", "/app/upgrade", "/app/admin"].some(on) ? "on" : ""}><Icon d={I.more} />More</Link>
     </nav>
   );
 }
@@ -59,6 +60,7 @@ export function SideBar({ name, counts, admin = false }: { name: string; counts:
           link(`/app/cases?c=${k}`, l, path === "/app/cases" && cat === k, <span style={{ width: 8, height: 8, borderRadius: 4, background: k === "medical" || k === "landlord" ? "#BF4F28" : "#1A1A1A" }} />)
         )}
         <span className="side-group">Support</span>
+        {link("/app/tools", "Tools", path.startsWith("/app/tools"))}
         {link("/app/help", "Get real help", path.startsWith("/app/help"))}
         {admin && link("/app/admin", "Admin", path.startsWith("/app/admin"))}
       </nav>

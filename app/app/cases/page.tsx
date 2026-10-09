@@ -38,6 +38,12 @@ export default async function CasesPage({ searchParams }: { searchParams: Promis
         <h1 className="page-title">{cat && cat in CATEGORY_INFO ? CATEGORY_INFO[cat as Category].label : "Cases"}</h1>
         <Link href="/app/scan" aria-label="New case" className="icon-btn"><PlusIcon /></Link>
       </div>
+      <nav aria-label="Type of fight" className="quick" style={{ marginBottom: 10 }}>
+        <Link href={`/app/cases${f !== "all" ? `?f=${f}` : ""}`} className={!cat ? "o" : ""}>All fights</Link>
+        {(["medical", "insurance", "landlord", "debt"] as Category[]).map((k) => (
+          <Link key={k} href={`/app/cases?c=${k}${f !== "all" ? `&f=${f}` : ""}`} className={cat === k ? "o" : ""}>{CATEGORY_INFO[k].label}</Link>
+        ))}
+      </nav>
       <nav aria-label="Filter" className="chips" style={{ marginBottom: 18 }}>
         {FILTERS.map(([v, l]) => (
           <Link key={v} href={q(v)} className={`chip${f === v ? " on" : ""}`} aria-current={f === v ? "page" : undefined}>{l}{v === "all" ? ` ${cases.length}` : ""}</Link>
@@ -52,8 +58,8 @@ export default async function CasesPage({ searchParams }: { searchParams: Promis
       ) : (
         <div className="stack">
           {groups.map((g) => (
-            <section key={g.key} className="stack" style={{ marginBottom: 18 }}>
-              <span className="eyebrow" style={{ margin: "4px 0" }}>{g.label} · {g.items.length}</span>
+            <section key={g.key} className="stack" style={{ marginBottom: 22 }}>
+              <div className="sec-head"><h2>{g.label} <span className="n">{g.items.length}</span></h2></div>
               {g.items.map((c) => <CaseRowLink key={c.id} c={c} deadline={byCase.get(c.id)} showDays={g.key !== "done" && byCase.has(c.id)} />)}
               {!g.items.length && <span className="muted small" style={{ padding: "8px 0" }}>Nothing here.</span>}
             </section>

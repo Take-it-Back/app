@@ -64,10 +64,6 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
     <main className="app-main wide">
       <div className="row between no-print">
         <BackLink href="/app/cases" />
-        <div className="row g8">
-          <Link href={`/app/cases/${id}/docs`} className="btn-plain">Documents · {docCount ?? 0}</Link>
-          <Link href={`/app/cases/${id}/packet`} className="btn-plain">Case packet</Link>
-        </div>
       </div>
 
       <div className="stack g8" style={{ margin: "8px 0 20px" }}>
@@ -100,7 +96,7 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
       <div className="split">
         <div className="a stack g20">
           {!done && (
-            <div className="grid-tiles" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
+            <div className="stats" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", maxWidth: 640 }}>
               <div className="panel-orange stack">
                 <span className="small" style={{ color: "#A8441F" }}>{yours ? `${yours.title} by ${shortDate(yours.due_date)}` : "Your deadline"}</span>
                 <span className="big-num">{yours ? relDays(daysUntil(yours.due_date)) : "—"}</span>
@@ -131,8 +127,9 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
           )}
 
           {c.next_steps?.length > 0 && !done && (
-            <section className="card">
-              <span className="eyebrow">Your options</span>
+            <section>
+              <div className="sec-head"><h2>Your options</h2></div>
+              <div className="band">
               <ol className="stack" style={{ margin: "4px 0 0", padding: 0, listStyle: "none" }}>
                 {c.next_steps.map((s, i) => (
                   <li key={i} className="row g12" style={{ padding: "14px 0", borderBottom: i < c.next_steps.length - 1 ? "1px solid #EBEBEB" : 0, alignItems: "flex-start" }}>
@@ -141,11 +138,13 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
                   </li>
                 ))}
               </ol>
+              </div>
             </section>
           )}
 
-          <section className="card">
-            <span className="eyebrow">Timeline</span>
+          <section>
+            <div className="sec-head"><h2>Timeline</h2></div>
+            <div className="card">
             <div style={{ marginTop: 12 }}>
               {events.length === 0 && <p className="muted" style={{ margin: 0 }}>Nothing yet.</p>}
               {events.map((e, i) => (
@@ -171,12 +170,14 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
                 <button className="btn-plain" style={{ alignSelf: "flex-start", background: "#1A1A1A", color: "#fff", borderColor: "#1A1A1A" }}>Save note</button>
               </form>
             </details>
+          </div>
           </section>
         </div>
 
         <div className="b stack g20">
-          <section className="card">
-            <span className="eyebrow">Dates</span>
+          <section>
+            <div className="sec-head"><h2>Dates</h2></div>
+            <div className="card">
             <div className="stack" style={{ marginTop: 4 }}>
               {deadlines.map((d) => (
                 <div key={d.id} className="stack g8" style={{ padding: "12px 0", borderBottom: "1px solid #EBEBEB" }}>
@@ -212,11 +213,13 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
                 </form>
               </details>
             </div>
+          </div>
           </section>
 
           {letters.length > 0 && (
-            <section className="card">
-              <span className="eyebrow">Letters</span>
+            <section>
+              <div className="sec-head"><h2>Letters</h2></div>
+              <div className="card">
               <div className="stack" style={{ marginTop: 4 }}>
                 {letters.map((l) => (
                   <Link key={l.id} href={`/app/cases/${id}/letter?id=${l.id}`} className="list-row">
@@ -225,12 +228,13 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
                   </Link>
                 ))}
               </div>
+              </div>
             </section>
           )}
 
           {!done && (
-            <section className="card stack g12">
-              <span className="eyebrow">How did it end?</span>
+            <section className="card stack g12" style={{ background: "#FAFAFA" }}>
+              <span className="serif" style={{ fontSize: 22 }}>How did it <em className="o">end</em>?</span>
               <form action={closeCase.bind(null, id)} className="stack g12">
                 <div className="chips">
                   <label className="chip"><input type="radio" name="outcome" value="won" defaultChecked />Won</label>

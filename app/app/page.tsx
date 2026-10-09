@@ -92,11 +92,11 @@ export default async function Today({ searchParams }: { searchParams: Promise<{ 
           </div>
         )}
 
-        <div className="grid-tiles">
+        <div className="stats">
           <div className="panel-orange stack">
             <span className="small" style={{ color: "#A8441F" }}>Next deadline</span>
             <span className="big-num">{nextYours ? relDays(daysUntil(nextYours.due_date)) : "—"}</span>
-            <span className="small muted">{nextYours ? caseOf(nextYours.case_id)?.title : "Nothing due"}</span>
+            <span className="small muted" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{nextYours ? caseOf(nextYours.case_id)?.title : "Nothing due"}</span>
           </div>
           <div className="panel-gray stack">
             <span className="small">Taken back</span>
@@ -117,25 +117,32 @@ export default async function Today({ searchParams }: { searchParams: Promise<{ 
           <CtaLink href={cta.href} variant="orange" block>{cta.label}</CtaLink>
         </div>
 
+        <nav aria-label="Shortcuts" className="quick">
+          <Link href="/app/scan" className="o">+ Scan a document</Link>
+          <Link href="/app/help">Get real help</Link>
+          <Link href="/app/dates">All dates</Link>
+          <Link href="/app/tools">Tools</Link>
+        </nav>
+
         {!plan.premium && <Upsell compact title="Let Premium write the letters and keep every date" />}
 
         <div className="split">
-          <section className="a card">
-            <span className="eyebrow">Your fights</span>
-            <div className="stack" style={{ marginTop: 4 }}>
+          <section className="a">
+            <div className="sec-head"><h2>Your fights <span className="n">{open.length}</span></h2><Link href="/app/cases">See all</Link></div>
+            <div className="card" style={{ padding: "4px 18px" }}>
               {open.slice(0, 8).map((c) => <CaseRowLink key={c.id} c={c} deadline={byCase.get(c.id)} />)}
               {!open.length && <p className="muted">No open fights. Nice.</p>}
             </div>
           </section>
-          <section className="b card">
-            <span className="eyebrow">Coming up</span>
-            <div className="stack" style={{ marginTop: 4 }}>
+          <section className="b">
+            <div className="sec-head"><h2>Coming up</h2><Link href="/app/dates">Calendar</Link></div>
+            <div className="band">
               {deadlines.slice(0, 5).map((d) => {
                 const n = daysUntil(d.due_date);
                 return (
                   <Link key={d.id} href={`/app/cases/${d.case_id}`} className="list-row">
                     <span className="serif" style={{ width: 52, fontSize: 26, lineHeight: 1, color: d.owner === "you" && n <= 3 ? "#A8441F" : "#1A1A1A" }}>{n < 0 ? "late" : `${n}d`}</span>
-                    <span className="stack grow"><span style={{ fontWeight: 500, fontSize: 15 }}>{d.title}</span><span className="muted small">{caseOf(d.case_id)?.title}</span></span>
+                    <span className="stack grow" style={{ minWidth: 0 }}><span style={{ fontWeight: 500, fontSize: 15 }}>{d.title}</span><span className="muted small">{caseOf(d.case_id)?.title}</span></span>
                     <span className={`tag ${d.owner === "you" ? "tag-orange" : "tag-gray"}`}>{d.owner === "you" ? "Yours" : "Theirs"}</span>
                   </Link>
                 );
