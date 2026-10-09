@@ -328,9 +328,9 @@ export function Desktop({ s = "insurance" }: { s?: ScenarioKey }) {
 }
 
 /** Small cropped preview for cards and menus. */
-export function Peek({ kind, s = "medical" }: { kind: ShotKind; s?: ScenarioKey }) {
+export function Peek({ kind, s = "medical", tone = "gray" }: { kind: ShotKind; s?: ScenarioKey; tone?: "gray" | "orange" | "ink" }) {
   return (
-    <div className="peek" aria-hidden="true">
+    <div className={`peek ${tone}`} aria-hidden="true">
       <div className={`phone-in${kind === "scan" ? " dark" : ""}`}>
         <Screen kind={kind} s={s} />
       </div>

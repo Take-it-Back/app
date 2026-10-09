@@ -3,7 +3,14 @@ import { CtaLink } from "@/components/ui";
 import { CtaBand } from "@/components/site";
 import { Desktop, Peek, Phone } from "@/components/screens";
 import FeatureIcon from "@/components/FeatureIcon";
-import { FAQ_GROUPS, FEATURES, PROBLEMS } from "@/lib/marketing";
+import { FAQ_GROUPS, FEATURES, PROBLEMS, type ProblemSlug, type ShotKind } from "@/lib/marketing";
+
+const PROBLEM_PEEK: Record<ProblemSlug, { kind: ShotKind; tone: "gray" | "orange" | "ink" }> = {
+  "medical-bills": { kind: "found", tone: "orange" },
+  "insurance-denials": { kind: "letter", tone: "gray" },
+  renters: { kind: "tracker", tone: "ink" },
+  "debt-collectors": { kind: "reply", tone: "orange" },
+};
 
 const STEPS = [
   { kind: "scan", s: "medical", title: "Snap the letter", body: "A photo, PDF or screenshot of the bill, denial or notice." },
@@ -45,7 +52,7 @@ export default function Home() {
         <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 18 }}>
           {PROBLEMS.map((p) => (
             <Link key={p.slug} href={`/help-with/${p.slug}`} className="problem-card">
-              <Peek kind="found" s={p.scenario} />
+              <Peek kind={PROBLEM_PEEK[p.slug].kind} s={p.scenario} tone={PROBLEM_PEEK[p.slug].tone} />
               <span className="stack g4" style={{ padding: "0 8px" }}>
                 <span className="row g8"><span className="ico o" style={{ width: 32, height: 32, borderRadius: 10 }}><FeatureIcon slug={p.slug} size={16} /></span><span className="serif" style={{ fontSize: 24 }}>{p.name}</span></span>
                 <span className="muted" style={{ fontSize: 15 }}>{p.menu}</span>

@@ -324,3 +324,6 @@ details.faq[open] .chev { transform: rotate(45deg); }
 @media (prefers-reduced-motion: reduce) { .problem-card { transition: none; } .problem-card:hover { transform: none; } }
 .site-header .logo { white-space: nowrap; }
 @media (max-width: 520px) { .nav-cta { display: none; } }
+.peek.orange { background: var(--orange-soft); }
+.peek.ink { background: var(--ink); }
+.peek.ink .phone-in { box-shadow: none; }
