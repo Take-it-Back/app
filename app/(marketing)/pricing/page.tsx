@@ -44,7 +44,9 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="wrap-1200 stack g20 m-section">
+      <section className="m-section">
+        <div className="panel-sec gray">
+        <div className="inner stack g20">
         <h2 className="h-l" style={{ fontSize: "clamp(32px, 3.6vw, 46px)" }}>Compare <em className="o">plans</em></h2>
         <div className="card" style={{ padding: "8px 12px", borderRadius: 26 }}>
           <table className="pt">
@@ -56,14 +58,16 @@ export default function PricingPage() {
             </tbody>
           </table>
         </div>
+        </div>
+        </div>
       </section>
 
       <section className="wrap-1200 m-section">
-        <div className="shot-stage orange">
+        <div className="shot-stage" style={{ background: "#1A1A1A" }}>
           <div className="side" style={{ transform: "rotate(-3deg)" }}><Phone kind="free" s="insurance" size="sm" label="Free plan: summary with locked details" /></div>
           <div className="stack g8" style={{ alignSelf: "center", maxWidth: 280, textAlign: "center", padding: "0 8px" }}>
-            <span className="hand" style={{ fontSize: 30, lineHeight: 1.1 }}>free shows you the problem.</span>
-            <span className="hand" style={{ fontSize: 30, lineHeight: 1.1, color: "#A8441F" }}>premium fixes it.</span>
+            <span className="hand" style={{ fontSize: 30, lineHeight: 1.1, color: "#fff" }}>free shows you the problem.</span>
+            <span className="hand" style={{ fontSize: 30, lineHeight: 1.1, color: "#F0A07E" }}>premium fixes it.</span>
           </div>
           <div className="side" style={{ transform: "rotate(3deg)" }}><Phone kind="letter" s="insurance" size="sm" label="Premium: the appeal letter, written for you" /></div>
         </div>

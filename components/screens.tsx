@@ -75,7 +75,7 @@ export function Screen({ kind, s = "medical" }: { kind: ShotKind; s?: ScenarioKe
             <span className="s-line" style={{ width: "70%" }} />
             <svg className="s-frame" viewBox="0 0 206 266" preserveAspectRatio="none" aria-hidden="true"><path d="M3 23V9a6 6 0 0 1 6-6h14M183 3h14a6 6 0 0 1 6 6v14M203 243v14a6 6 0 0 1-6 6h-14M23 263H9a6 6 0 0 1-6-6v-14" fill="none" stroke="#BF4F28" strokeWidth="3" strokeLinecap="round" /></svg>
           </div>
-          <div className="row between" style={{ width: "100%", padding: "0 14px", color: "#fff", fontSize: 12 }}>
+          <div className="row between" style={{ alignSelf: "stretch", padding: "0 24px", color: "#fff", fontSize: 12 }}>
             <span>Upload PDF</span>
             <span className="s-shutter" />
             <span>2 pages</span>
@@ -265,11 +265,27 @@ export function Screen({ kind, s = "medical" }: { kind: ShotKind; s?: ScenarioKe
   }
 }
 
+function StatusBar() {
+  return (
+    <div className="s-status" aria-hidden="true">
+      <span>9:41</span>
+      <span className="s-island" />
+      <span className="s-icons">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1" /><rect x="4.5" y="5" width="3" height="6" rx="1" /><rect x="9" y="2.5" width="3" height="8.5" rx="1" /><rect x="13.5" y="0" width="3" height="11" rx="1" /></svg>
+        <svg width="15" height="11" viewBox="0 0 15 11" fill="currentColor"><path d="M7.5 2.2c2 0 3.9.8 5.3 2.1l1.1-1.1A9 9 0 0 0 7.5.6 9 9 0 0 0 1.1 3.2l1.1 1.1A7.6 7.6 0 0 1 7.5 2.2zm0 3.1c1.2 0 2.3.4 3.1 1.2l1.1-1.1a6 6 0 0 0-8.4 0l1.1 1.1c.8-.8 1.9-1.2 3.1-1.2zm0 3a1.4 1.4 0 0 0-1 .4L7.5 10l1-1.3a1.4 1.4 0 0 0-1-.4z" /></svg>
+        <svg width="26" height="12" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="22" height="11" rx="3.5" fill="none" stroke="currentColor" strokeOpacity="0.4" /><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor" /><rect x="23.5" y="4" width="1.8" height="4" rx="0.9" fill="currentColor" fillOpacity="0.4" /></svg>
+      </span>
+    </div>
+  );
+}
+
 export function Phone({ kind, s = "medical", size = "md", label }: { kind: ShotKind; s?: ScenarioKey; size?: "md" | "sm" | "xs"; label?: string }) {
   return (
     <div className={`phone ${size}`} role="img" aria-label={label || `App screen: ${kind}`}>
       <div className={`phone-in${kind === "scan" ? " dark" : ""}`}>
+        <StatusBar />
         <Screen kind={kind} s={s} />
+        <i className="s-home" aria-hidden="true" />
       </div>
     </div>
   );
@@ -332,6 +348,7 @@ export function Peek({ kind, s = "medical", tone = "gray" }: { kind: ShotKind; s
   return (
     <div className={`peek ${tone}`} aria-hidden="true">
       <div className={`phone-in${kind === "scan" ? " dark" : ""}`}>
+        <StatusBar />
         <Screen kind={kind} s={s} />
       </div>
     </div>

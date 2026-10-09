@@ -1,6 +1,6 @@
-import type { FeatureSlug } from "@/lib/marketing";
+import type { FeatureSlug, ProblemSlug } from "@/lib/marketing";
 
-export default function FeatureIcon({ slug, size = 18 }: { slug: FeatureSlug | "medical-bills" | "insurance-denials" | "renters" | "debt-collectors"; size?: number }) {
+export default function FeatureIcon({ slug, size = 18 }: { slug: FeatureSlug | ProblemSlug; size?: number }) {
   const p = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
   switch (slug) {
     case "scan": return <svg {...p}><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3" /><path d="M8 12h8" /></svg>;
@@ -13,7 +13,7 @@ export default function FeatureIcon({ slug, size = 18 }: { slug: FeatureSlug | "
     case "real-help": return <svg {...p}><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="3.5" /><path d="M5.6 5.6l3.9 3.9M14.5 14.5l3.9 3.9M18.4 5.6l-3.9 3.9M9.5 14.5l-3.9 3.9" /></svg>;
     case "medical-bills": return <svg {...p}><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z" /><path d="M12 8v6M9 11h6" /></svg>;
     case "insurance-denials": return <svg {...p}><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z" /><path d="M9.5 9.5l5 5M14.5 9.5l-5 5" /></svg>;
-    case "renters": return <svg {...p}><path d="M3 11l9-7 9 7" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" /></svg>;
+    case "landlords": return <svg {...p}><path d="M3 11l9-7 9 7" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" /></svg>;
     case "debt-collectors": return <svg {...p}><path d="M5 4h14v16H5z" /><path d="M9 8h6M9 12h6M9 16h3" /></svg>;
   }
 }

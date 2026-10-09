@@ -43,9 +43,9 @@ export function SiteFooter() {
             <span className="eyebrow">Features</span>
             {FEATURES.map((f) => <Link key={f.slug} href={`/features/${f.slug}`} style={{ textDecoration: "none" }}>{f.name}</Link>)}
           </nav>
-          <nav aria-label="Who it helps" className="stack g8" style={{ fontSize: 15 }}>
-            <span className="eyebrow">Who it helps</span>
-            {PROBLEMS.map((p) => <Link key={p.slug} href={`/help-with/${p.slug}`} style={{ textDecoration: "none" }}>{p.name}</Link>)}
+          <nav aria-label="Who we fight" className="stack g8" style={{ fontSize: 15 }}>
+            <span className="eyebrow">Who we fight</span>
+            {PROBLEMS.map((p) => <Link key={p.slug} href={`/fight/${p.slug}`} style={{ textDecoration: "none" }}>{p.name}</Link>)}
           </nav>
           <nav aria-label="Company" className="stack g8" style={{ fontSize: 15 }}>
             <span className="eyebrow">Company</span>

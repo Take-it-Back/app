@@ -3,13 +3,14 @@ import type { Category } from "@/lib/types";
 import { STATUS_INFO } from "@/lib/rules";
 import type { CaseStatus } from "@/lib/types";
 
+/** The mark: a freestanding "take it back" U-turn arrow. */
 export function Mark({ size = 32, inverse = false }: { size?: number; inverse?: boolean }) {
+  const c = inverse ? "#fff" : "#BF4F28";
   return (
     <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true">
-      <rect width="64" height="64" rx="16" fill={inverse ? "#BF4F28" : "#1A1A1A"} />
-      <path d="M44 42V30a10 10 0 0 0-10-10H18" fill="none" stroke={inverse ? "#fff" : "#BF4F28"} strokeWidth="7" strokeLinecap="round" />
-      <path d="M26 11l-9 9 9 9" fill="none" stroke={inverse ? "#fff" : "#BF4F28"} strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" />
-      {!inverse && <circle cx="44" cy="49" r="3.5" fill="#fff" />}
+      <path d="M47 54V32a15 15 0 0 0-15-15H15" fill="none" stroke={c} strokeWidth="8.5" strokeLinecap="round" />
+      <path d="M26 6L15 17l11 11" fill="none" stroke={c} strokeWidth="8.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="47" cy="54" r="4.25" fill={inverse ? "#fff" : "#1A1A1A"} />
     </svg>
   );
 }
@@ -17,7 +18,7 @@ export function Mark({ size = 32, inverse = false }: { size?: number; inverse?: 
 export function Logo({ href = "/", size = 22, inverse = false }: { href?: string; size?: number; inverse?: boolean }) {
   return (
     <Link href={href} className="logo" aria-label="Take it back home" style={{ color: inverse ? "#fff" : "#1A1A1A" }}>
-      <Mark size={Math.round(size * 1.35)} inverse={inverse} />
+      <Mark size={Math.round(size * 1.5)} inverse={inverse} />
       <span style={{ fontFamily: "var(--sans)", fontWeight: 700, fontSize: size, letterSpacing: "-0.03em" }}>take it back</span>
     </Link>
   );

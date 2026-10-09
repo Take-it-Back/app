@@ -24,8 +24,9 @@ export default function HowItWorks() {
       <PageHead eyebrow="How it works" title="One denied MRI, from letter to" italic="settled" after="." lede="Here's how a real kind of fight plays out in Take it back, screen by screen. The same steps work for bills, landlords and collectors." />
 
       {STEPS.map((st, i) => (
-        <section key={st.n} className="wrap-1200 m-section">
-          <div className="row wrap" style={{ gap: 48, alignItems: "center", flexDirection: i % 2 ? "row-reverse" : "row" }}>
+        <section key={st.n} className="m-section">
+          <div className={i % 2 ? "panel-sec gray" : "panel-sec"} style={i % 2 ? undefined : { paddingTop: 0, paddingBottom: 0 }}>
+          <div className="inner row wrap" style={{ gap: 48, alignItems: "center", flexDirection: i % 2 ? "row-reverse" : "row" }}>
             <div className="stack g16" style={{ flex: "1 1 400px", minWidth: 0 }}>
               <span className="row g12"><span className="serif" style={{ fontSize: 64, lineHeight: 0.9, color: "#BF4F28" }}>{st.n}</span><span className={st.plan === "Premium" ? "pill-pro" : "pill-free"} style={{ marginLeft: 0 }}>{st.plan}</span></span>
               <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>{st.title} <em className="o">{st.italic}</em></h2>
@@ -36,7 +37,7 @@ export default function HowItWorks() {
                 ))}
               </ul>
             </div>
-            <div className={`shot-stage${i % 2 ? " orange" : ""}`} style={{ flex: "1 1 460px", minWidth: 0 }}>
+            <div className={`shot-stage${i % 2 ? "" : " orange"}`} style={{ flex: "1 1 460px", minWidth: 0 }}>
               {st.shots.map(([k, s], j) => (
                 <div key={k} className={j > 0 ? "side" : undefined} style={j > 0 ? { transform: "rotate(3deg)" } : undefined}>
                   <Phone kind={k} s={s} size={j > 0 ? "sm" : "md"} label={`Step ${st.n}: ${k}`} />
@@ -44,13 +45,18 @@ export default function HowItWorks() {
               ))}
             </div>
           </div>
+          </div>
         </section>
       ))}
 
-      <section className="wrap-1200 stack g20 m-section">
-        <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>And on your <em className="o">computer</em></h2>
+      <section className="m-section">
+        <div className="panel-sec ink">
+        <div className="inner stack g20">
+        <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>And on your <em style={{ color: "#F0A07E" }}>computer</em></h2>
         <Desktop s="insurance" />
-        <p className="muted" style={{ margin: 0 }}>Everything syncs. <Link href="/features">See every feature</Link> or <Link href="/pricing">compare plans</Link>.</p>
+        <p style={{ margin: 0, color: "#BDBDBD" }}>Everything syncs. <Link href="/features" style={{ color: "#fff" }}>See every feature</Link> or <Link href="/pricing" style={{ color: "#fff" }}>compare plans</Link>.</p>
+        </div>
+        </div>
       </section>
 
       <CtaBand title="Ready for round" italic="one?" sub="Scan your letter free and see where you stand." />

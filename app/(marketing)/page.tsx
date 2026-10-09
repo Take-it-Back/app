@@ -8,7 +8,7 @@ import { FAQ_GROUPS, FEATURES, PROBLEMS, type ProblemSlug, type ShotKind } from 
 const PROBLEM_PEEK: Record<ProblemSlug, { kind: ShotKind; tone: "gray" | "orange" | "ink" }> = {
   "medical-bills": { kind: "found", tone: "orange" },
   "insurance-denials": { kind: "letter", tone: "gray" },
-  renters: { kind: "tracker", tone: "ink" },
+  landlords: { kind: "tracker", tone: "ink" },
   "debt-collectors": { kind: "reply", tone: "orange" },
 };
 
@@ -25,7 +25,7 @@ export default function Home() {
     <main>
       <section className="wrap-1200 row wrap" style={{ paddingTop: "clamp(48px, 7vw, 88px)", gap: 56, alignItems: "center" }}>
         <div className="stack g20" style={{ flex: "1 1 480px", minWidth: 0 }}>
-          <span className="eyebrow" style={{ fontSize: 13 }}>Medical bills · Insurance denials · Landlords · Debt collectors</span>
+          <span className="eyebrow" style={{ fontSize: 13 }}>Fight back against hospitals · insurers · landlords · debt collectors</span>
           <h1 className="h-xl">They count on you giving up. Take it <em className="o">back</em>.</h1>
           <p className="lede">
             Take it back reads the unfair bill, denial or notice you got, tells you what's wrong in plain English, writes the letter to fight it, and tracks every deadline until it's settled.
@@ -45,18 +45,18 @@ export default function Home() {
 
       <section className="wrap-1200 stack g24 m-section">
         <div className="stack g8">
-          <span className="eyebrow" style={{ fontSize: 13 }}>Who it helps</span>
-          <h2 className="h-l" style={{ maxWidth: 820 }}>Four fights most people <em className="o">lose by default</em>.</h2>
-          <p className="lede">Not because they're wrong, but because the letters are confusing and the deadlines are short. We help with all four.</p>
+          <span className="eyebrow" style={{ fontSize: 13 }}>Who we fight</span>
+          <h2 className="h-l" style={{ maxWidth: 860 }}>Four industries that win <em className="o">by default</em>.</h2>
+          <p className="lede">Not because they're right, but because their letters are confusing and their deadlines are short. We're on your side against all four.</p>
         </div>
         <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 18 }}>
           {PROBLEMS.map((p) => (
-            <Link key={p.slug} href={`/help-with/${p.slug}`} className="problem-card">
+            <Link key={p.slug} href={`/fight/${p.slug}`} className="problem-card">
               <Peek kind={PROBLEM_PEEK[p.slug].kind} s={p.scenario} tone={PROBLEM_PEEK[p.slug].tone} />
               <span className="stack g4" style={{ padding: "0 8px" }}>
                 <span className="row g8"><span className="ico o" style={{ width: 32, height: 32, borderRadius: 10 }}><FeatureIcon slug={p.slug} size={16} /></span><span className="serif" style={{ fontSize: 24 }}>{p.name}</span></span>
                 <span className="muted" style={{ fontSize: 15 }}>{p.menu}</span>
-                <span style={{ fontSize: 14, fontWeight: 500, color: "#A8441F", marginTop: 4 }}>How we help →</span>
+                <span style={{ fontSize: 14, fontWeight: 500, color: "#A8441F", marginTop: 4 }}>Fight back →</span>
               </span>
             </Link>
           ))}
@@ -64,45 +64,53 @@ export default function Home() {
       </section>
 
       <section className="m-section">
-        <div className="wrap-1200 stack g8" style={{ marginBottom: 28 }}>
-          <span className="eyebrow" style={{ fontSize: 13 }}>What it does</span>
-          <h2 className="h-l">From scary letter to <em className="o">settled</em>.</h2>
-        </div>
-        <div className="strip">
-          <div>
-            {STEPS.map((st, i) => (
-              <figure key={st.title}>
-                <Phone kind={st.kind} s={st.s} size="sm" label={st.title} />
-                <figcaption className="stack g4">
-                  <span className="row g8"><span className="serif" style={{ fontSize: 26, color: "#BF4F28", lineHeight: 1 }}>{i + 1}</span><span style={{ fontWeight: 500, fontSize: 17 }}>{st.title}</span></span>
-                  <span className="muted">{st.body}</span>
-                </figcaption>
-              </figure>
-            ))}
+        <div className="panel-sec orange">
+          <div className="inner row wrap between g16" style={{ marginBottom: 28, alignItems: "flex-end" }}>
+            <div className="stack g8">
+              <span className="eyebrow" style={{ fontSize: 13, color: "#A8441F" }}>What it does</span>
+              <h2 className="h-l">From scary letter to <em className="o">settled</em>.</h2>
+            </div>
+            <Link href="/how-it-works" className="btn-plain" style={{ background: "transparent", borderColor: "#1A1A1A" }}>Walk through a full case</Link>
+          </div>
+          <div className="strip">
+            <div>
+              {STEPS.map((st, i) => (
+                <figure key={st.title}>
+                  <Phone kind={st.kind} s={st.s} size="sm" label={st.title} />
+                  <figcaption className="stack g4">
+                    <span className="row g8"><span className="serif" style={{ fontSize: 26, color: "#BF4F28", lineHeight: 1 }}>{i + 1}</span><span style={{ fontWeight: 500, fontSize: 17 }}>{st.title}</span></span>
+                    <span style={{ color: "#4A4A4A" }}>{st.body}</span>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </div>
-        <div className="wrap-1200"><Link href="/how-it-works" style={{ fontWeight: 500 }}>Walk through a full case →</Link></div>
       </section>
 
-      <section className="wrap-1200 stack g24 m-section">
-        <div className="row wrap between g16" style={{ alignItems: "flex-end" }}>
-          <div className="stack g8">
-            <span className="eyebrow" style={{ fontSize: 13 }}>Features</span>
-            <h2 className="h-l">Everything in <em className="o">one</em> place.</h2>
+      <section className="m-section">
+        <div className="panel-sec ink">
+          <div className="inner stack g24">
+            <div className="row wrap between g16" style={{ alignItems: "flex-end" }}>
+              <div className="stack g8">
+                <span className="eyebrow" style={{ fontSize: 13, color: "#F0A07E" }}>Features</span>
+                <h2 className="h-l">Everything in <em style={{ color: "#F0A07E" }}>one</em> place.</h2>
+              </div>
+              <CtaLink href="/features" variant="light">All features</CtaLink>
+            </div>
+            <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 14 }}>
+              {FEATURES.map((f) => (
+                <Link key={f.slug} href={`/features/${f.slug}`} className="card-ink">
+                  <span className="row between">
+                    <span className="ico o"><FeatureIcon slug={f.slug} /></span>
+                    {f.plan === "premium" ? <span className="pill-pro">Premium</span> : f.plan === "free" ? <span className="pill-free">Free</span> : <span className="pill-free">Free + Premium</span>}
+                  </span>
+                  <span className="serif" style={{ fontSize: 24 }}>{f.name}</span>
+                  <span style={{ fontSize: 15, color: "#BDBDBD" }}>{f.short}</span>
+                </Link>
+              ))}
+            </div>
           </div>
-          <Link href="/features" className="btn-plain">All features</Link>
-        </div>
-        <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 16 }}>
-          {FEATURES.map((f) => (
-            <Link key={f.slug} href={`/features/${f.slug}`} className="card stack g12" style={{ textDecoration: "none", padding: 24 }}>
-              <span className="row between">
-                <span className="ico o"><FeatureIcon slug={f.slug} /></span>
-                {f.plan === "premium" ? <span className="pill-pro">Premium</span> : f.plan === "free" ? <span className="pill-free">Free</span> : <span className="pill-free">Free + Premium</span>}
-              </span>
-              <span className="serif" style={{ fontSize: 24 }}>{f.name}</span>
-              <span className="muted" style={{ fontSize: 15 }}>{f.short}</span>
-            </Link>
-          ))}
         </div>
       </section>
 
@@ -141,13 +149,14 @@ export default function Home() {
       </section>
 
       <section className="wrap-1200 m-section">
-        <div className="grid-auto" style={{ gap: 36 }}>
+        <div className="trust">
           {[
-            ["You keep 100%", "We never take a cut of what you save or recover."],
-            ["Private by default", "Your documents are never sold or used for ads. Delete everything anytime."],
-            ["Honest about limits", "We're not a law firm. Court dates and lawsuits go straight to real help, free."],
-          ].map(([t, b]) => (
-            <div key={t} className="stack g8" style={{ borderTop: "1px solid #1A1A1A", paddingTop: 22 }}>
+            ["100%", "You keep 100%", "We never take a cut of what you save or recover."],
+            ["0", "Ads, ever", "Your documents are never sold or used for ads. Delete everything anytime."],
+            ["Free", "Real help, always", "We're not a law firm. Court dates and lawsuits go straight to real help, free."],
+          ].map(([n, t, b]) => (
+            <div key={t}>
+              <span className="num">{n}</span>
               <h3 style={{ margin: 0, fontSize: 20, fontWeight: 500 }}>{t}</h3>
               <p className="muted" style={{ margin: 0, fontSize: 16 }}>{b}</p>
             </div>

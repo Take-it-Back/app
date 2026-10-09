@@ -70,7 +70,7 @@ export default function SiteNav() {
           Features <Chevron open={open === "features"} />
         </button>
         <button type="button" aria-expanded={open === "who"} aria-controls="mega-who" onClick={() => setOpen(open === "who" ? null : "who")} {...hover("who")}>
-          Who it helps <Chevron open={open === "who"} />
+          Who we fight <Chevron open={open === "who"} />
         </button>
         <Link href="/how-it-works">How it works</Link>
         <Link href="/pricing">Pricing</Link>
@@ -116,10 +116,10 @@ export default function SiteNav() {
         <div id="mega-who" className="mega" {...hover("who")}>
           <div className="mega-in">
             <div className="stack g12">
-              <span className="eyebrow">Problems we help with</span>
+              <span className="eyebrow">Fight back against</span>
               <div className="mega-grid">
                 {PROBLEMS.map((p) => (
-                  <Link key={p.slug} href={`/help-with/${p.slug}`} className="mega-item">
+                  <Link key={p.slug} href={`/fight/${p.slug}`} className="mega-item">
                     <span className="ico o"><FeatureIcon slug={p.slug} /></span>
                     <span className="stack g4">
                       <span style={{ fontWeight: 500 }}>{p.name}</span>
@@ -128,12 +128,12 @@ export default function SiteNav() {
                   </Link>
                 ))}
               </div>
-              <Link href="/help-with" style={{ fontWeight: 500, fontSize: 15, padding: "4px 12px" }}>See everything we help with</Link>
+              <Link href="/fight" style={{ fontWeight: 500, fontSize: 15, padding: "4px 12px" }}>See everyone we fight</Link>
             </div>
             <div className="mega-side">
-              <span className="eyebrow" style={{ color: "#F0A07E" }}>For everyday people</span>
-              <span className="serif" style={{ fontSize: 26, lineHeight: 1.1 }}>No lawyer-speak. No cut of what you <em style={{ color: "#F0A07E" }}>save</em>.</span>
-              <span style={{ color: "#D4D4D4", fontSize: 14 }}>Built for anyone in the US with a bill or notice that feels wrong.</span>
+              <span className="eyebrow" style={{ color: "#F0A07E" }}>On your side</span>
+              <span className="serif" style={{ fontSize: 26, lineHeight: 1.1 }}>We work for you. Never for <em style={{ color: "#F0A07E" }}>them</em>.</span>
+              <span style={{ color: "#D4D4D4", fontSize: 14 }}>For patients, policyholders, renters and consumers in the US.</span>
               <div style={{ marginTop: "auto" }}><CtaLink href="/about" variant="light">Why we built it</CtaLink></div>
             </div>
           </div>
@@ -144,8 +144,8 @@ export default function SiteNav() {
         <nav id="mobile-nav" className="mobile-nav" aria-label="Mobile">
           <span className="eyebrow">Features</span>
           {FEATURES.map((f) => <Link key={f.slug} href={`/features/${f.slug}`}>{f.name}<PlanPill plan={f.plan} /></Link>)}
-          <span className="eyebrow">Who it helps</span>
-          {PROBLEMS.map((p) => <Link key={p.slug} href={`/help-with/${p.slug}`}>{p.name}</Link>)}
+          <span className="eyebrow">Who we fight</span>
+          {PROBLEMS.map((p) => <Link key={p.slug} href={`/fight/${p.slug}`}>{p.name}</Link>)}
           <span className="eyebrow">More</span>
           <Link href="/how-it-works">How it works</Link>
           <Link href="/pricing">Pricing</Link>

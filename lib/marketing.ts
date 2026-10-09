@@ -77,7 +77,7 @@ export const SCENARIOS: Record<ScenarioKey, Scenario> = {
   },
   renters: {
     key: "renters",
-    tag: "Renters",
+    tag: "Landlord",
     counterparty: "Harbor Point Apartments",
     title: "Security deposit kept",
     amount: "$1,800",
@@ -292,7 +292,7 @@ export const FEATURES: Feature[] = [
 
 export const featureBySlug = (slug: string) => FEATURES.find((f) => f.slug === slug);
 
-export type ProblemSlug = "medical-bills" | "insurance-denials" | "renters" | "debt-collectors";
+export type ProblemSlug = "medical-bills" | "insurance-denials" | "landlords" | "debt-collectors";
 
 export type Problem = {
   slug: ProblemSlug;
@@ -311,8 +311,8 @@ export const PROBLEMS: Problem[] = [
   {
     slug: "medical-bills",
     scenario: "medical",
-    name: "Medical bills",
-    menu: "Errors, surprise bills, charity care",
+    name: "Hospitals & medical bills",
+    menu: "Overcharges, surprise bills, billing errors",
     headline: ["Medical bills that don't add", "up"],
     lede: "Studies find errors on a large share of hospital bills. We check yours for double charges, surprise out-of-network fees and help you may qualify for.",
     catches: [
@@ -330,8 +330,8 @@ export const PROBLEMS: Problem[] = [
   {
     slug: "insurance-denials",
     scenario: "insurance",
-    name: "Insurance denials",
-    menu: "Denied claims, appeals, outside review",
+    name: "Insurance companies",
+    menu: "Denied claims, stalled appeals, lowball payments",
     headline: ["Denied? That's not the", "end"],
     lede: "Many people never appeal a denied claim, but appeals often succeed. We explain why you were denied, write the appeal and track every deadline.",
     catches: [
@@ -347,10 +347,10 @@ export const PROBLEMS: Problem[] = [
     faqs: [["How long do I have to appeal?", "Usually 180 days from the denial for an internal appeal, but plans vary. We'll pull the date from your letter."], ["What if my appeal is denied too?", "You can usually ask for an external review, where an outside doctor decides. We'll help you write it."]],
   },
   {
-    slug: "renters",
+    slug: "landlords",
     scenario: "renters",
-    name: "Renters & landlords",
-    menu: "Deposits, repairs, fees, notices",
+    name: "Landlords",
+    menu: "Kept deposits, ignored repairs, illegal fees",
     headline: ["Get your deposit", "back"],
     lede: "Kept deposits, ignored repairs, surprise fees and scary notices. We explain your rights in your state and write the letter that gets a landlord's attention.",
     catches: [
@@ -369,7 +369,7 @@ export const PROBLEMS: Problem[] = [
     slug: "debt-collectors",
     scenario: "debt",
     name: "Debt collectors",
-    menu: "Validation, old debts, harassment",
+    menu: "Unproven debts, old debts, harassment",
     headline: ["Make them", "prove it"],
     lede: "Collectors have to follow strict rules. We help you ask for proof, spot old debts and stop harassment, without saying anything that hurts you.",
     catches: [
@@ -405,9 +405,9 @@ export const FAQ_GROUPS: { title: string; items: [string, string][] }[] = [
   {
     title: "The basics",
     items: [
-      ["What is Take it back?", "An app that helps you fight unfair medical bills, insurance denials, landlord problems and debt collectors. Snap the letter, get your rights in plain words, send the letter we write, and we track it until it's settled."],
+      ["What is Take it back?", "An app that helps you fight back against hospitals, insurance companies, landlords and debt collectors. Snap the letter, get your rights in plain words, send the letter we write, and we track it until it's settled."],
       ["Is Take it back a lawyer?", "No. We explain your rights and prepare letters you review and send yourself. If your case needs a lawyer, like a court date, we'll point you to real help right away."],
-      ["Who is it for?", "Anyone in the US dealing with a bill, denial or notice that feels wrong. No legal knowledge needed."],
+      ["Who is it for?", "Patients, policyholders, renters and consumers in the US who are up against a bill, denial or notice that feels wrong. We never work for the other side. No legal knowledge needed."],
       ["Does it work on my phone?", "Yes. It works in any browser on a phone or computer. Nothing to install."],
     ],
   },

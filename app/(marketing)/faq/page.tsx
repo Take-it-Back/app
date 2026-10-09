@@ -17,14 +17,26 @@ export default function FaqPage() {
             <Faq items={g.items} openFirst={false} />
           </section>
         ))}
-        {PROBLEMS.map((p) => (
-          <section key={p.slug} className="stack g16">
-            <h2 className="serif" style={{ margin: 0, fontSize: 32 }}>{p.name}</h2>
-            <Faq items={p.faqs} openFirst={false} />
-            <Link href={`/help-with/${p.slug}`} style={{ fontWeight: 500 }}>More about {p.name.toLowerCase()} →</Link>
-          </section>
-        ))}
       </div>
+      <section className="m-section">
+        <div className="panel-sec orange">
+          <div className="inner stack g24">
+            <div className="stack g8">
+              <span className="eyebrow" style={{ fontSize: 13, color: "#A8441F" }}>By problem</span>
+              <h2 className="h-l" style={{ fontSize: "clamp(32px, 3.6vw, 46px)" }}>Questions about your <em className="o">fight</em></h2>
+            </div>
+            <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 28 }}>
+              {PROBLEMS.map((p) => (
+                <section key={p.slug} className="stack g12">
+                  <h3 className="serif" style={{ margin: 0, fontSize: 28, fontWeight: 400 }}>{p.name}</h3>
+                  <Faq items={p.faqs} openFirst={false} />
+                  <Link href={`/fight/${p.slug}`} style={{ fontWeight: 500 }}>How to fight {p.name.toLowerCase()} →</Link>
+                </section>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
       <CtaBand title="Still unsure? Try it" italic="free." sub="Scan one letter and see what we find." />
     </main>
   );
