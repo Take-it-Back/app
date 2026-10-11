@@ -5,6 +5,7 @@ import { deleteAccount, updateProfile } from "@/lib/actions";
 import { US_STATES } from "@/lib/states";
 import PasswordReset from "./PasswordReset";
 import ChangeEmail from "./ChangeEmail";
+import PushToggle from "@/components/PushToggle";
 import { getPlan } from "@/lib/plan";
 import { CtaLink } from "@/components/ui";
 import { shortDate } from "@/lib/format";
@@ -67,6 +68,7 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
           <label className="row between" style={{ padding: "12px 0", borderBottom: "1px solid #EBEBEB", fontSize: 15 }}>Email me before deadlines<input type="checkbox" role="switch" name="remind_email" defaultChecked={p?.remind_email ?? true} style={{ width: 22, height: 22, accentColor: "#1A1A1A" }} /></label>
           <label className="field" style={{ paddingTop: 12 }}><span style={{ fontSize: 14 }}>Mobile number for text reminders</span><input name="phone" type="tel" inputMode="tel" className="input" placeholder="(555) 555-0123" defaultValue={p?.phone ? p.phone.replace(/^\+1/, "") : ""} autoComplete="tel" /></label>
           <label className="row between" style={{ padding: "12px 0", borderBottom: "1px solid #EBEBEB", fontSize: 15, gap: 12 }}><span className="stack"><span>Text me before deadlines</span><span className="muted small">Premium. By turning this on you agree to get up to 1 text a day from Take it back about your deadlines at this number. Texts never include case details. Msg &amp; data rates may apply. Reply STOP to cancel, HELP for help. Not a condition of purchase. See our <a href="/privacy">privacy policy</a>.</span></span><input type="checkbox" role="switch" name="sms_opt_in" defaultChecked={p?.sms_opt_in ?? false} style={{ width: 22, height: 22, accentColor: "#1A1A1A", flex: "none" }} /></label>
+          <PushToggle canTest={!!p?.is_admin} />
           <label className="row between" style={{ padding: "12px 0", fontSize: 15 }}>Morning briefing on Today<input type="checkbox" role="switch" name="morning_briefing" defaultChecked={p?.morning_briefing ?? true} style={{ width: 22, height: 22, accentColor: "#1A1A1A" }} /></label>
           <button className="btn-plain" style={{ alignSelf: "flex-start", background: "#1A1A1A", color: "#fff", borderColor: "#1A1A1A" }}>Save</button>
         </form>

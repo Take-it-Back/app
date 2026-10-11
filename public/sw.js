@@ -43,3 +43,38 @@ self.addEventListener("fetch", (event) => {
     );
   }
 });
+
+// Deadline alerts. Payload is JSON {title, body, url}; it never carries case details.
+self.addEventListener("push", (event) => {
+  let data = {};
+  try {
+    data = event.data ? event.data.json() : {};
+  } catch {
+    data = { body: event.data ? event.data.text() : "" };
+  }
+  event.waitUntil(
+    self.registration.showNotification(data.title || "Take it back", {
+      body: data.body || "You have a deadline coming up.",
+      icon: "/icons/icon-192.png",
+      tag: "deadlines",
+      renotify: true,
+      data: { url: data.url || "/app" },
+    })
+  );
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const target = new URL((event.notification.data && event.notification.data.url) || "/app", self.location.origin);
+  const href = target.origin === self.location.origin ? target.href : new URL("/app", self.location.origin).href;
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((wins) => {
+      const win = wins.find((w) => new URL(w.url).origin === self.location.origin);
+      if (!win) return self.clients.openWindow(href);
+      return win
+        .focus()
+        .then((w) => (w && "navigate" in w ? w.navigate(href) : w))
+        .catch(() => self.clients.openWindow(href));
+    })
+  );
+});
