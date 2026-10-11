@@ -8,6 +8,8 @@ import { WriteLetterCard } from "@/components/CaseActions";
 import { kindsFor, kindInfo, type LetterGroup } from "@/lib/letters";
 import { shortDate } from "@/lib/format";
 import type { CaseRow, LetterRow } from "@/lib/types";
+import { DebtClock } from "@/components/StateRules";
+import { debtTimeLimit } from "@/lib/stateLaw";
 
 const ORDER: LetterGroup[] = ["Fight it", "Lower the bill", "Get your records", "Follow up"];
 
@@ -23,6 +25,13 @@ export default async function WritePage({ params }: { params: Promise<{ id: stri
   const c = cd as CaseRow;
   const letters = (lt || []) as LetterRow[];
   const kinds = kindsFor(c.category).filter((k) => k.group !== "Escalate");
+  const clock = c.category === "debt" ? debtTimeLimit(c.user_state, c.last_payment_on) : null;
+  const debtCaution = (key: string) =>
+    c.category === "debt" && (key === "payment_plan" || key === "settlement_offer")
+      ? clock?.age?.expired
+        ? "This debt may be past the time limit. Paying or agreeing in writing could give them the right to sue again. Consider \u201cToo old to sue\u201d first."
+        : "Paying or promising in writing can restart the time limit to sue. Only pay under a signed written agreement."
+      : undefined;
 
   return (
     <main className="app-main">
@@ -49,6 +58,8 @@ export default async function WritePage({ params }: { params: Promise<{ id: stri
         </section>
       )}
 
+      {c.category === "debt" && c.user_state && <div style={{ marginBottom: 20 }}><DebtClock state={c.user_state} lastPayment={c.last_payment_on ?? null} compact /></div>}
+
       {!premium ? (
         <Upsell title="Pick a letter. We'll write it." body="Disputes, appeals, payment plans, discounts, records requests and follow-ups, written from your case and ready to send." />
       ) : (
@@ -60,7 +71,7 @@ export default async function WritePage({ params }: { params: Promise<{ id: stri
               <section key={g}>
                 <div className="sec-head"><h2>{g}</h2></div>
                 <div className="stack g8">
-                  {list.map((k) => <WriteLetterCard key={k.key} caseId={id} kind={k.key} title={k.label} blurb={k.blurb} caution={k.caution} />)}
+                  {list.map((k) => <WriteLetterCard key={k.key} caseId={id} kind={k.key} title={k.label} blurb={k.blurb} caution={debtCaution(k.key) || k.caution} />)}
                 </div>
               </section>
             );

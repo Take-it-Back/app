@@ -51,7 +51,7 @@ export default async function AdminPage() {
     <main className="app-main wide">
       <div className="page-head">
         <h1 className="page-title">Admin</h1>
-        <span className="tag tag-orange">Only admins see this</span>
+        <span className="row g8"><Link href="/app/admin/rules" className="btn-plain">State rules review</Link><span className="tag tag-orange">Only admins see this</span></span>
       </div>
 
       <div className="stack g20">

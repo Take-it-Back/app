@@ -1,0 +1,136 @@
+{
+  "recording": {
+    "all_party_states": ["California", "Connecticut", "Delaware", "Florida", "Illinois", "Maryland", "Massachusetts", "Michigan", "Montana", "Nevada", "New Hampshire", "Pennsylvania", "Washington"],
+    "notes": "Federal law and ~37 states are one-party consent. Connecticut is one-party criminally but all-party for civil liability on phone calls; Nevada's statute is read by courts as all-party for phone calls; Michigan's eavesdropping law is often read as all-party; Oregon is all-party only for in-person talks. On interstate calls, follow the stricter state, and California applies its law to calls with Californians. Safest script: open with 'This call is being recorded.' and stop recording if the other side objects. The app should tell users this. It does not record calls itself.",
+    "sources": [
+      "https://viirtue.com/call-recording-consent-laws-by-state-2026-guide/",
+      "https://www.rev.com/blog/phone-call-recording-laws-state"
+    ]
+  },
+  "texting": {
+    "quiet_hours": "Send only between 8am and 8pm in the recipient's local time (use area code or ZIP plus the user's stated time zone). That satisfies the federal TCPA window (8am–9pm) and the strictest state windows (FL, OK, MD: 8am–8pm). Pick a single daily send slot, e.g. 9–10am local.",
+    "states": {
+      "Florida": "FTSA: 8am–8pm, max 3 msgs per 24h per topic; texts covered; 15-day cure for text claims. Applies to telephone solicitations.",
+      "Oklahoma": "OTSA (Washington-style FTSA copy): 8am–8pm, max 3 per 24h, prior express written consent for automated sales texts; private right of action.",
+      "Maryland": "Stop the Spam Calls Act (Jan 2024): 8am–8pm, max 3 per 24h on same subject; telephone solicitations; private right of action.",
+      "Texas": "SB 140 (Sept 1 2025): marketing texts count as telephone solicitation; registration and bond unless consent/exempt; DTPA private suits.",
+      "Virginia": "VTPPA amended Jan 1 2026: covers solicitation texts, STOP/UNSUBSCRIBE must work, honor opt-out 10 yrs, 8am–9pm.",
+      "Washington": "CEMA bans commercial texts without consent; Robocall Scam Protection Act; private suits common. Keep texts purely transactional.",
+      "Connecticut": "Telemarketing law covers texts; 9am–8pm window for solicitations; consent required.",
+      "Arizona": "HB 2498 extended telemarketing law to texts; opt-out must be honored."
+    },
+    "requirements": [
+      "Make texts opt-in only, with an unchecked box that is not a condition of purchase. Suggested wording: 'Text me deadline reminders from Take it Back at [number]. 1 msg/day. Msg & data rates may apply. Reply STOP to cancel, HELP for help. Consent not required to buy. Terms & Privacy: [links]'",
+      "Keep reminders purely informational, with no promotions or upsells. That keeps them outside most state telemarketing laws (FL, OK, MD, TX, VA mostly target solicitations), and TCPA prior express consent is enough. If you ever add marketing, get prior express written consent.",
+      "Send a confirmation text right after opt-in: brand name, frequency, 'Msg&data rates may apply', STOP/HELP.",
+      "Honor STOP, CANCEL, END, QUIT, UNSUBSCRIBE, REVOKE, OPT OUT and any reasonable opt-out right away. The FCC rule effective Apr 11 2025 allows up to 10 business days, but stop immediately anyway. You may send at most one confirmation text, within 5 minutes.",
+      "HELP must reply with the brand name, support contact, and STOP instructions.",
+      "Send at most 1 message per day, as disclosed. Do not exceed 3 per 24h in any state.",
+      "Send only within 8am–8pm in the recipient's local time.",
+      "Keep consent records: timestamp, phone number, IP/user agent, the exact consent wording and version, and the opt-out log. Keep them at least 4 to 5 years (TCPA statute of limitations is 4 years).",
+      "Complete Twilio A2P 10DLC brand and campaign registration (or toll-free verification) with opt-in screenshots and sample messages. Carriers block unregistered traffic.",
+      "Never put health details (diagnosis, provider, bill specifics) in SMS. Use generic text like 'You have a deadline in 3 days — open Take it Back.' SMS is not secure, and health data laws apply.",
+      "Scrub reassigned numbers (FCC Reassigned Numbers Database) or re-confirm after long inactivity, and drop numbers that bounce."
+    ],
+    "sources": [
+      "https://manatt.com/Insights/Newsletters/TCPA-Connect/State-Mini-TCPA-Telemarketing-Laws-Continue-to-P",
+      "https://www.alston.com/en/insights/publications/2025/08/texas-telemarketing-telephone-solicitation",
+      "https://datamatters.sidley.com/2025/09/04/texting-in-texas-the-state-expands-telemarketing-registration-requirements-to-include-text-marketers/",
+      "https://www.privacyworld.blog/2026/01/key-changes-to-virginia-telephone-privacy-protection-act-take-effect/",
+      "https://goodwinlaw.com/en/insights/publications/2023/02/02_28-mini-tcpa-laws-you-should-know"
+    ]
+  },
+  "auto_renewal": {
+    "federal": "The FTC's 2024 'click-to-cancel' amendments to the Negative Option Rule were vacated by the Eighth Circuit on July 8, 2025, on procedural grounds, before taking effect. On March 11, 2026, the FTC issued an ANPRM restarting negative-option rulemaking; comments closed April 13, 2026, and no final rule exists as of Oct 2026. ROSCA remains fully enforceable now, as does FTC Act Section 5. It requires clear disclosure of all material terms before billing info is collected, express informed consent before charging, and simple cancellation mechanisms. The FTC actively sues under it (e.g., Amazon Prime, $2.5B settlement Sept 2025).",
+    "requirements": [
+      "Before purchase, place a clear and conspicuous disclosure next to the Subscribe/Start trial button: auto-renews until canceled; price ($9.99/mo or $59/yr); billing frequency; trial length (7 days) and the date and amount of the first charge; how to cancel (online, in account); minimum term, if any. Show the amount and frequency before billing info is confirmed (CA AB 2863).",
+      "Get separate affirmative consent to the auto-renewal itself: an unchecked checkbox, e.g. 'I agree my subscription will auto-renew at $X/[period] until I cancel', separate from general Terms acceptance. Nothing else in the terms may contradict it.",
+      "Keep consent records for 3 years or 1 year after the subscription ends, whichever is longer (CA). Record the timestamp, the terms shown, and the price.",
+      "Send an acknowledgment email right after signup with: auto-renewal terms, price and frequency, trial end date and first charge, the cancellation policy, and a direct cancel link or steps. For a free trial, explain how to cancel before being charged.",
+      "Trial-ending notice: a 7-day trial is not legally required to get a pre-conversion notice under CA. CO, MN and others require one only for trials over 31 days, typically 3–21 days before conversion. Best practice (and ROSCA-safe): email 2–3 days before the trial converts.",
+      "Online cancellation: anyone who signed up online must be able to cancel online, immediately, through a prominent 'Cancel subscription' link in account settings, with no calls or chat required. Stripe Customer Portal works if linked directly.",
+      "Save offers during cancellation are allowed only if a 'click to cancel' button is shown at the same time (CA as of July 1 2025). Never block or delay cancellation.",
+      "Send an annual reminder at least once a year (CA, for plans renewing on any term) in the same medium used for signup (email): the product, charge amount and frequency, and how to cancel. For the annual plan, also send a renewal notice 15–45 days before renewal. NY, VA, CO and others require this for terms of 1 year or longer.",
+      "Price changes: notify clearly 7 to 30 days before a new price takes effect, with cancellation instructions (CA). Many states require prior notice of material changes.",
+      "Do not charge after cancellation. Prorated refunds are optional but reduce disputes; state the refund policy."
+    ],
+    "states_with_laws": ["Arkansas", "California", "Colorado", "Connecticut", "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Minnesota", "Missouri", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oregon", "Pennsylvania", "South Dakota", "Tennessee", "Utah", "Vermont", "Virginia", "Washington", "Wisconsin"],
+    "sources": [
+      "https://perkinscoie.com/insights/blog/ftc-kicks-new-negative-options-rulemaking",
+      "https://www.dlapiper.com/en/insights/publications/2025/07/ftcs-click-to-cancel-rule-voided",
+      "https://www.gunder.com/en/news-insights/insights/client-insight-eighth-circuit-vacates-ftcs-click-to-cancel-rule",
+      "https://ktslaw.com/insights/alert/2024/10/california-latest-automatic-renewal-law-amendments-take-effect-in-july-2025",
+      "https://www.sheppard.com/insights/blogs/californias-auto-renewal-law-takes-effect-on-july-1"
+    ]
+  },
+  "health_privacy": {
+    "washington_mhmda": [
+      "Applies to any business that collects consumer health data of WA residents, or data processed in WA. There is no revenue or user-count threshold; small-business compliance has applied since Mar 31 2024. Uploaded medical bills and insurance denials are consumer health data.",
+      "Get separate, freely given, specific opt-in consent to collect health data, for each stated purpose, except what is strictly necessary to provide the service the user requested. Disclose the categories, purpose, and sharing. No bundled or pre-checked consent.",
+      "Get a second, separate consent to share health data with any third party (e.g., AI/OCR vendors that are not acting as processors), distinct from the collection consent.",
+      "Post a Consumer Health Data Privacy Policy as a separate policy, with a prominent link on the homepage, covering categories collected and their sources, purposes, categories shared and recipients, and how to exercise rights.",
+      "Rights: confirm and access the data and the list of all third parties and affiliates it was shared with; withdraw consent; delete, including from processors and backups (backups within 6 months). Respond within 45 days (+45 extension), provide an appeal process, and offer the first 2 requests per year free.",
+      "Do not sell health data without a signed, valid authorization (specific content, 1-year expiry, kept 6 years). Simplest path: never sell.",
+      "Geofencing ban: no geofence within 2,000 ft of a health care provider site to identify, track, or collect data, or to send health messages or ads.",
+      "Processors (Supabase, OCR/AI vendors, Twilio) need binding contracts limiting use to your instructions.",
+      "Limit employee access to need-to-know, and maintain reasonable data security.",
+      "Private right of action via the WA Consumer Protection Act. Class actions are live (e.g., Maxwell v. Amazon, 2025), so watch ad pixels and SDKs, which count as sharing."
+    ],
+    "nevada": [
+      "SB 370 (NRS 603A.400+, effective Mar 31 2024) covers regulated entities doing business in NV or targeting NV consumers, with no size threshold. AG enforcement only; no private right of action.",
+      "Opt-in consent to collect, and separate consent to share, except as necessary to provide the requested product or service.",
+      "Post a consumer health data privacy policy: categories, sources, purposes, sharing, how to exercise rights, and an effective date.",
+      "Rights: confirm and access, list of third parties, stop collection, and deletion. Respond within 45 days.",
+      "No sale without written authorization from the consumer.",
+      "Geofence ban within 1,750 ft of a provider for health-data tracking or messaging.",
+      "Reasonable security and restricted employee access."
+    ],
+    "connecticut": [
+      "CTDPA consumer health data provisions apply to all persons, regardless of threshold: no selling consumer health data without consent, and no geofencing within 1,750 ft of mental, reproductive, or sexual health facilities.",
+      "SB 1295 (2025) amendments, mostly effective July 1, 2026: the CTDPA now applies to any controller that processes sensitive data (other than data used solely for payment), with no consumer-count minimum. The general threshold is lowered to 35,000 consumers.",
+      "Sensitive data, now including 'mental or physical health condition, treatment or diagnosis', 'disability or treatment', and consumer health data, requires opt-in consent before processing. Selling sensitive data needs separate consent.",
+      "Duties: privacy notice, data minimization (necessary and proportionate), data protection assessments for sensitive data (processing created on or after Aug 1 2026), consumer rights (access, correct, delete, portability, opt-out of targeted ads and sale), and processor contracts.",
+      "Employees and processors handling consumer health data must be under confidentiality duties."
+    ],
+    "other_states": "New York: Hochul vetoed the NY Health Information Privacy Act (S929) on Dec 19, 2025. A revised bill (S9269) was introduced in 2026 but is not enacted; if passed it would take effect 6 months after signing. Monitor it. The comprehensive privacy laws (~20 states: CA, VA, CO, CT, UT, TX, OR, MT, IA, DE, NH, NJ, NE, TN, MN, MD, IN, KY, RI) treat health data as sensitive, requiring opt-in consent (California: right to limit). Most have thresholds (e.g., 100k consumers; CCPA: $26.6M+ revenue, 100k consumers or households, or 50%+ revenue from selling or sharing) that a small startup won't meet. Texas and Nebraska exempt small businesses but still require consent before selling sensitive data. Maryland MODPA (effective Oct 2025) bans selling sensitive data outright and limits collection to what is strictly necessary (threshold 35k consumers). Practical approach: one opt-in health-data consent nationwide, never sell, no ad pixels on logged-in or document pages.",
+    "ftc_hbnr": "The FTC Health Breach Notification Rule (amended July 2024) likely applies: the app is a 'personal health record' vendor if it holds identifiable health information drawn from multiple sources (user uploads plus app inputs) and is not a HIPAA entity. A 'breach of security' includes unauthorized disclosure, such as sharing with ad platforms without authorization, not just hacks. Notify affected users, the FTC (within 60 days if 500+ people; otherwise via annual log), and media (500+ in a state). Penalties are about $53k per violation. Separately, FTC Act Section 5 bars deceptive or unfair health-data sharing (GoodRx, BetterHelp precedents). HIPAA does not apply to a consumer app that is not acting for a provider or plan.",
+    "sources": [
+      "https://www.hunton.com/privacy-and-cybersecurity-law-blog/connecticut-amends-the-connecticut-data-privacy-act",
+      "https://perkinscoie.com/insights/blog/connecticut-pierces-glba-veil-overhauling-its-omnibus-privacy-law",
+      "https://www.mofo.com/resources/insights/260316-nyhipa-returns-in-2026-revised-bill",
+      "https://www.healthlawadvisor.com/new-yorks-health-information-privacy-act-poised-to-become-the-latest-in-a-growing-trend-of-state-data-privacy-laws",
+      "https://www.wilmerhale.com/en/insights/blogs/WilmerHale-Privacy-and-Cybersecurity-Law/20230614-nevada-legislature-passes-consumer-health-data-privacy-bill",
+      "https://www.atg.wa.gov/protecting-washingtonians-personal-health-data-and-privacy",
+      "https://www.ftc.gov/legal-library/browse/rules/health-breach-notification-rule"
+    ]
+  },
+  "upl": {
+    "summary": "Self-help tools that give general legal information and let users fill templates are generally lawful. Risk arises when software applies law to a user's specific facts and gives individualized advice or selects strategies 'for' them, or presents itself as a lawyer substitute. Texas amended Gov't Code §81.101(c) in 1999, after Unauthorized Practice of Law Committee v. Parsons Technology (Quicken Family Lawyer). The amendment says computer software and websites are not the practice of law if they 'clearly and conspicuously state that the products are not a substitute for the advice of an attorney.' LegalZoom has litigated or settled with regulators in Missouri (Janson, 2011 settlement), North Carolina (2015 consent judgment requiring disclaimers, attorney review of templates, and a consumer opt-in to NC venue), and South Carolina (Medlock: upheld as non-UPL). Upsolve v. James (2d Cir. 2025) and DoNotPay (FTC 2024–25 order banning 'robot lawyer' claims without substantiation) show the risks of claiming to replace lawyers. Be careful in NC, TX (comply with the §81.101 disclaimer), NY, FL, CA, SC, and states with aggressive UPL committees (Georgia, Ohio). Utah and Arizona sandboxes allow more. Note: medical-bill disputes and insurance appeals are mostly consumer-rights processes, not legal proceedings, which lowers risk. Letters citing FDCPA, FCRA, or No Surprises Act rights are fine as information and templates.",
+    "requirements": [
+      "Clear and conspicuous disclaimer at signup, in the footer, and on every generated letter or script screen: 'Take it Back is not a law firm and does not provide legal advice. Using it does not create an attorney-client relationship. Our tools are not a substitute for the advice of an attorney.' (This tracks the Texas §81.101(c) wording.)",
+      "Position the product as information plus templates the user completes and sends themselves. The user chooses what to send and signs and sends it; the app never sends letters or calls as the user's representative.",
+      "Avoid 'robot lawyer', 'legal advice', 'win your case', or outcome guarantees; the FTC's DoNotPay order requires substantiation of such claims. Do not represent users in court or before agencies.",
+      "Keep templates attorney-reviewed and dated, cite general rules rather than tell users what they 'should' do legally, and add 'consult an attorney or legal aid' prompts for high-stakes items (lawsuits, eviction notices, garnishment, court deadlines).",
+      "Link to free help: legal aid (LawHelp.org), state attorney general, CFPB, state insurance department, hospital financial assistance.",
+      "Do not charge per-letter fees framed as legal services. Offer the subscription as a software tool.",
+      "If adding AI-generated letters, label them as drafts, require the user to review them, and avoid jurisdiction-specific legal conclusions."
+    ],
+    "sources": [
+      "https://statutes.capitol.texas.gov/Docs/GV/htm/GV.81.htm",
+      "https://www.ftc.gov/news-events/news/press-releases/2025/02/ftc-finalizes-order-donotpay-prohibits-deceptive-ai-lawyer-claims-imposes-monetary-relief-requires-notice-past",
+      "https://www.ncbar.gov/"
+    ]
+  },
+  "debt_relief": {
+    "summary": "About half the states (e.g., CA under the Debt Settlement Fair Practices Act/DFPI, CO, CT, DE, GA, IL, ME, MD, MN, NV, NH, NJ, NY, OR, RI, TX, UT, VT, VA, WA, WV, WI) license or regulate debt settlement, adjustment, or management services. These laws usually cover businesses that, for a fee, negotiate, settle, or arrange payment of a consumer's debts with creditors on the consumer's behalf. The FTC Telemarketing Sales Rule's debt relief provisions add an advance-fee ban on services sold by phone. A self-help tool that only gives information, letter templates (debt validation, dispute, financial-assistance requests), and call scripts, while the consumer contacts creditors themselves, generally falls outside these statutes: no negotiation on the user's behalf, no handling of funds, no settlement promises. Stay outside by never contacting creditors or collectors for users, never holding or disbursing funds, never promising to reduce or settle debts, and avoiding 'debt relief' or 'debt settlement' marketing. Credit repair laws (federal CROA and state laws) can be triggered by charging for help 'improving' credit reports, so avoid credit-repair claims or wording. Medical billing advocates who negotiate for patients are generally unlicensed, but some states may treat them as debt adjusters. Avoid negotiating on users' behalf.",
+    "sources": [
+      "https://www.ftc.gov/business-guidance/resources/debt-relief-services-telemarketing-sales-rule-guide-business",
+      "https://dfpi.ca.gov/regulated-industries/debt-settlement-fair-practices-act/",
+      "https://www.ftc.gov/legal-library/browse/statutes/credit-repair-organizations-act"
+    ]
+  },
+  "_meta": {
+    "checked": "2026-10-11",
+    "caveats": "Research summary, not legal advice; have counsel review before launch. Verified by search on Oct 11 2026: FTC click-to-cancel vacatur (July 2025) and March 2026 ANPRM; CA AB 2863 requirements; NY S929 veto and S9269 pending; TX SB 140; VA VTPPA Jan 2026; CT SB 1295 thresholds and dates; all-party recording list. Based on prior knowledge and not re-fetched this session: WA MHMDA and NV SB 370 details, the auto-renewal state list, the debt-settlement licensing list, UPL case details, the Amazon ROSCA settlement figure, the FCC revocation rule timing, and the HBNR penalty amount. State lists change often; recheck before relying on them. Mini-TCPA laws mostly target telephone solicitations; keeping SMS strictly informational is the main mitigation. The FCC 'revoke-all' consent provision has been delayed and could change opt-out scope."
+  }
+}

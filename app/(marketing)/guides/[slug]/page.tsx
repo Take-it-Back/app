@@ -1,3 +1,5 @@
+import { TABLES, type DebtRule, type SmallClaimsRule } from "@/lib/stateLaw";
+import { money } from "@/lib/format";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -75,6 +77,44 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           </section>
         )}
 
+        {g.table === "debt" && (
+          <section style={{ marginTop: 32 }}>
+            <h2 className="serif" style={{ fontSize: 30, margin: "0 0 12px", fontWeight: 400 }}>Time limits by state</h2>
+            <div className="card" style={{ padding: "8px 12px", borderRadius: 22 }}>
+              <table className="pt">
+                <thead><tr><th scope="col">State</th><th scope="col">Years to sue</th><th scope="col">Can a payment or promise restart it?</th></tr></thead>
+                <tbody>
+                  {stateRows<DebtRule>(TABLES.debt).map(([state, r]) => (
+                    <tr key={state}>
+                      <td>{state}</td>
+                      <td data-label="Years">{r.written === r.open ? r.written : `${Math.min(r.written, r.open)}–${Math.max(r.written, r.open)}`}</td>
+                      <td data-label="Restart">{r.revival === "none" ? "No" : r.revival === "payment" ? "Yes, a payment" : r.revival === "writing" ? "Yes, a signed promise" : "Yes, a payment or written promise"}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="muted small">Written contracts and credit cards; some debts, like medical debt, differ. Compiled from state statutes and 50-state surveys, checked October 2026. Laws change; check your state&apos;s statute or ask legal aid before relying on a date.</p>
+          </section>
+        )}
+
+        {g.table === "smallclaims" && (
+          <section style={{ marginTop: 32 }}>
+            <h2 className="serif" style={{ fontSize: 30, margin: "0 0 12px", fontWeight: 400 }}>Limits by state</h2>
+            <div className="card" style={{ padding: "8px 12px", borderRadius: 22 }}>
+              <table className="pt">
+                <thead><tr><th scope="col">State</th><th scope="col">Limit</th><th scope="col">Court</th><th scope="col">Filing fee</th></tr></thead>
+                <tbody>
+                  {stateRows<SmallClaimsRule>(TABLES.smallclaims).map(([state, r]) => (
+                    <tr key={state}><td>{state}</td><td data-label="Limit">{money(r.limit)}</td><td data-label="Court">{r.court}</td><td data-label="Fee">{r.fee}</td></tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="muted small">Limits for individuals, checked October 2026 against state court sites. Several states are raising limits; confirm with your court before filing.</p>
+          </section>
+        )}
+
         {g.blocks.map((b) => (
           <section key={b.h} style={{ marginTop: 36 }}>
             <h2 className="serif" style={{ fontSize: 30, margin: "0 0 12px", fontWeight: 400 }}>{b.h}</h2>
@@ -120,4 +160,8 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       <CtaBand title="Let us write the" italic="letter." sub="Scan it free. Premium writes the letter and tracks every deadline." />
     </main>
   );
+}
+
+function stateRows<T>(t: Record<string, unknown>) {
+  return Object.entries(t).filter(([k]) => k !== "_meta" && k !== "Puerto Rico") as [string, T][];
 }

@@ -7,6 +7,7 @@ import { createClient, requireUser } from "./supabase/server";
 import { theirDeadline } from "./rules";
 import { theirDeadlineFor } from "./letters";
 import type { Category } from "./types";
+import { US_STATES } from "./states";
 
 async function ctx() {
   return requireUser();
@@ -202,6 +203,24 @@ export async function updateCaseBasics(caseId: string, formData: FormData) {
   revalidatePath("/app", "layout");
 }
 
+export async function setCaseLaw(caseId: string, formData: FormData) {
+  const { supabase } = await ctx();
+  const state = String(formData.get("user_state") || "").slice(0, 40);
+  const lp = String(formData.get("last_payment_on") || "");
+  const update: Record<string, unknown> = {};
+  if (state && US_STATES.includes(state)) update.user_state = state;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(lp) && lp <= new Date().toISOString().slice(0, 10)) update.last_payment_on = lp;
+  else if (formData.has("last_payment_on") && !lp) update.last_payment_on = null;
+  if (Object.keys(update).length) await supabase.from("cases").update(update).eq("id", caseId);
+  revalidatePath(`/app/cases/${caseId}`, "layout");
+}
+
+export async function recordHealthConsent() {
+  const { supabase, user } = await ctx();
+  await supabase.from("profiles").update({ health_consent_at: new Date().toISOString() }).eq("id", user.id);
+  revalidatePath("/app", "layout");
+}
+
 export async function deleteCase(caseId: string) {
   const { supabase } = await ctx();
   const { data: docs } = await supabase.from("documents").select("storage_path").eq("case_id", caseId);
@@ -215,6 +234,10 @@ export async function updateProfile(formData: FormData) {
   const { supabase, user } = await ctx();
   const digits = String(formData.get("phone") || "").replace(/\D/g, "");
   const phone = digits.length === 10 ? `+1${digits}` : digits.length === 11 && digits.startsWith("1") ? `+${digits}` : "";
+  const smsOn = Boolean(phone) && formData.get("sms_opt_in") === "on";
+  const { data: before } = await supabase.from("profiles").select("sms_opt_in, sms_consent_at, phone").eq("id", user.id).maybeSingle();
+  // Keep a record of when they agreed to texts (and to which number); clear it when they turn texts off.
+  const smsConsentAt = !smsOn ? null : before?.sms_opt_in && before.sms_consent_at && before.phone === phone ? before.sms_consent_at : new Date().toISOString();
   await supabase
     .from("profiles")
     .update({
@@ -223,7 +246,8 @@ export async function updateProfile(formData: FormData) {
       remind_email: formData.get("remind_email") === "on",
       morning_briefing: formData.get("morning_briefing") === "on",
       phone: phone || null,
-      sms_opt_in: Boolean(phone) && formData.get("sms_opt_in") === "on",
+      sms_opt_in: smsOn,
+      sms_consent_at: smsConsentAt,
       address_line1: String(formData.get("address_line1") || "").trim().slice(0, 120) || null,
       address_line2: String(formData.get("address_line2") || "").trim().slice(0, 120) || null,
       address_city: String(formData.get("address_city") || "").trim().slice(0, 80) || null,

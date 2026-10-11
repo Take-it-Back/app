@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { stripe, stripeConfigured } from "@/lib/stripe";
-import { PRICES, TRIAL_DAYS, getPlan } from "@/lib/plan";
+import { PRICES, TRIAL_DAYS, getPlan, renewalTerms } from "@/lib/plan";
 
 export async function POST(request: Request) {
   const origin = new URL(request.url).origin;
@@ -17,6 +17,12 @@ export async function POST(request: Request) {
   const price = PRICES[which];
   const plan = await getPlan(supabase, user.id);
   if (plan.premium) return NextResponse.redirect(`${origin}/app/you`, { status: 303 });
+  // Auto-renewal laws: the person must tick the box agreeing to the renewal terms; keep a record of what they agreed to.
+  if (form.get("agree") !== "on") return NextResponse.redirect(`${origin}/app/upgrade?error=agree`, { status: 303 });
+  const trial = !plan.status;
+  const terms = renewalTerms(which, trial);
+  const agreedAt = new Date().toISOString();
+  await supabase.from("profiles").update({ renewal_consent_at: agreedAt, renewal_consent_text: terms }).eq("id", user.id);
 
   const session = await stripe().checkout.sessions.create({
     mode: "subscription",
@@ -33,7 +39,8 @@ export async function POST(request: Request) {
         },
       },
     ],
-    subscription_data: { trial_period_days: plan.status ? undefined : TRIAL_DAYS, metadata: { user_id: user.id } },
+    subscription_data: { trial_period_days: trial ? TRIAL_DAYS : undefined, metadata: { user_id: user.id, renewal_consent_at: agreedAt, renewal_terms: terms.slice(0, 480) } },
+    custom_text: { submit: { message: terms.slice(0, 1000) } },
     allow_promotion_codes: true,
     success_url: `${origin}/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/app/upgrade?canceled=1`,

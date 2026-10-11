@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
 import { BackLink, CtaButton } from "@/components/ui";
-import { PRICES, TRIAL_DAYS, getPlan } from "@/lib/plan";
+import { PRICES, TRIAL_DAYS, getPlan, renewalTerms } from "@/lib/plan";
 
 const FREE = ["Scan up to 3 papers a month", "A plain-English summary", "General next steps and red flags", "Free legal aid finder"];
 const PREMIUM = ["Unlimited scans", "Every problem we found, in full, with the rule behind it", "Letters written for you, ready to print or email", "Every deadline tracked, with email reminders", "Their replies read and explained", "Your whole case file and a printable case packet", "Complaints to regulators and credit report disputes", "Forward bills by email, text reminders and family helpers"];
@@ -11,6 +11,18 @@ function Check({ on = true }: { on?: boolean }) {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={on ? "#BF4F28" : "#9A9A9A"} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flex: "none", marginTop: 3 }}>
       <path d="M5 12l5 5 9-10" />
     </svg>
+  );
+}
+
+function Agree({ text }: { text: string }) {
+  return (
+    <span className="stack g8" style={{ marginTop: 4 }}>
+      <span className="small" style={{ color: "#3A3A3A" }}>{text}</span>
+      <label className="row g8 small" style={{ alignItems: "flex-start" }}>
+        <input type="checkbox" name="agree" required style={{ width: 20, height: 20, accentColor: "#1A1A1A", flex: "none", marginTop: 1 }} />
+        <span>I agree to these renewal terms and the <a href="/terms" target="_blank">Terms</a>.</span>
+      </label>
+    </span>
   );
 }
 
@@ -32,6 +44,7 @@ export default async function UpgradePage({ searchParams }: { searchParams: Prom
       </div>
 
       {error === "billing" && <p className="notice" role="alert">Payments aren't switched on yet. Please try again soon.</p>}
+      {error === "agree" && <p className="notice" role="alert">Please tick the box to agree to the renewal terms.</p>}
       {error === "confirm" && <p className="notice" role="alert">We couldn't confirm your payment. If you were charged, it will show up here within a minute.</p>}
       {canceled && <p className="notice">No problem. Nothing was charged.</p>}
 
@@ -41,6 +54,7 @@ export default async function UpgradePage({ searchParams }: { searchParams: Prom
           <span className="row between"><span className="eyebrow">Yearly</span><span className="tag tag-orange">Save 50%</span></span>
           <span><span className="big-num">{PRICES.yearly.label}</span> <span className="muted">{PRICES.yearly.per}</span></span>
           <span className="muted small">About $4.92 a month, billed once a year.</span>
+          <Agree text={renewalTerms("yearly", trial)} />
           <CtaButton type="submit" variant="orange" block>{trial ? `Start ${TRIAL_DAYS}-day free trial` : "Choose yearly"}</CtaButton>
         </form>
         <form action="/api/stripe/checkout" method="post" className="plan-card">
@@ -48,10 +62,11 @@ export default async function UpgradePage({ searchParams }: { searchParams: Prom
           <span className="eyebrow">Monthly</span>
           <span><span className="big-num">{PRICES.monthly.label}</span> <span className="muted">{PRICES.monthly.per}</span></span>
           <span className="muted small">Cancel anytime from your account.</span>
+          <Agree text={renewalTerms("monthly", trial)} />
           <CtaButton type="submit" variant="ink" block>{trial ? `Start ${TRIAL_DAYS}-day free trial` : "Choose monthly"}</CtaButton>
         </form>
       </div>
-      {trial && <p className="muted small" style={{ marginTop: 12 }}>You won't be charged today. We'll email you before your trial ends.</p>}
+      {trial && <p className="muted small" style={{ marginTop: 12 }}>You won&apos;t be charged today. We&apos;ll email you before your trial ends, and before each yearly renewal.</p>}
 
       <div className="plan-grid" style={{ marginTop: 28 }}>
         <section className="card stack g12">

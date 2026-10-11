@@ -14,6 +14,7 @@ export type Guide = {
   faqs: [string, string][];
   cta: string;
   depositTable?: boolean;
+  table?: "debt" | "smallclaims";
 };
 
 export const GUIDES: Guide[] = [
@@ -134,6 +135,66 @@ export const GUIDES: Guide[] = [
     ],
     cta: "Deposit late? We'll write the demand letter for your state.",
     depositTable: true,
+  },
+  {
+    slug: "statute-of-limitations-on-debt-by-state",
+    title: "Statute of limitations on debt by state",
+    description: "How long a debt collector has to sue you in all 50 states and DC, whether a payment restarts the clock, and what to do if a debt is too old.",
+    kicker: "Debt collectors",
+    updated: "2026-10-11",
+    problem: "debt-collectors",
+    intro: "Every state limits how long a creditor or collector has to sue over a debt, usually 3 to 6 years and sometimes longer. After that, the debt is \"time-barred\": they generally can't win a lawsuit, though in many states they can still ask you to pay.",
+    blocks: [
+      {
+        h: "The trap: restarting the clock",
+        p: [
+          "In many states, a payment, even a small one, or a written promise to pay can restart the time limit. That can turn a debt they could no longer sue on into one they can. Collectors sometimes ask for a small \"good faith\" payment for this reason.",
+          "Before you pay, agree to a plan or sign anything about an old debt, find the date of your last payment and check it against your state below.",
+        ],
+      },
+      {
+        h: "If the debt is too old",
+        list: [
+          "Don't pay or promise to pay until you've checked the dates.",
+          "Send a letter saying the debt appears to be past the time limit, that you don't acknowledge it, and asking them to stop. Federal rules bar collectors from suing, or threatening to sue, on a time-barred debt.",
+          "If they sue anyway, respond to the court papers by the deadline and raise the time limit as a defense. It usually isn't applied unless you raise it.",
+          "Old debts generally drop off credit reports 7 years after the first missed payment, whatever the state's time limit.",
+        ],
+      },
+    ],
+    faqs: [
+      ["When does the clock start?", "Usually from the date of your last payment or the date you first missed a payment, depending on the state and the type of debt."],
+      ["Does a time-barred debt disappear?", "Usually not. In most states the debt still exists and a collector can ask you to pay, but they can't win a lawsuit. A few states go further and stop collection altogether."],
+      ["Can a collector sue me on an old debt?", "Under federal rules, debt collectors may not sue or threaten to sue on a time-barred debt. If you're sued, respond and raise the time limit, or contact legal aid."],
+    ],
+    cta: "Is your debt too old? Scan the letter and we'll check your state's time limit.",
+    table: "debt",
+  },
+  {
+    slug: "small-claims-court-limits-by-state",
+    title: "Small claims court limits by state",
+    description: "The most you can sue for in small claims court in all 50 states and DC, the court's name, filing fees and whether lawyers are allowed.",
+    kicker: "Small claims",
+    updated: "2026-10-11",
+    problem: "landlords",
+    intro: "Small claims court is built for people without lawyers: simple forms, low fees and a hearing in weeks, not years. Each state caps how much you can ask for. Here are the limits for 2026.",
+    blocks: [
+      {
+        h: "Before you file",
+        steps: [
+          ["Send a demand letter first", "Many judges want to see you tried to settle. A clear letter with a deadline often gets you paid without court."],
+          ["Gather your evidence", "Letters, receipts, photos, your lease or bill, and a dated timeline."],
+          ["File in the right place", "Usually where the other side is or where it happened. Ask the clerk about a fee waiver if money is tight."],
+          ["Serve them and show up", "The court explains how to serve the papers. Bring three copies of everything to the hearing."],
+        ],
+      },
+    ],
+    faqs: [
+      ["What if I'm owed more than the limit?", "You can usually still file in small claims if you give up the amount over the limit, or file in a higher court where the rules are more formal."],
+      ["Can I sue a landlord for double my deposit?", "In many states, yes. If a landlord wrongly keeps a deposit, state law often lets you claim a penalty on top, and you can include it in a small claims case."],
+    ],
+    cta: "Getting ready for small claims? We'll write your statement and build your evidence packet.",
+    table: "smallclaims",
   },
   {
     slug: "debt-validation-letter",

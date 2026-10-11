@@ -7,6 +7,7 @@ import Upsell from "@/components/Upsell";
 import { WriteLetterCard } from "@/components/CaseActions";
 import { AGENCIES, BUREAUS, kindsFor, type BureauKey } from "@/lib/letters";
 import type { CaseRow } from "@/lib/types";
+import { insuranceRule } from "@/lib/stateLaw";
 
 export default async function EscalatePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -14,7 +15,11 @@ export default async function EscalatePage({ params }: { params: Promise<{ id: s
   const [{ data: cd }, premium] = await Promise.all([supabase.from("cases").select("*").eq("id", id).maybeSingle(), getCasePremium(supabase, user.id, id)]);
   if (!cd) notFound();
   const c = cd as CaseRow;
-  const agencies = AGENCIES.filter((a) => a.categories.includes(c.category === "other" ? "debt" : c.category));
+  const ins = insuranceRule(c.user_state);
+  // Point the generic "your state insurance department" card at the actual state regulator when we know the state.
+  const agencies = AGENCIES.filter((a) => a.categories.includes(c.category === "other" ? "debt" : c.category)).map((a) =>
+    a.key === "state_insurance" && ins ? { ...a, name: ins.dept, url: ins.complaint_url } : a,
+  );
   const extraKinds = kindsFor(c.category).filter((k) => k.group === "Escalate" && !["complaint", "credit_dispute", "small_claims_statement"].includes(k.key));
   const showCredit = c.category !== "landlord" && c.category !== "insurance";
 

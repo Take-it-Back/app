@@ -7,6 +7,7 @@ import { SCRIPTS } from "@/lib/scripts";
 import { logCall } from "@/lib/actions";
 import { shortDate } from "@/lib/format";
 import type { CaseRow, EventRow } from "@/lib/types";
+import { needsAllPartyConsent } from "@/lib/stateLaw";
 
 export default async function CallsPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ saved?: string }> }) {
   const { id } = await params;
@@ -37,6 +38,14 @@ export default async function CallsPage({ params, searchParams }: { params: Prom
             {s.before.map((b) => <li key={b} className="row g8" style={{ padding: "6px 0", fontSize: 15 }}><span style={{ color: "#BF4F28" }}>✓</span>{b}</li>)}
           </ul>
         </section>
+
+        <p className="panel-gray small" style={{ margin: 0 }}>
+          <strong>Recording the call?</strong>{" "}
+          {needsAllPartyConsent(c.user_state)
+            ? `${c.user_state} requires everyone on the call to agree. Start by saying “I'm recording this call” and stop if they object.`
+            : "Some states, and calls to people in them, require everyone to agree. To be safe, start by saying “I'm recording this call.”"}{" "}
+          Taking notes is always fine.
+        </p>
 
         <section>
           <div className="sec-head"><h2>Say this first</h2></div>

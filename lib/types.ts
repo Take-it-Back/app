@@ -36,6 +36,7 @@ export interface CaseRow {
   insured: string | null;
   paid: string | null;
   user_state: string | null;
+  last_payment_on?: string | null;
   summary: string | null;
   findings: Finding[];
   potential_savings: number | null;

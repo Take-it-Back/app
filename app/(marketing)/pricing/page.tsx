@@ -34,7 +34,7 @@ export default function PricingPage() {
             <span className="tag tag-orange" style={{ position: "absolute", top: -14, left: 28, fontSize: 13, padding: "6px 14px" }}>7 days free</span>
             <span style={{ fontWeight: 500, fontSize: 18 }}>Premium</span>
             <span className="serif" style={{ fontSize: 60, lineHeight: 1 }}>$9.99<span className="muted" style={{ fontFamily: "var(--sans)", fontSize: 16 }}> a month</span></span>
-            <p className="muted" style={{ margin: 0 }}>Or <strong style={{ color: "#1A1A1A", fontWeight: 600 }}>$59 a year</strong> (save 50%). Cancel anytime.</p>
+            <p className="muted" style={{ margin: 0 }}>Or <strong style={{ color: "#1A1A1A", fontWeight: 600 }}>$59 a year</strong> (save 50%). Renews automatically until you cancel, and you can cancel online anytime.</p>
             <ul className="stack g8" style={{ margin: 0, padding: 0, listStyle: "none" }}>
               {["Unlimited scans", "Every problem in full, with the rule behind it", "Letters written for you", "Deadline tracking with email reminders", "Their replies read and explained", "Case file and printable case packet"].map((t) => <li key={t} className="row g8" style={{ alignItems: "flex-start" }}><Check />{t}</li>)}
             </ul>

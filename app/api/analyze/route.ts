@@ -16,6 +16,9 @@ export async function POST(request: Request) {
   const { caseId } = (await request.json().catch(() => ({}))) as { caseId?: string };
   if (!caseId) return NextResponse.json({ error: "Missing case." }, { status: 400 });
 
+  const { data: prof } = await supabase.from("profiles").select("health_consent_at").eq("id", user.id).maybeSingle();
+  if (!prof?.health_consent_at) return NextResponse.json({ error: "Please agree to how we handle health information first.", consent: true }, { status: 403 });
+
   const limit = await useAi(supabase, user.id, "analyze");
   if (!limit.ok) return NextResponse.json({ error: limit.error }, { status: 429 });
   const premium = (await getPlan(supabase, user.id)).premium;

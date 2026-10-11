@@ -3,10 +3,11 @@ import { getPlan } from "@/lib/plan";
 import { BackLink } from "@/components/ui";
 import Upsell from "@/components/Upsell";
 import CopyButton from "@/components/CopyButton";
+import HealthConsent from "@/components/HealthConsent";
 
 export default async function InboxPage() {
   const { supabase, user } = await requireUser();
-  const [{ data: p }, plan] = await Promise.all([supabase.from("profiles").select("inbox_token").eq("id", user.id).maybeSingle(), getPlan(supabase, user.id)]);
+  const [{ data: p }, plan] = await Promise.all([supabase.from("profiles").select("inbox_token, health_consent_at").eq("id", user.id).maybeSingle(), getPlan(supabase, user.id)]);
   const domain = process.env.INBOUND_DOMAIN || "in.takeitback.app";
   const enabled = Boolean(process.env.INBOUND_SECRET && process.env.SUPABASE_SERVICE_ROLE_KEY);
   const address = p?.inbox_token ? `${p.inbox_token}@${domain}` : null;
@@ -18,7 +19,9 @@ export default async function InboxPage() {
         <h1 className="page-title" style={{ fontSize: 38 }}>Forward bills by <em className="o">email</em></h1>
         <span className="muted" style={{ fontSize: 15 }}>Got a bill, denial or notice by email? Forward it here and it becomes a case, read and ready.</span>
       </div>
-      {!plan.premium ? (
+      {plan.premium && !p?.health_consent_at ? (
+        <HealthConsent next="/app/tools/inbox" />
+      ) : !plan.premium ? (
         <Upsell title="Your own address for bills" body="Forward any bill or denial email with its attachment. We create the case, read it and set your deadline." />
       ) : (
         <div className="stack g20">

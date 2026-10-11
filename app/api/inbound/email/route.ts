@@ -52,10 +52,11 @@ export async function POST(request: Request) {
   if (!token) return NextResponse.json({ ok: true, skipped: "no recipient token" });
 
   const admin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY, { auth: { persistSession: false } });
-  const { data: prof } = await admin.from("profiles").select("id, plan, plan_status, state").eq("inbox_token", token).maybeSingle();
+  const { data: prof } = await admin.from("profiles").select("id, plan, plan_status, state, health_consent_at").eq("inbox_token", token).maybeSingle();
   if (!prof) return NextResponse.json({ ok: true, skipped: "unknown inbox" });
   const premium = prof.plan === "premium" && ["active", "trialing", "past_due"].includes(prof.plan_status || "");
   if (!premium) return NextResponse.json({ ok: true, skipped: "not premium" });
+  if (!prof.health_consent_at) return NextResponse.json({ ok: true, skipped: "no health data consent" });
 
   const subject = (msg.Subject || "Forwarded document").replace(/^(fwd?|fw):\s*/i, "").slice(0, 80);
   const { data: c, error } = await admin

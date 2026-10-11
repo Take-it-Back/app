@@ -1,0 +1,485 @@
+{
+  "_meta": {
+    "checked": "2026-10-11",
+    "plan_types": "Who sets the appeal rules depends on the plan, not just the state. Fully insured job plans and individual/ACA Marketplace plans bought in a state follow that state's rules and its insurance department. Self-funded employer plans (most large employers; check the plan document or SBC for \"self-funded\"/\"ERISA\") follow federal rules: internal appeal under DOL/ERISA, then external review through the federal process or the plan's contracted IROs; state insurance departments cannot help, but DOL EBSA (askebsa.dol.gov, 1-866-444-3272) can. Government/church plans may differ. Medicare (Original and Medicare Advantage) uses Medicare's federal appeal levels. Medicaid/CHIP uses the state Medicaid agency's fair hearing system (managed care members must usually appeal to the plan first). Federal employee (FEHB) plans go to OPM.",
+    "federal_defaults": "ACA internal appeal: file within 180 days of the denial. External review: generally within 4 months of the final internal denial (federal process and most state processes); urgent cases can be expedited (decision within 72 hours). Medicaid fair hearing: states may allow up to 90 days from the notice mailing date (42 CFR 431.221); Medicaid managed care: appeal to plan within 60 days, then fair hearing within 120 days of the plan decision. Medicare Advantage: request plan reconsideration within 65 days. Original Medicare: redetermination within 120 days.",
+    "sources": [
+      "CMS external review status table (updated July 9, 2024): https://www.cms.gov/cciio/resources/files/external_appeals",
+      "CMS HHS-administered FERP page: https://www.cms.gov/cciio/programs-and-initiatives/consumer-support-and-information/csg-ext-appeals-facts",
+      "CMS FERP deadline extension notice (July 31, 2026): https://www.cms.gov/files/document/hhs-administered-ferp-deadline-extension-07-31-26.pdf",
+      "HealthCare.gov external review: https://www.healthcare.gov/appeal-insurance-company-decision/external-review/",
+      "42 CFR 431.221 (Medicaid hearing request): https://www.ecfr.gov/current/title-42/chapter-IV/subchapter-C/part-431/subpart-E/section-431.221",
+      "State rules/pages checked: AL 560-X-3-.03; AZ R9-34-107; NJ DMAHS 26-06; RI staycovered.ri.gov; SD ARSD 67:17:02:04; OK OAC 317:2-1-2; WI DHA handbook; ME 144-101-I-1.24; NE 464-1-018; VT Health Connect; DE DMMA notice; UT DHHS manual 125-1; MI MOAHR brochure; MO FSD IM-4; WY Medicaid Ch. 4",
+      "Secondary cross-checks: brevy.com state Medicaid appeal pages (IA, KY, HI, VA, NH, MT, LA), medicaidplanningassistance.org"
+    ],
+    "caveats": "Not legal advice. The deadline printed on the person's own denial notice controls; when in doubt, file sooner. medicaid_days is the standard window for state-agency (eligibility/fee-for-service) notices; managed care members typically get 120 days after the plan's own appeal decision. Some states count from the notice date, others from receipt or mailing (a few add ~3-5 mailing days). The federal HHS external review process was temporarily unavailable in July 2026 (reopened July 31, 2026; affected deadlines extended to Oct 2, 2026). Complaint and Medicaid URLs were compiled Oct 2026 and some are top-level agency pages; agencies reorganize sites often, so re-check links periodically. Entries marked UNVERIFIED or \"believed\" in note need confirmation before launch."
+  },
+  "Alabama": {
+    "dept": "Alabama Department of Insurance",
+    "complaint_url": "https://www.aldoi.gov/Consumers/FileComplaint.aspx",
+    "external_review": "Uses the federal HHS-administered process (or insurer-contracted IROs); request within 4 months",
+    "medicaid_days": 60,
+    "medicaid_name": "Alabama Medicaid",
+    "medicaid_url": "https://medicaid.alabama.gov/content/2.0_Newsroom/2.4_Contact_Us.aspx",
+    "note": "Medicaid: request must be received within 60 days of the notice mailing date (Ala. Admin. Code 560-X-3-.03)."
+  },
+  "Alaska": {
+    "dept": "Alaska Division of Insurance",
+    "complaint_url": "https://www.commerce.alaska.gov/web/ins/Consumers/ConsumerAssistance.aspx",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "Alaska Medicaid (DenaliCare)",
+    "medicaid_url": "https://health.alaska.gov/en/division-of-public-assistance/",
+    "note": ""
+  },
+  "Arizona": {
+    "dept": "Arizona Department of Insurance and Financial Institutions",
+    "complaint_url": "https://difi.az.gov/consumers/file-complaint",
+    "external_review": "State runs it (since Jan 1, 2025); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "AHCCCS",
+    "medicaid_url": "https://www.azahcccs.gov/MembersAndApplicants/",
+    "note": "Medicaid: 30 days after receiving the notice (A.A.C. R9-34-107). AZ external review became state-run 1/1/2025."
+  },
+  "Arkansas": {
+    "dept": "Arkansas Insurance Department",
+    "complaint_url": "https://insurance.arkansas.gov/pages/consumer-services/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "Arkansas Medicaid (ARHOME)",
+    "medicaid_url": "https://humanservices.arkansas.gov/about-dhs/office-of-appeals-hearings/",
+    "note": ""
+  },
+  "California": {
+    "dept": "California Department of Managed Health Care / Department of Insurance",
+    "complaint_url": "https://www.dmhc.ca.gov/FileaComplaint.aspx",
+    "external_review": "State Independent Medical Review (IMR) via DMHC or CDI; generally within 6 months of the final denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Medi-Cal",
+    "medicaid_url": "https://www.cdss.ca.gov/hearing-requests",
+    "note": "Most HMOs/many PPOs are regulated by DMHC (888-466-2219); other policies by CDI (insurance.ca.gov). Medi-Cal managed care: 120 days after plan appeal decision."
+  },
+  "Colorado": {
+    "dept": "Colorado Division of Insurance",
+    "complaint_url": "https://doi.colorado.gov/for-consumers/ask-a-question-or-file-a-complaint",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 60,
+    "medicaid_name": "Health First Colorado",
+    "medicaid_url": "https://hcpf.colorado.gov/appeals",
+    "note": "Medicaid eligibility appeal window is 60 days (extended from 30)."
+  },
+  "Connecticut": {
+    "dept": "Connecticut Insurance Department",
+    "complaint_url": "https://portal.ct.gov/cid/general-consumer-information/file-a-complaint",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 60,
+    "medicaid_name": "HUSKY Health",
+    "medicaid_url": "https://portal.ct.gov/dss",
+    "note": "CT Office of the Healthcare Advocate (ct.gov/oha) offers free appeal help."
+  },
+  "Delaware": {
+    "dept": "Delaware Department of Insurance",
+    "complaint_url": "https://insurance.delaware.gov/services/consumerhp/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Delaware Medicaid (Diamond State Health Plan)",
+    "medicaid_url": "https://dhss.delaware.gov/dmma/",
+    "note": "Medicaid: 90 days from the date the notice is mailed."
+  },
+  "District of Columbia": {
+    "dept": "DC Department of Insurance, Securities and Banking",
+    "complaint_url": "https://disb.dc.gov/complaints",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "DC Medicaid (DC Healthy Families)",
+    "medicaid_url": "https://oah.dc.gov/",
+    "note": ""
+  },
+  "Florida": {
+    "dept": "Florida Department of Financial Services (Division of Consumer Services)",
+    "complaint_url": "https://www.myfloridacfo.com/division/consumers",
+    "external_review": "Uses the federal HHS-administered process (or insurer-contracted IROs); request within 4 months",
+    "medicaid_days": 90,
+    "medicaid_name": "Florida Medicaid (Statewide Medicaid Managed Care)",
+    "medicaid_url": "https://www.myflfamilies.com/about/office-inspector-general/appeal-hearings/how-request-public-assistance-hearing",
+    "note": "Insurers are regulated by the Office of Insurance Regulation; consumer complaints go to DFS (1-877-693-5236). Eligibility hearings via DCF; service denials via AHCA after plan appeal."
+  },
+  "Georgia": {
+    "dept": "Georgia Office of Insurance and Safety Fire Commissioner",
+    "complaint_url": "https://oci.georgia.gov/node/146",
+    "external_review": "Uses the federal HHS-administered process (or insurer-contracted IROs); request within 4 months",
+    "medicaid_days": 30,
+    "medicaid_name": "Georgia Medicaid (incl. Georgia Pathways)",
+    "medicaid_url": "https://medicaid.georgia.gov/",
+    "note": ""
+  },
+  "Hawaii": {
+    "dept": "Hawaii Insurance Division (DCCA)",
+    "complaint_url": "https://cca.hawaii.gov/ins/consumer/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Med-QUEST (QUEST Integration)",
+    "medicaid_url": "https://medquest.hawaii.gov/",
+    "note": ""
+  },
+  "Idaho": {
+    "dept": "Idaho Department of Insurance",
+    "complaint_url": "https://doi.idaho.gov/consumer/complaint/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "Idaho Medicaid",
+    "medicaid_url": "https://healthandwelfare.idaho.gov/",
+    "note": "Medicaid: about 30 days from notice for eligibility decisions, 28 days for service decisions (secondary source); confirm on notice."
+  },
+  "Illinois": {
+    "dept": "Illinois Department of Insurance",
+    "complaint_url": "https://idoi.illinois.gov/consumers/file-a-complaint.html",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 60,
+    "medicaid_name": "Illinois Medicaid (HealthChoice Illinois)",
+    "medicaid_url": "https://www.dhs.state.il.us/page.aspx?item=33468",
+    "note": ""
+  },
+  "Indiana": {
+    "dept": "Indiana Department of Insurance",
+    "complaint_url": "https://www.in.gov/idoi/consumer-services/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 33,
+    "medicaid_name": "Indiana Medicaid (Healthy Indiana Plan, Hoosier Healthwise)",
+    "medicaid_url": "https://www.in.gov/oalp/resources-for-fssa-appeals/",
+    "note": "Medicaid deadline is printed on the FSSA notice; 33 days is the usual window."
+  },
+  "Iowa": {
+    "dept": "Iowa Insurance Division",
+    "complaint_url": "https://iid.iowa.gov/consumers",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Iowa Medicaid (IA Health Link)",
+    "medicaid_url": "https://hhs.iowa.gov/appeals/how-appeal",
+    "note": ""
+  },
+  "Kansas": {
+    "dept": "Kansas Insurance Department",
+    "complaint_url": "https://insurance.kansas.gov/consumer-assistance/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 33,
+    "medicaid_name": "KanCare",
+    "medicaid_url": "https://oah.ks.gov/",
+    "note": ""
+  },
+  "Kentucky": {
+    "dept": "Kentucky Department of Insurance",
+    "complaint_url": "https://insurance.ky.gov/ppc/new_default.aspx",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "Kentucky Medicaid",
+    "medicaid_url": "https://www.chfs.ky.gov/agencies/dms/Pages/default.aspx",
+    "note": ""
+  },
+  "Louisiana": {
+    "dept": "Louisiana Department of Insurance",
+    "complaint_url": "https://www.ldi.la.gov/consumers/consumer-complaints",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "Louisiana Medicaid (Healthy Louisiana)",
+    "medicaid_url": "https://ldh.la.gov/medicaid/how-to-appeal-medicaid",
+    "note": "Medicaid hearings are run by the Division of Administrative Law."
+  },
+  "Maine": {
+    "dept": "Maine Bureau of Insurance",
+    "complaint_url": "https://www.maine.gov/pfr/insurance/consumers",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 60,
+    "medicaid_name": "MaineCare",
+    "medicaid_url": "https://www.maine.gov/dhhs/oms/member-resources",
+    "note": "Medicaid: request must be received within 60 calendar days of the notice (MaineCare Benefits Manual Ch. I, 1.24)."
+  },
+  "Maryland": {
+    "dept": "Maryland Insurance Administration",
+    "complaint_url": "https://insurance.maryland.gov/Consumer/Pages/FileAComplaint.aspx",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Maryland Medicaid (HealthChoice)",
+    "medicaid_url": "https://health.maryland.gov/mmcp/Pages/home.aspx",
+    "note": "The Attorney General's Health Education and Advocacy Unit helps with appeals."
+  },
+  "Massachusetts": {
+    "dept": "Massachusetts Division of Insurance",
+    "complaint_url": "https://www.mass.gov/how-to/file-a-complaint-with-the-division-of-insurance",
+    "external_review": "State runs it via the Office of Patient Protection (Health Policy Commission); within 4 months",
+    "medicaid_days": 60,
+    "medicaid_name": "MassHealth",
+    "medicaid_url": "https://www.mass.gov/info-details/request-a-fair-hearing-with-the-board-of-hearings",
+    "note": "MassHealth: usually 60 days (30 days for some actions)."
+  },
+  "Michigan": {
+    "dept": "Michigan Department of Insurance and Financial Services",
+    "complaint_url": "https://www.michigan.gov/difs/consumers/complaint",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Michigan Medicaid (Healthy Michigan Plan)",
+    "medicaid_url": "https://www.michigan.gov/lara/bureau-list/moahr",
+    "note": "Medicaid managed care: 120 days after the plan denies the internal appeal."
+  },
+  "Minnesota": {
+    "dept": "Minnesota Department of Commerce",
+    "complaint_url": "https://mn.gov/commerce/consumers/file-a-complaint/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "Medical Assistance (Minnesota Medicaid)",
+    "medicaid_url": "https://mn.gov/dhs/general-public/appeals/",
+    "note": "Medicaid: 30 days from notice, up to 90 days with good cause. HMOs are overseen by the MN Dept. of Health."
+  },
+  "Mississippi": {
+    "dept": "Mississippi Insurance Department",
+    "complaint_url": "https://www.mid.ms.gov/consumers/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "Mississippi Medicaid",
+    "medicaid_url": "https://medicaid.ms.gov/",
+    "note": ""
+  },
+  "Missouri": {
+    "dept": "Missouri Department of Commerce and Insurance",
+    "complaint_url": "https://insurance.mo.gov/consumers/complaints/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "MO HealthNet",
+    "medicaid_url": "https://dss.mo.gov/hearings/",
+    "note": "To keep benefits during the hearing, request within 10 days."
+  },
+  "Montana": {
+    "dept": "Montana Commissioner of Securities and Insurance",
+    "complaint_url": "https://csimt.gov/contact-us/file-a-complaint/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Montana Medicaid",
+    "medicaid_url": "https://dphhs.mt.gov/",
+    "note": ""
+  },
+  "Nebraska": {
+    "dept": "Nebraska Department of Insurance",
+    "complaint_url": "https://doi.nebraska.gov/node/2246",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Heritage Health (Nebraska Medicaid)",
+    "medicaid_url": "https://dhhs.ne.gov/Pages/Medicaid-and-Long-Term-Care.aspx",
+    "note": "Medicaid: 90 days from the date of the written notice (474 NAC / 465 NAC rules)."
+  },
+  "Nevada": {
+    "dept": "Nevada Division of Insurance",
+    "complaint_url": "https://doi.nv.gov/Consumers/File-A-Complaint/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Nevada Medicaid",
+    "medicaid_url": "https://dwss.nv.gov/",
+    "note": "Nevada Office for Consumer Health Assistance helps file external reviews."
+  },
+  "New Hampshire": {
+    "dept": "New Hampshire Insurance Department",
+    "complaint_url": "https://www.insurance.nh.gov/consumers/file-complaint",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "NH Medicaid (Granite Advantage)",
+    "medicaid_url": "https://www.dhhs.nh.gov/doing-business-dhhs/legal-services/administrative-appeals",
+    "note": "Request within 15 days of notice to keep benefits during the appeal."
+  },
+  "New Jersey": {
+    "dept": "New Jersey Department of Banking and Insurance",
+    "complaint_url": "https://www.nj.gov/dobi/consumer.htm",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 20,
+    "medicaid_name": "NJ FamilyCare",
+    "medicaid_url": "https://www.nj.gov/humanservices/dmahs/",
+    "note": "Medicaid: 20 days from receipt of notice (N.J.A.C. 10:49-10.3); notices say 30 days from notice date. Temporary 60-day window ended July 1, 2026."
+  },
+  "New Mexico": {
+    "dept": "New Mexico Office of Superintendent of Insurance",
+    "complaint_url": "https://www.osi.state.nm.us/pages/misc/file-a-complaint",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Turquoise Care (NM Medicaid)",
+    "medicaid_url": "https://www.hca.nm.gov/",
+    "note": ""
+  },
+  "New York": {
+    "dept": "New York State Department of Financial Services",
+    "complaint_url": "https://www.dfs.ny.gov/complaints",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 60,
+    "medicaid_name": "New York Medicaid",
+    "medicaid_url": "https://otda.ny.gov/hearings/",
+    "note": "DFS runs external appeals; Community Health Advocates (1-888-614-5400) gives free help."
+  },
+  "North Carolina": {
+    "dept": "North Carolina Department of Insurance",
+    "complaint_url": "https://www.ncdoi.gov/consumers/health-insurance",
+    "external_review": "State runs it via Smart NC (NC DOI); request within 4 months of the final denial",
+    "medicaid_days": 60,
+    "medicaid_name": "NC Medicaid",
+    "medicaid_url": "https://medicaid.ncdhhs.gov/",
+    "note": ""
+  },
+  "North Dakota": {
+    "dept": "North Dakota Insurance Department",
+    "complaint_url": "https://www.insurance.nd.gov/consumers",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "North Dakota Medicaid",
+    "medicaid_url": "https://www.hhs.nd.gov/",
+    "note": ""
+  },
+  "Ohio": {
+    "dept": "Ohio Department of Insurance",
+    "complaint_url": "https://gateway.insurance.ohio.gov/UI/ODI.CS.Public.UI/Complaint.mvc",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Ohio Medicaid",
+    "medicaid_url": "https://medicaid.ohio.gov/",
+    "note": ""
+  },
+  "Oklahoma": {
+    "dept": "Oklahoma Insurance Department",
+    "complaint_url": "https://www.oid.ok.gov/consumers/file-a-complaint/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "SoonerCare",
+    "medicaid_url": "https://oklahoma.gov/ohca/policies-and-rules/xpolicy/grievance-procedures-and-process/subchapter-one-administrative-appeals/appeals.html",
+    "note": "Medicaid: file form LD-1 within 30 calendar days of the OHCA notice (OAC 317:2-1-2)."
+  },
+  "Oregon": {
+    "dept": "Oregon Division of Financial Regulation",
+    "complaint_url": "https://dfr.oregon.gov/help/complaints-licenses/Pages/file-complaint.aspx",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Oregon Health Plan (OHP)",
+    "medicaid_url": "https://www.oregon.gov/oha/hsd/ohp/pages/appeals-hearings.aspx",
+    "note": "OHP managed care (CCO): 120 days after the CCO appeal decision."
+  },
+  "Pennsylvania": {
+    "dept": "Pennsylvania Insurance Department",
+    "complaint_url": "https://www.insurance.pa.gov/Consumers/Pages/File-a-Complaint.aspx",
+    "external_review": "State runs it (since Jan 2024); request within 4 months of the final denial",
+    "medicaid_days": 30,
+    "medicaid_name": "Pennsylvania Medical Assistance (HealthChoices)",
+    "medicaid_url": "https://www.dhs.pa.gov/Services/Assistance/Pages/Appeals.aspx",
+    "note": ""
+  },
+  "Rhode Island": {
+    "dept": "Rhode Island Office of the Health Insurance Commissioner",
+    "complaint_url": "https://ohic.ri.gov/consumers",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 35,
+    "medicaid_name": "Rhode Island Medicaid (RIte Care)",
+    "medicaid_url": "https://staycovered.ri.gov/medicaid-members/file-appeal",
+    "note": "RIREACH (1-855-747-3224) provides free appeal help."
+  },
+  "South Carolina": {
+    "dept": "South Carolina Department of Insurance",
+    "complaint_url": "https://doi.sc.gov/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "Healthy Connections (SC Medicaid)",
+    "medicaid_url": "https://www.scdhhs.gov/",
+    "note": ""
+  },
+  "South Dakota": {
+    "dept": "South Dakota Division of Insurance",
+    "complaint_url": "https://dlr.sd.gov/insurance/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "South Dakota Medicaid",
+    "medicaid_url": "https://dss.sd.gov/keyresources/adminhearings/fairhearing.aspx",
+    "note": "Medicaid: 30 days from notice (ARSD 67:17:02:04); deadline is also printed on the notice."
+  },
+  "Tennessee": {
+    "dept": "Tennessee Department of Commerce and Insurance",
+    "complaint_url": "https://www.tn.gov/commerce/insurance/consumer-resources.html",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 40,
+    "medicaid_name": "TennCare",
+    "medicaid_url": "https://www.tn.gov/tenncare/members-applicants/how-to-file-an-eligibility-appeal.html",
+    "note": ""
+  },
+  "Texas": {
+    "dept": "Texas Department of Insurance",
+    "complaint_url": "https://www.tdi.texas.gov/consumer/complfrm.html",
+    "external_review": "TDI assigns an IRO for medical-necessity denials of state-regulated plans; CMS lists TX as HHS/IRO",
+    "medicaid_days": 90,
+    "medicaid_name": "Texas Medicaid (STAR, STAR+PLUS, STAR Kids)",
+    "medicaid_url": "https://www.hhs.texas.gov/regulations/legal-information/appeals-division",
+    "note": "For life-threatening conditions you can go straight to IRO review without finishing the internal appeal."
+  },
+  "Utah": {
+    "dept": "Utah Insurance Department",
+    "complaint_url": "https://insurance.utah.gov/consumer/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Utah Medicaid",
+    "medicaid_url": "https://medicaid.utah.gov/hearings/",
+    "note": "Medicaid: 90 days from the date on the notice."
+  },
+  "Vermont": {
+    "dept": "Vermont Department of Financial Regulation",
+    "complaint_url": "https://dfr.vermont.gov/consumers/file-complaint",
+    "external_review": "State runs it via DFR; request within 4 months (120 days) of the final denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Green Mountain Care (Vermont Medicaid)",
+    "medicaid_url": "https://dvha.vermont.gov/members",
+    "note": "Office of the Health Care Advocate (1-800-917-7787) gives free help."
+  },
+  "Virginia": {
+    "dept": "Virginia Bureau of Insurance (State Corporation Commission)",
+    "complaint_url": "https://www.scc.virginia.gov/pages/Insurance-Complaints",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 30,
+    "medicaid_name": "Cardinal Care (Virginia Medicaid)",
+    "medicaid_url": "https://www.dmas.virginia.gov/appeals/",
+    "note": "Medicaid: 30 days from receipt of notice, presumed 5 days after mailing (12VAC30-110)."
+  },
+  "Washington": {
+    "dept": "Washington Office of the Insurance Commissioner",
+    "complaint_url": "https://www.insurance.wa.gov/file-complaint-or-check-your-complaint-status",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "Apple Health (Washington Medicaid)",
+    "medicaid_url": "https://www.hca.wa.gov/node/3766",
+    "note": ""
+  },
+  "West Virginia": {
+    "dept": "West Virginia Offices of the Insurance Commissioner",
+    "complaint_url": "https://www.wvinsurance.gov/",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 90,
+    "medicaid_name": "West Virginia Medicaid",
+    "medicaid_url": "https://bor.wv.gov/",
+    "note": ""
+  },
+  "Wisconsin": {
+    "dept": "Wisconsin Office of the Commissioner of Insurance",
+    "complaint_url": "https://oci.wi.gov/Pages/Consumers/Filing-a-Complaint.aspx",
+    "external_review": "Insurer-arranged review by an OCI-certified IRO (not federally parallel); request within 4 months",
+    "medicaid_days": 45,
+    "medicaid_name": "BadgerCare Plus / Wisconsin Medicaid",
+    "medicaid_url": "https://doa.wi.gov/Pages/LicensesHearings/DHAWorkAndFamilyServicesUnit.aspx",
+    "note": "Medicaid: 45 days from the effective date of the action."
+  },
+  "Wyoming": {
+    "dept": "Wyoming Department of Insurance",
+    "complaint_url": "https://doi.wyo.gov/consumers",
+    "external_review": "State runs it (NAIC-style); request within 4 months of the final internal denial",
+    "medicaid_days": 20,
+    "medicaid_name": "Wyoming Medicaid (EqualityCare)",
+    "medicaid_url": "https://health.wyo.gov/healthcarefin/medicaid/",
+    "note": "Medicaid rules (Ch. 4) give 20 BUSINESS days after the notice is mailed (~4 weeks)."
+  },
+  "Puerto Rico": {
+    "dept": "Oficina del Comisionado de Seguros de Puerto Rico (OCS)",
+    "complaint_url": "https://ocs.pr.gov/",
+    "external_review": "Territory process under PR Insurance Code; CMS lists PR separately (not confirmed as federally parallel)",
+    "medicaid_days": 30,
+    "medicaid_name": "Plan Vital (Puerto Rico Medicaid)",
+    "medicaid_url": "https://www.medicaid.pr.gov/",
+    "note": "UNVERIFIED: PR Medicaid hearing deadline not confirmed; check the notice. Plan Vital is administered by ASES."
+  }
+}

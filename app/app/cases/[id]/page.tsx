@@ -10,6 +10,7 @@ import { addDeadline, addNote, closeCase, deleteCase, toggleDeadline, updateCase
 import type { CaseRow, DeadlineRow, EventRow, LetterRow } from "@/lib/types";
 import { getCasePremium } from "@/lib/plan";
 import Upsell from "@/components/Upsell";
+import StateRules from "@/components/StateRules";
 
 export default async function CasePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -151,6 +152,8 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
               </div>
             </section>
           )}
+
+          {!done && c.category !== "other" && <StateRules c={c} />}
 
           <section>
             <div className="sec-head"><h2>Timeline</h2></div>

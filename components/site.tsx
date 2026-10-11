@@ -56,6 +56,7 @@ export function SiteFooter() {
             <Link href="/about" style={{ textDecoration: "none" }}>About</Link>
             <a href="mailto:hello@takeitback.app" style={{ textDecoration: "none" }}>Contact us</a>
             <Link href="/privacy" style={{ textDecoration: "none" }}>Privacy</Link>
+            <Link href="/health-data-privacy" style={{ textDecoration: "none" }}>Health data privacy</Link>
             <Link href="/terms" style={{ textDecoration: "none" }}>Terms</Link>
           </nav>
         </div>

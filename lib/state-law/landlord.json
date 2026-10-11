@@ -1,0 +1,538 @@
+{
+  "_meta": {
+    "checked": "2026-10-11",
+    "sources": [
+      "https://www.nolo.com/legal-encyclopedia/state-laws-on-rent-withholding-and-repair-and-deduct-remedies.html",
+      "https://www.nolo.com/legal-encyclopedia/state-laws-prohibiting-landlord-retaliation.html",
+      "https://ipropertymanagement.com/laws/landlords-right-to-entry",
+      "https://www.verticalrent.com/blog/security-deposit-laws-landlords",
+      "https://www.verticalrent.com/blog/security-deposit-interest-requirements-in-states-that-mandate-it",
+      "https://www.flsenate.gov/Laws/Statutes/2025/0083.53",
+      "https://app.coloradocapitolwatch.com/bill/1/HB25-1249/2025/0",
+      "https://nlihc.org/resource/georgia-passes-new-tenant-protection-law-renters-establishing-minimum-habitability",
+      "https://www.mdrealtor.org/news/one-month-max-marylands-new-security-deposit-law",
+      "https://law.justia.com/codes/"
+    ],
+    "caveats": "General information, not legal advice. State laws change often; verify the current statute before acting. Rent withholding and repair-and-deduct are risky: tenants who use them wrongly can be evicted, so follow notice steps exactly and keep records. Many big cities add stronger rules: New York City (HPD entry and repair rules, rent stabilization), San Francisco and Los Angeles (rent ordinances, deposit interest), Chicago (RLTO: 2-day entry notice, deposit interest, repair-and-deduct, withholding), Seattle (deposit and move-in fee limits), Washington DC (rent control), Portland OR and Montgomery County MD. Kentucky and Tennessee remedies apply only in areas that adopted the Uniform Residential Landlord and Tenant Act. Penalties usually require the landlord to have acted in bad faith or willfully. Puerto Rico data is thin and largely unverified. The url field points to the state's code on Justia; check the specific statute there."
+  },
+  "Alabama": {
+    "cap": "1 month's rent (extra allowed for pets, alterations, or added liability)",
+    "interest": null,
+    "penalty": "Up to 2x the deposit",
+    "entry": "2 days",
+    "repair_deduct": null,
+    "withhold": null,
+    "retaliation": "Protected for complaints and joining a tenant group; no presumption period",
+    "url": "https://law.justia.com/codes/alabama/title-35/chapter-9a/"
+  },
+  "Alaska": {
+    "cap": "2 months' rent (no cap if rent is over $2,000/month)",
+    "interest": null,
+    "penalty": "Up to 2x the amount wrongly kept",
+    "entry": "24 hours",
+    "repair_deduct": "Yes, for minor defects up to $100 after written notice",
+    "withhold": "Limited: if landlord cuts essential services (heat, water), tenant may get them and deduct",
+    "retaliation": "Protected for complaints, tenant groups, and using legal rights; no presumption period",
+    "url": "https://law.justia.com/codes/alaska/title-34/chapter-34-03/"
+  },
+  "Arizona": {
+    "cap": "1.5 months' rent",
+    "interest": null,
+    "penalty": "Up to 2x the amount wrongly kept, plus the deposit",
+    "entry": "2 days",
+    "repair_deduct": "Yes, up to $300 or half a month's rent (whichever is more) after written notice",
+    "withhold": "Limited: if landlord fails to supply essential services like heat or water",
+    "retaliation": "Presumed retaliation if landlord acts within 6 months of a complaint",
+    "url": "https://law.justia.com/codes/arizona/title-33/section-33-1381/"
+  },
+  "Arkansas": {
+    "cap": "2 months' rent (landlords with 5 or fewer units are exempt)",
+    "interest": null,
+    "penalty": "Up to 2x the amount wrongly kept",
+    "entry": null,
+    "repair_deduct": null,
+    "withhold": null,
+    "retaliation": "Very limited: only for lead-hazard complaints",
+    "url": "https://law.justia.com/codes/arkansas/title-18/subtitle-2/chapter-17/"
+  },
+  "California": {
+    "cap": "1 month's rent (since July 2024; some small landlords may charge 2)",
+    "interest": null,
+    "penalty": "Up to 2x the deposit if bad faith, plus actual damages",
+    "entry": "24 hours written notice",
+    "repair_deduct": "Yes, up to one month's rent, twice a year, after notice and reasonable time (about 30 days)",
+    "withhold": "Yes, for serious habitability problems; risky, document everything",
+    "retaliation": "Presumed retaliation if landlord acts within 180 days of a complaint",
+    "url": "https://law.justia.com/codes/california/code-civ/division-3/part-4/title-5/chapter-2/"
+  },
+  "Colorado": {
+    "cap": "1 month's rent (HB25-1249); tenant may pay in installments",
+    "interest": null,
+    "penalty": "Up to 3x the amount wrongly kept, plus attorney fees",
+    "entry": "No general rule; 24 hours for bed bug inspections",
+    "repair_deduct": "Yes, after written notice if landlord fails to fix (rules updated 2024; check details)",
+    "withhold": "Limited: rent reduction/abatement for habitability breaches; uncertain, check 38-12-507",
+    "retaliation": "Protected for complaints and tenant groups; no presumption period",
+    "url": "https://law.justia.com/codes/colorado/title-38/"
+  },
+  "Connecticut": {
+    "cap": "2 months' rent (1 month if tenant is 62+)",
+    "interest": "Yes, at the state-set rate, yearly",
+    "penalty": "Up to 2x the deposit if not returned on time",
+    "entry": "Reasonable notice",
+    "repair_deduct": "Limited: only for essential services like heat or water",
+    "withhold": "Yes, but rent must be paid into court",
+    "retaliation": "Presumed retaliation if landlord acts within 6 months of a complaint",
+    "url": "https://law.justia.com/codes/connecticut/title-47a/"
+  },
+  "Delaware": {
+    "cap": "1 month's rent for leases of 1 year or more",
+    "interest": null,
+    "penalty": "Up to 2x the deposit",
+    "entry": "48 hours",
+    "repair_deduct": "Yes, up to $100 or half a month's rent (whichever is more) after notice",
+    "withhold": "Limited: partial rent reduction if essential services fail; uncertain",
+    "retaliation": "Presumed retaliation if landlord acts within 90 days of a complaint",
+    "url": "https://law.justia.com/codes/delaware/title-25/chapter-55/"
+  },
+  "District of Columbia": {
+    "cap": "1 month's rent",
+    "interest": "Yes, at the bank passbook rate, paid when deposit is returned",
+    "penalty": "Up to 3x the deposit if bad faith",
+    "entry": "48 hours",
+    "repair_deduct": null,
+    "withhold": "Yes, for code violations; court may order rent paid into its registry",
+    "retaliation": "Presumed retaliation if landlord acts within 6 months of a complaint",
+    "url": "https://code.dccouncil.gov/us/dc/council/code/titles/42/chapters/35/"
+  },
+  "Florida": {
+    "cap": null,
+    "interest": "Only if held in an interest-bearing account (5% a year or 75% of interest earned)",
+    "penalty": "Landlord loses right to keep any of it; tenant can recover court costs and fees",
+    "entry": "24 hours for repairs, between 7:30am and 8pm",
+    "repair_deduct": null,
+    "withhold": "Yes, after 7 days written notice; may have to pay rent into court",
+    "retaliation": "Protected for complaints, tenant groups, and using legal rights; no presumption period",
+    "url": "https://www.flsenate.gov/Laws/Statutes/2025/Chapter83"
+  },
+  "Georgia": {
+    "cap": "2 months' rent (leases from July 2024)",
+    "interest": null,
+    "penalty": "Up to 3x the amount wrongly kept, plus attorney fees",
+    "entry": null,
+    "repair_deduct": "Allowed by court decisions after notice; risky without a lawyer",
+    "withhold": null,
+    "retaliation": "Presumed retaliation if landlord acts within 3 months of a complaint",
+    "url": "https://law.justia.com/codes/georgia/title-44/chapter-7/"
+  },
+  "Hawaii": {
+    "cap": "1 month's rent (plus up to 1 month pet deposit)",
+    "interest": null,
+    "penalty": "Up to 3x the amount wrongly kept if willful",
+    "entry": "2 days",
+    "repair_deduct": "Yes, up to $500 after written notice",
+    "withhold": "Yes, if health officials confirm violations; may need to pay into escrow",
+    "retaliation": "Protected for complaints and using legal rights; no presumption period",
+    "url": "https://law.justia.com/codes/hawaii/title-28/chapter-521/"
+  },
+  "Idaho": {
+    "cap": null,
+    "interest": null,
+    "penalty": "Actual damages and possibly attorney fees; no multiplier (uncertain)",
+    "entry": null,
+    "repair_deduct": "Only for smoke detectors",
+    "withhold": null,
+    "retaliation": "Recognized by courts as an eviction defense; no statute",
+    "url": "https://law.justia.com/codes/idaho/title-6/chapter-3/"
+  },
+  "Illinois": {
+    "cap": null,
+    "interest": "Yes if 25+ units and held 6+ months (Chicago: all units)",
+    "penalty": "2x the deposit plus court costs and attorney fees",
+    "entry": null,
+    "repair_deduct": "Yes, up to $500 or half a month's rent (whichever is less) after 14 days notice",
+    "withhold": "Very limited statewide (Chicago allows more)",
+    "retaliation": "Protected for complaints to officials; no presumption period",
+    "url": "https://www.ilga.gov/legislation/ilcs/ilcs3.asp?ActID=2203&ChapterID=62"
+  },
+  "Indiana": {
+    "cap": null,
+    "interest": null,
+    "penalty": "Deposit back plus attorney fees and costs",
+    "entry": "Reasonable notice",
+    "repair_deduct": null,
+    "withhold": null,
+    "retaliation": "Protected for complaints, tenant groups, and using legal rights; no presumption period",
+    "url": "https://law.justia.com/codes/indiana/title-32/article-31/"
+  },
+  "Iowa": {
+    "cap": "2 months' rent",
+    "interest": "Only on interest earned after the first 5 years",
+    "penalty": "Up to 2x the deposit if bad faith (punitive)",
+    "entry": "24 hours",
+    "repair_deduct": "Limited: essential services or minor repairs after notice; uncertain",
+    "withhold": "Limited: for failure to supply essential services; uncertain",
+    "retaliation": "Presumed retaliation if landlord acts within 1 year of a complaint",
+    "url": "https://law.justia.com/codes/iowa/title-xiv/chapter-562a/"
+  },
+  "Kansas": {
+    "cap": "1 month's rent unfurnished, 1.5 months furnished (more allowed for pets)",
+    "interest": null,
+    "penalty": "Up to 1.5x the amount wrongly kept",
+    "entry": "Reasonable notice",
+    "repair_deduct": null,
+    "withhold": "Limited: for failure to supply essential services; uncertain",
+    "retaliation": "Protected for complaints and tenant groups; no presumption period",
+    "url": "https://law.justia.com/codes/kansas/chapter-58/article-25/"
+  },
+  "Kentucky": {
+    "cap": null,
+    "interest": null,
+    "penalty": "Landlord loses right to keep deposit; no multiplier (uncertain)",
+    "entry": "2 days (in areas that adopted URLTA)",
+    "repair_deduct": "Only in URLTA areas: up to $100 or half a month's rent after notice",
+    "withhold": "Only in URLTA areas: for failure to supply essential services",
+    "retaliation": "Presumed retaliation within 1 year of a complaint (URLTA areas)",
+    "url": "https://law.justia.com/codes/kentucky/chapter-383/"
+  },
+  "Louisiana": {
+    "cap": null,
+    "interest": null,
+    "penalty": "$300 or 2x the amount wrongly kept, whichever is more (if willful)",
+    "entry": null,
+    "repair_deduct": "Yes, after notice if landlord fails to fix within a reasonable time",
+    "withhold": null,
+    "retaliation": null,
+    "url": "https://law.justia.com/codes/louisiana/revised-statutes/title-9/"
+  },
+  "Maine": {
+    "cap": "2 months' rent",
+    "interest": null,
+    "penalty": "2x the amount wrongly kept, plus attorney fees",
+    "entry": "24 hours",
+    "repair_deduct": "Yes, up to $500 or half a month's rent (whichever is more) after notice",
+    "withhold": "Yes, through court; rent may be paid into escrow",
+    "retaliation": "Presumed retaliation if landlord acts within 6 months of a complaint",
+    "url": "https://legislature.maine.gov/statutes/14/title14ch710-B.pdf"
+  },
+  "Maryland": {
+    "cap": "1 month's rent (since Oct 2024)",
+    "interest": "Yes, simple interest (1-year Treasury rate) on deposits of $50+, paid at move-out",
+    "penalty": "Up to 3x the amount wrongly kept, plus attorney fees",
+    "entry": null,
+    "repair_deduct": null,
+    "withhold": "Yes, through court rent escrow for serious defects",
+    "retaliation": "Presumed retaliation if landlord acts within 6 months of a complaint",
+    "url": "https://law.justia.com/codes/maryland/real-property/title-8/"
+  },
+  "Massachusetts": {
+    "cap": "1 month's rent",
+    "interest": "Yes, 5% or the bank rate, yearly",
+    "penalty": "3x the deposit plus interest and attorney fees",
+    "entry": "No set notice; entry only for inspections, repairs, or showing",
+    "repair_deduct": "Yes, up to 4 months' rent after code inspection and notice",
+    "withhold": "Yes, for code violations the landlord knew about",
+    "retaliation": "Presumed retaliation if landlord acts within 6 months of a complaint",
+    "url": "https://www.mass.gov/info-details/the-attorney-generals-guide-to-landlord-and-tenant-rights"
+  },
+  "Michigan": {
+    "cap": "1.5 months' rent",
+    "interest": null,
+    "penalty": "2x the amount wrongly kept",
+    "entry": null,
+    "repair_deduct": "Allowed by court decisions after notice; keep receipts",
+    "withhold": "Yes, for code violations; often paid into escrow",
+    "retaliation": "Presumed retaliation if landlord acts within 90 days of a complaint",
+    "url": "https://www.michigan.gov/ag/consumer-protection/consumer-alerts/consumer-alerts/real-estate/renting"
+  },
+  "Minnesota": {
+    "cap": null,
+    "interest": "Yes, 1% simple interest, paid at move-out",
+    "penalty": "2x the amount wrongly kept plus interest; $500 more if bad faith",
+    "entry": "24 hours, between 8am and 8pm",
+    "repair_deduct": "Limited: usually through court or with landlord consent",
+    "withhold": "Yes, through court rent escrow after notice",
+    "retaliation": "Presumed retaliation if landlord acts within 90 days of a complaint",
+    "url": "https://www.ag.state.mn.us/Consumer/Publications/LandlordsandTenants.asp"
+  },
+  "Mississippi": {
+    "cap": null,
+    "interest": null,
+    "penalty": "Up to $200 extra if bad faith",
+    "entry": null,
+    "repair_deduct": "Yes, up to 1 month's rent after 30 days written notice",
+    "withhold": null,
+    "retaliation": "Protected for using legal rights; no presumption period",
+    "url": "https://law.justia.com/codes/mississippi/title-89/chapter-8/"
+  },
+  "Missouri": {
+    "cap": "2 months' rent",
+    "interest": null,
+    "penalty": "Up to 2x the amount wrongly kept",
+    "entry": null,
+    "repair_deduct": "Yes, up to $300 or half a month's rent (whichever is more) after 14 days notice",
+    "withhold": "Limited: habitability defense in court; rent escrow in some cities",
+    "retaliation": null,
+    "url": "https://revisor.mo.gov/main/OneChapter.aspx?chapter=441"
+  },
+  "Montana": {
+    "cap": null,
+    "interest": null,
+    "penalty": "Landlord loses right to keep deposit; actual damages (uncertain)",
+    "entry": "24 hours",
+    "repair_deduct": "Yes, up to 1 month's rent after written notice",
+    "withhold": "Limited: as a defense in eviction; rent may be paid into court",
+    "retaliation": "Presumed retaliation if landlord acts within 6 months of a complaint",
+    "url": "https://law.justia.com/codes/montana/title-70/chapter-24/"
+  },
+  "Nebraska": {
+    "cap": "1 month's rent (plus 1/4 month for pets)",
+    "interest": null,
+    "penalty": "If bad faith, up to 1 month's rent extra plus attorney fees",
+    "entry": "24 hours",
+    "repair_deduct": "Limited: for essential services like heat or water",
+    "withhold": "Limited: habitability defense through court; uncertain",
+    "retaliation": "Protected for complaints and tenant groups; no presumption period",
+    "url": "https://law.justia.com/codes/nebraska/chapter-76/"
+  },
+  "Nevada": {
+    "cap": "3 months' rent",
+    "interest": null,
+    "penalty": "Up to 2x the deposit if bad faith",
+    "entry": "24 hours",
+    "repair_deduct": "Yes, up to $100 or 1 month's rent (whichever is more) after notice",
+    "withhold": "Limited: for failure to supply essential services",
+    "retaliation": "Protected for complaints, tenant groups, and using legal rights; no presumption period",
+    "url": "https://www.leg.state.nv.us/nrs/nrs-118a.html"
+  },
+  "New Hampshire": {
+    "cap": "1 month's rent or $100, whichever is more",
+    "interest": "Yes if held 1 year or more, at the bank rate",
+    "penalty": "Up to 2x the deposit plus costs",
+    "entry": "Adequate notice (about 24 hours)",
+    "repair_deduct": null,
+    "withhold": "Yes, as an eviction defense for serious code violations",
+    "retaliation": "Presumed retaliation if landlord acts within 6 months of a complaint",
+    "url": "https://law.justia.com/codes/new-hampshire/title-lv/chapter-540/"
+  },
+  "New Jersey": {
+    "cap": "1.5 months' rent",
+    "interest": "Yes, interest earned, paid or credited yearly",
+    "penalty": "2x the amount wrongly kept plus costs",
+    "entry": "Reasonable notice (usually 1 day)",
+    "repair_deduct": "Yes, allowed by court decisions after notice",
+    "withhold": "Yes, for serious habitability defects (court decisions)",
+    "retaliation": "Protected for complaints, tenant groups, and using legal rights; no presumption period",
+    "url": "https://www.nj.gov/dca/codes/publications/pdf_lti/t_to_t.pdf"
+  },
+  "New Mexico": {
+    "cap": "1 month's rent for leases under 1 year",
+    "interest": "Yes for 1-year+ leases if deposit exceeds 1 month's rent",
+    "penalty": "$250 civil penalty plus attorney fees if bad faith",
+    "entry": "24 hours",
+    "repair_deduct": null,
+    "withhold": "Yes, partial rent abatement after 7 days written notice",
+    "retaliation": "Presumed retaliation if landlord acts within 6 months of a complaint",
+    "url": "https://law.justia.com/codes/new-mexico/chapter-47/article-8/"
+  },
+  "New York": {
+    "cap": "1 month's rent",
+    "interest": "Yes in buildings with 6+ units, interest earned (landlord may keep 1%)",
+    "penalty": "Landlord loses right to keep deposit; up to 2x if willful",
+    "entry": "Reasonable notice (NYC: 24 hours inspection, 1 week for repairs)",
+    "repair_deduct": "Emergency repairs only (court decisions)",
+    "withhold": "Yes, under the warranty of habitability; risky, consider an HP action in NYC",
+    "retaliation": "Presumed retaliation if landlord acts within 1 year of a complaint",
+    "url": "https://ag.ny.gov/publications/residential-tenants-rights-guide"
+  },
+  "North Carolina": {
+    "cap": "2 weeks (weekly), 1.5 months (monthly), 2 months (longer leases)",
+    "interest": null,
+    "penalty": "Deposit back plus damages; attorney fees if willful",
+    "entry": null,
+    "repair_deduct": null,
+    "withhold": null,
+    "retaliation": "Presumed retaliation if landlord acts within 12 months of a complaint",
+    "url": "https://www.ncleg.gov/Laws/GeneralStatuteSections/Chapter42"
+  },
+  "North Dakota": {
+    "cap": "1 month's rent (more allowed for pets or some tenant histories)",
+    "interest": "Yes, for leases of 9 months or more",
+    "penalty": "Up to 3x the amount wrongly kept if bad faith",
+    "entry": "Reasonable notice (usually 24 hours)",
+    "repair_deduct": "Yes, after notice if landlord fails to fix within a reasonable time",
+    "withhold": null,
+    "retaliation": null,
+    "url": "https://ndlegis.gov/cencode/t47c16.pdf"
+  },
+  "Ohio": {
+    "cap": null,
+    "interest": "Yes, 5% yearly on the part over $50 or 1 month's rent, if tenancy is 6+ months",
+    "penalty": "2x the amount wrongly kept plus attorney fees",
+    "entry": "24 hours",
+    "repair_deduct": null,
+    "withhold": "Yes, pay rent to court clerk after 30 days written notice (some exceptions)",
+    "retaliation": "Protected for complaints and tenant groups; no presumption period",
+    "url": "https://codes.ohio.gov/ohio-revised-code/chapter-5321"
+  },
+  "Oklahoma": {
+    "cap": null,
+    "interest": null,
+    "penalty": "Deposit back; landlord may lose right to keep it (no multiplier, uncertain)",
+    "entry": "1 day",
+    "repair_deduct": "Yes, up to $100 after 14 days written notice",
+    "withhold": "Limited: for failure to supply essential services; uncertain",
+    "retaliation": null,
+    "url": "https://law.justia.com/codes/oklahoma/title-41/"
+  },
+  "Oregon": {
+    "cap": null,
+    "interest": null,
+    "penalty": "2x the amount wrongly kept",
+    "entry": "24 hours",
+    "repair_deduct": "Yes, up to $300 for minor habitability defects after notice",
+    "withhold": "Limited: rent reduction for loss of essential services",
+    "retaliation": "Protected for complaints, tenant groups, and using legal rights; no presumption period",
+    "url": "https://www.oregonlegislature.gov/bills_laws/ors/ors090.html"
+  },
+  "Pennsylvania": {
+    "cap": "2 months' rent first year, 1 month after that",
+    "interest": "Yes, after 2 years, on deposits over $100",
+    "penalty": "2x the deposit if not returned within 30 days",
+    "entry": null,
+    "repair_deduct": "Yes, allowed by court decisions after notice and reasonable time",
+    "withhold": "Limited: escrow for certified unfit housing in some cities",
+    "retaliation": "Limited statute; protected for tenant groups and some legal rights",
+    "url": "https://law.justia.com/codes/pennsylvania/title-68/"
+  },
+  "Puerto Rico": {
+    "cap": null,
+    "interest": null,
+    "penalty": null,
+    "entry": null,
+    "repair_deduct": null,
+    "withhold": null,
+    "retaliation": null,
+    "url": "https://www.daco.pr.gov/"
+  },
+  "Rhode Island": {
+    "cap": "1 month's rent",
+    "interest": null,
+    "penalty": "2x the amount wrongly kept plus attorney fees",
+    "entry": "2 days",
+    "repair_deduct": "Yes, up to $125 for minor defects after notice",
+    "withhold": "Limited: for failure to supply essential services",
+    "retaliation": "Presumed retaliation if landlord acts within 6 months of a complaint",
+    "url": "https://law.justia.com/codes/rhode-island/title-34/chapter-34-18/"
+  },
+  "South Carolina": {
+    "cap": null,
+    "interest": null,
+    "penalty": "3x the amount wrongly kept plus attorney fees",
+    "entry": "24 hours",
+    "repair_deduct": "Yes, up to $100 or half a month's rent (whichever is more) after notice",
+    "withhold": "Limited: for failure to supply essential services",
+    "retaliation": "Protected for complaints to officials; no presumption period",
+    "url": "https://www.scstatehouse.gov/code/t27c040.php"
+  },
+  "South Dakota": {
+    "cap": "1 month's rent (more allowed in special cases like pets)",
+    "interest": null,
+    "penalty": "Up to $200 extra if bad faith",
+    "entry": null,
+    "repair_deduct": "Yes, after notice if landlord fails to fix within a reasonable time",
+    "withhold": "Yes, rent may be paid into escrow after notice",
+    "retaliation": "Presumed retaliation if landlord acts within 180 days of a complaint",
+    "url": "https://sdlegislature.gov/Statutes/43-32"
+  },
+  "Tennessee": {
+    "cap": null,
+    "interest": null,
+    "penalty": "Actual damages; no multiplier (uncertain)",
+    "entry": "No fixed period; URLTA counties have limited notice rules (uncertain)",
+    "repair_deduct": "Limited: essential services, URLTA counties only",
+    "withhold": "Limited: for health code violations; uncertain",
+    "retaliation": "Protected for complaints and using legal rights; no presumption period",
+    "url": "https://law.justia.com/codes/tennessee/title-66/chapter-28/"
+  },
+  "Texas": {
+    "cap": null,
+    "interest": null,
+    "penalty": "$100 plus 3x the amount wrongly kept plus attorney fees, if bad faith",
+    "entry": null,
+    "repair_deduct": "Yes, up to $500 or 1 month's rent (whichever is more) after proper notice",
+    "withhold": null,
+    "retaliation": "Presumed retaliation if landlord acts within 6 months of a complaint",
+    "url": "https://statutes.capitol.texas.gov/Docs/PR/htm/PR.92.htm"
+  },
+  "Utah": {
+    "cap": null,
+    "interest": null,
+    "penalty": "Deposit plus $100 penalty and court costs, if bad faith",
+    "entry": "24 hours (unless lease says otherwise)",
+    "repair_deduct": "Yes, after notice; limits apply (about 2 months' rent, uncertain)",
+    "withhold": null,
+    "retaliation": "Recognized by courts for complaints; no presumption period",
+    "url": "https://le.utah.gov/xcode/Title57/Chapter22/57-22.html"
+  },
+  "Vermont": {
+    "cap": null,
+    "interest": null,
+    "penalty": "2x the deposit if willful",
+    "entry": "48 hours",
+    "repair_deduct": "Yes, up to half a month's rent after notice",
+    "withhold": "Yes, for habitability violations after notice",
+    "retaliation": "Presumed retaliation if landlord acts within 90 days of a complaint",
+    "url": "https://legislature.vermont.gov/statutes/chapter/09/137"
+  },
+  "Virginia": {
+    "cap": "2 months' rent",
+    "interest": null,
+    "penalty": "Actual damages plus attorney fees",
+    "entry": "24 hours; 72 hours for routine maintenance you didn't request",
+    "repair_deduct": "Yes, up to $1,500 or 1 month's rent (whichever is more) after 14 days notice",
+    "withhold": "Yes, through court rent escrow after notice",
+    "retaliation": "Protected for complaints, tenant groups, and using legal rights; no presumption period",
+    "url": "https://law.lis.virginia.gov/vacode/title55.1/chapter12/"
+  },
+  "Washington": {
+    "cap": null,
+    "interest": null,
+    "penalty": "Up to 2x the deposit if intentional",
+    "entry": "2 days (1 day to show the unit)",
+    "repair_deduct": "Yes, up to 1 month's rent per repair, 2 months' per year, after notice",
+    "withhold": "Limited: rent paid into escrow through local official process",
+    "retaliation": "Presumed retaliation if landlord acts within 90 days of a complaint",
+    "url": "https://app.leg.wa.gov/rcw/default.aspx?cite=59.18"
+  },
+  "West Virginia": {
+    "cap": null,
+    "interest": null,
+    "penalty": "Deposit back; possibly up to 1.5x (uncertain)",
+    "entry": null,
+    "repair_deduct": "Allowed by court decisions after notice; risky",
+    "withhold": "Allowed by court decisions for serious defects; risky",
+    "retaliation": "Recognized by courts for complaints and legal rights; no presumption period",
+    "url": "https://law.justia.com/codes/west-virginia/chapter-37/"
+  },
+  "Wisconsin": {
+    "cap": null,
+    "interest": null,
+    "penalty": "2x the amount wrongly kept plus attorney fees",
+    "entry": "12 hours",
+    "repair_deduct": null,
+    "withhold": "Limited: rent reduced if unit becomes unlivable; withholding is risky",
+    "retaliation": "Protected for complaints, tenant groups, and using legal rights; no presumption period",
+    "url": "https://docs.legis.wisconsin.gov/statutes/statutes/704"
+  },
+  "Wyoming": {
+    "cap": null,
+    "interest": null,
+    "penalty": "Deposit back plus court costs (uncertain)",
+    "entry": null,
+    "repair_deduct": null,
+    "withhold": "Limited: after notice if unit is unsafe; uncertain",
+    "retaliation": null,
+    "url": "https://law.justia.com/codes/wyoming/title-1/chapter-21/article-12/"
+  }
+}

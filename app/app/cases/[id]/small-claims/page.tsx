@@ -8,6 +8,7 @@ import { WriteLetterCard } from "@/components/CaseActions";
 import { kindInfo } from "@/lib/letters";
 import { money, shortDate } from "@/lib/format";
 import type { CaseRow, DocumentRow, LetterRow } from "@/lib/types";
+import { smallClaimsRule, landlordRule, RULES_CHECKED } from "@/lib/stateLaw";
 
 export default async function SmallClaimsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -25,6 +26,10 @@ export default async function SmallClaimsPage({ params }: { params: Promise<{ id
   const docs = (dc || []) as DocumentRow[];
   const sentDemand = letters.find((l) => l.status === "sent" && ["demand", "dispute", "validation", "followup"].includes(l.kind));
   const state = c.user_state || prof?.state || "your state";
+  const sc = smallClaimsRule(c.user_state || prof?.state);
+  const over = sc && c.amount_at_stake ? c.amount_at_stake > sc.limit : false;
+  const penalty = c.category === "landlord" ? landlordRule(c.user_state || prof?.state)?.penalty : null;
+  const court = sc?.court || "small claims court";
 
   const evidence: [string, boolean, string][] = [
     ["Your demand letter, and proof it was sent", !!sentDemand, sentDemand ? `Sent ${shortDate(sentDemand.sent_at)}${sentDemand.sent_method ? ` by ${sentDemand.sent_method}` : ""}` : "Send one first. Courts like to see you tried."],
@@ -42,9 +47,25 @@ export default async function SmallClaimsPage({ params }: { params: Promise<{ id
       </div>
 
       <div className="stack g24">
-        <p className="panel-gray" style={{ margin: 0, fontSize: 15 }}>
-          Small claims court is built for people without lawyers. The limit on how much you can claim depends on the state, from about $2,500 to $25,000, so check the limit for {state} before you file.
-        </p>
+        {sc ? (
+          <section className="panel-gray stack g8" style={{ margin: 0 }}>
+            <span style={{ fontWeight: 600 }}>Small claims in {state}</span>
+            <dl className="stack g4" style={{ margin: 0, fontSize: 15 }}>
+              <div className="row g8"><dt className="muted" style={{ width: 110, flex: "none" }}>Court</dt><dd style={{ margin: 0 }}>{sc.court}</dd></div>
+              <div className="row g8"><dt className="muted" style={{ width: 110, flex: "none" }}>Most you can claim</dt><dd style={{ margin: 0 }}>{money(sc.limit)}</dd></div>
+              <div className="row g8"><dt className="muted" style={{ width: 110, flex: "none" }}>Filing fee</dt><dd style={{ margin: 0 }}>About {sc.fee}</dd></div>
+              <div className="row g8"><dt className="muted" style={{ width: 110, flex: "none" }}>Lawyers</dt><dd style={{ margin: 0 }}>{sc.lawyers === "allowed" ? "Allowed, but you don't need one" : sc.lawyers === "not allowed" ? "Not allowed, so it's you and them" : "Only in limited cases"}</dd></div>
+            </dl>
+            {sc.note && <span className="small">{sc.note}</span>}
+            {over && <span className="small" style={{ color: "#A8441F", fontWeight: 500 }}>Your amount is over the {money(sc.limit)} limit. You can usually still file if you give up the extra, or file in a higher court. A legal aid office can help you choose.</span>}
+            {penalty && <span className="small">Deposit cases: {penalty}. You can ask for that in your claim.</span>}
+            <span className="muted small">Checked {RULES_CHECKED}. Limits change; <a href={sc.url} target="_blank" rel="noopener noreferrer">confirm with the court</a>.</span>
+          </section>
+        ) : (
+          <p className="panel-gray" style={{ margin: 0, fontSize: 15 }}>
+            Small claims court is built for people without lawyers. The limit on how much you can claim depends on the state, from about $2,500 to $25,000. Add your state on the case page and we&apos;ll show yours.
+          </p>
+        )}
 
         <section>
           <div className="sec-head"><h2>Your evidence</h2></div>
@@ -79,9 +100,9 @@ export default async function SmallClaimsPage({ params }: { params: Promise<{ id
           <div className="sec-head"><h2>Steps to file</h2></div>
           <ol className="band stack" style={{ margin: 0, listStyle: "none", padding: "6px 18px" }}>
             {[
-              ["Find your court", `Search “${state} small claims court” plus your county. File where the other side is, or where it happened.`],
+              ["Find your court", `Search “${state} ${court}” plus your county. File where the other side is, or where it happened.`],
               ["Fill in the claim form", "Copy in your statement. Ask for the amount owed plus court costs."],
-              ["Pay the filing fee", "It varies by court. Ask about a fee waiver if money is tight."],
+              ["Pay the filing fee", `${sc ? `Usually about ${sc.fee}. ` : "It varies by court. "}Ask about a fee waiver if money is tight.`],
               ["Serve the other side", "The court tells you how: usually certified mail or a sheriff or process server."],
               ["Go to your hearing", "Bring three copies of everything: one for you, one for the judge, one for them."],
             ].map(([t, b], i) => (

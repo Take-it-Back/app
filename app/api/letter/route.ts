@@ -4,7 +4,7 @@ import { aiConfigured, draftLetter } from "@/lib/ai";
 import { kindInfo, senderAddress, templateFor, type BureauKey, agencyFor, BUREAUS } from "@/lib/letters";
 import type { CaseRow } from "@/lib/types";
 import { getCasePremium } from "@/lib/plan";
-import { depositRule } from "@/lib/deposits";
+import { stateContext } from "@/lib/stateLaw";
 import { logError, useAi } from "@/lib/limits";
 
 export const maxDuration = 60;
@@ -55,7 +55,8 @@ export async function POST(request: Request) {
       `From: ${cr.counterparty || "unknown"}`,
       `Amount: ${cr.amount_at_stake ?? "unknown"}`,
       `State: ${cr.user_state || profile?.state || "unknown"}`,
-      cr.category === "landlord" && depositRule(cr.user_state || profile?.state) ? `Deposit return rule in this state (general information): ${depositRule(cr.user_state || profile?.state)!.text}` : "",
+      stateContext(cr.category, cr.user_state || profile?.state, cr.last_payment_on),
+      cr.category === "debt" && ["payment_plan", "settlement_offer"].includes(kind) ? "IMPORTANT: Do not admit the debt is owed or promise to pay anything except under a signed written agreement. Include a sentence that the letter is not an acknowledgment of the debt and not a promise to pay, and that any agreement must be in writing." : "",
       `Summary: ${cr.summary || ""}`,
       `Findings: ${JSON.stringify(cr.findings || [])}`,
       `History: ${JSON.stringify(events || [])}`,

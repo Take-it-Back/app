@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { aiConfigured, analyzeDocument } from "./ai";
 import { loadMedia } from "./media";
 import { firstDeadline } from "./rules";
+import { stateContext } from "./stateLaw";
 import { todayISO } from "./format";
 import type { Category } from "./types";
 
@@ -27,7 +28,9 @@ export async function analyzeCase(supabase: SupabaseClient, userId: string, case
         `Has health insurance: ${c.insured || "unknown"}`,
         `Arrived on: ${received}`,
         `Paid any of it: ${c.paid || "unknown"}`,
-      ].join("\n");
+        stateContext(c.category === "other" ? "other" : c.category, c.user_state, c.last_payment_on),
+        c.user_state ? "Use the state rules above when they fit what the document shows (for example a deposit kept past the deadline, medical debt on a credit report, or a debt that may be past the time limit). Name the state in the finding." : "",
+      ].filter(Boolean).join("\n");
       const a = await analyzeDocument(media, context);
       category = (c.category !== "other" ? c.category : a.category) as Category;
       update = {
