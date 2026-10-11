@@ -3,8 +3,8 @@ import { requireUser } from "@/lib/supabase/server";
 import { BackLink, CtaButton } from "@/components/ui";
 import { PRICES, TRIAL_DAYS, getPlan, renewalTerms } from "@/lib/plan";
 
-const FREE = ["Scan up to 3 papers a month", "A plain-English summary", "General next steps and red flags", "Free legal aid finder"];
-const PREMIUM = ["Unlimited scans", "Every problem we found, in full, with the rule behind it", "Letters written for you, ready to print or email", "Every deadline tracked, with email reminders", "Their replies read and explained", "Your whole case file and a printable case packet", "Complaints to regulators and credit report disputes", "Forward bills by email, text reminders and family helpers"];
+const FREE = ["Scan up to 3 papers a month", "A plain-English summary, in English or Spanish", "Your state's rules on every case", "General next steps and red flags", "Free legal aid finder"];
+const PREMIUM = ["Unlimited scans", "Every problem we found, in full, with the rule behind it", "Letters written for you, ready to print or email", "Deadlines read from your letters, with email, text and phone alerts", "Their replies read and explained", "Your whole case file and a printable case packet", "Complaints to regulators and credit report disputes", "Certified mail and fax sent for you ($8.99 / $1.99)", "Forward bills by email and add family helpers"];
 
 function Check({ on = true }: { on?: boolean }) {
   return (

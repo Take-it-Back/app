@@ -132,7 +132,7 @@ export const SCENARIOS: Record<ScenarioKey, Scenario> = {
   },
 };
 
-export type FeatureSlug = "scan" | "plain-answers" | "letters" | "deadline-keeper" | "case-tracker" | "reply-decoder" | "case-packet" | "real-help";
+export type FeatureSlug = "scan" | "plain-answers" | "state-rules" | "letters" | "send-for-you" | "deadline-keeper" | "case-tracker" | "reply-decoder" | "case-packet" | "real-help";
 
 export type Feature = {
   slug: FeatureSlug;
@@ -183,15 +183,32 @@ export const FEATURES: Feature[] = [
       "A medical bill can have a double charge on page three. A denial can skip a step the law requires. A collector may be chasing a debt that's too old.",
       "We check for the things that go wrong most often and tell you in plain words, with the dollar amount and the rule that backs you up.",
     ],
-    benefits: [["The short version first", "One or two sentences that tell you what's going on."], ["The rule behind it", "No Surprises Act, FDCPA, deposit laws and more, named for you."], ["Red flags, fast", "Court dates and lawsuits get flagged at the top, right away."]],
+    benefits: [["The short version first", "One or two sentences, in English or Spanish."], ["The rule behind it", "No Surprises Act, FDCPA, deposit laws and more, named for you."], ["Red flags, fast", "Court dates and lawsuits get flagged at the top, right away."]],
     related: ["scan", "letters", "real-help"],
+  },
+  {
+    slug: "state-rules",
+    name: "Your state's rules",
+    short: "Deadlines, limits and penalties for where you live, in all 50 states.",
+    headline: ["The rules where", "you live"],
+    lede: "The law changes at the state line. Every case shows the rules for your state, with a source link: deposit deadlines, debt time limits, medical debt protections, appeal windows and small claims limits.",
+    plan: "both",
+    planNote: "Included free on every case.",
+    shot: "found",
+    shots: [["found", "renters"], ["found", "debt"], ["dates", "insurance"]],
+    story: [
+      "A landlord in New York has 14 days to return a deposit. In Alabama it's 60. A debt can be too old to sue on after 3 years in one state and 10 in another. General advice gets these wrong.",
+      "We built the rules for all 50 states and DC into every case, and our letters use them. Before you pay an old debt, we warn you if a payment could restart the clock.",
+    ],
+    benefits: [["All 50 states and DC", "Deposits, tenant rights, debt time limits, medical debt and insurance appeals."], ["Warnings before mistakes", "Like paying a debt that's too old to sue on."], ["Sources you can check", "Every rule links to where it comes from."]],
+    related: ["plain-answers", "letters", "real-help"],
   },
   {
     slug: "letters",
     name: "Ready letters",
     short: "Firm, polite letters you review, sign and send.",
     headline: ["The letter,", "written for you"],
-    lede: "Disputes, appeals, demand letters, validation requests and follow-ups. Written from your case, citing the right rules, ready to print or email.",
+    lede: "Twenty kinds of letters: disputes, appeals, deposit demands, debt validation, \"too old to sue\", payment plans, charity care, complaints and more. Written from your case and your state's rules.",
     plan: "premium",
     planNote: "Letters are part of Premium.",
     shot: "letter",
@@ -200,24 +217,41 @@ export const FEATURES: Feature[] = [
       "Companies treat a clear, specific letter very differently from a phone call. It creates a record, and it starts their clock.",
       "We write it for you in your voice: calm, firm and specific. You can edit any word, ask for a rewrite, then print, save as PDF or email it.",
     ],
-    benefits: [["Built from your case", "Uses what we found, your history and their replies."], ["Edit or rewrite", "Change anything, or tell us what to add and we'll redo it."], ["Print, PDF or email", "Mark it sent and we start counting their deadline."]],
-    related: ["deadline-keeper", "reply-decoder", "case-tracker"],
+    benefits: [["Built from your case", "Uses what we found, your state's rules, your history and their replies."], ["Edit or rewrite", "Change anything, or tell us what to add and we'll redo it."], ["Print, email or we send it", "Certified mail or fax from the app, and we start counting their deadline."]],
+    related: ["send-for-you", "deadline-keeper", "state-rules"],
+  },
+  {
+    slug: "send-for-you",
+    name: "We send it for you",
+    short: "Certified mail with tracking, or fax, without leaving home.",
+    headline: ["Sent, with", "proof"],
+    lede: "No printer, no post office line. We print your letter and send it by certified mail with tracking, or fax it in minutes, and save the proof to your case.",
+    plan: "premium",
+    planNote: "Premium. $8.99 per certified letter, $1.99 per fax.",
+    shot: "letter",
+    shots: [["letter", "debt"], ["tracker", "debt"], ["packet", "debt"]],
+    story: [
+      "Certified mail is the gold standard for disputes: it proves when they got your letter, and many deadlines start from that date.",
+      "Tap send, check the address and we handle the rest. A copy of exactly what went out lands in your case file, and we start counting their deadline.",
+    ],
+    benefits: [["Certified mail", "Tracked, with proof of mailing saved to your case."], ["Fax in minutes", "For insurers and billing offices that still want fax."], ["Their clock starts", "We track their deadline from the day it's sent."]],
+    related: ["letters", "deadline-keeper", "case-packet"],
   },
   {
     slug: "deadline-keeper",
     name: "Deadline keeper",
     short: "Your dates and theirs, counted down and remembered.",
     headline: ["Never miss a", "deadline"],
-    lede: "Appeals, disputes and deposits all run on the clock. We work out your deadlines from the rules, track theirs too, and remind you before anything is due.",
+    lede: "Appeals, disputes and deposits all run on the clock. We read the exact deadline from your letter, track theirs too, and remind you by email, text or phone alert before anything is due.",
     plan: "premium",
     planNote: "Deadline tracking and reminders are part of Premium. Free shows the general rule.",
     shot: "dates",
     shots: [["dates", "insurance"], ["today", "medical"], ["tracker", "renters"]],
     story: [
       "Miss an appeal window by one day and you can lose the right to appeal. Companies know most people don't track this.",
-      "We do. Every case gets your deadline, worked out from the rules for that kind of problem. When you send a letter, we start counting theirs.",
+      "We do. When the letter states a deadline, we pull out the exact date and the words it came from. When it doesn't, we use the rule for your state. When you send a letter, we start counting theirs.",
     ],
-    benefits: [["Both clocks", "What you owe them and what they owe you, side by side."], ["Email reminders", "A nudge before anything is due, not after."], ["Your whole week", "One calendar view across every fight."]],
+    benefits: [["Read from the letter", "The exact date the letter gives, with the quote to prove it."], ["Email, text or phone alert", "A nudge before anything is due, never with case details on your lock screen."], ["Both clocks", "What you owe them and what they owe you, side by side."]],
     related: ["case-tracker", "letters", "reply-decoder"],
   },
   {
@@ -276,16 +310,16 @@ export const FEATURES: Feature[] = [
     name: "Real help",
     short: "Court dates and lawsuits go straight to people who can help.",
     headline: ["When it needs a", "person"],
-    lede: "Some things shouldn't be handled alone. If we see a court date, an eviction or a lawsuit, we flag it and point you to free legal help.",
+    lede: "Some things shouldn't be handled alone. If we see a court date, an eviction or a lawsuit, we flag it and show you free legal aid near you, by ZIP code, in every state.",
     plan: "free",
     planNote: "Included free, always.",
     shot: "help",
     shots: [["help", "renters"], ["free", "debt"], ["packet", "debt"]],
     story: [
       "We're not a law firm, and we're honest about it. Some notices move fast and need a real person.",
-      "When we spot one, it goes to the top in plain words, with links to legal aid, tenant hotlines and consumer agencies near you.",
+      "When we spot one, it goes to the top in plain words, with the phone numbers for legal aid offices, tenant hotlines and lawyer referral services in your state. The finder is free for anyone at takeitback.app/legal-aid.",
     ],
-    benefits: [["Flagged right away", "Evictions, lawsuits and court dates come first."], ["Free help near you", "Legal aid, tenant unions and state agencies."], ["Always free", "Safety features are never behind a paywall."]],
+    benefits: [["Flagged right away", "Evictions, lawsuits and court dates come first."], ["Legal aid by ZIP code", "Offices, tenant hotlines and lawyer referral in all 50 states and DC."], ["Always free", "Safety features are never behind a paywall."]],
     related: ["plain-answers", "case-packet", "scan"],
   },
 ];
@@ -306,6 +340,7 @@ export type Problem = {
   rules: [string, string][];
   steps: [string, string][];
   faqs: [string, string][];
+  state: string[];
 };
 
 export const PROBLEMS: Problem[] = [
@@ -328,6 +363,7 @@ export const PROBLEMS: Problem[] = [
     rules: [["No Surprises Act", "Limits surprise out-of-network bills for emergencies and in-network facilities."], ["Hospital financial assistance", "Nonprofit hospitals must have a written charity care policy."], ["Price transparency", "Hospitals must publish their prices."]],
     steps: [["Snap the bill", "Add every page, plus your insurance statement if you have it."], ["See what's wrong", "Double charges, surprise fees and the rule behind each one."], ["Send the dispute", "Ask for an itemized bill, a correction or charity care."]],
     faqs: [["Should I pay the bill while I dispute it?", "Ask for an itemized bill and a hold on collections first. We'll tell you the deadline on your bill and help you write the request."], ["What if it's already in collections?", "You can still dispute it. Collectors have to prove the debt, and medical debt has extra credit reporting protections."]],
+    state: ["Whether your state bans medical debt on credit reports", "Interest caps on medical debt", "State charity care rules that go beyond federal law", "Limits on suing, liens and wage garnishment for medical bills"],
   },
   {
     slug: "insurance-denials",
@@ -348,6 +384,7 @@ export const PROBLEMS: Problem[] = [
     rules: [["Internal appeal", "You can ask your plan to reconsider, usually within 180 days."], ["External review", "An independent reviewer can overturn the denial."], ["Urgent care appeals", "Faster decisions when your health can't wait."]],
     steps: [["Snap the denial", "Add the letter or the explanation of benefits."], ["Understand the reason", "Plain words, plus what usually wins this kind of appeal."], ["Appeal on time", "We write it, count their deadline and help with round two."]],
     faqs: [["How long do I have to appeal?", "Usually 180 days from the denial for an internal appeal, but plans vary. We'll pull the date from your letter."], ["What if my appeal is denied too?", "You can usually ask for an external review, where an outside doctor decides. We'll help you write it."]],
+    state: ["The exact appeal deadline from your denial letter", "How outside review works for your plan in your state", "Your state insurance regulator and its complaint page", "Your state's Medicaid fair hearing deadline"],
   },
   {
     slug: "landlords",
@@ -368,6 +405,7 @@ export const PROBLEMS: Problem[] = [
     rules: [["Deposit return deadlines", "Often 14 to 30 days, depending on your state."], ["Warranty of habitability", "Your home must be safe and livable."], ["Bad-faith penalties", "Some states let you recover extra if a deposit is kept unfairly."]],
     steps: [["Snap the notice or lease", "Add move-out photos and texts if you have them."], ["Know your state's rules", "Deadlines and limits for where you live."], ["Send a demand", "Then we track their deadline and help with small claims."]],
     faqs: [["What if I get an eviction notice?", "We flag it right away and point you to free tenant help near you. Eviction deadlines are short, so please act quickly."], ["Can I take my landlord to small claims?", "Often, yes. Your case packet gives you everything organized to file."]],
+    state: ["Your state's deposit return deadline and penalty", "Deposit caps and interest owed on deposits", "Repair-and-deduct and rent withholding rights", "Notice before entry, protection from retaliation and small claims limits"],
   },
   {
     slug: "debt-collectors",
@@ -387,7 +425,8 @@ export const PROBLEMS: Problem[] = [
     ],
     rules: [["FDCPA", "Federal rules on how collectors can contact you and what they must prove."], ["Validation request", "Ask within 30 days and they must pause until they prove it."], ["Statute of limitations", "Each state limits how long a debt can be sued on."]],
     steps: [["Snap the letter", "Add any earlier letters or texts from them."], ["Know your rights", "Whether it's proven, how old it is and what not to say."], ["Ask for proof", "We write the request and track their response."]],
-    faqs: [["Should I pay a small amount to make them stop?", "Not before you know more. In many states a payment can restart the time limit on an old debt."], ["What if they're suing me?", "Don't ignore it. We'll flag the court date and point you to free legal help right away."]],
+    faqs: [["Should I pay a small amount to make them stop?", "Not before you know more. In many states a payment can restart the time limit on an old debt. Add your last payment date and we'll tell you where your debt stands in your state."], ["What if they're suing me?", "Don't ignore it. We'll flag the court date and point you to free legal help right away."]],
+    state: ["How long collectors have to sue in your state", "Whether a payment or promise restarts the clock", "States that bar collecting on old debts", "Medical debt credit reporting protections"],
   },
 ];
 
@@ -397,10 +436,12 @@ export const PLAN_ROWS: [string, string, string][] = [
   ["Scan bills, denials and notices", "3 a month", "Unlimited"],
   ["Plain-English summary", "Yes", "Yes"],
   ["General next steps and red flags", "Yes", "Yes"],
-  ["Free legal aid finder", "Yes", "Yes"],
+  ["Your state's rules on every case", "Yes", "Yes"],
+  ["Free legal aid finder by ZIP code", "Yes", "Yes"],
+  ["Explanations in Spanish", "Yes", "Yes"],
   ["Every problem in full, with the rule", "Titles only", "Yes"],
   ["Letters written for you", "—", "Yes"],
-  ["Deadline tracking and reminders", "General rule only", "Yes"],
+  ["Deadline tracking and reminders", "General rule only", "Yes, read from your letter"],
   ["Case tracker and timeline", "—", "Yes"],
   ["Their replies read and explained", "—", "Yes"],
   ["Document vault and case packet", "—", "Yes"],
@@ -409,9 +450,10 @@ export const PLAN_ROWS: [string, string, string][] = [
   ["Complaints to regulators and credit disputes", "—", "Yes"],
   ["Small claims kit", "Steps only", "Yes, with your statement"],
   ["Forward bills by email", "—", "Yes"],
-  ["Text and email reminders", "—", "Yes"],
+  ["Email, text and phone alerts", "—", "Yes"],
   ["Family helpers on a case", "—", "Up to 4"],
   ["We mail or fax it for you", "—", "$8.99 certified mail, $1.99 fax"],
+  ["Give a month, get a month", "Yes", "Yes"],
 ];
 
 export const FAQ_GROUPS: { title: string; items: [string, string][] }[] = [
@@ -421,7 +463,10 @@ export const FAQ_GROUPS: { title: string; items: [string, string][] }[] = [
       ["What is Take it back?", "An app that helps you fight back against hospitals, insurance companies, landlords and debt collectors. Snap the letter, get your rights in plain words, send the letter we write, and we track it until it's settled."],
       ["Is Take it back a lawyer?", "No. We explain your rights and prepare letters you review and send yourself. If your case needs a lawyer, like a court date, we'll point you to real help right away."],
       ["Who is it for?", "Patients, policyholders, renters and consumers in the US who are up against a bill, denial or notice that feels wrong. We never work for the other side. No legal knowledge needed."],
-      ["Does it work on my phone?", "Yes. It works in any browser on a phone or computer. Nothing to install."],
+      ["Does it work on my phone?", "Yes. It works in any browser on a phone or computer. Add it to your home screen to use it like an app and get phone alerts before deadlines."],
+      ["Does it know my state's laws?", "Yes. Every case shows the rules for your state, with a source link: deposit deadlines, tenant rights, how long collectors can sue, medical debt protections, insurance appeal windows and small claims limits, for all 50 states and DC."],
+      ["Is it available in Spanish?", "Yes. Choose Español in Settings and we'll explain your documents, findings and their replies in Spanish. Letters stay in English because they go to US companies. See takeitback.app/es."],
+      ["Can you mail the letter for me?", "Yes. With Premium, we send it by certified mail with tracking for $8.99, or by fax for $1.99, and save the proof to your case."],
     ],
   },
   {
@@ -429,16 +474,18 @@ export const FAQ_GROUPS: { title: string; items: [string, string][] }[] = [
     items: [
       ["What's free?", "Up to 3 scans a month, a plain-English summary, general next steps, red flags and the legal aid finder."],
       ["What does Premium add?", "Every problem in full with the rule behind it, letters written for you, deadline tracking and reminders, reply decoding, your case file and a printable case packet."],
-      ["How much is Premium?", "$9.99 a month or $59 a year, with a 7-day free trial. Cancel anytime."],
+      ["How much is Premium?", "$9.99 a month or $59 a year, with a 7-day free trial. It renews automatically until you cancel, and you can cancel online anytime."],
       ["Do you take a cut of what I save?", "Never. You keep 100% of what you save or recover."],
+      ["Do I get anything for inviting friends?", "Yes. Share your link from Settings. When a friend starts Premium, you each get a month free."],
     ],
   },
   {
     title: "Privacy and safety",
     items: [
       ["Is my information safe?", "Your documents are stored privately, never sold and never used for ads. You can download or delete everything whenever you like."],
-      ["Who can see my documents?", "Only you. Files are stored in a private bucket tied to your account."],
-      ["What if my situation is urgent?", "Court dates, lawsuits and evictions are flagged at the top with links to free legal help. That's always free."],
+      ["Who can see my documents?", "Only you, and any family helpers you invite to a case. Files are stored privately and tied to your account. Our health data policy explains exactly what we collect and why."],
+      ["Can I share a win without sharing my details?", "Yes. Win cards show only the amount and the type of fight. No names, no documents, and you can stop sharing anytime."],
+      ["What if my situation is urgent?", "Court dates, lawsuits and evictions are flagged at the top with phone numbers for free legal aid in your state. That's always free, and anyone can use our legal aid finder at takeitback.app/legal-aid."],
     ],
   },
 ];

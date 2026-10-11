@@ -95,6 +95,13 @@ export default async function ProblemPage({ params }: { params: Promise<{ slug: 
               <span className="eyebrow" style={{ fontSize: 13, color: "#F0A07E" }}>Rules on your side</span>
               <h2 className="serif" style={{ margin: 0, fontSize: "clamp(32px, 3.6vw, 46px)", lineHeight: 1.1 }}>We name the rule, so they <em className="o">take you seriously</em>.</h2>
               <p className="muted small" style={{ margin: 0 }}>General information. Rules vary by state and plan, and we'll check the details on your letter.</p>
+              <div className="stack g8" style={{ marginTop: 12, padding: "18px 20px", borderRadius: 18, background: "#262626" }}>
+                <span style={{ fontWeight: 600, color: "#fff" }}>Plus the rules for your state</span>
+                <ul style={{ margin: 0, paddingLeft: 18, color: "#D4D4D4", fontSize: 15, lineHeight: 1.6 }}>
+                  {p.state.map((t) => <li key={t}>{t}</li>)}
+                </ul>
+                <span style={{ fontSize: 14, color: "#BDBDBD" }}>All 50 states and DC, with sources. <Link href="/legal-aid" style={{ color: "#F0A07E" }}>Need a person? Free legal aid near you</Link></span>
+              </div>
             </div>
             <div className="stack" style={{ flex: "1 1 420px" }}>
               {p.rules.map(([t, b], i) => (

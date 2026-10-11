@@ -5,6 +5,8 @@ export default function FeatureIcon({ slug, size = 18 }: { slug: FeatureSlug | P
   switch (slug) {
     case "scan": return <svg {...p}><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3" /><path d="M8 12h8" /></svg>;
     case "plain-answers": return <svg {...p}><path d="M4 5h16v11H9l-5 4z" /><path d="M8 9h8M8 12h5" /></svg>;
+    case "state-rules": return <svg {...p}><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" /><path d="M9.5 9.5l2 2 3.5-3.5" /></svg>;
+    case "send-for-you": return <svg {...p}><path d="M21 3L10 14" /><path d="M21 3l-7 18-4-7-7-4z" /></svg>;
     case "letters": return <svg {...p}><path d="M4 6h16v12H4z" /><path d="M4 7l8 6 8-6" /></svg>;
     case "deadline-keeper": return <svg {...p}><circle cx="12" cy="13" r="8" /><path d="M12 9v4l3 2M9 2h6" /></svg>;
     case "case-tracker": return <svg {...p}><path d="M5 4v16" /><circle cx="5" cy="7" r="2" /><circle cx="5" cy="17" r="2" /><path d="M10 7h10M10 17h7" /></svg>;

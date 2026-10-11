@@ -125,6 +125,63 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="wrap-1200 stack g24 m-section">
+        <div className="row wrap between g16" style={{ alignItems: "flex-end" }}>
+          <div className="stack g8" style={{ maxWidth: 760 }}>
+            <span className="eyebrow" style={{ fontSize: 13 }}>Built for your state</span>
+            <h2 className="h-l">The law changes at the <em className="o">state line</em>. So do we.</h2>
+            <p className="lede" style={{ margin: 0 }}>Every case shows the rules where you live, with a source for each one, and every letter uses them. All 50 states and DC.</p>
+          </div>
+          <Link href="/features/state-rules" className="btn-plain">How it works</Link>
+        </div>
+        <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(230px, 1fr))", gap: 14 }}>
+          {[
+            ["Deposit deadlines", "14 days in New York, 60 in Alabama. Plus the penalty if they're late.", "/guides/security-deposit-return-deadlines-by-state"],
+            ["Debt time limits", "How long collectors can sue, and a warning before a payment restarts the clock.", "/guides/statute-of-limitations-on-debt-by-state"],
+            ["Small claims limits", "The most you can sue for without a lawyer, from $2,500 to $25,000.", "/guides/small-claims-court-limits-by-state"],
+            ["Medical debt protections", "States that keep medical debt off credit reports or cap the interest.", "/fight/medical-bills"],
+          ].map(([t, b, href]) => (
+            <Link key={t} href={href} className="card stack g8" style={{ textDecoration: "none", borderRadius: 22 }}>
+              <span style={{ fontWeight: 600, fontSize: 17 }}>{t}</span>
+              <span className="muted" style={{ fontSize: 15 }}>{b}</span>
+              <span style={{ fontSize: 14, fontWeight: 500, color: "#A8441F", marginTop: "auto" }}>See every state →</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="m-section">
+        <div className="panel-sec orange">
+          <div className="inner row wrap" style={{ gap: 40, alignItems: "center" }}>
+            <div className="stack g12" style={{ flex: "1 1 380px" }}>
+              <span className="eyebrow" style={{ fontSize: 13, color: "#A8441F" }}>Free for everyone</span>
+              <h2 className="h-l" style={{ fontSize: "clamp(32px, 3.6vw, 48px)" }}>Court date? Eviction? Find a <em className="o">real person</em>.</h2>
+              <p className="lede" style={{ margin: 0, fontSize: 17 }}>Free legal aid offices, tenant hotlines and lawyer referral services in your state, with phone numbers. No account needed.</p>
+            </div>
+            <form action="/legal-aid" method="get" className="card row wrap g12" style={{ flex: "1 1 320px", alignItems: "flex-end", borderRadius: 22 }}>
+              <label className="field grow" style={{ minWidth: 160 }}><span style={{ fontSize: 15, fontWeight: 500 }}>Your ZIP code</span><input name="zip" inputMode="numeric" pattern="[0-9]{5}" maxLength={5} className="input" placeholder="e.g. 18701" /></label>
+              <button className="btn btn-orange" style={{ minHeight: 48 }}>Find free help</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section className="wrap-1200 m-section">
+        <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 18 }}>
+          {[
+            ["We send it for you", "Certified mail with tracking for $8.99, or fax for $1.99. Proof saved to your case.", "/features/send-for-you", "Premium"],
+            ["Alerts before every deadline", "We read the exact date from your letter, then remind you by email, text or phone alert.", "/features/deadline-keeper", "Premium"],
+            ["Win, share, get a month free", "Share a win card with just the amount. When a friend starts Premium, you both get a month free.", "/pricing", "Everyone"],
+            ["¿Prefieres español?", "Explanations of your bills, denials and their replies in Spanish. Letters stay in English for US companies.", "/es", "Todos"],
+          ].map(([t, b, href, tag]) => (
+            <Link key={t} href={href} className="stack g8" style={{ textDecoration: "none", borderTop: "1px solid #1A1A1A", paddingTop: 18 }} {...(href === "/es" ? { lang: "es", hrefLang: "es" } : {})}>
+              <span className="row between g8"><span className="serif" style={{ fontSize: 24 }}>{t}</span><span className="tag tag-gray">{tag}</span></span>
+              <span className="muted" style={{ fontSize: 15 }}>{b}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       <section className="m-section">
         <div>
           <div className="wrap-1200 row wrap g32" style={{ alignItems: "center", gap: 48 }}>
@@ -147,13 +204,13 @@ export default function Home() {
           <div className="card stack g12" style={{ padding: 30, borderRadius: 26 }}>
             <span style={{ fontWeight: 500, fontSize: 18 }}>Free</span>
             <span className="serif" style={{ fontSize: 52, lineHeight: 1 }}>$0</span>
-            <p className="muted" style={{ margin: 0 }}>Know where you stand. 3 scans a month, a plain-English summary, general next steps and red flags.</p>
+            <p className="muted" style={{ margin: 0 }}>Know where you stand. 3 scans a month, a plain-English summary, your state's rules, red flags and the legal aid finder.</p>
             <Link prefetch={false} href="/login?mode=signup" className="btn-plain" style={{ alignSelf: "flex-start", minHeight: 48, borderColor: "#1A1A1A" }}>Start free</Link>
           </div>
           <div className="card stack g12" style={{ padding: 30, borderRadius: 26, border: "2px solid #BF4F28" }}>
             <span style={{ fontWeight: 500, fontSize: 18 }}>Premium</span>
             <span className="serif" style={{ fontSize: 52, lineHeight: 1 }}>$9.99<span className="muted" style={{ fontFamily: "var(--sans)", fontSize: 16 }}> a month</span></span>
-            <p className="muted" style={{ margin: 0 }}>We do the work. Letters written for you, every deadline tracked, replies explained. Or $59 a year.</p>
+            <p className="muted" style={{ margin: 0 }}>We do the work. Letters written and sent for you, deadlines read from your letters with alerts, replies explained. Or $59 a year.</p>
             <CtaLink href="/pricing" variant="orange">Try 7 days free</CtaLink>
           </div>
         </div>
