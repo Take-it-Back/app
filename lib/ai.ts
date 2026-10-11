@@ -18,6 +18,10 @@ Rules:
 - Never invent account numbers, names, dates or amounts that are not in the document. Use [BRACKETED PLACEHOLDERS] for anything unknown.
 - Set red_flag to true when the person may need a human right away: an eviction filing or court date, a lawsuit or summons, wage garnishment, a utility shutoff, discrimination, or a denial of urgent or life-threatening care.`;
 
+export type StatedDeadline = { title: string; date: string | null; owner: "you" | "them"; quote: string };
+export type Lang = "en" | "es";
+const langNote = (lang?: Lang) => (lang === "es" ? "\n\nLANGUAGE: Write every plain-language field (summary, findings, next steps, explanations) in clear, simple Spanish, as used by Spanish speakers in the United States. Keep names of laws, companies and agencies in English, with a short Spanish explanation the first time." : "");
+
 export type MediaInput = { mime: string; base64: string };
 
 function mediaBlock(m: MediaInput): Anthropic.ContentBlockParam {
@@ -56,7 +60,23 @@ export interface Analysis {
   red_flag: boolean;
   red_flag_reason: string | null;
   next_steps: { title: string; detail: string; letter_kind: string | null }[];
+  deadlines?: StatedDeadline[];
 }
+
+const deadlinesSchema = {
+  type: "array",
+  description: "Every deadline or date the document itself states, with the exact words. Empty if the document states none. Don't guess or calculate.",
+  items: {
+    type: "object",
+    properties: {
+      title: { type: "string", description: "What must happen, max 8 words, e.g. 'Appeal the denial' or 'Dispute the debt'" },
+      date: { type: ["string", "null"], description: "YYYY-MM-DD if the document gives a date or a period you can convert from a date on the document (e.g. '180 days from the date of this notice' dated 2026-03-01 → 2026-08-28); null if it can't be pinned down" },
+      owner: { type: "string", enum: ["you", "them"], description: "you = the person must act; them = the company must act" },
+      quote: { type: "string", description: "The exact words from the document, max 30 words" },
+    },
+    required: ["title", "date", "owner", "quote"],
+  },
+};
 
 const analysisSchema = {
   type: "object",
@@ -82,6 +102,7 @@ const analysisSchema = {
       },
     },
     potential_savings: { type: ["number", "null"] },
+    deadlines: deadlinesSchema,
     red_flag: { type: "boolean" },
     red_flag_reason: { type: ["string", "null"] },
     next_steps: {
@@ -98,15 +119,15 @@ const analysisSchema = {
       },
     },
   },
-  required: ["category", "title", "counterparty", "amount_at_stake", "document_date", "summary", "findings", "potential_savings", "red_flag", "red_flag_reason", "next_steps"],
+  required: ["category", "title", "counterparty", "amount_at_stake", "document_date", "summary", "findings", "potential_savings", "deadlines", "red_flag", "red_flag_reason", "next_steps"],
 };
 
-export async function analyzeDocument(media: MediaInput[], context: string): Promise<Analysis> {
+export async function analyzeDocument(media: MediaInput[], context: string, lang?: Lang): Promise<Analysis> {
   return callTool<Analysis>(
     "record_analysis",
     "Record what this document is, what looks wrong, and what the person can do.",
     analysisSchema,
-    [...media.map(mediaBlock), { type: "text", text: `Here is what the person told us:\n${context}\n\nRead the document and record your analysis.` }]
+    [...media.map(mediaBlock), { type: "text", text: `Here is what the person told us:\n${context}\n\nRead the document and record your analysis.${langNote(lang)}` }]
   );
 }
 
@@ -119,9 +140,10 @@ export interface ReplyAnalysis {
   red_flag: boolean;
   red_flag_reason: string | null;
   next_steps: { title: string; detail: string; letter_kind: string | null }[];
+  deadlines?: StatedDeadline[];
 }
 
-export async function analyzeReply(media: MediaInput[], caseContext: string): Promise<ReplyAnalysis> {
+export async function analyzeReply(media: MediaInput[], caseContext: string, lang?: Lang): Promise<ReplyAnalysis> {
   return callTool<ReplyAnalysis>(
     "record_reply",
     "Explain the other side's reply in plain words and what to do next.",
@@ -136,10 +158,11 @@ export async function analyzeReply(media: MediaInput[], caseContext: string): Pr
         red_flag: { type: "boolean" },
         red_flag_reason: { type: ["string", "null"] },
         next_steps: analysisSchema.properties.next_steps,
+        deadlines: deadlinesSchema,
       },
-      required: ["what_it_says", "whats_missing", "what_it_means", "outcome", "amount_resolved", "red_flag", "red_flag_reason", "next_steps"],
+      required: ["what_it_says", "whats_missing", "what_it_means", "outcome", "amount_resolved", "red_flag", "red_flag_reason", "next_steps", "deadlines"],
     },
-    [...media.map(mediaBlock), { type: "text", text: `This is the other side's reply in an ongoing case.\n${caseContext}` }]
+    [...media.map(mediaBlock), { type: "text", text: `This is the other side's reply in an ongoing case.\n${caseContext}${langNote(lang)}` }]
   );
 }
 

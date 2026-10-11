@@ -1,0 +1,2457 @@
+{
+  "Alabama": {
+    "portal": {
+      "name": "AlabamaLegalHelp.org",
+      "url": "https://www.alabamalegalhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Services Alabama",
+        "url": "https://legalservicesalabama.org",
+        "phone": "1-866-456-4995",
+        "area": "Statewide"
+      },
+      {
+        "name": "Alabama State Bar Volunteer Lawyers Program",
+        "url": "https://www.alabar.org/programs/volunteer-lawyers-program/",
+        "phone": null,
+        "area": "Statewide (pro bono)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Alabama State Bar Lawyer Referral Service",
+      "url": "https://www.alabar.org/for-the-public/get-legal-help/",
+      "phone": null
+    }
+  },
+  "Alaska": {
+    "portal": {
+      "name": "AlaskaLawHelp.org",
+      "url": "https://alaskalawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Alaska Legal Services Corporation",
+        "url": "https://www.alsc-law.org",
+        "phone": "1-888-478-2572",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Alaska Bar Association Lawyer Referral Service",
+      "url": "https://alaskabar.org/for-the-public/lawyer-referral-service/",
+      "phone": "907-272-0352"
+    }
+  },
+  "Arizona": {
+    "portal": {
+      "name": "AZLawHelp.org",
+      "url": "https://azlawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Community Legal Services",
+        "url": "https://clsaz.org",
+        "phone": "602-258-3434",
+        "area": "Central & Western AZ (Phoenix)"
+      },
+      {
+        "name": "Southern Arizona Legal Aid",
+        "url": "https://sazlegalaid.org",
+        "phone": "520-623-9461",
+        "area": "Southern AZ (Tucson)"
+      },
+      {
+        "name": "DNA-People's Legal Services",
+        "url": "https://dnalegalservices.org",
+        "phone": "928-871-4151",
+        "area": "Northern AZ & Navajo Nation"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Maricopa County Bar Association Lawyer Referral Service",
+      "url": "https://maricopabar.org/?pg=clientReferrals",
+      "phone": "602-257-4200"
+    }
+  },
+  "Arkansas": {
+    "portal": {
+      "name": "ArkansasLegalServices.org (Arkansas Legal Services Online)",
+      "url": "https://www.arlegalservices.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Aid of Arkansas",
+        "url": "https://arlegalaid.org",
+        "phone": "1-800-952-9243",
+        "area": "Northern & Eastern AR"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Arkansas Bar Association - Find a Lawyer",
+      "url": "https://www.arkbar.com/?pg=Arkansas-Find-a-Lawyer",
+      "phone": null
+    }
+  },
+  "California": {
+    "portal": {
+      "name": "LawHelpCA.org",
+      "url": "https://www.lawhelpca.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Aid Foundation of Los Angeles",
+        "url": "https://lafla.org",
+        "phone": "1-800-399-4529",
+        "area": "Los Angeles County"
+      },
+      {
+        "name": "Bay Area Legal Aid",
+        "url": "https://baylegal.org",
+        "phone": "1-800-551-5554",
+        "area": "SF Bay Area"
+      },
+      {
+        "name": "Legal Aid Society of San Diego",
+        "url": "https://www.lassd.org",
+        "phone": "1-877-534-2524",
+        "area": "San Diego County"
+      },
+      {
+        "name": "Legal Services of Northern California",
+        "url": "https://lsnc.net",
+        "phone": "916-551-2150",
+        "area": "Sacramento & Northern CA"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "State Bar of California - Certified Lawyer Referral Services",
+      "url": "https://www.calbar.ca.gov/Public/Need-Legal-Help/Lawyer-Referral-Service",
+      "phone": null
+    }
+  },
+  "Colorado": {
+    "portal": {
+      "name": "Colorado Legal Services",
+      "url": "https://www.coloradolegalservices.org"
+    },
+    "orgs": [
+      {
+        "name": "Colorado Legal Services",
+        "url": "https://www.coloradolegalservices.org",
+        "phone": "303-837-1313",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Colorado Bar Association - Find a Lawyer",
+      "url": "https://www.cobar.org/For-the-Public/Find-a-Lawyer",
+      "phone": null
+    }
+  },
+  "Connecticut": {
+    "portal": {
+      "name": "CTLawHelp.org",
+      "url": "https://ctlawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Statewide Legal Services of Connecticut",
+        "url": "https://slsct.org",
+        "phone": "1-800-453-3320",
+        "area": "Statewide intake"
+      },
+      {
+        "name": "Connecticut Legal Services",
+        "url": "https://ctlegal.org",
+        "phone": "860-344-0447",
+        "area": "Statewide (outside Hartford/New Haven)"
+      },
+      {
+        "name": "Greater Hartford Legal Aid",
+        "url": "https://www.ghla.org",
+        "phone": null,
+        "area": "Greater Hartford"
+      },
+      {
+        "name": "New Haven Legal Assistance Association",
+        "url": "https://nhlegal.org",
+        "phone": "203-946-4811",
+        "area": "Greater New Haven"
+      }
+    ],
+    "tenant": {
+      "name": "Connecticut Right to Counsel (eviction)",
+      "url": "https://ctlawhelp.org/en/right-to-counsel",
+      "phone": "1-800-559-1565"
+    },
+    "referral": {
+      "name": "Connecticut Bar Association Lawyer Referral Service",
+      "url": "https://www.ctbar.org/public/find-a-lawyer-ct",
+      "phone": null
+    }
+  },
+  "Delaware": {
+    "portal": {
+      "name": "DELegalHelpLink.org",
+      "url": "https://delegalhelplink.org"
+    },
+    "orgs": [
+      {
+        "name": "Community Legal Aid Society, Inc.",
+        "url": "https://www.declasi.org",
+        "phone": null,
+        "area": "Statewide"
+      },
+      {
+        "name": "Legal Services Corporation of Delaware",
+        "url": "https://www.lscd.com",
+        "phone": null,
+        "area": "Statewide"
+      },
+      {
+        "name": "Delaware Volunteer Legal Services",
+        "url": "https://www.dvls.org",
+        "phone": null,
+        "area": "Statewide (pro bono)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Delaware State Bar Association Lawyer Referral Service",
+      "url": "https://www.dsba.org/members-area/lawyer-referral/",
+      "phone": null
+    }
+  },
+  "District of Columbia": {
+    "portal": {
+      "name": "LawHelp.org/DC",
+      "url": "https://www.lawhelp.org/dc"
+    },
+    "orgs": [
+      {
+        "name": "Neighborhood Legal Services Program",
+        "url": "https://www.nlsp.org",
+        "phone": "202-832-6577",
+        "area": "District-wide"
+      },
+      {
+        "name": "Legal Aid DC",
+        "url": "https://www.legalaiddc.org",
+        "phone": "202-628-1161",
+        "area": "District-wide"
+      },
+      {
+        "name": "Bread for the City Legal Clinic",
+        "url": "https://breadforthecity.org/legal/",
+        "phone": null,
+        "area": "District-wide"
+      }
+    ],
+    "tenant": {
+      "name": "DC Office of the Tenant Advocate",
+      "url": "https://ota.dc.gov",
+      "phone": "202-719-6560"
+    },
+    "referral": {
+      "name": "DC Bar Pro Bono Center Advice & Referral Clinic",
+      "url": "https://www.dcbar.org/pro-bono/what-we-do/advice-referral-clinic",
+      "phone": null
+    }
+  },
+  "Florida": {
+    "portal": {
+      "name": "FloridaLawHelp.org",
+      "url": "https://www.floridalawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Services of Greater Miami",
+        "url": "https://www.legalservicesmiami.org",
+        "phone": "305-576-0080",
+        "area": "Miami-Dade & Monroe"
+      },
+      {
+        "name": "Bay Area Legal Services",
+        "url": "https://bals.org",
+        "phone": "1-800-625-2257",
+        "area": "Tampa Bay area"
+      },
+      {
+        "name": "Community Legal Services (Mid-Florida)",
+        "url": "https://www.legalaccessforall.org",
+        "phone": "1-800-405-1417",
+        "area": "Central FL"
+      },
+      {
+        "name": "Legal Services of North Florida",
+        "url": "https://lsnf.org",
+        "phone": null,
+        "area": "North FL (Tallahassee/Panhandle)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "The Florida Bar Lawyer Referral Service",
+      "url": "https://www.floridabar.org/public/lrs/",
+      "phone": "1-800-342-8011"
+    }
+  },
+  "Georgia": {
+    "portal": {
+      "name": "GeorgiaLegalAid.org",
+      "url": "https://www.georgialegalaid.org"
+    },
+    "orgs": [
+      {
+        "name": "Atlanta Legal Aid Society",
+        "url": "https://atlantalegalaid.org",
+        "phone": "404-524-5811",
+        "area": "Metro Atlanta (5 counties)"
+      },
+      {
+        "name": "Georgia Legal Services Program",
+        "url": "https://glsp.org",
+        "phone": "1-833-457-7529",
+        "area": "Outside metro Atlanta (154 counties)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Atlanta Bar Association Lawyer Referral & Information Service",
+      "url": "https://atlantabar.org/?pg=lrishome",
+      "phone": "404-521-0777"
+    }
+  },
+  "Hawaii": {
+    "portal": {
+      "name": "Legal Aid Society of Hawaii",
+      "url": "https://www.legalaidhawaii.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Aid Society of Hawaii",
+        "url": "https://www.legalaidhawaii.org",
+        "phone": "808-536-4302",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Hawaii State Bar Association Lawyer Referral & Information Service",
+      "url": "https://hsba.org",
+      "phone": "808-537-9140"
+    }
+  },
+  "Idaho": {
+    "portal": {
+      "name": "Idaho Legal Aid Services",
+      "url": "https://www.idaholegalaid.org"
+    },
+    "orgs": [
+      {
+        "name": "Idaho Legal Aid Services",
+        "url": "https://www.idaholegalaid.org",
+        "phone": null,
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Idaho State Bar Lawyer Referral Service",
+      "url": "https://isb.idaho.gov/lawyer-referral-service/",
+      "phone": "208-334-4500"
+    }
+  },
+  "Illinois": {
+    "portal": {
+      "name": "IllinoisLegalAid.org",
+      "url": "https://www.illinoislegalaid.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Aid Chicago",
+        "url": "https://www.legalaidchicago.org",
+        "phone": "312-341-1070",
+        "area": "Cook County"
+      },
+      {
+        "name": "Prairie State Legal Services",
+        "url": "https://pslegal.org",
+        "phone": "815-965-2134",
+        "area": "Northern & Central IL (outside Cook)"
+      },
+      {
+        "name": "Land of Lincoln Legal Aid",
+        "url": "https://lincolnlegal.org",
+        "phone": "1-877-342-7891",
+        "area": "Central & Southern IL"
+      }
+    ],
+    "tenant": {
+      "name": "Metropolitan Tenants Organization (Chicago)",
+      "url": "https://www.tenants-rights.org",
+      "phone": null
+    },
+    "referral": {
+      "name": "Illinois State Bar Association - Illinois Lawyer Finder",
+      "url": "https://www.isba.org/public/illinoislawyerfinder",
+      "phone": null
+    }
+  },
+  "Indiana": {
+    "portal": {
+      "name": "IndianaLegalHelp.org",
+      "url": "https://indianalegalhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Indiana Legal Services",
+        "url": "https://www.indianalegalservices.org",
+        "phone": "1-844-243-8570",
+        "area": "Statewide"
+      },
+      {
+        "name": "Indiana Legal Help (Coalition for Court Access)",
+        "url": "https://indianalegalhelp.org",
+        "phone": null,
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Indianapolis Bar Association Lawyer Referral Service",
+      "url": "https://www.indybar.org",
+      "phone": "317-269-2222"
+    }
+  },
+  "Iowa": {
+    "portal": {
+      "name": "IowaLegalAid.org",
+      "url": "https://www.iowalegalaid.org"
+    },
+    "orgs": [
+      {
+        "name": "Iowa Legal Aid",
+        "url": "https://www.iowalegalaid.org",
+        "phone": "1-800-532-1275",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Iowa State Bar Association - Find a Lawyer",
+      "url": "https://www.iowabar.org/?pg=Find-A-LawyerHP",
+      "phone": null
+    }
+  },
+  "Kansas": {
+    "portal": {
+      "name": "Kansas Legal Services",
+      "url": "https://www.kansaslegalservices.org"
+    },
+    "orgs": [
+      {
+        "name": "Kansas Legal Services",
+        "url": "https://www.kansaslegalservices.org",
+        "phone": "316-267-3975",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Kansas Bar Association Lawyer Referral Service",
+      "url": "https://ksbar.org/?pg=clientreferrals",
+      "phone": null
+    }
+  },
+  "Kentucky": {
+    "portal": {
+      "name": "KYJustice.org",
+      "url": "https://www.kyjustice.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Aid Society",
+        "url": "https://yourlegalaid.org",
+        "phone": "502-584-1254",
+        "area": "Louisville & 15 counties"
+      },
+      {
+        "name": "Legal Aid of the Bluegrass",
+        "url": "https://lablaw.org",
+        "phone": "859-431-8200",
+        "area": "Central & Northern KY"
+      },
+      {
+        "name": "Kentucky Legal Aid",
+        "url": "https://klaid.org",
+        "phone": "1-800-782-1924",
+        "area": "Western KY"
+      },
+      {
+        "name": "Appalachian Research and Defense Fund (AppalReD)",
+        "url": "https://www.ardfky.org",
+        "phone": "1-866-277-5733",
+        "area": "Eastern KY"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Louisville Bar Association Lawyer Referral Service",
+      "url": "https://www.loubar.org/need-a-lawyer/",
+      "phone": "502-583-1801"
+    }
+  },
+  "Louisiana": {
+    "portal": {
+      "name": "LouisianaLawHelp.org",
+      "url": "https://louisianalawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Southeast Louisiana Legal Services",
+        "url": "https://slls.org",
+        "phone": null,
+        "area": "Southeast LA (New Orleans/Baton Rouge)"
+      },
+      {
+        "name": "Acadiana Legal Service Corporation",
+        "url": "https://la-law.org",
+        "phone": "1-866-275-2572",
+        "area": "Western & Northern LA"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Louisiana State Bar Association - Find Legal Help",
+      "url": "https://www.lsba.org/Public/LawyerReferral.aspx",
+      "phone": null
+    }
+  },
+  "Maine": {
+    "portal": {
+      "name": "Pine Tree Legal Assistance (ptla.org)",
+      "url": "https://www.ptla.org"
+    },
+    "orgs": [
+      {
+        "name": "Pine Tree Legal Assistance",
+        "url": "https://www.ptla.org",
+        "phone": "207-942-8322",
+        "area": "Statewide"
+      },
+      {
+        "name": "Maine Volunteer Lawyers Project",
+        "url": "https://vlp.org",
+        "phone": null,
+        "area": "Statewide (pro bono)"
+      },
+      {
+        "name": "Legal Services for Maine Elders",
+        "url": "https://mainelse.org",
+        "phone": "1-800-750-5353",
+        "area": "Statewide (age 60+)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Maine State Bar Association Lawyer Referral Service",
+      "url": "https://www.mainebar.org/page/LRS",
+      "phone": null
+    }
+  },
+  "Maryland": {
+    "portal": {
+      "name": "The People's Law Library of Maryland",
+      "url": "https://www.peoples-law.org"
+    },
+    "orgs": [
+      {
+        "name": "Maryland Legal Aid",
+        "url": "https://www.mdlab.org",
+        "phone": "1-888-465-2468",
+        "area": "Statewide"
+      },
+      {
+        "name": "Maryland Volunteer Lawyers Service",
+        "url": "https://mvlslaw.org",
+        "phone": "410-547-6537",
+        "area": "Statewide (pro bono)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Maryland State Bar Association - Find a Lawyer",
+      "url": "https://www.msba.org",
+      "phone": null
+    }
+  },
+  "Massachusetts": {
+    "portal": {
+      "name": "MassLegalHelp.org",
+      "url": "https://www.masslegalhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Greater Boston Legal Services",
+        "url": "https://www.gbls.org",
+        "phone": "617-371-1234",
+        "area": "Greater Boston"
+      },
+      {
+        "name": "Community Legal Aid",
+        "url": "https://communitylegal.org",
+        "phone": null,
+        "area": "Central & Western MA"
+      },
+      {
+        "name": "Northeast Legal Aid",
+        "url": "https://www.northeastlegalaid.org",
+        "phone": "978-458-1465",
+        "area": "Northeastern MA"
+      },
+      {
+        "name": "South Coastal Counties Legal Services",
+        "url": "https://www.sccls.org",
+        "phone": "1-800-244-9023",
+        "area": "Southeastern MA & Cape/Islands"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Massachusetts Bar Association Lawyer Referral Service",
+      "url": "https://www.masslawhelp.com",
+      "phone": "617-654-0400"
+    }
+  },
+  "Michigan": {
+    "portal": {
+      "name": "MichiganLegalHelp.org",
+      "url": "https://michiganlegalhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Lakeshore Legal Aid (Counsel & Advocacy Law Line)",
+        "url": "https://lakeshorelegalaid.org",
+        "phone": "1-888-783-8190",
+        "area": "Statewide hotline; SE Michigan offices"
+      },
+      {
+        "name": "Legal Aid of Western Michigan",
+        "url": "https://lawestmi.org",
+        "phone": null,
+        "area": "Western MI"
+      },
+      {
+        "name": "Legal Services of Eastern Michigan",
+        "url": "https://lsem-mi.org",
+        "phone": "1-800-322-4512",
+        "area": "Mid & Eastern MI (Flint/Saginaw)"
+      },
+      {
+        "name": "Michigan Advocacy Program (Legal Services of South Central Michigan)",
+        "url": "https://lsscm.org",
+        "phone": null,
+        "area": "South Central MI"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "State Bar of Michigan Lawyer Referral Service",
+      "url": "https://lrs.michbar.org",
+      "phone": "1-800-968-0738"
+    }
+  },
+  "Minnesota": {
+    "portal": {
+      "name": "LawHelpMN.org",
+      "url": "https://www.lawhelpmn.org"
+    },
+    "orgs": [
+      {
+        "name": "Mid-Minnesota Legal Aid",
+        "url": "https://mylegalaid.org",
+        "phone": "1-877-696-6529",
+        "area": "Minneapolis & Central MN"
+      },
+      {
+        "name": "Southern Minnesota Regional Legal Services",
+        "url": "https://www.smrls.org",
+        "phone": "1-877-696-6529",
+        "area": "St. Paul & Southern MN"
+      },
+      {
+        "name": "Central Minnesota Legal Services",
+        "url": "https://www.centralmnlegal.org",
+        "phone": "612-332-8151",
+        "area": "Central MN"
+      },
+      {
+        "name": "Justice North",
+        "url": "https://justicenorth.org",
+        "phone": "1-877-696-6529",
+        "area": "Northern MN"
+      }
+    ],
+    "tenant": {
+      "name": "HOME Line (statewide tenant hotline)",
+      "url": "https://homelinemn.org",
+      "phone": "612-728-5767"
+    },
+    "referral": {
+      "name": "Minnesota State Bar Association - MN Find a Lawyer",
+      "url": "https://www.mnfindalawyer.com",
+      "phone": null
+    }
+  },
+  "Mississippi": {
+    "portal": {
+      "name": "MSLegalServices.org",
+      "url": "https://www.mslegalservices.org"
+    },
+    "orgs": [
+      {
+        "name": "Mississippi Center for Legal Services",
+        "url": "https://mscenterforlegalservices.org",
+        "phone": "1-800-773-1737",
+        "area": "Southern MS"
+      },
+      {
+        "name": "North Mississippi Rural Legal Services",
+        "url": "https://www.nmrls.com",
+        "phone": "1-800-898-8731",
+        "area": "Northern MS"
+      },
+      {
+        "name": "Mississippi Volunteer Lawyers Project",
+        "url": "https://www.mvlp.net",
+        "phone": null,
+        "area": "Statewide (pro bono)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "The Mississippi Bar Lawyer Referral Service",
+      "url": "https://www.msbar.org/for-the-public/",
+      "phone": null
+    }
+  },
+  "Missouri": {
+    "portal": {
+      "name": "LawHelpMO.org",
+      "url": "https://www.lawhelpmo.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Services of Eastern Missouri",
+        "url": "https://lsem.org",
+        "phone": "314-534-4200",
+        "area": "St. Louis & Eastern MO"
+      },
+      {
+        "name": "Legal Aid of Western Missouri",
+        "url": "https://lawmo.org",
+        "phone": "816-474-6750",
+        "area": "Kansas City & Western MO"
+      },
+      {
+        "name": "Legal Services of Southern Missouri",
+        "url": "https://lsosm.org",
+        "phone": "1-800-444-4863",
+        "area": "Southern MO"
+      },
+      {
+        "name": "Mid-Missouri Legal Services",
+        "url": "https://www.mmls.org",
+        "phone": "573-442-0116",
+        "area": "Mid-Missouri (Columbia)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "The Missouri Bar Lawyer Referral Service",
+      "url": "https://mobar.org",
+      "phone": null
+    }
+  },
+  "Montana": {
+    "portal": {
+      "name": "MontanaLawHelp.org",
+      "url": "https://montanalawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Montana Legal Services Association",
+        "url": "https://www.mtlsa.org",
+        "phone": "1-800-666-6899",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "State Bar of Montana Lawyer Referral & Information Service",
+      "url": "https://www.montanabar.org/For-the-Public/Find-a-Lawyer",
+      "phone": null
+    }
+  },
+  "Nebraska": {
+    "portal": {
+      "name": "Legal Aid of Nebraska",
+      "url": "https://www.legalaidofnebraska.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Aid of Nebraska",
+        "url": "https://www.legalaidofnebraska.org",
+        "phone": "1-877-250-2016",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Nebraska State Bar Association - Find a Lawyer",
+      "url": "https://www.nefindalawyer.com",
+      "phone": null
+    }
+  },
+  "Nevada": {
+    "portal": {
+      "name": "NevadaLawHelp.org",
+      "url": "https://www.nevadalawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Nevada Legal Services",
+        "url": "https://nlslaw.net",
+        "phone": null,
+        "area": "Statewide"
+      },
+      {
+        "name": "Legal Aid Center of Southern Nevada",
+        "url": "https://www.lacsn.org",
+        "phone": "702-386-1070",
+        "area": "Clark County (Las Vegas)"
+      },
+      {
+        "name": "Washoe Legal Services",
+        "url": "https://washoelegalservices.org",
+        "phone": null,
+        "area": "Washoe County (Reno)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "State Bar of Nevada Lawyer Referral & Information Service",
+      "url": "https://nvbar.org/for-the-public/find-a-lawyer/",
+      "phone": null
+    }
+  },
+  "New Hampshire": {
+    "portal": {
+      "name": "NHLegalAid.org",
+      "url": "https://www.nhlegalaid.org"
+    },
+    "orgs": [
+      {
+        "name": "603 Legal Aid",
+        "url": "https://www.603legalaid.org",
+        "phone": "1-800-639-5290",
+        "area": "Statewide intake"
+      },
+      {
+        "name": "New Hampshire Legal Assistance",
+        "url": "https://nhla.org",
+        "phone": "1-800-562-3174",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "New Hampshire Bar Association Lawyer Referral Service",
+      "url": "https://www.nhbar.org/lawyer-referral-service/",
+      "phone": "603-229-0002"
+    }
+  },
+  "New Jersey": {
+    "portal": {
+      "name": "LSNJLAW (Legal Services of New Jersey)",
+      "url": "https://www.lsnjlaw.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Services of New Jersey (statewide hotline)",
+        "url": "https://www.lsnj.org",
+        "phone": "1-888-576-5529",
+        "area": "Statewide"
+      },
+      {
+        "name": "Northeast New Jersey Legal Services",
+        "url": "https://www.nnjls.org",
+        "phone": null,
+        "area": "Bergen, Hudson, Passaic"
+      },
+      {
+        "name": "Central Jersey Legal Services",
+        "url": "https://www.lsnj.org/cjls",
+        "phone": null,
+        "area": "Mercer, Middlesex, Union"
+      },
+      {
+        "name": "South Jersey Legal Services",
+        "url": "https://www.lsnj.org/sjls",
+        "phone": null,
+        "area": "Southern NJ"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "New Jersey State Bar Association - County Lawyer Referral Services",
+      "url": "https://njsba.com",
+      "phone": null
+    }
+  },
+  "New Mexico": {
+    "portal": {
+      "name": "LawHelpNewMexico.org",
+      "url": "https://lawhelpnewmexico.org"
+    },
+    "orgs": [
+      {
+        "name": "New Mexico Legal Aid",
+        "url": "https://www.newmexicolegalaid.org",
+        "phone": "1-833-545-4357",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "State Bar of New Mexico Lawyer Referral",
+      "url": "https://www.sbnm.org/For-Public/I-Need-a-Lawyer",
+      "phone": null
+    }
+  },
+  "New York": {
+    "portal": {
+      "name": "LawHelpNY.org",
+      "url": "https://www.lawhelpny.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Services NYC",
+        "url": "https://www.legalservicesnyc.org",
+        "phone": "917-661-4500",
+        "area": "New York City"
+      },
+      {
+        "name": "The Legal Aid Society",
+        "url": "https://legalaidnyc.org",
+        "phone": "212-577-3300",
+        "area": "New York City"
+      },
+      {
+        "name": "Legal Assistance of Western New York (LawNY)",
+        "url": "https://www.lawny.org",
+        "phone": "1-866-781-5235",
+        "area": "Western & Central NY"
+      },
+      {
+        "name": "Legal Aid Society of Northeastern New York",
+        "url": "https://lasnny.org",
+        "phone": "1-833-628-0087",
+        "area": "Capital Region & North Country"
+      }
+    ],
+    "tenant": {
+      "name": "NYC Tenant Helpline / Right to Counsel (call 311)",
+      "url": "https://www.nyc.gov/site/hra/help/legal-services-for-tenants.page",
+      "phone": "311"
+    },
+    "referral": {
+      "name": "New York State Bar Association Lawyer Referral & Information Service",
+      "url": "https://nysba.org/new-york-state-bar-association-lawyer-referral-service/",
+      "phone": null
+    }
+  },
+  "North Carolina": {
+    "portal": {
+      "name": "Legal Aid of North Carolina",
+      "url": "https://www.legalaidnc.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Aid of North Carolina",
+        "url": "https://www.legalaidnc.org",
+        "phone": "1-866-219-5262",
+        "area": "Statewide"
+      },
+      {
+        "name": "Pisgah Legal Services",
+        "url": "https://www.pisgahlegal.org",
+        "phone": "1-800-489-6144",
+        "area": "Western NC (Asheville)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "North Carolina Bar Association Lawyer Referral Service",
+      "url": "https://www.ncbar.org/public-resources/lawyer-referral-service/",
+      "phone": "919-677-8574"
+    }
+  },
+  "North Dakota": {
+    "portal": {
+      "name": "Legal Services of North Dakota",
+      "url": "https://lsnd.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Services of North Dakota",
+        "url": "https://lsnd.org",
+        "phone": "1-800-634-5263",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "State Bar Association of North Dakota - Find a Lawyer",
+      "url": "https://www.sband.org/page/FindALawyer",
+      "phone": null
+    }
+  },
+  "Ohio": {
+    "portal": {
+      "name": "OhioLegalHelp.org",
+      "url": "https://www.ohiolegalhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "The Legal Aid Society of Cleveland",
+        "url": "https://lasclev.org",
+        "phone": "1-888-817-3777",
+        "area": "Northeast OH (Cleveland)"
+      },
+      {
+        "name": "Legal Aid Society of Greater Cincinnati",
+        "url": "https://www.lascinti.org",
+        "phone": "513-241-9400",
+        "area": "Southwest OH (Cincinnati)"
+      },
+      {
+        "name": "Community Legal Aid",
+        "url": "https://www.communitylegalaid.org",
+        "phone": "1-800-998-9454",
+        "area": "Northeast OH (Akron/Youngstown)"
+      },
+      {
+        "name": "Legal Aid of Western Ohio",
+        "url": "https://www.lawolaw.org",
+        "phone": "1-877-894-4599",
+        "area": "Western OH (Toledo/Dayton)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Ohio State Bar Association - Find a Lawyer",
+      "url": "https://www.ohiobar.org/public-resources/",
+      "phone": null
+    }
+  },
+  "Oklahoma": {
+    "portal": {
+      "name": "OKLaw.org",
+      "url": "https://oklaw.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Aid Services of Oklahoma",
+        "url": "https://legalaidok.org",
+        "phone": "1-888-534-5243",
+        "area": "Statewide"
+      },
+      {
+        "name": "Oklahoma Indian Legal Services",
+        "url": "https://www.oilsonline.org",
+        "phone": null,
+        "area": "Statewide (Native American clients)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Oklahoma Bar Association - Find a Lawyer",
+      "url": "https://www.okbar.org/findalawyer/",
+      "phone": null
+    }
+  },
+  "Oregon": {
+    "portal": {
+      "name": "OregonLawHelp.org",
+      "url": "https://oregonlawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Aid Services of Oregon",
+        "url": "https://lasoregon.org",
+        "phone": null,
+        "area": "Statewide (regional offices)"
+      },
+      {
+        "name": "Oregon Law Center",
+        "url": "https://oregonlawcenter.org",
+        "phone": null,
+        "area": "Statewide (regional offices)"
+      }
+    ],
+    "tenant": {
+      "name": "Community Alliance of Tenants",
+      "url": "https://oregoncat.org",
+      "phone": "503-288-0130"
+    },
+    "referral": {
+      "name": "Oregon State Bar Lawyer Referral Service",
+      "url": "https://www.osbar.org/public/ris/",
+      "phone": "503-684-3763"
+    }
+  },
+  "Pennsylvania": {
+    "portal": {
+      "name": "PALawHelp.org",
+      "url": "https://www.palawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Community Legal Services of Philadelphia",
+        "url": "https://clsphila.org",
+        "phone": "215-981-3700",
+        "area": "Philadelphia"
+      },
+      {
+        "name": "Neighborhood Legal Services",
+        "url": "https://www.nlsa.us",
+        "phone": "1-866-761-6572",
+        "area": "Western PA (Pittsburgh)"
+      },
+      {
+        "name": "MidPenn Legal Services",
+        "url": "https://www.midpenn.org",
+        "phone": "1-800-326-9177",
+        "area": "Central PA (Harrisburg)"
+      },
+      {
+        "name": "North Penn Legal Services",
+        "url": "https://www.northpennlegal.org",
+        "phone": "1-877-953-4250",
+        "area": "Northeastern PA (Wilkes-Barre/Scranton/Lehigh Valley)"
+      }
+    ],
+    "tenant": {
+      "name": "Philadelphia Tenant Hotline / Right to Counsel",
+      "url": "https://www.phila.gov/services/property-lots-housing/get-free-legal-help-to-avoid-eviction/",
+      "phone": "267-443-2500"
+    },
+    "referral": {
+      "name": "Pennsylvania Bar Association Lawyer Referral Service",
+      "url": "https://www.pabar.org/PBA/Public-Resources/Find-a-Lawyer.aspx",
+      "phone": "1-800-932-0311"
+    }
+  },
+  "Puerto Rico": {
+    "portal": {
+      "name": "Ayuda Legal Puerto Rico",
+      "url": "https://ayudalegalpr.org"
+    },
+    "orgs": [
+      {
+        "name": "Servicios Legales de Puerto Rico (Puerto Rico Legal Services)",
+        "url": "https://www.servicioslegales.org",
+        "phone": null,
+        "area": "Island-wide"
+      },
+      {
+        "name": "Ayuda Legal Puerto Rico",
+        "url": "https://ayudalegalpr.org",
+        "phone": null,
+        "area": "Island-wide (online info)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Colegio de Abogados y Abogadas de Puerto Rico",
+      "url": "https://www.capr.org",
+      "phone": null
+    }
+  },
+  "Rhode Island": {
+    "portal": {
+      "name": "HelpRILaw.org",
+      "url": "https://www.helprilaw.org"
+    },
+    "orgs": [
+      {
+        "name": "Rhode Island Legal Services",
+        "url": "https://rils.org",
+        "phone": "401-274-2652",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Rhode Island Bar Association Lawyer Referral Service",
+      "url": "https://www.ribar.com/for-the-public/lawyer-referral-service/",
+      "phone": null
+    }
+  },
+  "South Carolina": {
+    "portal": {
+      "name": "SCJustice.org",
+      "url": "https://www.scjustice.org"
+    },
+    "orgs": [
+      {
+        "name": "South Carolina Legal Services",
+        "url": "https://sclegal.org",
+        "phone": "1-888-346-5592",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "South Carolina Bar Lawyer Referral Service",
+      "url": "https://www.scbar.org/public/get-legal-help/find-lawyer-or-mediator/",
+      "phone": "803-799-7100"
+    }
+  },
+  "South Dakota": {
+    "portal": {
+      "name": "SDLawHelp.org",
+      "url": "https://www.sdlawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "East River Legal Services",
+        "url": "https://erlservices.org",
+        "phone": "1-800-952-3015",
+        "area": "Eastern SD"
+      },
+      {
+        "name": "Dakota Plains Legal Services",
+        "url": "https://www.dpls.org",
+        "phone": null,
+        "area": "Western SD & reservations"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "State Bar of South Dakota - Find a Lawyer",
+      "url": "https://www.statebarofsouthdakota.com/page/public",
+      "phone": null
+    }
+  },
+  "Tennessee": {
+    "portal": {
+      "name": "Help4TN.org",
+      "url": "https://help4tn.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Aid Society of Middle Tennessee and the Cumberlands",
+        "url": "https://las.org",
+        "phone": "1-800-238-1443",
+        "area": "Middle TN (Nashville)"
+      },
+      {
+        "name": "Legal Aid of East Tennessee",
+        "url": "https://www.laet.org",
+        "phone": null,
+        "area": "East TN (Knoxville/Chattanooga)"
+      },
+      {
+        "name": "West Tennessee Legal Services",
+        "url": "https://www.wtls.org",
+        "phone": "1-800-372-8346",
+        "area": "West TN"
+      },
+      {
+        "name": "Memphis Area Legal Services",
+        "url": "https://www.malsi.org",
+        "phone": "901-523-8822",
+        "area": "Memphis/Shelby County"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Help4TN Helpline (TN Alliance for Legal Services)",
+      "url": "https://help4tn.org",
+      "phone": "1-844-435-7486"
+    }
+  },
+  "Texas": {
+    "portal": {
+      "name": "TexasLawHelp.org",
+      "url": "https://texaslawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Texas RioGrande Legal Aid",
+        "url": "https://www.trla.org",
+        "phone": "1-833-329-8752",
+        "area": "South & West TX (San Antonio/Austin)"
+      },
+      {
+        "name": "Lone Star Legal Aid",
+        "url": "https://www.lonestarlegal.org",
+        "phone": "1-800-733-8394",
+        "area": "East & Gulf Coast TX (Houston)"
+      },
+      {
+        "name": "Legal Aid of NorthWest Texas",
+        "url": "https://internet.lanwt.org",
+        "phone": "1-888-529-5277",
+        "area": "North & West TX (Dallas/Fort Worth)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "State Bar of Texas Lawyer Referral Information Service",
+      "url": "https://www.texasbar.com/lris",
+      "phone": "1-800-252-9690"
+    }
+  },
+  "Utah": {
+    "portal": {
+      "name": "UtahLegalHelp.org",
+      "url": "https://www.utahlegalhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Utah Legal Services",
+        "url": "https://www.utahlegalservices.org",
+        "phone": "801-328-8891",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Utah State Bar - Licensed Lawyer Referral",
+      "url": "https://www.utahbar.org",
+      "phone": null
+    }
+  },
+  "Vermont": {
+    "portal": {
+      "name": "VTLawHelp.org",
+      "url": "https://vtlawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Services Vermont",
+        "url": "https://legalservicesvt.org",
+        "phone": "1-800-889-2047",
+        "area": "Statewide helpline"
+      },
+      {
+        "name": "Vermont Legal Aid",
+        "url": "https://www.vtlegalaid.org",
+        "phone": null,
+        "area": "Statewide"
+      }
+    ],
+    "tenant": {
+      "name": "Vermont Tenants (CVOEO tenant hotline)",
+      "url": "https://www.cvoeo.org/vermont-tenants",
+      "phone": "802-864-0099"
+    },
+    "referral": {
+      "name": "Vermont Bar Association Lawyer Referral Service",
+      "url": "https://www.vtbar.org/for-the-public/lawyer-referral-service/",
+      "phone": "802-223-2020"
+    }
+  },
+  "Virginia": {
+    "portal": {
+      "name": "VirginiaLawHelp.org (Virginia Legal Aid Society network)",
+      "url": "https://www.virginialawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Virginia legal aid statewide intake (866-LEGLAID)",
+        "url": "https://www.valegalaid.org",
+        "phone": "1-866-534-5243",
+        "area": "Statewide"
+      },
+      {
+        "name": "Legal Services of Northern Virginia",
+        "url": "https://www.lsnv.org",
+        "phone": "703-778-6800",
+        "area": "Northern VA"
+      },
+      {
+        "name": "Central Virginia Legal Aid Society",
+        "url": "https://cvlas.org",
+        "phone": "1-800-868-1012",
+        "area": "Richmond & Central VA"
+      },
+      {
+        "name": "Legal Aid Society of Eastern Virginia",
+        "url": "https://www.laseva.org",
+        "phone": "757-827-5078",
+        "area": "Hampton Roads & Eastern Shore"
+      }
+    ],
+    "tenant": {
+      "name": "Virginia Eviction Legal Helpline",
+      "url": "https://evictionhelpline.org",
+      "phone": null
+    },
+    "referral": {
+      "name": "Virginia State Bar Lawyer Referral Service",
+      "url": "https://vsb.org/Site/Legal-Help/VLRS.aspx",
+      "phone": "1-800-552-7977"
+    }
+  },
+  "Washington": {
+    "portal": {
+      "name": "WashingtonLawHelp.org",
+      "url": "https://www.washingtonlawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Northwest Justice Project (CLEAR hotline)",
+        "url": "https://nwjustice.org",
+        "phone": "1-888-201-1014",
+        "area": "Statewide (outside King County)"
+      },
+      {
+        "name": "King County Bar Association Neighborhood Legal Clinics",
+        "url": "https://www.kcba.org/For-the-Public/Free-Legal-Assistance",
+        "phone": null,
+        "area": "King County (Seattle)"
+      }
+    ],
+    "tenant": {
+      "name": "Washington Eviction Defense Screening Line (right to counsel)",
+      "url": "https://www.washingtonlawhelp.org",
+      "phone": "1-855-657-8387"
+    },
+    "referral": {
+      "name": "Washington State Bar Association - Find Legal Help",
+      "url": "https://www.wsba.org/for-the-public/find-legal-help",
+      "phone": null
+    }
+  },
+  "West Virginia": {
+    "portal": {
+      "name": "Legal Aid of West Virginia",
+      "url": "https://legalaidwv.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Aid of West Virginia",
+        "url": "https://legalaidwv.org",
+        "phone": "1-866-255-4370",
+        "area": "Statewide"
+      },
+      {
+        "name": "Mountain State Justice",
+        "url": "https://mountainstatejustice.org",
+        "phone": "1-800-319-7132",
+        "area": "Statewide (consumer & housing)"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "West Virginia Lawyer Referral Service (WV State Bar)",
+      "url": "https://www.wvlawyerreferral.org",
+      "phone": "304-553-7220"
+    }
+  },
+  "Wisconsin": {
+    "portal": {
+      "name": "WisLawHelp.org",
+      "url": "https://www.wislawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Action of Wisconsin",
+        "url": "https://legalaction.org",
+        "phone": "1-855-947-2529",
+        "area": "Southern & Western WI"
+      },
+      {
+        "name": "Wisconsin Judicare",
+        "url": "https://www.judicare.org",
+        "phone": "1-855-947-2529",
+        "area": "Northern WI"
+      },
+      {
+        "name": "Legal Aid Wisconsin",
+        "url": "https://lawisconsin.org",
+        "phone": null,
+        "area": "Milwaukee"
+      }
+    ],
+    "tenant": {
+      "name": "Tenant Resource Center",
+      "url": "https://www.tenantresourcecenter.org",
+      "phone": "608-257-0006"
+    },
+    "referral": {
+      "name": "State Bar of Wisconsin Lawyer Referral & Information Service",
+      "url": "https://www.wisbar.org/forpublic/ineedalawyer/pages/lris.aspx",
+      "phone": "1-800-362-9082"
+    }
+  },
+  "Wyoming": {
+    "portal": {
+      "name": "WyomingLawHelp.org",
+      "url": "https://www.wyominglawhelp.org"
+    },
+    "orgs": [
+      {
+        "name": "Legal Aid of Wyoming",
+        "url": "https://www.lawyoming.org",
+        "phone": "1-877-432-9955",
+        "area": "Statewide"
+      }
+    ],
+    "tenant": null,
+    "referral": {
+      "name": "Wyoming State Bar - Find a Lawyer",
+      "url": "https://www.wyomingbar.org/for-the-public/hire-a-lawyer/request-a-referral-online/",
+      "phone": null
+    }
+  },
+  "zip3": {
+    "100": "New York",
+    "101": "New York",
+    "102": "New York",
+    "103": "New York",
+    "104": "New York",
+    "105": "New York",
+    "106": "New York",
+    "107": "New York",
+    "108": "New York",
+    "109": "New York",
+    "110": "New York",
+    "111": "New York",
+    "112": "New York",
+    "113": "New York",
+    "114": "New York",
+    "115": "New York",
+    "116": "New York",
+    "117": "New York",
+    "118": "New York",
+    "119": "New York",
+    "120": "New York",
+    "121": "New York",
+    "122": "New York",
+    "123": "New York",
+    "124": "New York",
+    "125": "New York",
+    "126": "New York",
+    "127": "New York",
+    "128": "New York",
+    "129": "New York",
+    "130": "New York",
+    "131": "New York",
+    "132": "New York",
+    "133": "New York",
+    "134": "New York",
+    "135": "New York",
+    "136": "New York",
+    "137": "New York",
+    "138": "New York",
+    "139": "New York",
+    "140": "New York",
+    "141": "New York",
+    "142": "New York",
+    "143": "New York",
+    "144": "New York",
+    "145": "New York",
+    "146": "New York",
+    "147": "New York",
+    "148": "New York",
+    "149": "New York",
+    "150": "Pennsylvania",
+    "151": "Pennsylvania",
+    "152": "Pennsylvania",
+    "153": "Pennsylvania",
+    "154": "Pennsylvania",
+    "155": "Pennsylvania",
+    "156": "Pennsylvania",
+    "157": "Pennsylvania",
+    "158": "Pennsylvania",
+    "159": "Pennsylvania",
+    "160": "Pennsylvania",
+    "161": "Pennsylvania",
+    "162": "Pennsylvania",
+    "163": "Pennsylvania",
+    "164": "Pennsylvania",
+    "165": "Pennsylvania",
+    "166": "Pennsylvania",
+    "167": "Pennsylvania",
+    "168": "Pennsylvania",
+    "169": "Pennsylvania",
+    "170": "Pennsylvania",
+    "171": "Pennsylvania",
+    "172": "Pennsylvania",
+    "173": "Pennsylvania",
+    "174": "Pennsylvania",
+    "175": "Pennsylvania",
+    "176": "Pennsylvania",
+    "177": "Pennsylvania",
+    "178": "Pennsylvania",
+    "179": "Pennsylvania",
+    "180": "Pennsylvania",
+    "181": "Pennsylvania",
+    "182": "Pennsylvania",
+    "183": "Pennsylvania",
+    "184": "Pennsylvania",
+    "185": "Pennsylvania",
+    "186": "Pennsylvania",
+    "187": "Pennsylvania",
+    "188": "Pennsylvania",
+    "189": "Pennsylvania",
+    "190": "Pennsylvania",
+    "191": "Pennsylvania",
+    "192": "Pennsylvania",
+    "193": "Pennsylvania",
+    "194": "Pennsylvania",
+    "195": "Pennsylvania",
+    "196": "Pennsylvania",
+    "197": "Delaware",
+    "198": "Delaware",
+    "199": "Delaware",
+    "200": "District of Columbia",
+    "201": "Virginia",
+    "202": "District of Columbia",
+    "203": "District of Columbia",
+    "204": "District of Columbia",
+    "205": "District of Columbia",
+    "206": "Maryland",
+    "207": "Maryland",
+    "208": "Maryland",
+    "209": "Maryland",
+    "210": "Maryland",
+    "211": "Maryland",
+    "212": "Maryland",
+    "214": "Maryland",
+    "215": "Maryland",
+    "216": "Maryland",
+    "217": "Maryland",
+    "218": "Maryland",
+    "219": "Maryland",
+    "220": "Virginia",
+    "221": "Virginia",
+    "222": "Virginia",
+    "223": "Virginia",
+    "224": "Virginia",
+    "225": "Virginia",
+    "226": "Virginia",
+    "227": "Virginia",
+    "228": "Virginia",
+    "229": "Virginia",
+    "230": "Virginia",
+    "231": "Virginia",
+    "232": "Virginia",
+    "233": "Virginia",
+    "234": "Virginia",
+    "235": "Virginia",
+    "236": "Virginia",
+    "237": "Virginia",
+    "238": "Virginia",
+    "239": "Virginia",
+    "240": "Virginia",
+    "241": "Virginia",
+    "242": "Virginia",
+    "243": "Virginia",
+    "244": "Virginia",
+    "245": "Virginia",
+    "246": "Virginia",
+    "247": "West Virginia",
+    "248": "West Virginia",
+    "249": "West Virginia",
+    "250": "West Virginia",
+    "251": "West Virginia",
+    "252": "West Virginia",
+    "253": "West Virginia",
+    "254": "West Virginia",
+    "255": "West Virginia",
+    "256": "West Virginia",
+    "257": "West Virginia",
+    "258": "West Virginia",
+    "259": "West Virginia",
+    "260": "West Virginia",
+    "261": "West Virginia",
+    "262": "West Virginia",
+    "263": "West Virginia",
+    "264": "West Virginia",
+    "265": "West Virginia",
+    "266": "West Virginia",
+    "267": "West Virginia",
+    "268": "West Virginia",
+    "270": "North Carolina",
+    "271": "North Carolina",
+    "272": "North Carolina",
+    "273": "North Carolina",
+    "274": "North Carolina",
+    "275": "North Carolina",
+    "276": "North Carolina",
+    "277": "North Carolina",
+    "278": "North Carolina",
+    "279": "North Carolina",
+    "280": "North Carolina",
+    "281": "North Carolina",
+    "282": "North Carolina",
+    "283": "North Carolina",
+    "284": "North Carolina",
+    "285": "North Carolina",
+    "286": "North Carolina",
+    "287": "North Carolina",
+    "288": "North Carolina",
+    "289": "North Carolina",
+    "290": "South Carolina",
+    "291": "South Carolina",
+    "292": "South Carolina",
+    "293": "South Carolina",
+    "294": "South Carolina",
+    "295": "South Carolina",
+    "296": "South Carolina",
+    "297": "South Carolina",
+    "298": "South Carolina",
+    "299": "South Carolina",
+    "300": "Georgia",
+    "301": "Georgia",
+    "302": "Georgia",
+    "303": "Georgia",
+    "304": "Georgia",
+    "305": "Georgia",
+    "306": "Georgia",
+    "307": "Georgia",
+    "308": "Georgia",
+    "309": "Georgia",
+    "310": "Georgia",
+    "311": "Georgia",
+    "312": "Georgia",
+    "313": "Georgia",
+    "314": "Georgia",
+    "315": "Georgia",
+    "316": "Georgia",
+    "317": "Georgia",
+    "318": "Georgia",
+    "319": "Georgia",
+    "320": "Florida",
+    "321": "Florida",
+    "322": "Florida",
+    "323": "Florida",
+    "324": "Florida",
+    "325": "Florida",
+    "326": "Florida",
+    "327": "Florida",
+    "328": "Florida",
+    "329": "Florida",
+    "330": "Florida",
+    "331": "Florida",
+    "332": "Florida",
+    "333": "Florida",
+    "334": "Florida",
+    "335": "Florida",
+    "336": "Florida",
+    "337": "Florida",
+    "338": "Florida",
+    "339": "Florida",
+    "341": "Florida",
+    "342": "Florida",
+    "344": "Florida",
+    "346": "Florida",
+    "347": "Florida",
+    "349": "Florida",
+    "350": "Alabama",
+    "351": "Alabama",
+    "352": "Alabama",
+    "354": "Alabama",
+    "355": "Alabama",
+    "356": "Alabama",
+    "357": "Alabama",
+    "358": "Alabama",
+    "359": "Alabama",
+    "360": "Alabama",
+    "361": "Alabama",
+    "362": "Alabama",
+    "363": "Alabama",
+    "364": "Alabama",
+    "365": "Alabama",
+    "366": "Alabama",
+    "367": "Alabama",
+    "368": "Alabama",
+    "369": "Alabama",
+    "370": "Tennessee",
+    "371": "Tennessee",
+    "372": "Tennessee",
+    "373": "Tennessee",
+    "374": "Tennessee",
+    "375": "Tennessee",
+    "376": "Tennessee",
+    "377": "Tennessee",
+    "378": "Tennessee",
+    "379": "Tennessee",
+    "380": "Tennessee",
+    "381": "Tennessee",
+    "382": "Tennessee",
+    "383": "Tennessee",
+    "384": "Tennessee",
+    "385": "Tennessee",
+    "386": "Mississippi",
+    "387": "Mississippi",
+    "388": "Mississippi",
+    "389": "Mississippi",
+    "390": "Mississippi",
+    "391": "Mississippi",
+    "392": "Mississippi",
+    "393": "Mississippi",
+    "394": "Mississippi",
+    "395": "Mississippi",
+    "396": "Mississippi",
+    "397": "Mississippi",
+    "398": "Georgia",
+    "399": "Georgia",
+    "400": "Kentucky",
+    "401": "Kentucky",
+    "402": "Kentucky",
+    "403": "Kentucky",
+    "404": "Kentucky",
+    "405": "Kentucky",
+    "406": "Kentucky",
+    "407": "Kentucky",
+    "408": "Kentucky",
+    "409": "Kentucky",
+    "410": "Kentucky",
+    "411": "Kentucky",
+    "412": "Kentucky",
+    "413": "Kentucky",
+    "414": "Kentucky",
+    "415": "Kentucky",
+    "416": "Kentucky",
+    "417": "Kentucky",
+    "418": "Kentucky",
+    "420": "Kentucky",
+    "421": "Kentucky",
+    "422": "Kentucky",
+    "423": "Kentucky",
+    "424": "Kentucky",
+    "425": "Kentucky",
+    "426": "Kentucky",
+    "427": "Kentucky",
+    "430": "Ohio",
+    "431": "Ohio",
+    "432": "Ohio",
+    "433": "Ohio",
+    "434": "Ohio",
+    "435": "Ohio",
+    "436": "Ohio",
+    "437": "Ohio",
+    "438": "Ohio",
+    "439": "Ohio",
+    "440": "Ohio",
+    "441": "Ohio",
+    "442": "Ohio",
+    "443": "Ohio",
+    "444": "Ohio",
+    "445": "Ohio",
+    "446": "Ohio",
+    "447": "Ohio",
+    "448": "Ohio",
+    "449": "Ohio",
+    "450": "Ohio",
+    "451": "Ohio",
+    "452": "Ohio",
+    "453": "Ohio",
+    "454": "Ohio",
+    "455": "Ohio",
+    "456": "Ohio",
+    "457": "Ohio",
+    "458": "Ohio",
+    "460": "Indiana",
+    "461": "Indiana",
+    "462": "Indiana",
+    "463": "Indiana",
+    "464": "Indiana",
+    "465": "Indiana",
+    "466": "Indiana",
+    "467": "Indiana",
+    "468": "Indiana",
+    "469": "Indiana",
+    "470": "Indiana",
+    "471": "Indiana",
+    "472": "Indiana",
+    "473": "Indiana",
+    "474": "Indiana",
+    "475": "Indiana",
+    "476": "Indiana",
+    "477": "Indiana",
+    "478": "Indiana",
+    "479": "Indiana",
+    "480": "Michigan",
+    "481": "Michigan",
+    "482": "Michigan",
+    "483": "Michigan",
+    "484": "Michigan",
+    "485": "Michigan",
+    "486": "Michigan",
+    "487": "Michigan",
+    "488": "Michigan",
+    "489": "Michigan",
+    "490": "Michigan",
+    "491": "Michigan",
+    "492": "Michigan",
+    "493": "Michigan",
+    "494": "Michigan",
+    "495": "Michigan",
+    "496": "Michigan",
+    "497": "Michigan",
+    "498": "Michigan",
+    "499": "Michigan",
+    "500": "Iowa",
+    "501": "Iowa",
+    "502": "Iowa",
+    "503": "Iowa",
+    "504": "Iowa",
+    "505": "Iowa",
+    "506": "Iowa",
+    "507": "Iowa",
+    "508": "Iowa",
+    "510": "Iowa",
+    "511": "Iowa",
+    "512": "Iowa",
+    "513": "Iowa",
+    "514": "Iowa",
+    "515": "Iowa",
+    "516": "Iowa",
+    "520": "Iowa",
+    "521": "Iowa",
+    "522": "Iowa",
+    "523": "Iowa",
+    "524": "Iowa",
+    "525": "Iowa",
+    "526": "Iowa",
+    "527": "Iowa",
+    "528": "Iowa",
+    "530": "Wisconsin",
+    "531": "Wisconsin",
+    "532": "Wisconsin",
+    "534": "Wisconsin",
+    "535": "Wisconsin",
+    "537": "Wisconsin",
+    "538": "Wisconsin",
+    "539": "Wisconsin",
+    "540": "Wisconsin",
+    "541": "Wisconsin",
+    "542": "Wisconsin",
+    "543": "Wisconsin",
+    "544": "Wisconsin",
+    "545": "Wisconsin",
+    "546": "Wisconsin",
+    "547": "Wisconsin",
+    "548": "Wisconsin",
+    "549": "Wisconsin",
+    "550": "Minnesota",
+    "551": "Minnesota",
+    "553": "Minnesota",
+    "554": "Minnesota",
+    "555": "Minnesota",
+    "556": "Minnesota",
+    "557": "Minnesota",
+    "558": "Minnesota",
+    "559": "Minnesota",
+    "560": "Minnesota",
+    "561": "Minnesota",
+    "562": "Minnesota",
+    "563": "Minnesota",
+    "564": "Minnesota",
+    "565": "Minnesota",
+    "566": "Minnesota",
+    "567": "Minnesota",
+    "569": "District of Columbia",
+    "570": "South Dakota",
+    "571": "South Dakota",
+    "572": "South Dakota",
+    "573": "South Dakota",
+    "574": "South Dakota",
+    "575": "South Dakota",
+    "576": "South Dakota",
+    "577": "South Dakota",
+    "580": "North Dakota",
+    "581": "North Dakota",
+    "582": "North Dakota",
+    "583": "North Dakota",
+    "584": "North Dakota",
+    "585": "North Dakota",
+    "586": "North Dakota",
+    "587": "North Dakota",
+    "588": "North Dakota",
+    "590": "Montana",
+    "591": "Montana",
+    "592": "Montana",
+    "593": "Montana",
+    "594": "Montana",
+    "595": "Montana",
+    "596": "Montana",
+    "597": "Montana",
+    "598": "Montana",
+    "599": "Montana",
+    "600": "Illinois",
+    "601": "Illinois",
+    "602": "Illinois",
+    "603": "Illinois",
+    "604": "Illinois",
+    "605": "Illinois",
+    "606": "Illinois",
+    "607": "Illinois",
+    "608": "Illinois",
+    "609": "Illinois",
+    "610": "Illinois",
+    "611": "Illinois",
+    "612": "Illinois",
+    "613": "Illinois",
+    "614": "Illinois",
+    "615": "Illinois",
+    "616": "Illinois",
+    "617": "Illinois",
+    "618": "Illinois",
+    "619": "Illinois",
+    "620": "Illinois",
+    "622": "Illinois",
+    "623": "Illinois",
+    "624": "Illinois",
+    "625": "Illinois",
+    "626": "Illinois",
+    "627": "Illinois",
+    "628": "Illinois",
+    "629": "Illinois",
+    "630": "Missouri",
+    "631": "Missouri",
+    "633": "Missouri",
+    "634": "Missouri",
+    "635": "Missouri",
+    "636": "Missouri",
+    "637": "Missouri",
+    "638": "Missouri",
+    "639": "Missouri",
+    "640": "Missouri",
+    "641": "Missouri",
+    "644": "Missouri",
+    "645": "Missouri",
+    "646": "Missouri",
+    "647": "Missouri",
+    "648": "Missouri",
+    "649": "Missouri",
+    "650": "Missouri",
+    "651": "Missouri",
+    "652": "Missouri",
+    "653": "Missouri",
+    "654": "Missouri",
+    "655": "Missouri",
+    "656": "Missouri",
+    "657": "Missouri",
+    "658": "Missouri",
+    "660": "Kansas",
+    "661": "Kansas",
+    "662": "Kansas",
+    "664": "Kansas",
+    "665": "Kansas",
+    "666": "Kansas",
+    "667": "Kansas",
+    "668": "Kansas",
+    "669": "Kansas",
+    "670": "Kansas",
+    "671": "Kansas",
+    "672": "Kansas",
+    "673": "Kansas",
+    "674": "Kansas",
+    "675": "Kansas",
+    "676": "Kansas",
+    "677": "Kansas",
+    "678": "Kansas",
+    "679": "Kansas",
+    "680": "Nebraska",
+    "681": "Nebraska",
+    "683": "Nebraska",
+    "684": "Nebraska",
+    "685": "Nebraska",
+    "686": "Nebraska",
+    "687": "Nebraska",
+    "688": "Nebraska",
+    "689": "Nebraska",
+    "690": "Nebraska",
+    "691": "Nebraska",
+    "692": "Nebraska",
+    "693": "Nebraska",
+    "700": "Louisiana",
+    "701": "Louisiana",
+    "702": "Louisiana",
+    "703": "Louisiana",
+    "704": "Louisiana",
+    "705": "Louisiana",
+    "706": "Louisiana",
+    "707": "Louisiana",
+    "708": "Louisiana",
+    "709": "Louisiana",
+    "710": "Louisiana",
+    "711": "Louisiana",
+    "712": "Louisiana",
+    "713": "Louisiana",
+    "714": "Louisiana",
+    "716": "Arkansas",
+    "717": "Arkansas",
+    "718": "Arkansas",
+    "719": "Arkansas",
+    "720": "Arkansas",
+    "721": "Arkansas",
+    "722": "Arkansas",
+    "723": "Arkansas",
+    "724": "Arkansas",
+    "725": "Arkansas",
+    "726": "Arkansas",
+    "727": "Arkansas",
+    "728": "Arkansas",
+    "729": "Arkansas",
+    "730": "Oklahoma",
+    "731": "Oklahoma",
+    "733": "Texas",
+    "734": "Oklahoma",
+    "735": "Oklahoma",
+    "736": "Oklahoma",
+    "737": "Oklahoma",
+    "738": "Oklahoma",
+    "739": "Oklahoma",
+    "740": "Oklahoma",
+    "741": "Oklahoma",
+    "743": "Oklahoma",
+    "744": "Oklahoma",
+    "745": "Oklahoma",
+    "746": "Oklahoma",
+    "747": "Oklahoma",
+    "748": "Oklahoma",
+    "749": "Oklahoma",
+    "750": "Texas",
+    "751": "Texas",
+    "752": "Texas",
+    "753": "Texas",
+    "754": "Texas",
+    "755": "Texas",
+    "756": "Texas",
+    "757": "Texas",
+    "758": "Texas",
+    "759": "Texas",
+    "760": "Texas",
+    "761": "Texas",
+    "762": "Texas",
+    "763": "Texas",
+    "764": "Texas",
+    "765": "Texas",
+    "766": "Texas",
+    "767": "Texas",
+    "768": "Texas",
+    "769": "Texas",
+    "770": "Texas",
+    "772": "Texas",
+    "773": "Texas",
+    "774": "Texas",
+    "775": "Texas",
+    "776": "Texas",
+    "777": "Texas",
+    "778": "Texas",
+    "779": "Texas",
+    "780": "Texas",
+    "781": "Texas",
+    "782": "Texas",
+    "783": "Texas",
+    "784": "Texas",
+    "785": "Texas",
+    "786": "Texas",
+    "787": "Texas",
+    "788": "Texas",
+    "789": "Texas",
+    "790": "Texas",
+    "791": "Texas",
+    "792": "Texas",
+    "793": "Texas",
+    "794": "Texas",
+    "795": "Texas",
+    "796": "Texas",
+    "797": "Texas",
+    "798": "Texas",
+    "799": "Texas",
+    "800": "Colorado",
+    "801": "Colorado",
+    "802": "Colorado",
+    "803": "Colorado",
+    "804": "Colorado",
+    "805": "Colorado",
+    "806": "Colorado",
+    "807": "Colorado",
+    "808": "Colorado",
+    "809": "Colorado",
+    "810": "Colorado",
+    "811": "Colorado",
+    "812": "Colorado",
+    "813": "Colorado",
+    "814": "Colorado",
+    "815": "Colorado",
+    "816": "Colorado",
+    "820": "Wyoming",
+    "821": "Wyoming",
+    "822": "Wyoming",
+    "823": "Wyoming",
+    "824": "Wyoming",
+    "825": "Wyoming",
+    "826": "Wyoming",
+    "827": "Wyoming",
+    "828": "Wyoming",
+    "829": "Wyoming",
+    "830": "Wyoming",
+    "831": "Wyoming",
+    "832": "Idaho",
+    "833": "Idaho",
+    "834": "Idaho",
+    "835": "Idaho",
+    "836": "Idaho",
+    "837": "Idaho",
+    "838": "Idaho",
+    "840": "Utah",
+    "841": "Utah",
+    "842": "Utah",
+    "843": "Utah",
+    "844": "Utah",
+    "845": "Utah",
+    "846": "Utah",
+    "847": "Utah",
+    "850": "Arizona",
+    "851": "Arizona",
+    "852": "Arizona",
+    "853": "Arizona",
+    "855": "Arizona",
+    "856": "Arizona",
+    "857": "Arizona",
+    "859": "Arizona",
+    "860": "Arizona",
+    "863": "Arizona",
+    "864": "Arizona",
+    "865": "Arizona",
+    "870": "New Mexico",
+    "871": "New Mexico",
+    "872": "New Mexico",
+    "873": "New Mexico",
+    "874": "New Mexico",
+    "875": "New Mexico",
+    "877": "New Mexico",
+    "878": "New Mexico",
+    "879": "New Mexico",
+    "880": "New Mexico",
+    "881": "New Mexico",
+    "882": "New Mexico",
+    "883": "New Mexico",
+    "884": "New Mexico",
+    "885": "Texas",
+    "889": "Nevada",
+    "890": "Nevada",
+    "891": "Nevada",
+    "893": "Nevada",
+    "894": "Nevada",
+    "895": "Nevada",
+    "897": "Nevada",
+    "898": "Nevada",
+    "900": "California",
+    "901": "California",
+    "902": "California",
+    "903": "California",
+    "904": "California",
+    "905": "California",
+    "906": "California",
+    "907": "California",
+    "908": "California",
+    "910": "California",
+    "911": "California",
+    "912": "California",
+    "913": "California",
+    "914": "California",
+    "915": "California",
+    "916": "California",
+    "917": "California",
+    "918": "California",
+    "919": "California",
+    "920": "California",
+    "921": "California",
+    "922": "California",
+    "923": "California",
+    "924": "California",
+    "925": "California",
+    "926": "California",
+    "927": "California",
+    "928": "California",
+    "930": "California",
+    "931": "California",
+    "932": "California",
+    "933": "California",
+    "934": "California",
+    "935": "California",
+    "936": "California",
+    "937": "California",
+    "938": "California",
+    "939": "California",
+    "940": "California",
+    "941": "California",
+    "942": "California",
+    "943": "California",
+    "944": "California",
+    "945": "California",
+    "946": "California",
+    "947": "California",
+    "948": "California",
+    "949": "California",
+    "950": "California",
+    "951": "California",
+    "952": "California",
+    "953": "California",
+    "954": "California",
+    "955": "California",
+    "956": "California",
+    "957": "California",
+    "958": "California",
+    "959": "California",
+    "960": "California",
+    "961": "California",
+    "967": "Hawaii",
+    "968": "Hawaii",
+    "970": "Oregon",
+    "971": "Oregon",
+    "972": "Oregon",
+    "973": "Oregon",
+    "974": "Oregon",
+    "975": "Oregon",
+    "976": "Oregon",
+    "977": "Oregon",
+    "978": "Oregon",
+    "979": "Oregon",
+    "980": "Washington",
+    "981": "Washington",
+    "982": "Washington",
+    "983": "Washington",
+    "984": "Washington",
+    "985": "Washington",
+    "986": "Washington",
+    "988": "Washington",
+    "989": "Washington",
+    "990": "Washington",
+    "991": "Washington",
+    "992": "Washington",
+    "993": "Washington",
+    "994": "Washington",
+    "995": "Alaska",
+    "996": "Alaska",
+    "997": "Alaska",
+    "998": "Alaska",
+    "999": "Alaska",
+    "005": "New York",
+    "006": "Puerto Rico",
+    "007": "Puerto Rico",
+    "009": "Puerto Rico",
+    "010": "Massachusetts",
+    "011": "Massachusetts",
+    "012": "Massachusetts",
+    "013": "Massachusetts",
+    "014": "Massachusetts",
+    "015": "Massachusetts",
+    "016": "Massachusetts",
+    "017": "Massachusetts",
+    "018": "Massachusetts",
+    "019": "Massachusetts",
+    "020": "Massachusetts",
+    "021": "Massachusetts",
+    "022": "Massachusetts",
+    "023": "Massachusetts",
+    "024": "Massachusetts",
+    "025": "Massachusetts",
+    "026": "Massachusetts",
+    "027": "Massachusetts",
+    "028": "Rhode Island",
+    "029": "Rhode Island",
+    "030": "New Hampshire",
+    "031": "New Hampshire",
+    "032": "New Hampshire",
+    "033": "New Hampshire",
+    "034": "New Hampshire",
+    "035": "New Hampshire",
+    "036": "New Hampshire",
+    "037": "New Hampshire",
+    "038": "New Hampshire",
+    "039": "Maine",
+    "040": "Maine",
+    "041": "Maine",
+    "042": "Maine",
+    "043": "Maine",
+    "044": "Maine",
+    "045": "Maine",
+    "046": "Maine",
+    "047": "Maine",
+    "048": "Maine",
+    "049": "Maine",
+    "050": "Vermont",
+    "051": "Vermont",
+    "052": "Vermont",
+    "053": "Vermont",
+    "054": "Vermont",
+    "055": "Massachusetts",
+    "056": "Vermont",
+    "057": "Vermont",
+    "058": "Vermont",
+    "059": "Vermont",
+    "060": "Connecticut",
+    "061": "Connecticut",
+    "062": "Connecticut",
+    "063": "Connecticut",
+    "064": "Connecticut",
+    "065": "Connecticut",
+    "066": "Connecticut",
+    "067": "Connecticut",
+    "068": "Connecticut",
+    "069": "Connecticut",
+    "070": "New Jersey",
+    "071": "New Jersey",
+    "072": "New Jersey",
+    "073": "New Jersey",
+    "074": "New Jersey",
+    "075": "New Jersey",
+    "076": "New Jersey",
+    "077": "New Jersey",
+    "078": "New Jersey",
+    "079": "New Jersey",
+    "080": "New Jersey",
+    "081": "New Jersey",
+    "082": "New Jersey",
+    "083": "New Jersey",
+    "084": "New Jersey",
+    "085": "New Jersey",
+    "086": "New Jersey",
+    "087": "New Jersey",
+    "088": "New Jersey",
+    "089": "New Jersey"
+  },
+  "_meta": {
+    "checked": "2026-10-11",
+    "sources": [
+      "LSC grantee list: https://www.lsc.gov/grants/our-grantees (2026)",
+      "LawHelp.org network and state legal help portals (each portal URL)",
+      "Each organization's own website (phone numbers confirmed on-page where marked non-null)",
+      "State and local bar association lawyer referral pages (each referral URL)",
+      "USPS ZIP3 prefix ranges (Publication 65 / L002 3-digit ZIP Code prefix matrix)"
+    ],
+    "caveats": "Phone numbers are included only where they appeared on the organization's own site or an official page checked on 2026-10-11; otherwise null. Some LawHelp-network portals (e.g. PALawHelp, LawHelpCA, GeorgiaLegalAid, LawHelpMO, Help4TN) and a few org sites could not be fetched from the build environment and are listed from the known network domain. Several states have no statewide bar-run lawyer referral service; a large-county bar (e.g. Maricopa, Atlanta, Indianapolis, Louisville) or the bar's find-a-lawyer page is used instead. Tenant entries are null where no statewide tenant hotline/right-to-counsel program was confirmed; some listed tenant programs are city-only (NYC, Philadelphia; Chicago listed without a confirmed number). Tennessee has no statewide bar referral service, so the Help4TN statewide helpline is used. Service areas and eligibility (income limits, case types) vary; users should confirm before relying on any listing. ZIP3 table excludes military APO/FPO prefixes, USVI (008), Guam/Pacific (969), and unassigned prefixes; a few prefixes straddle state lines at the 5-digit level, so treat ZIP3 as a best-guess default the user can override."
+  }
+}

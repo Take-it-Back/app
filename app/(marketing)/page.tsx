@@ -27,6 +27,7 @@ export const metadata: Metadata = pageMeta({
   description: "Snap a photo of the bill, denial or notice. Take it back explains what's wrong in plain English, writes the letter to fight it, and tracks every deadline until it's settled. Free to start.",
   path: "/",
   absolute: true,
+  languages: { "en-US": "/", "es-US": "/es", "x-default": "/" },
 });
 
 export default function Home() {

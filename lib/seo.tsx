@@ -4,13 +4,13 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.takeit
 export const SITE_NAME = "Take it back";
 
 /** Title, description, canonical URL and social previews for a public page. */
-export function pageMeta({ title, description, path, absolute = false }: { title: string; description: string; path: string; absolute?: boolean }): Metadata {
+export function pageMeta({ title, description, path, absolute = false, locale = "en_US", languages }: { title: string; description: string; path: string; absolute?: boolean; locale?: string; languages?: Record<string, string> }): Metadata {
   const fullTitle = absolute ? title : `${title} · ${SITE_NAME}`;
   return {
     title: absolute ? { absolute: title } : title,
     description,
-    alternates: { canonical: path },
-    openGraph: { title: fullTitle, description, url: path, siteName: SITE_NAME, type: "website", locale: "en_US", images: [{ url: "/og.png", width: 1200, height: 630, alt: "Take it back: fight back against hospitals, insurers, landlords and debt collectors" }] },
+    alternates: { canonical: path, ...(languages ? { languages } : {}) },
+    openGraph: { title: fullTitle, description, url: path, siteName: SITE_NAME, type: "website", locale, images: [{ url: "/og.png", width: 1200, height: 630, alt: "Take it back: fight back against hospitals, insurers, landlords and debt collectors" }] },
     twitter: { card: "summary_large_image", title: fullTitle, description, images: ["/og.png"] },
   };
 }

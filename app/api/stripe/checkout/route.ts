@@ -20,7 +20,11 @@ export async function POST(request: Request) {
   // Auto-renewal laws: the person must tick the box agreeing to the renewal terms; keep a record of what they agreed to.
   if (form.get("agree") !== "on") return NextResponse.redirect(`${origin}/app/upgrade?error=agree`, { status: 303 });
   const trial = !plan.status;
-  const terms = renewalTerms(which, trial);
+  // Free months earned from referrals (banked before they had a subscription) extend the trial.
+  const { data: prof } = await supabase.from("profiles").select("referral_credit_months").eq("id", user.id).maybeSingle();
+  const banked = Math.min(12, prof?.referral_credit_months || 0);
+  const trialDays = (trial ? TRIAL_DAYS : 0) + banked * 30;
+  const terms = renewalTerms(which, trial, new Date(), banked);
   const agreedAt = new Date().toISOString();
   await supabase.from("profiles").update({ renewal_consent_at: agreedAt, renewal_consent_text: terms }).eq("id", user.id);
 
@@ -39,7 +43,7 @@ export async function POST(request: Request) {
         },
       },
     ],
-    subscription_data: { trial_period_days: trial ? TRIAL_DAYS : undefined, metadata: { user_id: user.id, renewal_consent_at: agreedAt, renewal_terms: terms.slice(0, 480) } },
+    subscription_data: { trial_period_days: trialDays || undefined, metadata: { user_id: user.id, banked_months: String(banked), renewal_consent_at: agreedAt, renewal_terms: terms.slice(0, 480) } },
     custom_text: { submit: { message: terms.slice(0, 1000) } },
     allow_promotion_codes: true,
     success_url: `${origin}/api/stripe/success?session_id={CHECKOUT_SESSION_ID}`,

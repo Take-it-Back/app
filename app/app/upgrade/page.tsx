@@ -32,6 +32,8 @@ export default async function UpgradePage({ searchParams }: { searchParams: Prom
   const plan = await getPlan(supabase, user.id);
   if (plan.premium) redirect("/app/you");
   const trial = !plan.status;
+  const { data: prof } = await supabase.from("profiles").select("referral_credit_months").eq("id", user.id).maybeSingle();
+  const banked = Math.min(12, prof?.referral_credit_months || 0);
 
   return (
     <main className="app-main wide">
@@ -54,7 +56,7 @@ export default async function UpgradePage({ searchParams }: { searchParams: Prom
           <span className="row between"><span className="eyebrow">Yearly</span><span className="tag tag-orange">Save 50%</span></span>
           <span><span className="big-num">{PRICES.yearly.label}</span> <span className="muted">{PRICES.yearly.per}</span></span>
           <span className="muted small">About $4.92 a month, billed once a year.</span>
-          <Agree text={renewalTerms("yearly", trial)} />
+          <Agree text={renewalTerms("yearly", trial, new Date(), banked)} />
           <CtaButton type="submit" variant="orange" block>{trial ? `Start ${TRIAL_DAYS}-day free trial` : "Choose yearly"}</CtaButton>
         </form>
         <form action="/api/stripe/checkout" method="post" className="plan-card">
@@ -62,7 +64,7 @@ export default async function UpgradePage({ searchParams }: { searchParams: Prom
           <span className="eyebrow">Monthly</span>
           <span><span className="big-num">{PRICES.monthly.label}</span> <span className="muted">{PRICES.monthly.per}</span></span>
           <span className="muted small">Cancel anytime from your account.</span>
-          <Agree text={renewalTerms("monthly", trial)} />
+          <Agree text={renewalTerms("monthly", trial, new Date(), banked)} />
           <CtaButton type="submit" variant="ink" block>{trial ? `Start ${TRIAL_DAYS}-day free trial` : "Choose monthly"}</CtaButton>
         </form>
       </div>

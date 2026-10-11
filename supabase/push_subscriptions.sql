@@ -15,20 +15,20 @@ create index if not exists push_subscriptions_user_id_idx on public.push_subscri
 
 alter table public.push_subscriptions enable row level security;
 
-drop policy if exists "Own push subscriptions: select" on public.push_subscriptions;
+
 create policy "Own push subscriptions: select" on public.push_subscriptions
   for select to authenticated using ((select auth.uid()) = user_id);
 
-drop policy if exists "Own push subscriptions: insert" on public.push_subscriptions;
+
 create policy "Own push subscriptions: insert" on public.push_subscriptions
   for insert to authenticated with check ((select auth.uid()) = user_id);
 
 -- Needed so re-subscribing the same device (upsert on endpoint) can refresh its keys.
-drop policy if exists "Own push subscriptions: update" on public.push_subscriptions;
+
 create policy "Own push subscriptions: update" on public.push_subscriptions
   for update to authenticated using ((select auth.uid()) = user_id) with check ((select auth.uid()) = user_id);
 
-drop policy if exists "Own push subscriptions: delete" on public.push_subscriptions;
+
 create policy "Own push subscriptions: delete" on public.push_subscriptions
   for delete to authenticated using ((select auth.uid()) = user_id);
 

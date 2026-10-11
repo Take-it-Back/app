@@ -40,6 +40,10 @@ export async function middleware(request: NextRequest) {
     url.search = "";
     return NextResponse.redirect(url);
   }
+  // Came from the Spanish page: remember it so new accounts start with Spanish explanations.
+  if (path === "/login" && request.nextUrl.searchParams.get("lang") === "es") {
+    response.cookies.set("tib_lang", "es", { maxAge: 60 * 60 * 24 * 30, path: "/", sameSite: "lax" });
+  }
   return response;
 }
 

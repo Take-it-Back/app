@@ -2,7 +2,22 @@ import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 import { periodEnd, stripe } from "@/lib/stripe";
-import { applyBilling } from "@/lib/plan";
+import { applyBilling, PRICES } from "@/lib/plan";
+import type { SupabaseClient } from "@supabase/supabase-js";
+
+/** Give-a-month, get-a-month: a month's credit for the new subscriber and the friend who invited them. */
+async function rewardReferral(supabase: SupabaseClient, userId: string, bankedUsed: number) {
+  const secret = process.env.BILLING_SECRET;
+  if (bankedUsed > 0) await supabase.rpc("referral_bank_month", { p_secret: secret, p_user: userId, p_delta: -bankedUsed });
+  const { data } = await supabase.rpc("referral_reward", { p_secret: secret, p_user: userId });
+  const row = (data as { referrer: string; referrer_customer: string | null; friend_customer: string | null }[] | null)?.[0];
+  if (!row) return;
+  const credit = (customer: string, who: string) =>
+    stripe().customers.createBalanceTransaction(customer, { amount: -PRICES.monthly.amount, currency: "usd", description: `Referral reward: one free month (${who})` });
+  if (row.friend_customer) await credit(row.friend_customer, "joined with a friend's link");
+  if (row.referrer_customer) await credit(row.referrer_customer, "a friend joined");
+  else await supabase.rpc("referral_bank_month", { p_secret: secret, p_user: row.referrer, p_delta: 1 });
+}
 
 // Keeps plans in sync when subscriptions renew, fail, or are cancelled.
 export async function POST(request: Request) {
@@ -24,6 +39,7 @@ export async function POST(request: Request) {
       if (s.subscription && s.client_reference_id) {
         const sub = await stripe().subscriptions.retrieve(typeof s.subscription === "string" ? s.subscription : s.subscription.id);
         await applyBilling(supabase, { userId: s.client_reference_id, customer: typeof s.customer === "string" ? s.customer : s.customer?.id ?? null, subscription: sub.id, status: sub.status, periodEnd: periodEnd(sub) });
+        await rewardReferral(supabase, s.client_reference_id, Number(sub.metadata?.banked_months || 0));
       }
     } else if (event.type.startsWith("customer.subscription.")) {
       const sub = event.data.object as Stripe.Subscription;

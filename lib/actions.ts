@@ -226,6 +226,20 @@ export async function recordHealthConsent() {
   revalidatePath("/app", "layout");
 }
 
+export async function shareWin(caseId: string) {
+  const { supabase } = await ctx();
+  const { data: c } = await supabase.from("cases").select("category, outcome_amount, status").eq("id", caseId).maybeSingle();
+  if (!c || !["won", "settled"].includes(c.status)) return;
+  await supabase.from("wins").insert({ case_id: caseId, category: c.category, amount: c.outcome_amount });
+  revalidatePath(`/app/cases/${caseId}/won`);
+}
+
+export async function unshareWin(caseId: string) {
+  const { supabase } = await ctx();
+  await supabase.from("wins").delete().eq("case_id", caseId);
+  revalidatePath(`/app/cases/${caseId}/won`);
+}
+
 export async function deleteCase(caseId: string) {
   const { supabase } = await ctx();
   const { data: docs } = await supabase.from("documents").select("storage_path").eq("case_id", caseId);
@@ -248,6 +262,7 @@ export async function updateProfile(formData: FormData) {
     .update({
       full_name: String(formData.get("full_name") || "").slice(0, 80),
       state: String(formData.get("state") || "").slice(0, 40) || null,
+      language: formData.get("language") === "es" ? "es" : "en",
       remind_email: formData.get("remind_email") === "on",
       morning_briefing: formData.get("morning_briefing") === "on",
       phone: phone || null,

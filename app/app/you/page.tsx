@@ -3,6 +3,9 @@ import { Avatar } from "@/components/ui";
 import ConfirmSubmit from "@/components/ConfirmSubmit";
 import { deleteAccount, updateProfile } from "@/lib/actions";
 import { US_STATES } from "@/lib/states";
+import ShareButton from "@/components/ShareButton";
+import CopyButton from "@/components/CopyButton";
+import { REFERRAL_TEXT, referralUrl } from "@/lib/referrals";
 import PasswordReset from "./PasswordReset";
 import ChangeEmail from "./ChangeEmail";
 import PushToggle from "@/components/PushToggle";
@@ -45,6 +48,18 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
           </div>
         )}
 
+        {p?.referral_code && (
+          <section className="card stack g8">
+            <span className="serif" style={{ fontSize: 22 }}>Give a month, <em className="o">get a month</em></span>
+            <span className="small muted">Share your link. When a friend starts Premium, they get a month free and so do you{p.referral_credit_months ? `. You have ${p.referral_credit_months} free month${p.referral_credit_months > 1 ? "s" : ""} waiting` : ""}.</span>
+            <span className="small" style={{ wordBreak: "break-all" }}>{referralUrl(p.referral_code)}</span>
+            <span className="row wrap g8">
+              <ShareButton url={referralUrl(p.referral_code)} text={REFERRAL_TEXT} label="Share my link" />
+              <CopyButton text={referralUrl(p.referral_code)} label="Copy link" />
+            </span>
+          </section>
+        )}
+
         <form action={updateProfile} className="stack g12">
           <span className="eyebrow">Your details</span>
           <label className="field"><span style={{ fontSize: 14 }}>Name on your letters</span><input name="full_name" className="input" defaultValue={p?.full_name || ""} /></label>
@@ -54,6 +69,14 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
               <option value="">Choose your state</option>
               {US_STATES.map((s) => <option key={s}>{s}</option>)}
             </select>
+          </label>
+          <label className="field" style={{ paddingTop: 12 }}>
+            <span style={{ fontSize: 14 }}>Explain things to me in · <span lang="es">Explicarme en</span></span>
+            <select name="language" className="input" defaultValue={p?.language || "en"}>
+              <option value="en">English</option>
+              <option value="es" lang="es">Español</option>
+            </select>
+            <span className="muted small">Summaries, findings and replies. Letters stay in English, since they go to US companies.</span>
           </label>
           <span className="eyebrow" style={{ marginTop: 8 }}>Mailing address</span>
           <span className="muted small" style={{ marginTop: -6 }}>Used on your letters and as the return address when we mail for you.</span>

@@ -45,9 +45,9 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
         </div>
         <div className="stack g20">
           {c.red_flag && (
-            <Link href="/app/help" className="panel-orange stack g4" style={{ textDecoration: "none" }}>
+            <Link href={`/app/help?${new URLSearchParams({ ...(c.user_state ? { state: c.user_state } : {}), ...(c.category === "landlord" ? { focus: "tenant" } : {}) })}`} className="panel-orange stack g4" style={{ textDecoration: "none" }}>
               <span className="eyebrow" style={{ color: "#A8441F" }}>This may need a real person</span>
-              <span style={{ fontSize: 15 }}>{c.red_flag_reason || "Something here moves fast."} Tap for help finding legal aid.</span>
+              <span style={{ fontSize: 15 }}>{c.red_flag_reason || "Something here moves fast."} Tap for free legal aid in your state.</span>
             </Link>
           )}
           {c.summary && <p style={{ margin: 0, fontSize: 17 }}>{c.summary}</p>}
@@ -79,9 +79,9 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
       </div>
 
       {c.red_flag && !done && (
-        <Link href="/app/help" className="panel-orange stack g4" style={{ textDecoration: "none", marginBottom: 20 }}>
+        <Link href={`/app/help?${new URLSearchParams({ ...(c.user_state ? { state: c.user_state } : {}), ...(c.category === "landlord" ? { focus: "tenant" } : {}) })}`} className="panel-orange stack g4" style={{ textDecoration: "none", marginBottom: 20 }}>
           <span className="eyebrow" style={{ color: "#A8441F" }}>This may need a real person</span>
-          <span style={{ fontSize: 15 }}>{c.red_flag_reason || "Something here moves fast."} Tap for help finding legal aid.</span>
+          <span style={{ fontSize: 15 }}>{c.red_flag_reason || "Something here moves fast."} Tap for free legal aid in your state.</span>
         </Link>
       )}
 

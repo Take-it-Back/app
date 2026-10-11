@@ -6,7 +6,7 @@ const PUBLIC = [
   "/", "/how-it-works", "/pricing", "/faq", "/fight", "/features", "/guides",
   "/fight/medical-bills", "/fight/insurance-denials", "/fight/landlords", "/fight/debt-collectors",
   "/features/letters", "/guides/how-to-dispute-a-medical-bill", "/guides/security-deposit-return-deadlines-by-state",
-  "/privacy", "/terms",
+  "/privacy", "/health-data-privacy", "/terms", "/es", "/legal-aid/pennsylvania", "/guides/statute-of-limitations-on-debt-by-state",
 ];
 const PRIVATE = ["/app", "/app/cases", "/app/tools", "/app/admin"];
 const FILES = ["/sitemap.xml", "/robots.txt", "/manifest.webmanifest", "/og.png", "/sw.js", "/offline.html"];

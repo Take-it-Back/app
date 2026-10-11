@@ -8,11 +8,12 @@ export const TRIAL_DAYS = 7;
 export const FREE_SCANS_PER_MONTH = 3;
 
 /** The auto-renewal terms shown next to the button and saved with the person's consent (California ARL and similar laws). */
-export function renewalTerms(which: keyof typeof PRICES, trial: boolean, from = new Date()) {
+export function renewalTerms(which: keyof typeof PRICES, trial: boolean, from = new Date(), freeMonths = 0) {
   const p = PRICES[which];
-  const first = new Date(from.getTime() + TRIAL_DAYS * 86400000).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
-  return trial
-    ? `Free for ${TRIAL_DAYS} days, then ${p.label} ${p.per} starting ${first}, renewing automatically every ${p.interval} until you cancel. Cancel online anytime in Settings before ${first} and you won't be charged.`
+  const days = (trial ? TRIAL_DAYS : 0) + freeMonths * 30;
+  const first = new Date(from.getTime() + days * 86400000).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
+  return days > 0
+    ? `Free for ${days} days, then ${p.label} ${p.per} starting ${first}, renewing automatically every ${p.interval} until you cancel. Cancel online anytime in Settings before ${first} and you won't be charged.`
     : `${p.label} ${p.per}, charged today and renewing automatically every ${p.interval} until you cancel. Cancel online anytime in Settings; you keep Premium until the end of the period you paid for.`;
 }
 
