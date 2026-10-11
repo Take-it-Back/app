@@ -8,6 +8,7 @@ import { theirDeadline } from "./rules";
 import { theirDeadlineFor } from "./letters";
 import type { Category } from "./types";
 import { US_STATES } from "./states";
+import { logError } from "./limits";
 
 async function ctx() {
   return requireUser();
@@ -217,7 +218,11 @@ export async function setCaseLaw(caseId: string, formData: FormData) {
 
 export async function recordHealthConsent() {
   const { supabase, user } = await ctx();
-  await supabase.from("profiles").update({ health_consent_at: new Date().toISOString() }).eq("id", user.id);
+  const { error } = await supabase.from("profiles").update({ health_consent_at: new Date().toISOString() }).eq("id", user.id);
+  if (error) {
+    await logError(supabase, "consent", error.message, "/app/scan", user.id);
+    throw new Error("We couldn't save your consent. Please try again.");
+  }
   revalidatePath("/app", "layout");
 }
 
