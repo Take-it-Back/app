@@ -35,7 +35,7 @@ export function Arrow({ color = "#fff", size = 16 }: { color?: string; size?: nu
 
 export function CtaLink({ href, children, variant = "ink", block }: { href: string; children: React.ReactNode; variant?: "ink" | "orange" | "light"; block?: boolean }) {
   return (
-    <Link href={href} className={`btn btn-${variant}${block ? " btn-block" : ""}`}>
+    <Link href={href} prefetch={href.startsWith("/login") ? false : undefined} className={`btn btn-${variant}${block ? " btn-block" : ""}`}>
       {children}
       <span className="dot">
         <Arrow color={variant === "orange" ? "#BF4F28" : "#fff"} />

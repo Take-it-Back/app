@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Logo } from "@/components/ui";
 import LoginForm from "./LoginForm";
 
-export const metadata: Metadata = { title: "Sign in" };
+export const metadata: Metadata = { title: "Sign in", description: "Sign in to Take it back to see your cases, letters and deadlines.", robots: { index: false, follow: true }, alternates: { canonical: "/login" } };
 
 export default function LoginPage() {
   return (

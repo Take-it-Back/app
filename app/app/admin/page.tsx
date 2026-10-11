@@ -13,6 +13,8 @@ type Overview = {
   by_category: Record<string, number>;
   users: { id: string; email: string; full_name: string | null; state: string | null; plan: string; plan_status: string | null; is_admin: boolean; created_at: string; last_sign_in_at: string | null; cases: number; letters: number }[];
   recent_cases: { id: string; title: string; category: Category; status: CaseStatus; amount_at_stake: number | null; created_at: string; email: string }[];
+  funnel?: Record<string, number>;
+  errors?: { area: string; message: string; path: string | null; created_at: string; email: string | null }[];
 };
 
 export default async function AdminPage() {
@@ -38,7 +40,11 @@ export default async function AdminPage() {
     ["Open cases", String(t.open_cases), `${t.needs_help} need a person`],
     ["Letters", String(t.letters), `${t.letters_sent} sent`],
     ["Taken back", money(t.taken_back), `${money(t.in_play)} still in play`],
+    ["AI runs, 24h", String(t.ai_24h ?? 0), `${t.errors_7d ?? 0} errors this week`],
   ];
+  const f = o.funnel || {};
+  const steps: [string, number][] = [["Signed up", f.signed_up ?? 0], ["Scanned a document", f.scanned ?? 0], ["Wrote a letter", f.wrote_letter ?? 0], ["Sent a letter", f.sent_letter ?? 0], ["Premium", f.premium ?? 0]];
+  const top = Math.max(1, steps[0][1]);
   const catTotal = Object.values(o.by_category).reduce((a, b) => a + b, 0) || 1;
 
   return (
@@ -58,6 +64,21 @@ export default async function AdminPage() {
             </div>
           ))}
         </div>
+
+        <section className="card">
+          <span className="eyebrow">Funnel</span>
+          <div className="stack g12" style={{ marginTop: 12 }}>
+            {steps.map(([label, n]) => (
+              <div key={label} className="row g12">
+                <span style={{ width: 150, fontSize: 14 }}>{label}</span>
+                <span className="grow" style={{ height: 10, borderRadius: 5, background: "#F3F3F3", overflow: "hidden" }}>
+                  <span style={{ display: "block", height: "100%", width: `${(n / top) * 100}%`, background: "#1A1A1A", borderRadius: 5 }} />
+                </span>
+                <span style={{ width: 70, textAlign: "right", fontWeight: 500 }}>{n} <span className="muted small">{Math.round((n / top) * 100)}%</span></span>
+              </div>
+            ))}
+          </div>
+        </section>
 
         <section className="card">
           <span className="eyebrow">Cases by fight</span>
@@ -110,6 +131,18 @@ export default async function AdminPage() {
               </div>
             ))}
             {!o.recent_cases.length && <p className="muted">No cases yet.</p>}
+          </div>
+        </section>
+        <section className="card">
+          <span className="eyebrow">Recent errors</span>
+          <div className="stack" style={{ marginTop: 4 }}>
+            {(o.errors || []).map((e, i) => (
+              <div key={i} className="list-row" style={{ alignItems: "flex-start" }}>
+                <span className="tag tag-gray">{e.area}</span>
+                <span className="stack grow" style={{ minWidth: 0 }}><span style={{ fontSize: 14, wordBreak: "break-word" }}>{e.message}</span><span className="muted small">{e.email || "—"} · {e.path || ""} · {shortDate(e.created_at)}</span></span>
+              </div>
+            ))}
+            {!(o.errors || []).length && <p className="muted" style={{ margin: "8px 0 0" }}>No errors logged.</p>}
           </div>
         </section>
         <p className="muted small">Case contents and files stay private to each user; this page shows totals and titles only. <Link href="/app">Back to your cases</Link></p>

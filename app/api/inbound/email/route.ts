@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { analyzeCase } from "@/lib/analyzeCase";
+import { logError } from "@/lib/limits";
 
 // Inbound email (Postmark inbound webhook format). Each person forwards bills to <their token>@<INBOUND_DOMAIN>.
 export const maxDuration = 60;
@@ -62,7 +63,10 @@ export async function POST(request: Request) {
     .insert({ user_id: prof.id, category: "other", title: subject || "Forwarded document", status: "analyzing", received_date: new Date().toISOString().slice(0, 10), user_state: prof.state })
     .select("id")
     .single();
-  if (error || !c) return NextResponse.json({ error: "Could not create case" }, { status: 500 });
+  if (error || !c) {
+    await logError(admin, "inbound", error?.message || "Could not create case", undefined, prof.id);
+    return NextResponse.json({ error: "Could not create case" }, { status: 500 });
+  }
 
   const files = (msg.Attachments || []).filter((a) => OK_TYPES.includes(a.ContentType) && a.ContentLength <= 20 * 1024 * 1024).slice(0, 5);
   for (const [i, a] of files.entries()) {

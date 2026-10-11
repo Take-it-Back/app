@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { pageMeta, JsonLd, breadcrumbs, faqPage, ORG, APP_LD } from "@/lib/seo";
 import { CtaBand } from "@/components/site";
 import { PageHead } from "@/components/Faq";
 import { Phone } from "@/components/screens";
 
-export const metadata: Metadata = { title: "About", description: "Why we built Take it back, and the promises we keep." };
+export const metadata: Metadata = pageMeta({ title: "About us: on your side against unfair bills", description: "Why we built Take it back for people fighting hospitals, insurers, landlords and debt collectors, and the promises we keep: plain words, no cut of your savings, privacy first.", path: "/about" });
 
 const PROMISES: [string, string][] = [
   ["Plain words, always", "If a sentence needs a law degree, we rewrite it."],

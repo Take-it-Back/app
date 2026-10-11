@@ -4,6 +4,8 @@ import { aiConfigured, draftLetter } from "@/lib/ai";
 import { kindInfo, senderAddress, templateFor, type BureauKey, agencyFor, BUREAUS } from "@/lib/letters";
 import type { CaseRow } from "@/lib/types";
 import { getCasePremium } from "@/lib/plan";
+import { depositRule } from "@/lib/deposits";
+import { logError, useAi } from "@/lib/limits";
 
 export const maxDuration = 60;
 
@@ -24,6 +26,9 @@ export async function POST(request: Request) {
   if (!kindInfo(kind)) return NextResponse.json({ error: "Unknown letter type." }, { status: 400 });
   if (!(await getCasePremium(supabase, user.id, caseId)))
     return NextResponse.json({ error: "Letters are part of Premium. Start a free 7-day trial to draft this.", upgrade: true }, { status: 402 });
+
+  const limit = await useAi(supabase, user.id, "letter");
+  if (!limit.ok) return NextResponse.json({ error: limit.error }, { status: 429 });
 
   const [{ data: c }, { data: profile }, { data: events }, { data: letters }, { data: replies }] = await Promise.all([
     supabase.from("cases").select("*").eq("id", caseId).single(),
@@ -50,6 +55,7 @@ export async function POST(request: Request) {
       `From: ${cr.counterparty || "unknown"}`,
       `Amount: ${cr.amount_at_stake ?? "unknown"}`,
       `State: ${cr.user_state || profile?.state || "unknown"}`,
+      cr.category === "landlord" && depositRule(cr.user_state || profile?.state) ? `Deposit return rule in this state (general information): ${depositRule(cr.user_state || profile?.state)!.text}` : "",
       `Summary: ${cr.summary || ""}`,
       `Findings: ${JSON.stringify(cr.findings || [])}`,
       `History: ${JSON.stringify(events || [])}`,
@@ -65,7 +71,7 @@ export async function POST(request: Request) {
     } catch (e) {
       warning = "We couldn't draft a custom letter just now, so here's a template to edit.";
       letter = templateFor(cr, kind, sender, extra);
-      console.error(e);
+      await logError(supabase, "letter", e, `/app/cases/${caseId}`);
     }
   } else {
     letter = templateFor(cr, kind, sender, extra);

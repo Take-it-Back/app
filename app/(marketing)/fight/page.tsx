@@ -1,19 +1,18 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta, JsonLd, breadcrumbs } from "@/lib/seo";
 import { CtaBand } from "@/components/site";
 import { Peek } from "@/components/screens";
 import { PageHead } from "@/components/Faq";
 import FeatureIcon from "@/components/FeatureIcon";
 import { PROBLEMS } from "@/lib/marketing";
 
-export const metadata: Metadata = {
-  title: "Who we fight",
-  description: "Take it back helps you fight hospitals and medical bills, insurance companies, landlords and debt collectors.",
-};
+export const metadata: Metadata = pageMeta({ title: "Who we fight: hospitals, insurers, landlords, debt collectors", description: "Take it back helps you dispute medical bills, appeal insurance denials, get your deposit back from a landlord and make debt collectors prove it.", path: "/fight" });
 
 export default function HelpWithPage() {
   return (
     <main>
+      <JsonLd data={breadcrumbs([["Home", "/"], ["What we fight", "/fight"]])} />
       <PageHead eyebrow="Who we fight" title="Four industries that count on you" italic="giving up" after="." lede="Take it back is on your side, never theirs. We help patients, policyholders, renters and consumers push back, with no legal knowledge needed." />
       <section className="wrap-1200 stack g20" style={{ paddingTop: 48 }}>
         {PROBLEMS.map((p, i) => (

@@ -1,6 +1,11 @@
 import type { Metadata, Viewport } from "next";
+import { Caveat, Fraunces, Outfit } from "next/font/google";
 import "./globals.css";
 import PwaRegister from "@/components/PwaRegister";
+
+const fraunces = Fraunces({ subsets: ["latin"], style: ["normal", "italic"], axes: ["opsz"], display: "swap", variable: "--font-serif" });
+const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-sans" });
+const caveat = Caveat({ subsets: ["latin"], weight: ["500", "600"], display: "swap", variable: "--font-hand", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.takeitback.app"),
@@ -31,15 +36,7 @@ export const viewport: Viewport = { themeColor: "#ffffff", width: "device-width"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Outfit:wght@400;500;600&display=swap"
-        />
-      </head>
+    <html lang="en" className={`${fraunces.variable} ${outfit.variable} ${caveat.variable}`}>
       <body>
         {children}
         <PwaRegister />

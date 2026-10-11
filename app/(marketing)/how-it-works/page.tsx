@@ -1,14 +1,12 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta, JsonLd, breadcrumbs } from "@/lib/seo";
 import { CtaBand } from "@/components/site";
 import { Desktop, Phone } from "@/components/screens";
 import { PageHead } from "@/components/Faq";
 import type { ScenarioKey, ShotKind } from "@/lib/marketing";
 
-export const metadata: Metadata = {
-  title: "How it works",
-  description: "Snap the letter, see what's wrong, send the letter we write, and let us track every deadline and reply until it's settled.",
-};
+export const metadata: Metadata = pageMeta({ title: "How it works: from scary letter to settled in five steps", description: "Snap the bill or denial, see what's wrong, send the letter we write, and we track every deadline and reply until it's settled.", path: "/how-it-works" });
 
 const STEPS: { n: string; title: string; italic: string; body: string; points: string[]; shots: [ShotKind, ScenarioKey][]; plan: string }[] = [
   { n: "1", title: "Snap the", italic: "letter", body: "Take a photo of the bill, denial or notice, or upload a PDF. Then answer three quick questions about your state, insurance and when it arrived.", points: ["Photos, PDFs and screenshots", "Several pages at once", "About a minute, start to finish"], shots: [["scan", "insurance"], ["questions", "insurance"]], plan: "Free and Premium" },
@@ -21,6 +19,7 @@ const STEPS: { n: string; title: string; italic: string; body: string; points: s
 export default function HowItWorks() {
   return (
     <main>
+      <JsonLd data={breadcrumbs([["Home", "/"], ["How it works", "/how-it-works"]])} />
       <PageHead eyebrow="How it works" title="One denied MRI, from letter to" italic="settled" after="." lede="Here's how a real kind of fight plays out in Take it back, screen by screen. The same steps work for bills, landlords and collectors." />
 
       {STEPS.map((st, i) => (

@@ -8,9 +8,9 @@
   --orange-ink: #a8441f;
   --orange-soft: #fdeee7;
   --gray-soft: #f3f3f3;
-  --serif: "Fraunces", Georgia, serif;
-  --sans: "Outfit", system-ui, sans-serif;
-  --hand: "Caveat", cursive;
+  --serif: var(--font-serif), Georgia, serif;
+  --sans: var(--font-sans), system-ui, sans-serif;
+  --hand: var(--font-hand), cursive;
   --shadow: 0 6px 12px rgba(26, 26, 26, 0.1);
 }
 

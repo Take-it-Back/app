@@ -55,7 +55,7 @@ export async function analyzeCase(supabase: SupabaseClient, userId: string, case
   const { error } = await supabase.from("cases").update(update).eq("id", caseId);
   if (error) return { ok: false as const, error: error.message };
 
-  const fd = firstDeadline(category, received, c.insured);
+  const fd = firstDeadline(category, received, c.insured, c.user_state);
   await Promise.all([
     premium ? supabase.from("deadlines").insert({ case_id: caseId, user_id: userId, title: fd.title, due_date: fd.due, owner: "you", rule_note: fd.note }) : Promise.resolve(),
     supabase.from("events").insert({ case_id: caseId, user_id: userId, title: eventTitle, detail: docs?.length ? `${docs.length} page${docs.length > 1 ? "s" : ""} added` : null }),

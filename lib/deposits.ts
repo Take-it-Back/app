@@ -1,0 +1,62 @@
+// How long landlords generally have to return a security deposit after move-out, by state.
+// Compiled from state-law summaries (iPropertyManagement and Ezel state-by-state surveys, checked Oct 2026).
+// General information: exceptions apply, and the clock often starts at move-out or when you give a forwarding address.
+export type DepositRule = { days: number | null; text: string };
+
+export const DEPOSIT_RULES: Record<string, DepositRule> = {
+  Alabama: { days: 60, text: "60 days after the lease ends and you move out" },
+  Alaska: { days: 14, text: "14 days, or 30 days if they deduct for damage" },
+  Arizona: { days: 14, text: "14 business days" },
+  Arkansas: { days: 60, text: "60 days (some small landlords are exempt)" },
+  California: { days: 21, text: "21 days after you move out" },
+  Colorado: { days: 30, text: "1 month, or up to 60 days if the lease says so" },
+  Connecticut: { days: 21, text: "21 days, or 15 days after you give a forwarding address if later" },
+  Delaware: { days: 20, text: "20 days after the lease ends" },
+  "District of Columbia": { days: 45, text: "45 days to return it or give notice of deductions" },
+  Florida: { days: 15, text: "15 days with no deductions; notice of any claim within 30 days" },
+  Georgia: { days: 30, text: "30 days" },
+  Hawaii: { days: 14, text: "14 days" },
+  Idaho: { days: 21, text: "21 days (up to 30 if the lease says so)" },
+  Illinois: { days: 30, text: "30 days if they deduct for damage, 45 days to return it in full" },
+  Indiana: { days: 45, text: "45 days after you give a mailing address" },
+  Iowa: { days: 30, text: "30 days after you give a mailing address" },
+  Kansas: { days: 30, text: "14 days after charges are set, no later than 30 days" },
+  Kentucky: { days: null, text: "no fixed deadline in state law" },
+  Louisiana: { days: 30, text: "1 month" },
+  Maine: { days: 30, text: "30 days (21 days for a tenancy at will)" },
+  Maryland: { days: 45, text: "45 days" },
+  Massachusetts: { days: 30, text: "30 days" },
+  Michigan: { days: 30, text: "30 days" },
+  Minnesota: { days: 21, text: "3 weeks after you give a forwarding address" },
+  Mississippi: { days: 45, text: "45 days" },
+  Missouri: { days: 30, text: "30 days" },
+  Montana: { days: 30, text: "30 days, or 10 days with no deductions" },
+  Nebraska: { days: 14, text: "14 days" },
+  Nevada: { days: 30, text: "30 days" },
+  "New Hampshire": { days: 30, text: "30 days" },
+  "New Jersey": { days: 30, text: "30 days (faster after fire, flood or condemnation)" },
+  "New Mexico": { days: 30, text: "30 days" },
+  "New York": { days: 14, text: "14 days after you move out" },
+  "North Carolina": { days: 30, text: "30 days (up to 60 with an interim accounting)" },
+  "North Dakota": { days: 30, text: "30 days" },
+  Ohio: { days: 30, text: "30 days" },
+  Oklahoma: { days: 45, text: "45 days after a written request" },
+  Oregon: { days: 31, text: "31 days" },
+  Pennsylvania: { days: 30, text: "30 days" },
+  "Rhode Island": { days: 20, text: "20 days" },
+  "South Carolina": { days: 30, text: "30 days" },
+  "South Dakota": { days: 14, text: "2 weeks (sources differ; some say 21 days)" },
+  Tennessee: { days: null, text: "no fixed deadline in state law" },
+  Texas: { days: 30, text: "30 days after you give a written forwarding address" },
+  Utah: { days: 30, text: "30 days" },
+  Vermont: { days: 14, text: "14 days" },
+  Virginia: { days: 45, text: "45 days (60 if a contractor is needed)" },
+  Washington: { days: 30, text: "30 days" },
+  "West Virginia": { days: 45, text: "60 days after the lease ends, or 45 days after a new tenant moves in if sooner" },
+  Wisconsin: { days: 21, text: "21 days" },
+  Wyoming: { days: 30, text: "30 days, or 15 days after you give a new address if later" },
+};
+
+export function depositRule(state?: string | null) {
+  return state ? DEPOSIT_RULES[state] : undefined;
+}

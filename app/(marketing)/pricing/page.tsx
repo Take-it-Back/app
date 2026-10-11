@@ -1,15 +1,13 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta, JsonLd, breadcrumbs, faqPage, ORG, APP_LD } from "@/lib/seo";
 import { CtaBand } from "@/components/site";
 import { CtaLink } from "@/components/ui";
 import { Phone } from "@/components/screens";
 import Faq, { PageHead } from "@/components/Faq";
 import { FAQ_GROUPS, PLAN_ROWS } from "@/lib/marketing";
 
-export const metadata: Metadata = {
-  title: "Pricing",
-  description: "Start free with 3 scans a month. Premium is $9.99 a month or $59 a year, with a 7-day free trial.",
-};
+export const metadata: Metadata = pageMeta({ title: "Pricing: free to start, Premium $9.99 a month", description: "Start free with 3 scans a month. Premium is $9.99 a month or $59 a year with a 7-day free trial: letters, deadlines, complaints, reminders and more. Keep 100% of what you save.", path: "/pricing" });
 
 function Check({ on = true }: { on?: boolean }) {
   return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={on ? "#BF4F28" : "#9A9A9A"} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flex: "none", marginTop: 4 }}><path d="M5 12l5 5 9-10" /></svg>;
@@ -18,6 +16,7 @@ function Check({ on = true }: { on?: boolean }) {
 export default function PricingPage() {
   return (
     <main>
+      <JsonLd data={[APP_LD, faqPage([...FAQ_GROUPS[1].items]), breadcrumbs([["Home", "/"], ["Pricing", "/pricing"]])]} />
       <PageHead eyebrow="Pricing" title="Start free. Let us do the" italic="work" after=" when you're ready." lede="Free tells you where you stand. Premium writes the letters, keeps every date and stays with you until it's settled. You keep 100% of what you save." />
 
       <section className="wrap-1200" style={{ paddingTop: 48 }}>
@@ -29,7 +28,7 @@ export default function PricingPage() {
             <ul className="stack g8" style={{ margin: 0, padding: 0, listStyle: "none" }}>
               {["3 scans a month", "Plain-English summary", "General next steps and deadlines", "Red flags and free legal aid finder"].map((t) => <li key={t} className="row g8" style={{ alignItems: "flex-start" }}><Check on={false} />{t}</li>)}
             </ul>
-            <Link href="/login?mode=signup" className="btn-plain" style={{ alignSelf: "flex-start", minHeight: 48, borderColor: "#1A1A1A", marginTop: "auto" }}>Start free</Link>
+            <Link prefetch={false} href="/login?mode=signup" className="btn-plain" style={{ alignSelf: "flex-start", minHeight: 48, borderColor: "#1A1A1A", marginTop: "auto" }}>Start free</Link>
           </div>
           <div className="card stack g16" style={{ padding: 32, borderRadius: 28, border: "2px solid #BF4F28", position: "relative" }}>
             <span className="tag tag-orange" style={{ position: "absolute", top: -14, left: 28, fontSize: 13, padding: "6px 14px" }}>7 days free</span>

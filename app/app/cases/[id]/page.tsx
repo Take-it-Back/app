@@ -111,14 +111,15 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
 
           {!done && (
             <div className="stack g12" style={{ maxWidth: 520 }}>
-              {draft ? (
-                <CtaLink href={`/app/cases/${id}/letter?id=${draft.id}`} variant="orange" block>Review your letter</CtaLink>
-              ) : c.status === "waiting" ? (
+              {c.status === "waiting" ? (
                 <>
                   <UploadButton caseId={id} userId={user.id} ownerId={c.user_id} kind="reply" label="They replied — add their letter" analyze />
                   <span className="hand muted" style={{ fontSize: 20 }}>no reply by the date? we'll help you follow up</span>
                   <WriteLetterButton caseId={id} kind="followup" label="Write a follow-up" variant="ink" />
+                  {draft && <Link href={`/app/cases/${id}/letter?id=${draft.id}`} style={{ fontSize: 15, fontWeight: 500 }}>You also have a draft letter</Link>}
                 </>
+              ) : draft ? (
+                <CtaLink href={`/app/cases/${id}/letter?id=${draft.id}`} variant="orange" block>Review your letter</CtaLink>
               ) : (
                 <WriteLetterButton caseId={id} kind={c.next_steps?.[0]?.letter_kind || (c.category === "insurance" ? "appeal" : c.category === "debt" ? "validation" : "dispute")} />
               )}

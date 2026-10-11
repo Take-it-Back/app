@@ -16,7 +16,7 @@ export default async function EscalatePage({ params }: { params: Promise<{ id: s
   const c = cd as CaseRow;
   const agencies = AGENCIES.filter((a) => a.categories.includes(c.category === "other" ? "debt" : c.category));
   const extraKinds = kindsFor(c.category).filter((k) => k.group === "Escalate" && !["complaint", "credit_dispute", "small_claims_statement"].includes(k.key));
-  const showCredit = c.category === "debt" || c.category === "medical";
+  const showCredit = c.category !== "landlord" && c.category !== "insurance";
 
   return (
     <main className="app-main">

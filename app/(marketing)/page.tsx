@@ -1,4 +1,6 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+import { pageMeta, JsonLd, ORG, APP_LD, SITE_URL } from "@/lib/seo";
 import { CtaLink } from "@/components/ui";
 import { CtaBand } from "@/components/site";
 import { Desktop, Peek, Phone } from "@/components/screens";
@@ -20,9 +22,17 @@ const STEPS = [
   { kind: "reply", s: "renters", title: "Answer their reply", body: "Snap it. We say if it's a win and write the next letter." },
 ] as const;
 
+export const metadata: Metadata = pageMeta({
+  title: "Take it back — Fight medical bills, insurance denials & landlords",
+  description: "Snap a photo of the bill, denial or notice. Take it back explains what's wrong in plain English, writes the letter to fight it, and tracks every deadline until it's settled. Free to start.",
+  path: "/",
+  absolute: true,
+});
+
 export default function Home() {
   return (
     <main>
+      <JsonLd data={[ORG, { "@type": "WebSite", "@id": `${SITE_URL}/#site`, url: SITE_URL, name: "Take it back", publisher: { "@id": `${SITE_URL}/#org` } }, APP_LD]} />
       <section className="wrap-1200 row wrap" style={{ paddingTop: "clamp(48px, 7vw, 88px)", gap: 56, alignItems: "center" }}>
         <div className="stack g20" style={{ flex: "1 1 480px", minWidth: 0 }}>
           <span className="eyebrow" style={{ fontSize: 13 }}>Fight back against hospitals · insurers · landlords · debt collectors</span>
@@ -137,7 +147,7 @@ export default function Home() {
             <span style={{ fontWeight: 500, fontSize: 18 }}>Free</span>
             <span className="serif" style={{ fontSize: 52, lineHeight: 1 }}>$0</span>
             <p className="muted" style={{ margin: 0 }}>Know where you stand. 3 scans a month, a plain-English summary, general next steps and red flags.</p>
-            <Link href="/login?mode=signup" className="btn-plain" style={{ alignSelf: "flex-start", minHeight: 48, borderColor: "#1A1A1A" }}>Start free</Link>
+            <Link prefetch={false} href="/login?mode=signup" className="btn-plain" style={{ alignSelf: "flex-start", minHeight: 48, borderColor: "#1A1A1A" }}>Start free</Link>
           </div>
           <div className="card stack g12" style={{ padding: 30, borderRadius: 26, border: "2px solid #BF4F28" }}>
             <span style={{ fontWeight: 500, fontSize: 18 }}>Premium</span>

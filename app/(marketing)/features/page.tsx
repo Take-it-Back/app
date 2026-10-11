@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta, JsonLd, breadcrumbs } from "@/lib/seo";
 import { CtaBand } from "@/components/site";
 import { CtaLink } from "@/components/ui";
 import { Peek } from "@/components/screens";
@@ -7,14 +8,12 @@ import { PageHead } from "@/components/Faq";
 import FeatureIcon from "@/components/FeatureIcon";
 import { FEATURES } from "@/lib/marketing";
 
-export const metadata: Metadata = {
-  title: "Features",
-  description: "Scan bills and notices, get plain answers, send letters written for you, and track every deadline and reply until it's settled.",
-};
+export const metadata: Metadata = pageMeta({ title: "Features: scan, letters, deadlines and case tracking", description: "Scan bills and notices, get plain-English answers, send letters written for you, track every deadline and decode their replies until it's settled.", path: "/features" });
 
 export default function FeaturesPage() {
   return (
     <main>
+      <JsonLd data={breadcrumbs([["Home", "/"], ["Features", "/features"]])} />
       <PageHead eyebrow="Features" title="Everything you need to" italic="fight back" after="." lede="Eight tools that work together, from the moment a letter arrives to the day it's settled." />
       <section className="wrap-1200" style={{ paddingTop: 48 }}>
         <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>

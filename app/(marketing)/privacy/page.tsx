@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { pageMeta, JsonLd, breadcrumbs, faqPage, ORG, APP_LD } from "@/lib/seo";
 
 
-export const metadata: Metadata = { title: "Privacy" };
+export const metadata: Metadata = pageMeta({ title: "Privacy", description: "How Take it back keeps your bills, letters and documents private: never sold, never used for ads, and deletable anytime.", path: "/privacy" });
 
 export default function Privacy() {
   return (

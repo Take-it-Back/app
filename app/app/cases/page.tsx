@@ -15,8 +15,8 @@ const FILTERS = [
 export default async function CasesPage({ searchParams }: { searchParams: Promise<{ f?: string; c?: string }> }) {
   const { f = "all", c: cat } = await searchParams;
   const { supabase, user } = await requireUser();
-  await supabase.rpc("claim_case_shares");
-  const [{ data: casesData }, { data: dl }] = await Promise.all([
+  const [, { data: casesData }, { data: dl }] = await Promise.all([
+    supabase.rpc("claim_case_shares"),
     supabase.from("cases").select("*").order("updated_at", { ascending: false }),
     supabase.from("deadlines").select("*").eq("done", false).order("due_date"),
   ]);

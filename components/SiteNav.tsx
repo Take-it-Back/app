@@ -74,8 +74,8 @@ export default function SiteNav() {
         </button>
         <Link href="/how-it-works">How it works</Link>
         <Link href="/pricing">Pricing</Link>
-        <Link href="/faq">FAQ</Link>
-        <Link href="/login">Sign in</Link>
+        <Link href="/guides">Guides</Link>
+        <Link prefetch={false} href="/login">Sign in</Link>
       </nav>
       <span className="nav-cta"><CtaLink href="/login?mode=signup">Start free</CtaLink></span>
       <button type="button" className="nav-burger" aria-expanded={mobile} aria-controls="mobile-nav" aria-label={mobile ? "Close menu" : "Open menu"} onClick={() => setMobile(!mobile)}>
@@ -150,8 +150,9 @@ export default function SiteNav() {
           <Link href="/how-it-works">How it works</Link>
           <Link href="/pricing">Pricing</Link>
           <Link href="/faq">FAQ</Link>
+          <Link href="/guides">Guides</Link>
           <Link href="/about">About</Link>
-          <Link href="/login">Sign in</Link>
+          <Link prefetch={false} href="/login">Sign in</Link>
         </nav>
       )}
     </div>

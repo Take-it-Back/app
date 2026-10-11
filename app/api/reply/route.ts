@@ -3,6 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import { aiConfigured, analyzeReply } from "@/lib/ai";
 import { loadMedia } from "@/lib/media";
 import { getCasePremium } from "@/lib/plan";
+import { logError, useAi } from "@/lib/limits";
 
 export const maxDuration = 60;
 
@@ -16,6 +17,8 @@ export async function POST(request: Request) {
   if (!caseId || !documentId) return NextResponse.json({ error: "Missing details." }, { status: 400 });
   if (!(await getCasePremium(supabase, user.id, caseId)))
     return NextResponse.json({ error: "Reading their reply is part of Premium. Start a free 7-day trial to use it.", upgrade: true }, { status: 402 });
+  const limit = await useAi(supabase, user.id, "reply");
+  if (!limit.ok) return NextResponse.json({ error: limit.error }, { status: 429 });
 
   const [{ data: c }, { data: doc }] = await Promise.all([
     supabase.from("cases").select("title, category, summary, findings, stage").eq("id", caseId).single(),
@@ -46,6 +49,7 @@ export async function POST(request: Request) {
     ]);
     return NextResponse.json({ ok: true });
   } catch (e) {
+    await logError(supabase, "reply", e, `/app/cases/${caseId}`);
     await supabase.from("events").insert({ case_id: caseId, user_id: user.id, title: "Their reply added" });
     return NextResponse.json({ ok: true, warning: e instanceof Error ? e.message : "We couldn't read the reply." });
   }

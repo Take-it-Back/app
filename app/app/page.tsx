@@ -14,8 +14,8 @@ import { createDemoCase } from "@/lib/actions";
 export default async function Today({ searchParams }: { searchParams: Promise<{ upgraded?: string }> }) {
   const { upgraded } = await searchParams;
   const { supabase, user } = await requireUser();
-  await supabase.rpc("claim_case_shares");
-  const [{ data: profile }, { data: casesData }, { data: dlData }, { data: letters }, plan] = await Promise.all([
+  const [, { data: profile }, { data: casesData }, { data: dlData }, { data: letters }, plan] = await Promise.all([
+    supabase.rpc("claim_case_shares"),
     supabase.from("profiles").select("full_name, morning_briefing").eq("id", user.id).maybeSingle(),
     supabase.from("cases").select("*").order("updated_at", { ascending: false }),
     supabase.from("deadlines").select("*").eq("done", false).order("due_date"),

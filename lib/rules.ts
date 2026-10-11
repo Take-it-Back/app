@@ -1,3 +1,4 @@
+import { depositRule } from "./deposits";
 import type { Category, CaseStatus } from "./types";
 
 /**
@@ -33,7 +34,7 @@ export function addDays(dateISO: string, days: number) {
 }
 
 /** Your first deadline after a document arrives. */
-export function firstDeadline(category: Category, received: string, insured?: string | null) {
+export function firstDeadline(category: Category, received: string, insured?: string | null, state?: string | null) {
   switch (category) {
     case "insurance":
       return {
@@ -59,12 +60,14 @@ export function firstDeadline(category: Category, received: string, insured?: st
         due: addDays(received, 30),
         note: "Suggested date. Replying within 30 days helps keep the bill out of collections.",
       };
-    case "landlord":
+    case "landlord": {
+      const r = depositRule(state);
       return {
         title: "Send your letter",
         due: addDays(received, 14),
-        note: "Suggested date. Rules vary by state, so act quickly.",
+        note: r ? `Suggested date. In ${state}, landlords generally must return a deposit within ${r.text}.` : "Suggested date. Rules vary by state, so act quickly.",
       };
+    }
     default:
       return { title: "Send your letter", due: addDays(received, 30), note: "Suggested date." };
   }

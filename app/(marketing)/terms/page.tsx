@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { pageMeta, JsonLd, breadcrumbs, faqPage, ORG, APP_LD } from "@/lib/seo";
 
 
-export const metadata: Metadata = { title: "Terms" };
+export const metadata: Metadata = pageMeta({ title: "Terms", description: "The short version of Take it back's terms: information and self-help tools, not legal advice; plans, billing and fair use.", path: "/terms" });
 
 export default function Terms() {
   return (

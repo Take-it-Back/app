@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta, JsonLd, breadcrumbs, faqPage } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { CtaBand } from "@/components/site";
 import { CtaLink } from "@/components/ui";
@@ -7,6 +8,7 @@ import { Phone } from "@/components/screens";
 import Faq from "@/components/Faq";
 import FeatureIcon from "@/components/FeatureIcon";
 import { PROBLEMS, SCENARIOS, problemBySlug } from "@/lib/marketing";
+import { guidesFor } from "@/lib/guides";
 
 const CTA = { medical: "Fighting a hospital bill?", insurance: "Fighting your insurance company?", renters: "Fighting your landlord?", debt: "Fighting a debt collector?" } as const;
 
@@ -16,7 +18,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const p = problemBySlug((await params).slug);
-  return p ? { title: p.name, description: p.lede } : {};
+  return p ? pageMeta({ title: p.seoTitle, description: p.lede, path: `/fight/${p.slug}` }) : {};
 }
 
 export default async function ProblemPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -26,6 +28,7 @@ export default async function ProblemPage({ params }: { params: Promise<{ slug: 
 
   return (
     <main>
+      <JsonLd data={[breadcrumbs([["Home", "/"], ["Who we fight", "/fight"], [p.name, `/fight/${p.slug}`]]), faqPage(p.faqs)]} />
       <section className="wrap-1200 row wrap" style={{ paddingTop: "clamp(40px, 6vw, 72px)", gap: 56, alignItems: "center" }}>
         <div className="stack g16" style={{ flex: "1 1 460px", minWidth: 0 }}>
           <Link href="/fight" className="muted" style={{ fontSize: 14, textDecoration: "none", padding: "10px 0", alignSelf: "flex-start" }}>← Everyone we fight</Link>
@@ -128,6 +131,10 @@ export default async function ProblemPage({ params }: { params: Promise<{ slug: 
       <section className="stack g24 m-section" style={{ maxWidth: 820, margin: "0 auto", paddingLeft: 24, paddingRight: 24 }}>
         <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>Common <em className="o">questions</em></h2>
         <Faq items={p.faqs} />
+        <div className="stack g8">
+          <span className="eyebrow" style={{ marginTop: 12 }}>Guides</span>
+          {guidesFor(p.slug).map((g) => <Link key={g.slug} href={`/guides/${g.slug}`} className="list-row" style={{ fontWeight: 500 }}>{g.title} →</Link>)}
+        </div>
       </section>
 
       <CtaBand title={CTA[p.scenario]} italic="Start here." sub="Scan it free and see where you stand in a minute." />

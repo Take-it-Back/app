@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta, JsonLd, breadcrumbs } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { CtaBand } from "@/components/site";
 import { CtaLink } from "@/components/ui";
@@ -13,7 +14,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const f = featureBySlug((await params).slug);
-  return f ? { title: f.name, description: f.lede } : {};
+  return f ? pageMeta({ title: `${f.name}: ${f.headline[0]} ${f.headline[1]}`, description: f.lede, path: `/features/${f.slug}` }) : {};
 }
 
 export default async function FeaturePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -23,6 +24,7 @@ export default async function FeaturePage({ params }: { params: Promise<{ slug: 
 
   return (
     <main>
+      <JsonLd data={breadcrumbs([["Home", "/"], ["Features", "/features"], [f.name, `/features/${f.slug}`]])} />
       <section className="wrap-1200 stack g16" style={{ paddingTop: "clamp(40px, 6vw, 72px)" }}>
         <Link href="/features" className="muted" style={{ fontSize: 14, textDecoration: "none", padding: "10px 0", alignSelf: "flex-start" }}>← All features</Link>
         <span className="row g8">

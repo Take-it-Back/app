@@ -1,14 +1,16 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { pageMeta, JsonLd, breadcrumbs, faqPage, ORG, APP_LD } from "@/lib/seo";
 import { CtaBand } from "@/components/site";
 import Faq, { PageHead } from "@/components/Faq";
 import { FAQ_GROUPS, PROBLEMS } from "@/lib/marketing";
 
-export const metadata: Metadata = { title: "FAQ", description: "Answers about how Take it back works, what it costs and how your information is kept private." };
+export const metadata: Metadata = pageMeta({ title: "FAQ: how Take it back works, pricing and privacy", description: "Answers about fighting medical bills, insurance denials, landlords and debt collectors with Take it back, what Free and Premium include, and how your documents stay private.", path: "/faq" });
 
 export default function FaqPage() {
   return (
     <main>
+      <JsonLd data={[faqPage([...FAQ_GROUPS.flatMap((g) => g.items), ...PROBLEMS.flatMap((p) => p.faqs)]), breadcrumbs([["Home", "/"], ["FAQ", "/faq"]])]} />
       <PageHead eyebrow="FAQ" title="Good" italic="questions" after="." lede="Can't find what you need? Email hello@takeitback.app and a person will write back." />
       <div className="stack g48" style={{ maxWidth: 820, margin: "0 auto", padding: "48px 24px 0", gap: 56 }}>
         {FAQ_GROUPS.map((g) => (

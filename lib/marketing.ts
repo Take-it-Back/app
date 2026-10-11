@@ -299,6 +299,7 @@ export type Problem = {
   scenario: ScenarioKey;
   name: string;
   menu: string;
+  seoTitle: string;
   headline: [string, string];
   lede: string;
   catches: [string, string][];
@@ -310,6 +311,7 @@ export type Problem = {
 export const PROBLEMS: Problem[] = [
   {
     slug: "medical-bills",
+    seoTitle: "How to dispute a hospital or medical bill",
     scenario: "medical",
     name: "Hospitals & medical bills",
     menu: "Overcharges, surprise bills, billing errors",
@@ -329,6 +331,7 @@ export const PROBLEMS: Problem[] = [
   },
   {
     slug: "insurance-denials",
+    seoTitle: "How to appeal a health insurance denial",
     scenario: "insurance",
     name: "Insurance companies",
     menu: "Denied claims, stalled appeals, lowball payments",
@@ -348,6 +351,7 @@ export const PROBLEMS: Problem[] = [
   },
   {
     slug: "landlords",
+    seoTitle: "How to get your security deposit back and fight your landlord",
     scenario: "renters",
     name: "Landlords",
     menu: "Kept deposits, ignored repairs, illegal fees",
@@ -367,6 +371,7 @@ export const PROBLEMS: Problem[] = [
   },
   {
     slug: "debt-collectors",
+    seoTitle: "How to dispute a debt collector and make them prove it",
     scenario: "debt",
     name: "Debt collectors",
     menu: "Unproven debts, old debts, harassment",

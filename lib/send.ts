@@ -1,5 +1,6 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { letterPdf } from "./pdf";
+import { logError } from "./limits";
 
 // Sending letters for people: certified mail through Lob, fax through Telnyx.
 export const SEND_PRICES = { mail: { cents: 899, label: "$8.99", name: "Certified mail" }, fax: { cents: 199, label: "$1.99", name: "Fax" } } as const;
@@ -84,6 +85,7 @@ export async function dispatchSend(supabase: SupabaseClient, send: SendRow, from
   } catch (e) {
     const error = e instanceof Error ? e.message : "Sending failed";
     await supabase.from("sends").update({ status: "failed", error, updated_at: new Date().toISOString() }).eq("id", send.id);
+    await logError(supabase, `send-${send.method}`, error, `/app/cases/${send.case_id}`);
     return { ok: false as const, error };
   }
 

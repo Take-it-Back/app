@@ -23,7 +23,7 @@ export default async function FoundPage({ params, searchParams }: { params: Prom
   const d = (dl?.[0] || null) as DeadlineRow | null;
   const hasFindings = c.findings?.length > 0;
   const premium = plan.premium;
-  const rule = !premium ? firstDeadline(c.category, c.received_date || c.created_at.slice(0, 10), c.insured) : null;
+  const rule = !premium ? firstDeadline(c.category, c.received_date || c.created_at.slice(0, 10), c.insured, c.user_state) : null;
 
   return (
     <main className="app-main">

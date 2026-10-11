@@ -4,6 +4,7 @@ import ConfirmSubmit from "@/components/ConfirmSubmit";
 import { deleteAccount, updateProfile } from "@/lib/actions";
 import { US_STATES } from "@/lib/states";
 import PasswordReset from "./PasswordReset";
+import ChangeEmail from "./ChangeEmail";
 import { getPlan } from "@/lib/plan";
 import { CtaLink } from "@/components/ui";
 import { shortDate } from "@/lib/format";
@@ -74,6 +75,7 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
           {p?.is_admin && <a href="/app/admin" className="list-row" style={{ fontWeight: 500 }}>Admin dashboard</a>}
           <span className="eyebrow">Privacy</span>
           <p className="muted small" style={{ margin: "6px 0" }}>Your documents are private to you, never sold and never used for ads.</p>
+          <ChangeEmail current={user.email || ""} />
           <a href="/api/export" className="list-row">Download all my data</a>
           <form action="/auth/signout" method="post"><button className="list-row btn-text" style={{ width: "100%", justifyContent: "flex-start", borderBottom: "1px solid #EBEBEB" }}>Sign out</button></form>
           <form action={deleteAccount}>
