@@ -8,6 +8,8 @@ import { theirDeadline } from "./rules";
 import { theirDeadlineFor } from "./letters";
 import type { Category } from "./types";
 import { US_STATES } from "./states";
+import { sendEmail } from "./email";
+import { helperInviteEmail } from "./emails/templates";
 import { logError } from "./limits";
 
 async function ctx() {
@@ -69,6 +71,12 @@ export async function inviteHelper(caseId: string, formData: FormData) {
   const { error } = await supabase.from("case_shares").insert({ case_id: caseId, owner_id: user.id, helper_email: email });
   if (error) redirect(`${back}?err=${encodeURIComponent(error.code === "23505" ? "They're already added." : "Couldn't add them. Only the case owner can add helpers.")}`);
   await supabase.from("events").insert({ case_id: caseId, user_id: user.id, title: `Added a helper: ${email}` });
+  const [{ data: me }, { data: cs }] = await Promise.all([
+    supabase.from("profiles").select("full_name").eq("id", user.id).maybeSingle(),
+    supabase.from("cases").select("title").eq("id", caseId).maybeSingle(),
+  ]);
+  const inv = helperInviteEmail({ fromName: me?.full_name || user.email || "Someone", caseTitle: cs?.title || "a case" });
+  await sendEmail(email, inv.subject, inv.text, inv.html).catch(() => null);
   revalidatePath(back);
   redirect(`${back}?sent=1`);
 }

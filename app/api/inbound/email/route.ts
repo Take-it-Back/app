@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { analyzeCase } from "@/lib/analyzeCase";
 import { logError } from "@/lib/limits";
+import { sendEmail } from "@/lib/email";
+import { forwardReceivedEmail } from "@/lib/emails/templates";
 
 // Inbound email (Postmark inbound webhook format). Each person forwards bills to <their token>@<INBOUND_DOMAIN>.
 export const maxDuration = 60;
@@ -79,5 +81,16 @@ export async function POST(request: Request) {
   await admin.from("events").insert({ case_id: c.id, user_id: prof.id, title: `Forwarded by email from ${from}`.slice(0, 200), detail: files.length ? `${files.length} attachment${files.length > 1 ? "s" : ""}` : (msg.TextBody || "").slice(0, 1500) || null });
 
   await analyzeCase(admin, prof.id, c.id, true, "Read automatically");
+  try {
+    const [{ data: u }, { data: full }, { data: cs }] = await Promise.all([
+      admin.auth.admin.getUserById(prof.id),
+      admin.from("profiles").select("full_name").eq("id", prof.id).maybeSingle(),
+      admin.from("cases").select("title").eq("id", c.id).maybeSingle(),
+    ]);
+    if (u?.user?.email) {
+      const e = forwardReceivedEmail({ name: full?.full_name, caseTitle: cs?.title || subject || "Forwarded document", caseId: c.id, files: files.length });
+      await sendEmail(u.user.email, e.subject, e.text, e.html);
+    }
+  } catch { /* confirmation email is best effort */ }
   return NextResponse.json({ ok: true, caseId: c.id });
 }

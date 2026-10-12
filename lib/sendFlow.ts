@@ -1,3 +1,5 @@
+import { sendEmail } from "./email";
+import { letterSentEmail } from "./emails/templates";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { stripe } from "./stripe";
 import { dispatchSend, SEND_PRICES, type Address, type SendMethod } from "./send";
@@ -19,5 +21,13 @@ export async function completeSend(supabase: SupabaseClient, sendId: string) {
   const result = await dispatchSend(supabase, { ...send, to_address: addr?.to ?? null }, addr?.from ?? null);
   if (!result.ok) return { ok: false as const, error: result.error, ...base };
   await markLetterSent(send.letter_id, `${SEND_PRICES[send.method as SendMethod].name} (sent for you)`, todayISO());
+  try {
+    const { data: u } = await supabase.auth.getUser();
+    if (u?.user?.email) {
+      const { data: prof } = await supabase.from("profiles").select("full_name").eq("id", u.user.id).maybeSingle();
+      const e = letterSentEmail({ name: prof?.full_name, method: send.method as SendMethod, to: send.to_name || addr?.to?.name || send.fax_number || "them", caseId: send.case_id });
+      await sendEmail(u.user.email, e.subject, e.text, e.html);
+    }
+  } catch { /* confirmation email is best effort */ }
   return { ok: true as const, ...base };
 }
