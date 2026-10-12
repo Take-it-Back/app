@@ -15,7 +15,11 @@ type Overview = {
   recent_cases: { id: string; title: string; category: Category; status: CaseStatus; amount_at_stake: number | null; created_at: string; email: string }[];
   funnel?: Record<string, number>;
   errors?: { area: string; message: string; path: string | null; created_at: string; email: string | null }[];
+  ai_failures?: { area: string; message: string; path: string | null; created_at: string; email: string | null; case_title: string | null; category: Category | null }[];
+  stuck_cases?: { id: string; title: string; category: Category; updated_at: string; email: string }[];
 };
+
+const AI_AREA: Record<string, string> = { analyze: "Scan", reply: "Reply read", letter: "Letter" };
 
 export default async function AdminPage() {
   const { supabase, user } = await requireUser();
@@ -44,6 +48,7 @@ export default async function AdminPage() {
     ["Letters", String(t.letters), `${t.letters_sent} sent`],
     ["Taken back", money(t.taken_back), `${money(t.in_play)} still in play`],
     ["AI runs, 24h", String(t.ai_24h ?? 0), `${t.errors_7d ?? 0} errors this week`],
+    ["Failed AI reads, 7d", String(t.ai_failed_7d ?? 0), `${t.ai_7d ? Math.round(((t.ai_failed_7d ?? 0) / t.ai_7d) * 100) : 0}% of ${t.ai_7d ?? 0} runs${t.stuck ? ` · ${t.stuck} stuck` : ""}`],
   ];
   const f = o.funnel || {};
   const steps: [string, number][] = [["Signed up", f.signed_up ?? 0], ["Scanned a document", f.scanned ?? 0], ["Wrote a letter", f.wrote_letter ?? 0], ["Sent a letter", f.sent_letter ?? 0], ["Premium", f.premium ?? 0]];
@@ -150,7 +155,26 @@ export default async function AdminPage() {
           </div>
         </section>
         <section className="card">
-          <span className="eyebrow">Recent errors</span>
+          <span className="eyebrow">Failed AI reads</span>
+          <p className="muted small" style={{ margin: "6px 0 0" }}>Scans, reply reads and letters where the AI didn&apos;t come back cleanly. The person got the template version instead.</p>
+          <div className="stack" style={{ marginTop: 4 }}>
+            {(o.stuck_cases || []).map((c) => (
+              <div key={c.id} className="list-row" style={{ alignItems: "flex-start" }}>
+                <span className="tag tag-orange">Stuck</span>
+                <span className="stack grow" style={{ minWidth: 0 }}><span style={{ fontSize: 14 }}>{c.title} is still &ldquo;reading&rdquo;</span><span className="muted small">{CATEGORY_INFO[c.category]?.label} · {c.email} · since {shortDate(c.updated_at)}</span></span>
+              </div>
+            ))}
+            {(o.ai_failures || []).map((e, i) => (
+              <div key={i} className="list-row" style={{ alignItems: "flex-start" }}>
+                <span className="tag tag-gray">{AI_AREA[e.area] || e.area}</span>
+                <span className="stack grow" style={{ minWidth: 0 }}><span style={{ fontSize: 14, wordBreak: "break-word" }}>{e.message}</span><span className="muted small">{e.case_title ? `${e.case_title} · ` : ""}{e.category ? `${CATEGORY_INFO[e.category]?.label} · ` : ""}{e.email || "—"} · {shortDate(e.created_at)}</span></span>
+              </div>
+            ))}
+            {!(o.ai_failures || []).length && !(o.stuck_cases || []).length && <p className="muted" style={{ margin: "8px 0 0" }}>No failed reads.</p>}
+          </div>
+        </section>
+        <section className="card">
+          <span className="eyebrow">Other errors</span>
           <div className="stack" style={{ marginTop: 4 }}>
             {(o.errors || []).map((e, i) => (
               <div key={i} className="list-row" style={{ alignItems: "flex-start" }}>

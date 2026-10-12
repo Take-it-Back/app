@@ -25,6 +25,7 @@ export default function LetterEditor({ letter, caseId }: { letter: LetterRow; ca
   const [toast, setToast] = useState<string | null>(null);
   const [rewrite, setRewrite] = useState("");
   const [rewriting, setRewriting] = useState(false);
+  const [sharing, setSharing] = useState(false);
   const [pending, start] = useTransition();
   const sent = letter.status === "sent";
 
@@ -49,6 +50,42 @@ export default function LetterEditor({ letter, caseId }: { letter: LetterRow; ca
     });
   }
 
+  // Phones: share sheet with the letter as a PDF attachment (Mail, Gmail, Outlook, any app).
+  // Elsewhere, or if sharing isn't available: open the email app. Long letters are too big for an
+  // email link on many phones, so the text is copied first and the email opens with the subject only.
+  async function emailIt() {
+    setSharing(true);
+    try {
+      if (!sent) await saveLetter(letter.id, { body, subject, recipient });
+      const nav = navigator as Navigator & { canShare?: (d: ShareData) => boolean };
+      const mobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(navigator.userAgent));
+      if (mobile && nav.share) {
+        let file: File | null = null;
+        try {
+          const res = await fetch(`/api/letter/pdf?id=${letter.id}`);
+          if (res.ok) file = new File([await res.blob()], `${(subject || "letter").replace(/[^a-z0-9]+/gi, "-").slice(0, 60) || "letter"}.pdf`, { type: "application/pdf" });
+        } catch { /* fall back to text only */ }
+        const data: ShareData = file && nav.canShare?.({ files: [file] }) ? { title: subject, text: body, files: [file] } : { title: subject, text: `${subject}\n\n${body}` };
+        try {
+          await nav.share(data);
+          return;
+        } catch (e) {
+          if ((e as Error)?.name === "AbortError") return;
+        }
+      }
+      const full = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      if (full.length <= 1800) {
+        window.location.href = full;
+      } else {
+        await navigator.clipboard.writeText(body).catch(() => {});
+        flash("Letter copied. Paste it into the email.");
+        setTimeout(() => { window.location.href = `mailto:?subject=${encodeURIComponent(subject)}`; }, 900);
+      }
+    } finally {
+      setSharing(false);
+    }
+  }
+
   async function redo() {
     setRewriting(true);
     const res = await fetch("/api/letter", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ caseId, kind: letter.kind, instructions: rewrite }) });
@@ -71,7 +108,7 @@ export default function LetterEditor({ letter, caseId }: { letter: LetterRow; ca
         <div className="row wrap g8">
           {!sent && <button type="button" className="btn-plain" onClick={save} disabled={pending}>Save changes</button>}
           <button type="button" className="btn-plain" onClick={() => { navigator.clipboard.writeText(`${subject}\n\n${body}`); flash("Copied"); }}>Copy text</button>
-          <a className="btn-plain" href={`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}>Open in email</a>
+          <button type="button" className="btn-plain" onClick={emailIt} disabled={sharing}>{sharing ? "Opening…" : "Email it"}</button>
         </div>
       </div>
 

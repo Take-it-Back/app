@@ -65,12 +65,14 @@ export async function inviteHelper(caseId: string, formData: FormData) {
   const back = `/app/cases/${caseId}/share`;
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) redirect(`${back}?err=${encodeURIComponent("That email doesn't look right.")}`);
   if (email === (user.email || "").toLowerCase()) redirect(`${back}?err=${encodeURIComponent("That's your own email.")}`);
+  // Separate, specific consent to share health information (Washington MHMDA and similar laws).
+  if (formData.get("share_consent") !== "on") redirect(`${back}?err=${encodeURIComponent("Please tick the box to agree to share this case.")}`);
   if (!(await getCasePremium(supabase, user.id, caseId))) redirect("/app/upgrade");
   const { count } = await supabase.from("case_shares").select("id", { count: "exact", head: true }).eq("case_id", caseId);
   if ((count ?? 0) >= 4) redirect(`${back}?err=${encodeURIComponent("Up to 4 helpers per case.")}`);
   const { error } = await supabase.from("case_shares").insert({ case_id: caseId, owner_id: user.id, helper_email: email });
   if (error) redirect(`${back}?err=${encodeURIComponent(error.code === "23505" ? "They're already added." : "Couldn't add them. Only the case owner can add helpers.")}`);
-  await supabase.from("events").insert({ case_id: caseId, user_id: user.id, title: `Added a helper: ${email}` });
+  await supabase.from("events").insert({ case_id: caseId, user_id: user.id, title: `Added a helper: ${email}`, detail: `You agreed to share this case, including any health information in it, with ${email} on ${new Date().toISOString().slice(0, 10)}.` });
   const [{ data: me }, { data: cs }] = await Promise.all([
     supabase.from("profiles").select("full_name").eq("id", user.id).maybeSingle(),
     supabase.from("cases").select("title").eq("id", caseId).maybeSingle(),
@@ -232,6 +234,14 @@ export async function recordHealthConsent() {
     throw new Error("We couldn't save your consent. Please try again.");
   }
   revalidatePath("/app", "layout");
+}
+
+/** Withdraw consent to collect health information. Existing cases stay; new scans and forwarded bills ask again. */
+export async function withdrawHealthConsent() {
+  const { supabase, user } = await ctx();
+  await supabase.from("profiles").update({ health_consent_at: null }).eq("id", user.id);
+  revalidatePath("/app", "layout");
+  redirect("/app/you?consent=withdrawn");
 }
 
 export async function shareWin(caseId: string) {

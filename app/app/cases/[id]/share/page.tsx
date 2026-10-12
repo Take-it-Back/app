@@ -52,6 +52,10 @@ export default async function SharePage({ params, searchParams }: { params: Prom
           {sent && <p className="notice" role="status">Added. Send them the invite below so they know to sign up with that email.</p>}
           <form action={inviteHelper.bind(null, id)} className="card stack g12">
             <label className="field"><span>Their email</span><input name="email" type="email" required className="input" placeholder="name@example.com" autoComplete="off" /></label>
+            <label className="row g12" style={{ alignItems: "flex-start", fontSize: 14 }}>
+              <input type="checkbox" name="share_consent" required style={{ width: 20, height: 20, accentColor: "#1A1A1A", flex: "none", marginTop: 2 }} />
+              <span>I agree to share this case with this person, including any health information in its documents and letters. I can remove them anytime.</span>
+            </label>
             <button className="btn-plain" style={{ alignSelf: "flex-start", background: "#1A1A1A", color: "#fff", borderColor: "#1A1A1A" }}>Add helper</button>
             <span className="muted small">They&apos;ll see this case only, not your other cases. They can&apos;t delete it.</span>
           </form>

@@ -1,7 +1,7 @@
 import { requireUser } from "@/lib/supabase/server";
 import { Avatar } from "@/components/ui";
 import ConfirmSubmit from "@/components/ConfirmSubmit";
-import { deleteAccount, updateProfile } from "@/lib/actions";
+import { deleteAccount, updateProfile, withdrawHealthConsent } from "@/lib/actions";
 import { US_STATES } from "@/lib/states";
 import ShareButton from "@/components/ShareButton";
 import CopyButton from "@/components/CopyButton";
@@ -13,8 +13,8 @@ import { getPlan } from "@/lib/plan";
 import { CtaLink } from "@/components/ui";
 import { shortDate } from "@/lib/format";
 
-export default async function YouPage({ searchParams }: { searchParams: Promise<{ reset?: string; saved?: string }> }) {
-  const { reset, saved } = await searchParams;
+export default async function YouPage({ searchParams }: { searchParams: Promise<{ reset?: string; saved?: string; consent?: string }> }) {
+  const { reset, saved, consent } = await searchParams;
   const { supabase, user } = await requireUser();
   const [{ data: p }, plan] = await Promise.all([supabase.from("profiles").select("*").eq("id", user.id).maybeSingle(), getPlan(supabase, user.id)]);
   const ends = plan.periodEnd ? shortDate(plan.periodEnd.slice(0, 10)) : null;
@@ -102,6 +102,13 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
           <p className="muted small" style={{ margin: "6px 0" }}>Your documents are private to you, never sold and never used for ads.</p>
           <ChangeEmail current={user.email || ""} />
           <a href="/api/export" className="list-row">Download all my data</a>
+          {p?.health_consent_at ? (
+            <form action={withdrawHealthConsent}>
+              <ConfirmSubmit message="Stop collecting health information? Your cases stay, but new scans and forwarded bills will ask for your OK again." className="list-row btn-text" style={{ width: "100%", justifyContent: "flex-start", borderBottom: "1px solid #EBEBEB" }}>Withdraw health data consent</ConfirmSubmit>
+            </form>
+          ) : (
+            <span className="list-row muted small">{consent === "withdrawn" ? "Health data consent withdrawn. We'll ask again before your next scan." : "No health data consent on file. We'll ask before your first scan."}</span>
+          )}
           <form action="/auth/signout" method="post"><button className="list-row btn-text" style={{ width: "100%", justifyContent: "flex-start", borderBottom: "1px solid #EBEBEB" }}>Sign out</button></form>
           <form action={deleteAccount}>
             <ConfirmSubmit message="Delete your account, every case and every file? This can't be undone." className="btn-text" style={{ color: "#A8441F" }}>Delete my account and everything in it</ConfirmSubmit>
