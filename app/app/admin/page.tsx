@@ -27,7 +27,7 @@ export default async function AdminPage() {
   if (!me?.is_admin) notFound();
   const [{ data, error }, { data: costs }] = await Promise.all([supabase.rpc("admin_overview"), supabase.rpc("admin_ai_costs")]);
   // Estimated AI cost: token counts are exact; the per-million prices are settings (AI_PRICE_IN / AI_PRICE_OUT, in dollars).
-  const pin = Number(process.env.AI_PRICE_IN || 3), pout = Number(process.env.AI_PRICE_OUT || 15);
+  const pin = Number(process.env.AI_PRICE_IN || 2), pout = Number(process.env.AI_PRICE_OUT || 10);
   const costRows = ((costs as { kind: string; calls: number; avg_in: number; avg_out: number; model: string }[] | null) || []).map((c) => ({ ...c, cost: (Number(c.avg_in) * pin + Number(c.avg_out) * pout) / 1e6 }));
   if (error || !data) {
     return (
