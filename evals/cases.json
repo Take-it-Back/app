@@ -1,0 +1,955 @@
+[
+  {
+    "id": "med-01-duplicate-charge",
+    "context": "State: Pennsylvania. Insured: yes. Paid: no.",
+    "document": "RIVERSIDE MEDICAL CENTER\nPatient Billing Office · 400 River Rd, Scranton, PA 18503\nStatement date: 2026-09-02\nPatient: Maria Lopez · Account: RMC-448210\n\nDate of service 2026-07-14 · Emergency Department\n99284 ER visit, level 4 ........ $1,850.00\n99284 ER visit, level 4 ........ $1,850.00\n71046 Chest X-ray, 2 views ..... $412.00\n36415 Blood draw ................ $38.00\nTotal charges: $4,150.00\nInsurance paid (Highmark): -$1,610.00\nAdjustments: -$240.00\nPATIENT BALANCE DUE: $2,300.00\n\nPlease pay by 2026-10-02 to avoid referral to collections.",
+    "expect": {
+      "category": "medical",
+      "red_flag": false,
+      "amount_at_stake": 2300,
+      "findings_any": [
+        [
+          "duplicate",
+          "twice",
+          "billed two",
+          "charged two",
+          "same charge"
+        ]
+      ],
+      "deadlines": [
+        {
+          "owner": "you",
+          "date": "2026-10-02"
+        }
+      ],
+      "must_not": [
+        "No Surprises Act applies"
+      ]
+    }
+  },
+  {
+    "id": "med-02-surprise-anesthesia",
+    "context": "State: Ohio. Insured: yes. Paid: no. Surgery at an in-network hospital.",
+    "document": "BUCKEYE ANESTHESIA ASSOCIATES (out of network)\n1200 Lane Ave, Columbus, OH 43221\nStatement date: 2026-08-20\nPatient: Daniel Kim · Acct 77-30192\n\nService 2026-06-11 at Ohio Valley Hospital (in-network facility)\nAnesthesia for knee arthroscopy, 58 min ..... $3,480.00\nInsurance allowed (in-network rate): $920.00\nInsurance paid: $736.00\nBalance billed to patient: $2,744.00\n\nAmount due: $2,744.00. Payment due within 30 days.",
+    "expect": {
+      "category": "medical",
+      "red_flag": false,
+      "amount_at_stake": 2744,
+      "findings_any": [
+        [
+          "No Surprises",
+          "surprise bill",
+          "balance bill",
+          "out-of-network"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "med-03-upcoded-er",
+    "context": "State: Texas. Insured: no. Paid: no. Went to ER for a small cut, was there 40 minutes.",
+    "document": "LONE STAR REGIONAL HOSPITAL\nStatement 2026-09-10 · Account LSR-2290041 · Patient: Tyrone Jackson\nDOS 2026-08-01\n99285 Emergency visit, level 5 (highest severity) ..... $3,920.00\n12001 Simple repair of wound, 2.5 cm or less .......... $640.00\nSupplies ............................................ $185.00\nTotal: $4,745.00\nSelf-pay discount: $0.00\nAmount due: $4,745.00\nIf you cannot pay, call us about a payment plan.",
+    "expect": {
+      "category": "medical",
+      "red_flag": false,
+      "amount_at_stake": 4745,
+      "findings_any": [
+        [
+          "level 5",
+          "99285",
+          "upcod",
+          "severity",
+          "highest level"
+        ],
+        [
+          "good faith estimate",
+          "self-pay",
+          "uninsured",
+          "financial assistance",
+          "charity care"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "med-04-no-itemization",
+    "context": "State: Florida. Insured: yes. Paid: no.",
+    "document": "SUNCOAST SURGERY CENTER\nAccount summary · Date 2026-09-15\nPatient: Linda Morales · Account SSC-55102\nServices on 2026-07-28: $6,212.48\nInsurance payments: -$3,900.00\nYour responsibility: $2,312.48\nThis is a summary bill. Pay online at suncoastpay.example or call 813-555-0144.",
+    "expect": {
+      "category": "medical",
+      "red_flag": false,
+      "amount_at_stake": 2312.48,
+      "findings_any": [
+        [
+          "itemized",
+          "itemization",
+          "line-by-line",
+          "line item"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "med-05-paid-already",
+    "context": "State: Arizona. Insured: yes. Paid: yes, I paid $180 at the front desk.",
+    "document": "DESERT FAMILY CLINIC\nStatement 2026-09-01 · Patient: Grace Whitfield · Acct DFC-11873\n2026-07-06 Office visit, established patient ..... $245.00\nInsurance paid: -$65.00\nPatient payments: $0.00\nBalance: $180.00\nPAST DUE. Pay by 2026-09-30.",
+    "expect": {
+      "category": "medical",
+      "red_flag": false,
+      "amount_at_stake": 180,
+      "findings_any": [
+        [
+          "already paid",
+          "payment not credited",
+          "not applied",
+          "front desk",
+          "receipt",
+          "proof of payment"
+        ]
+      ],
+      "deadlines": [
+        {
+          "owner": "you",
+          "date": "2026-09-30"
+        }
+      ],
+      "must_not": []
+    }
+  },
+  {
+    "id": "med-06-collections-threat-medicaid",
+    "context": "State: Georgia. Insured: Medicaid. Paid: no.",
+    "document": "PEACHTREE PEDIATRICS\nStatement date 2026-08-25 · Guarantor: Keisha Brown · Account PP-90311\nPatient: Jaylen Brown (age 6)\n2026-06-02 Sick visit ..... $210.00\n2026-06-02 Strep test ....... $48.00\nInsurance: Georgia Medicaid — claim denied (no prior auth on file)\nBalance due from guarantor: $258.00\nFinal notice: unpaid balances are sent to collections after 2026-09-24.",
+    "expect": {
+      "category": "medical",
+      "red_flag": false,
+      "amount_at_stake": 258,
+      "findings_any": [
+        [
+          "Medicaid",
+          "can't bill",
+          "cannot bill",
+          "balance bill",
+          "provider must"
+        ]
+      ],
+      "deadlines": [
+        {
+          "owner": "you",
+          "date": "2026-09-24"
+        }
+      ],
+      "must_not": []
+    }
+  },
+  {
+    "id": "med-07-financial-assistance",
+    "context": "State: Pennsylvania. Insured: no. Paid: no. I earn about $28,000 a year, household of 3.",
+    "document": "WYOMING VALLEY HEALTH (nonprofit hospital)\n575 N River St, Wilkes-Barre, PA 18764\nStatement 2026-09-12 · Patient: Robert Nowak · Acct WVH-3381920\nInpatient stay 2026-08-03 to 2026-08-05 ..... $18,440.00\nPayments: $0.00\nBalance: $18,440.00\nPlease contact us to set up payment.",
+    "expect": {
+      "category": "medical",
+      "red_flag": false,
+      "amount_at_stake": 18440,
+      "findings_any": [
+        [
+          "financial assistance",
+          "charity care",
+          "501(r)",
+          "nonprofit"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "med-08-lawsuit-red-flag",
+    "context": "State: Missouri. Insured: no. Paid: no.",
+    "document": "IN THE CIRCUIT COURT OF JACKSON COUNTY, MISSOURI\nMIDWEST HEALTH SYSTEM, Plaintiff, v. SARAH COLLINS, Defendant.\nCase No. 2616-CV-20441\nSUMMONS IN CIVIL CASE\nYou are hereby summoned to appear and file your answer within 30 days after service of this summons, exclusive of the day of service. Judgment by default may be taken against you for the relief demanded in the petition: $7,212.55 for unpaid medical services.\nIssued: 2026-09-18",
+    "expect": {
+      "category": "medical",
+      "red_flag": true,
+      "amount_at_stake": 7212.55,
+      "findings_any": [
+        [
+          "answer",
+          "respond",
+          "court",
+          "default"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "med-09-out-of-network-lab",
+    "context": "State: California. Insured: yes. Paid: no. Doctor sent my blood to the lab, I didn't choose it.",
+    "document": "PACIFIC DIAGNOSTIC LABS\nInvoice date 2026-09-05 · Patient: Ana Reyes · Invoice PDL-881920\nOrdering provider: Dr. S. Patel (in-network)\n2026-07-19 Comprehensive metabolic panel ..... $310.00\n2026-07-19 Lipid panel ........................ $195.00\n2026-07-19 Vitamin D ......................... $260.00\nInsurance (Blue Shield): processed as out-of-network, paid $120.00\nAmount due: $645.00",
+    "expect": {
+      "category": "medical",
+      "red_flag": false,
+      "amount_at_stake": 645,
+      "findings_any": [
+        [
+          "No Surprises",
+          "out-of-network",
+          "surprise",
+          "didn't choose",
+          "in-network"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "med-10-clean-bill",
+    "context": "State: Michigan. Insured: yes. Paid: no.",
+    "document": "LAKESHORE DERMATOLOGY\nStatement 2026-09-08 · Patient: Ellen Brooks · Acct LD-20931\n2026-08-12 Office visit ..... $180.00\nInsurance (Priority Health) allowed $142.00, paid $112.00\nContractual adjustment: -$38.00\nCopay/coinsurance per your EOB: $30.00\nAmount due: $30.00",
+    "expect": {
+      "category": "medical",
+      "red_flag": false,
+      "amount_at_stake": 30,
+      "findings_any": [],
+      "max_findings": 2,
+      "deadlines": [],
+      "must_not": [
+        "duplicate"
+      ]
+    }
+  },
+  {
+    "id": "med-11-spanish-bill",
+    "context": "State: New Jersey. Insured: no. Paid: no.",
+    "document": "HUDSON COMMUNITY HOSPITAL\nEstado de cuenta · Fecha 2026-09-03 · Paciente: José Ramírez · Cuenta HCH-7710023\nServicio 2026-08-14 Sala de emergencias, nivel 3 ..... $1,420.00\nRadiografía de tobillo .............................. $355.00\nTotal adeudado: $1,775.00\nSi no puede pagar, pregunte por asistencia financiera.",
+    "expect": {
+      "category": "medical",
+      "red_flag": false,
+      "amount_at_stake": 1775,
+      "findings_any": [
+        [
+          "financial assistance",
+          "charity care",
+          "asistencia",
+          "uninsured",
+          "self-pay",
+          "good faith estimate"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "med-12-ambulance-ground",
+    "context": "State: Colorado. Insured: yes. Paid: no.",
+    "document": "FRONT RANGE AMBULANCE (out of network)\nInvoice 2026-09-09 · Patient: Mark Ellis · Run #FR-26-11873\n2026-08-02 ALS emergency transport ..... $2,380.00\nMileage, 14 miles ...................... $560.00\nInsurance paid: $1,050.00\nBalance due: $1,890.00. Pay within 30 days.",
+    "expect": {
+      "category": "medical",
+      "red_flag": false,
+      "amount_at_stake": 1890,
+      "findings_any": [
+        [
+          "ground ambulance",
+          "balance bill",
+          "state law",
+          "Colorado",
+          "out-of-network",
+          "appeal"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": [
+        "No Surprises Act protects ground ambulance"
+      ]
+    }
+  },
+  {
+    "id": "ins-01-not-medically-necessary",
+    "context": "State: Illinois. Insured: yes, through my employer.",
+    "document": "BLUECROSS BLUESHIELD OF ILLINOIS\nNotice of Adverse Benefit Determination · Date: 2026-09-04\nMember: Priya Shah · ID XOF882130412 · Claim 26-0915-55812\nService: MRI, lumbar spine, 2026-08-21 · Billed $2,100.00\nDecision: DENIED. Reason: not medically necessary. Conservative treatment (6 weeks of physical therapy) was not documented.\nYour right to appeal: You may request an internal appeal within 180 days of receiving this notice. You may also request an external review after the internal appeal.",
+    "expect": {
+      "category": "insurance",
+      "red_flag": false,
+      "amount_at_stake": 2100,
+      "findings_any": [
+        [
+          "appeal",
+          "180 days"
+        ],
+        [
+          "medical records",
+          "physical therapy",
+          "letter from",
+          "doctor",
+          "documentation"
+        ]
+      ],
+      "deadlines": [
+        {
+          "owner": "you",
+          "date": "2027-03-03"
+        }
+      ],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ins-02-prior-auth",
+    "context": "State: North Carolina. Insured: yes, ACA marketplace plan.",
+    "document": "AMBETTER OF NORTH CAROLINA\nExplanation of Benefits · Processed 2026-09-12\nMember: Thomas Reed · Claim 7739120\nProvider: Carolina Sleep Center · Service 2026-08-30 Sleep study ..... $3,050.00\nAmount allowed: $0.00 · Plan paid: $0.00 · You may owe: $3,050.00\nRemark code N54: Prior authorization was not obtained.\nThis is not a bill. Appeal rights: 180 days from the date of this notice.",
+    "expect": {
+      "category": "insurance",
+      "red_flag": false,
+      "amount_at_stake": 3050,
+      "findings_any": [
+        [
+          "prior auth",
+          "authorization",
+          "retro"
+        ],
+        [
+          "appeal"
+        ]
+      ],
+      "deadlines": [
+        {
+          "owner": "you",
+          "date": "2027-03-11"
+        }
+      ],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ins-03-urgent-care-denial",
+    "context": "State: Washington. Insured: yes. My chemotherapy starts in 5 days.",
+    "document": "PREMERA BLUE CROSS\nPre-service Denial · 2026-09-20\nMember: Hannah Fischer · ID PBC-2210993\nRequested: Pembrolizumab infusion, cycle 1, scheduled 2026-09-25\nDecision: Not approved. Reason: Experimental/investigational for this diagnosis per plan policy MP-4.12.\nIf your situation is urgent, you may request an expedited appeal. Expedited appeals are decided within 72 hours.",
+    "expect": {
+      "category": "insurance",
+      "red_flag": true,
+      "amount_at_stake": null,
+      "findings_any": [
+        [
+          "expedited",
+          "urgent",
+          "72 hours"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ins-04-coding-error",
+    "context": "State: Pennsylvania. Insured: yes.",
+    "document": "AETNA\nExplanation of Benefits · 2026-09-14 · Member: Chris Dolan · Claim E2611039920\nProvider: Valley Ortho · DOS 2026-08-18\nCPT 29881 Knee arthroscopy/meniscectomy ..... Billed $5,400.00\nDiagnosis submitted: Z00.00 (routine general exam without abnormal findings)\nStatus: Denied · Code CO-11: Diagnosis inconsistent with procedure.\nYou may owe: $5,400.00",
+    "expect": {
+      "category": "insurance",
+      "red_flag": false,
+      "amount_at_stake": 5400,
+      "findings_any": [
+        [
+          "diagnosis code",
+          "coding",
+          "wrong code",
+          "inconsistent",
+          "resubmit",
+          "corrected claim"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ins-05-out-of-network-er",
+    "context": "State: Florida. Insured: yes.",
+    "document": "UNITEDHEALTHCARE\nEOB · 2026-09-02 · Member: Olivia Grant · Claim 2608-117755\nProvider: Gulf Coast ER Physicians (non-network)\nDOS 2026-08-09 Emergency department visit ..... Billed $2,950.00\nAllowed: $640.00 · Plan paid: $512.00 · Out-of-network deductible applied: $1,500.00\nYou may owe: $2,438.00",
+    "expect": {
+      "category": "insurance",
+      "red_flag": false,
+      "amount_at_stake": 2438,
+      "findings_any": [
+        [
+          "No Surprises",
+          "emergency",
+          "in-network cost sharing",
+          "in-network deductible",
+          "out-of-network deductible"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ins-06-medicare-advantage",
+    "context": "State: Arizona. Insured: Medicare Advantage.",
+    "document": "HUMANA MEDICARE ADVANTAGE\nNotice of Denial of Medical Coverage · 2026-09-16\nEnrollee: Walter Price · Member ID H1036-22918\nWe denied: continued skilled nursing facility care after 2026-09-18.\nWhy: Your condition no longer requires daily skilled care.\nYou have the right to an immediate appeal to the Quality Improvement Organization. Call by noon of the day before your services end.",
+    "expect": {
+      "category": "insurance",
+      "red_flag": true,
+      "amount_at_stake": null,
+      "findings_any": [
+        [
+          "Quality Improvement Organization",
+          "QIO",
+          "fast appeal",
+          "immediate appeal",
+          "expedited"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ins-07-medicaid-reduction",
+    "context": "State: New York. Insured: Medicaid.",
+    "document": "NEW YORK STATE DEPARTMENT OF HEALTH · Medicaid Managed Care\nInitial Adverse Determination · Date of notice: 2026-09-10\nMember: Gloria Santos · CIN AB12345C\nService: Home health aide, reduced from 40 to 20 hours per week effective 2026-10-01.\nYou may ask for a Plan Appeal within 60 days of the date of this notice. If you appeal within 10 days, your services will continue during the appeal.",
+    "expect": {
+      "category": "insurance",
+      "red_flag": false,
+      "amount_at_stake": null,
+      "findings_any": [
+        [
+          "10 days",
+          "continue",
+          "aid continuing",
+          "keep your services"
+        ],
+        [
+          "appeal",
+          "fair hearing"
+        ]
+      ],
+      "deadlines": [
+        {
+          "owner": "you",
+          "date": "2026-11-09"
+        },
+        {
+          "owner": "you",
+          "date": "2026-09-20"
+        }
+      ],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ins-08-drug-formulary",
+    "context": "State: Virginia. Insured: yes, employer plan.",
+    "document": "EXPRESS SCRIPTS\nCoverage Determination · 2026-09-11\nMember: Nathan Ford · Rx: Ozempic 1 mg pen\nDecision: Not covered. This drug is not on your plan's formulary for the diagnosis submitted. Covered alternatives: metformin, glipizide.\nYou or your prescriber can request a formulary exception. If your health could be seriously harmed by waiting, ask for an expedited review (decided within 24 hours).",
+    "expect": {
+      "category": "insurance",
+      "red_flag": false,
+      "amount_at_stake": null,
+      "findings_any": [
+        [
+          "formulary exception",
+          "exception",
+          "prescriber",
+          "doctor"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ins-09-timely-filing",
+    "context": "State: Kentucky. Insured: yes.",
+    "document": "ANTHEM BLUE CROSS AND BLUE SHIELD\nEOB · 2026-09-19 · Member: Laura Bishop · Claim 26261A00419\nProvider: Bluegrass Physical Therapy · DOS 2025-11-03 through 2025-12-15 (12 visits) · Billed $2,760.00\nDenied: CO-29 The time limit for filing has expired.\nProvider may not bill member for amounts denied for timely filing when provider is in-network.\nYou owe: $0.00",
+    "expect": {
+      "category": "insurance",
+      "red_flag": false,
+      "amount_at_stake": null,
+      "findings_any": [
+        [
+          "timely filing",
+          "don't owe",
+          "do not owe",
+          "can't bill",
+          "cannot bill",
+          "$0"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ins-10-external-review",
+    "context": "State: Oregon. Insured: yes. My internal appeal was already denied.",
+    "document": "PROVIDENCE HEALTH PLAN\nFinal Internal Adverse Benefit Determination · 2026-09-08\nMember: Kevin O'Brien · Appeal #A26-50313\nService: Proton beam therapy, 28 sessions · Estimated $68,000\nWe have upheld our denial. This is our final internal decision.\nYou may request an independent external review through the Oregon Division of Financial Regulation within 180 days of this notice.",
+    "expect": {
+      "category": "insurance",
+      "red_flag": false,
+      "amount_at_stake": 68000,
+      "findings_any": [
+        [
+          "external review",
+          "independent review"
+        ]
+      ],
+      "deadlines": [
+        {
+          "owner": "you",
+          "date": "2027-03-07"
+        }
+      ],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ll-01-deposit-late",
+    "context": "State: Pennsylvania. I moved out on 2026-07-31 and gave my forwarding address in writing. Rent was $1,150.",
+    "document": "HK PROPERTIES LLC\n12 Main St, Wilkes-Barre, PA 18701\nDate: 2026-09-15\nTo: Jordan Lee, former tenant, Unit 3B\nRe: Security deposit\nYour security deposit of $1,150.00 is being kept in full for cleaning, painting and carpet replacement. No further amounts are owed to you.\nHK Properties",
+    "expect": {
+      "category": "landlord",
+      "red_flag": false,
+      "amount_at_stake": 1150,
+      "findings_any": [
+        [
+          "30 days",
+          "late",
+          "deadline"
+        ],
+        [
+          "itemized",
+          "list of damages",
+          "itemization"
+        ],
+        [
+          "normal wear",
+          "wear and tear",
+          "painting",
+          "double"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ll-02-eviction-notice",
+    "context": "State: Ohio. I'm 2 months behind on rent.",
+    "document": "NOTICE TO LEAVE THE PREMISES (Ohio Revised Code 1923.04)\nTo: Brianna Wells, 88 Elm St Apt 2, Dayton, OH 45402\nDate: 2026-09-21\nYou are being asked to leave the premises. If you do not leave, an eviction action may be initiated against you. If you are in doubt regarding your legal rights and obligations as a tenant, it is recommended that you seek legal assistance.\nYou must vacate within three (3) days of service of this notice.\nLandlord: Gem City Rentals",
+    "expect": {
+      "category": "landlord",
+      "red_flag": true,
+      "amount_at_stake": null,
+      "findings_any": [
+        [
+          "legal aid",
+          "lawyer",
+          "legal help",
+          "court"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ll-03-repairs-ignored",
+    "context": "State: New York. I've asked for the heat to be fixed 3 times since October 1, in texts.",
+    "document": "From: Building Management (Bronxview Realty)\nDate: 2026-10-08\nTo: Apt 5C tenant (Monique Harris)\nWe received your messages about the heat. The boiler technician is scheduled for next month. In the meantime please use a space heater. Rent remains due on the 1st and late fees apply after the 5th.",
+    "expect": {
+      "category": "landlord",
+      "red_flag": false,
+      "amount_at_stake": null,
+      "findings_any": [
+        [
+          "heat",
+          "warranty of habitability",
+          "habitability",
+          "311",
+          "HPD",
+          "code"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ll-04-illegal-fee",
+    "context": "State: California. Monthly rent $2,400.",
+    "document": "SUNSET PROPERTY GROUP · Lease renewal addendum · 2026-09-01\nResident: Ethan Park · Unit 210\nEffective 2026-11-01:\n- Rent: $2,400.00\n- Late fee: $250.00 if rent is received after 11:59 pm on the 1st\n- Lease renewal processing fee: $350.00 (non-refundable)\n- Security deposit increase: additional $3,000.00, for a total deposit of $5,400.00\nSign and return by 2026-09-30.",
+    "expect": {
+      "category": "landlord",
+      "red_flag": false,
+      "amount_at_stake": null,
+      "findings_any": [
+        [
+          "deposit",
+          "one month",
+          "AB 12",
+          "limit",
+          "cap"
+        ],
+        [
+          "late fee",
+          "reasonable"
+        ]
+      ],
+      "deadlines": [
+        {
+          "owner": "you",
+          "date": "2026-09-30"
+        }
+      ],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ll-05-deposit-itemized-fine",
+    "context": "State: Texas. Moved out 2026-08-31.",
+    "document": "LONGHORN APARTMENTS\nDeposit disposition · 2026-09-20\nFormer resident: Sam Ortiz · Unit 1204\nDeposit held: $800.00\nDeductions:\n- Unpaid August utilities (invoice attached): $112.40\n- Replace broken bedroom window (photo and receipt attached): $186.00\nRefund enclosed: $501.60",
+    "expect": {
+      "category": "landlord",
+      "red_flag": false,
+      "findings_any": [],
+      "max_findings": 3,
+      "deadlines": [],
+      "must_not": [
+        "late"
+      ]
+    }
+  },
+  {
+    "id": "ll-06-lockout",
+    "context": "State: Georgia. I came home and the locks were changed. My stuff is inside.",
+    "document": "Text message from landlord (Peach Homes), 2026-09-22 6:14 PM:\n\"Locks changed. You're 3 weeks late. You can get your things when you pay the $1,600 you owe. Don't call the police, this is my property.\"",
+    "expect": {
+      "category": "landlord",
+      "red_flag": true,
+      "amount_at_stake": 1600,
+      "findings_any": [
+        [
+          "lockout",
+          "illegal",
+          "self-help",
+          "police",
+          "court order"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ll-07-rent-increase-notice",
+    "context": "State: Oregon. Month-to-month, have lived here 3 years. Rent $1,500.",
+    "document": "WILLAMETTE RENTALS · Notice of rent increase · 2026-09-25\nTenant: Abby Nguyen · 220 Oak St #4, Salem OR\nYour rent will increase from $1,500 to $1,950 per month effective 2026-11-01.\nManagement",
+    "expect": {
+      "category": "landlord",
+      "red_flag": false,
+      "amount_at_stake": null,
+      "findings_any": [
+        [
+          "90 days",
+          "notice",
+          "cap",
+          "limit",
+          "rent stabilization",
+          "SB 608",
+          "percent"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ll-08-mold",
+    "context": "State: Illinois (Chicago). My kid has asthma.",
+    "document": "Email from Lakeview Mgmt · 2026-09-17\nRe: Unit 2R bathroom\nThe black spots on the bathroom ceiling are a cleaning issue and are the tenant's responsibility under section 14 of your lease. Please use bleach. We will not be sending maintenance.",
+    "expect": {
+      "category": "landlord",
+      "red_flag": false,
+      "amount_at_stake": null,
+      "findings_any": [
+        [
+          "mold",
+          "RLTO",
+          "habitability",
+          "inspection",
+          "311",
+          "code"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ll-09-court-date",
+    "context": "State: Pennsylvania.",
+    "document": "MAGISTERIAL DISTRICT COURT 11-1-01 · Luzerne County\nLANDLORD AND TENANT COMPLAINT\nPlaintiff: Diamond City Apartments · Defendant: Carlos Mendez\nAmount claimed: rent $2,300.00, late fees $300.00, costs $187.25\nHEARING DATE: 2026-10-06 at 9:30 AM\nIf you fail to appear, judgment may be entered against you by default.",
+    "expect": {
+      "category": "landlord",
+      "red_flag": true,
+      "amount_at_stake": 2787.25,
+      "findings_any": [
+        [
+          "hearing",
+          "appear",
+          "court",
+          "legal aid"
+        ]
+      ],
+      "deadlines": [
+        {
+          "owner": "you",
+          "date": "2026-10-06"
+        }
+      ],
+      "must_not": []
+    }
+  },
+  {
+    "id": "ll-10-deposit-no-forwarding",
+    "context": "State: Massachusetts. Moved out 2026-08-01. Deposit was $1,800. The landlord never gave me a receipt or told me which bank it was in.",
+    "document": "Text from landlord (Paul D.), 2026-09-12:\n\"Hey, I'll mail your deposit when I get a chance, things have been busy. Maybe around November.\"",
+    "expect": {
+      "category": "landlord",
+      "red_flag": false,
+      "amount_at_stake": 1800,
+      "findings_any": [
+        [
+          "30 days",
+          "late"
+        ],
+        [
+          "triple",
+          "three times",
+          "treble",
+          "receipt",
+          "bank",
+          "escrow"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "debt-01-validation",
+    "context": "State: Pennsylvania. I don't recognize this debt.",
+    "document": "PORTFOLIO RECOVERY ASSOCIATES, LLC\n120 Corporate Blvd, Norfolk, VA 23502\nDate: 2026-09-08\nTo: Angela White · Reference # 7713092288\nOriginal creditor: Synchrony Bank (Lowe's) · Account ending 4471\nAmount of debt: $2,846.19\nThis is a communication from a debt collector. This is an attempt to collect a debt and any information obtained will be used for that purpose.\nHow can you dispute the debt? Call or write to us by 2026-10-13 to dispute all or part of the debt. If you do not, we will assume that our information is correct.",
+    "expect": {
+      "category": "debt",
+      "red_flag": false,
+      "amount_at_stake": 2846.19,
+      "findings_any": [
+        [
+          "validation",
+          "verify",
+          "dispute"
+        ]
+      ],
+      "deadlines": [
+        {
+          "owner": "you",
+          "date": "2026-10-13"
+        }
+      ],
+      "must_not": []
+    }
+  },
+  {
+    "id": "debt-02-time-barred",
+    "context": "State: Texas. My last payment on this card was in 2018.",
+    "document": "MIDLAND CREDIT MANAGEMENT\nDate: 2026-09-14 · To: Paul Rivera · MCM Account 8830129910\nOriginal creditor: Capital One · Charge-off date: 2019-03-31\nBalance: $4,210.77\nGOOD NEWS! Pay just $842.15 to settle in full. Or make a payment of $25 today to show good faith.\nThe law limits how long you can be sued on a debt. Because of the age of your debt, we will not sue you for it.",
+    "expect": {
+      "category": "debt",
+      "red_flag": false,
+      "amount_at_stake": 4210.77,
+      "findings_any": [
+        [
+          "statute of limitations",
+          "time-barred",
+          "too old",
+          "restart",
+          "revive",
+          "reset"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "debt-03-harassment",
+    "context": "State: Florida. They call me 8 times a day and called my boss.",
+    "document": "Voicemail transcript, 2026-09-19 7:42 AM, from (888) 555-0199:\n\"This is a message for Denise Carter from Apex Recovery. This is your final warning. If we don't hear from you today we will contact your employer again and have the sheriff come to your home. Call us back.\"",
+    "expect": {
+      "category": "debt",
+      "red_flag": false,
+      "amount_at_stake": null,
+      "findings_any": [
+        [
+          "FDCPA",
+          "Fair Debt Collection",
+          "harass",
+          "threat",
+          "sheriff",
+          "employer"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "debt-04-garnishment",
+    "context": "State: Michigan.",
+    "document": "STATE OF MICHIGAN · 36th DISTRICT COURT\nREQUEST AND WRIT FOR GARNISHMENT (PERIODIC)\nPlaintiff: Cavalry SPV I, LLC · Defendant: Michael Turner · Case No. 26-118833-GC\nJudgment amount: $3,912.40 · Garnishee: Detroit Auto Parts Inc. (employer)\nDate issued: 2026-09-16\nObjections: The defendant may file objections within 14 days after the date the writ is served.",
+    "expect": {
+      "category": "debt",
+      "red_flag": true,
+      "amount_at_stake": 3912.4,
+      "findings_any": [
+        [
+          "objection",
+          "exempt",
+          "14 days",
+          "legal aid"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "debt-05-medical-debt-credit",
+    "context": "State: Pennsylvania. This was a hospital bill from 2025.",
+    "document": "CREDIT COLLECTION SERVICES\nDate 2026-09-09 · To: Hannah Cole · CCS Account 2250918\nCreditor: Geisinger Medical Center · Service 2025-05-02\nBalance: $412.00\nThis account has been or may be reported to the credit bureaus.",
+    "expect": {
+      "category": "debt",
+      "red_flag": false,
+      "amount_at_stake": 412,
+      "findings_any": [
+        [
+          "credit report",
+          "credit bureau",
+          "under $500",
+          "$500",
+          "one year",
+          "medical debt"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "debt-06-wrong-amount",
+    "context": "State: Ohio. I settled this card with the bank for $600 in 2025 and have the letter.",
+    "document": "LVNV FUNDING LLC c/o Resurgent Capital Services\nDate 2026-09-12 · To: Steven Gray · Account ending 9902\nOriginal creditor: Credit One Bank\nCurrent balance: $1,987.33\nPlease remit payment or contact us to discuss options.",
+    "expect": {
+      "category": "debt",
+      "red_flag": false,
+      "amount_at_stake": 1987.33,
+      "findings_any": [
+        [
+          "settled",
+          "settlement",
+          "paid",
+          "proof"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "debt-07-identity-theft",
+    "context": "State: California. I never had an account with this company.",
+    "document": "ENCORE CAPITAL / MIDLAND CREDIT\n2026-09-17 · To: Lisa Huang · Account 5512093\nOriginal creditor: Verizon Wireless · Opened 2024-02-11 · Balance $1,344.90\nDispute or pay by 2026-10-22.",
+    "expect": {
+      "category": "debt",
+      "red_flag": false,
+      "amount_at_stake": 1344.9,
+      "findings_any": [
+        [
+          "identity theft",
+          "fraud",
+          "IdentityTheft.gov",
+          "police report",
+          "FTC"
+        ],
+        [
+          "dispute",
+          "validation"
+        ]
+      ],
+      "deadlines": [
+        {
+          "owner": "you",
+          "date": "2026-10-22"
+        }
+      ],
+      "must_not": []
+    }
+  },
+  {
+    "id": "debt-08-reply-validation-incomplete",
+    "context": "State: Pennsylvania. I sent a validation request on 2026-08-01. This is their answer.",
+    "document": "CONVERGENT OUTSOURCING\n2026-09-01 · To: Ray Patel · Ref 99102877\nIn response to your dispute, we have verified the debt with our client. Balance: $1,120.00 owed to T-Mobile.\nEnclosed: account statement summary (1 page) showing name, address and balance.\nCollection activity will resume.",
+    "expect": {
+      "category": "debt",
+      "red_flag": false,
+      "amount_at_stake": 1120,
+      "findings_any": [
+        [
+          "itemiz",
+          "original",
+          "chain",
+          "contract",
+          "not enough",
+          "incomplete"
+        ]
+      ],
+      "deadlines": [],
+      "must_not": []
+    }
+  },
+  {
+    "id": "other-01-utility-shutoff",
+    "context": "State: Pennsylvania. It's getting cold and I have a baby.",
+    "document": "PPL ELECTRIC UTILITIES\n10-DAY TERMINATION NOTICE · 2026-10-02\nCustomer: Dana Price · Account 44190-22813\nPast due: $689.42\nYour service may be shut off on or after 2026-10-12 unless payment is received or arrangements are made.\nCall 1-800-342-5775 about payment agreements, or the PUC at 1-800-692-7380.",
+    "expect": {
+      "category": "other",
+      "red_flag": true,
+      "amount_at_stake": 689.42,
+      "findings_any": [
+        [
+          "LIHEAP",
+          "payment agreement",
+          "PUC",
+          "medical certificate",
+          "winter",
+          "shutoff protection"
+        ]
+      ],
+      "deadlines": [
+        {
+          "owner": "you",
+          "date": "2026-10-12"
+        }
+      ],
+      "must_not": []
+    }
+  }
+]
