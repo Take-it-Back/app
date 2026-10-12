@@ -21,7 +21,10 @@ export default async function AdminPage() {
   const { supabase, user } = await requireUser();
   const { data: me } = await supabase.from("profiles").select("is_admin").eq("id", user.id).maybeSingle();
   if (!me?.is_admin) notFound();
-  const { data, error } = await supabase.rpc("admin_overview");
+  const [{ data, error }, { data: costs }] = await Promise.all([supabase.rpc("admin_overview"), supabase.rpc("admin_ai_costs")]);
+  // Estimated AI cost: token counts are exact; the per-million prices are settings (AI_PRICE_IN / AI_PRICE_OUT, in dollars).
+  const pin = Number(process.env.AI_PRICE_IN || 3), pout = Number(process.env.AI_PRICE_OUT || 15);
+  const costRows = ((costs as { kind: string; calls: number; avg_in: number; avg_out: number; model: string }[] | null) || []).map((c) => ({ ...c, cost: (Number(c.avg_in) * pin + Number(c.avg_out) * pout) / 1e6 }));
   if (error || !data) {
     return (
       <main className="app-main wide">
@@ -78,6 +81,19 @@ export default async function AdminPage() {
               </div>
             ))}
           </div>
+        </section>
+
+        <section className="card">
+          <span className="eyebrow">AI cost per action · last 30 days</span>
+          {costRows.length ? (
+            <div style={{ overflowX: "auto", marginTop: 8 }}>
+              <table className="pt" style={{ fontSize: 14 }}>
+                <thead><tr><th scope="col">Action</th><th scope="col">Runs</th><th scope="col">Avg tokens in / out</th><th scope="col">Est. cost each</th></tr></thead>
+                <tbody>{costRows.map((c) => <tr key={c.kind}><td>{c.kind === "analyze" ? "Scan" : c.kind === "letter" ? "Letter" : "Reply read"}</td><td data-label="Runs">{c.calls}</td><td data-label="Tokens">{Number(c.avg_in).toLocaleString()} / {Number(c.avg_out).toLocaleString()}</td><td data-label="Cost">${c.cost.toFixed(3)}</td></tr>)}</tbody>
+              </table>
+              <p className="muted small" style={{ margin: "10px 0 0" }}>Estimated at ${pin} / ${pout} per million tokens in / out ({costRows[0]?.model}). Premium at $9.99 a month covers about {Math.floor(9.99 / Math.max(0.001, costRows.find((c) => c.kind === "analyze")?.cost || 0.05))} scans.</p>
+            </div>
+          ) : <p className="muted" style={{ margin: "8px 0 0" }}>No AI runs yet. Numbers appear once the AI key is added and people scan.</p>}
         </section>
 
         <section className="card">

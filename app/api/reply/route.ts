@@ -4,7 +4,7 @@ import { aiConfigured, analyzeReply } from "@/lib/ai";
 import { cleanStated } from "@/lib/analyzeCase";
 import { loadMedia } from "@/lib/media";
 import { getCasePremium } from "@/lib/plan";
-import { logError, useAi } from "@/lib/limits";
+import { logError, recordAiCall, useAi } from "@/lib/limits";
 
 export const maxDuration = 60;
 
@@ -44,6 +44,7 @@ export async function POST(request: Request) {
     const { data: prof } = await supabase.from("profiles").select("language").eq("id", user.id).maybeSingle();
     const a = await analyzeReply(media, `Case: ${c.title} (${c.category}). Earlier summary: ${c.summary}. Our original points: ${JSON.stringify(c.findings)}`, prof?.language === "es" ? "es" : "en");
     const stated = cleanStated(a.deadlines);
+    await recordAiCall(supabase, user.id, "reply", a);
     const status = a.red_flag ? "needs_help" : a.outcome === "won" ? "your_move" : "your_move";
     await Promise.all([
       supabase.from("documents").update({ analysis: a }).eq("id", documentId),

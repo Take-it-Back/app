@@ -1,0 +1,25 @@
+# Checks the live site after every production deploy and every 30 minutes.
+# If a check fails, GitHub emails the repository owner (Settings → Notifications → Actions).
+name: Site check
+on:
+  deployment_status:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+jobs:
+  check:
+    if: github.event_name != 'deployment_status' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Database and services
+        run: |
+          code=$(curl -s -o health.json -w "%{http_code}" https://www.takeitback.app/api/health)
+          cat health.json; echo
+          test "$code" = "200"
+      - name: Every public page, share tags and private-page protection
+        run: node scripts/smoke.mjs https://www.takeitback.app

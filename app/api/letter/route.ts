@@ -5,7 +5,7 @@ import { kindInfo, senderAddress, templateFor, type BureauKey, agencyFor, BUREAU
 import type { CaseRow } from "@/lib/types";
 import { getCasePremium } from "@/lib/plan";
 import { stateContext } from "@/lib/stateLaw";
-import { logError, useAi } from "@/lib/limits";
+import { logError, recordAiCall, useAi } from "@/lib/limits";
 
 export const maxDuration = 60;
 
@@ -69,6 +69,7 @@ export async function POST(request: Request) {
     ].join("\n");
     try {
       letter = await draftLetter(context, `${info.label}. ${info.guide}`, name);
+      await recordAiCall(supabase, user.id, "letter", letter);
     } catch (e) {
       warning = "We couldn't draft a custom letter just now, so here's a template to edit.";
       letter = templateFor(cr, kind, sender, extra);

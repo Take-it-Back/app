@@ -18,6 +18,7 @@ Rules:
 - Never invent account numbers, names, dates or amounts that are not in the document. Use [BRACKETED PLACEHOLDERS] for anything unknown.
 - Set red_flag to true when the person may need a human right away: an eviction filing or court date, a lawsuit or summons, wage garnishment, a utility shutoff, discrimination, or a denial of urgent or life-threatening care.`;
 
+export type AiUsage = { model: string; input: number; output: number };
 export type StatedDeadline = { title: string; date: string | null; owner: "you" | "them"; quote: string };
 export type Lang = "en" | "es";
 const langNote = (lang?: Lang) => (lang === "es" ? "\n\nLANGUAGE: Write every plain-language field (summary, findings, next steps, explanations) in clear, simple Spanish, as used by Spanish speakers in the United States. Keep names of laws, companies and agencies in English, with a short Spanish explanation the first time." : "");
@@ -45,7 +46,8 @@ async function callTool<T>(name: string, description: string, schema: Record<str
   });
   const block = res.content.find((b) => b.type === "tool_use");
   if (!block || block.type !== "tool_use") throw new Error("No structured answer from the model");
-  return block.input as T;
+  const usage: AiUsage = { model: res.model || MODEL, input: res.usage?.input_tokens ?? 0, output: res.usage?.output_tokens ?? 0 };
+  return Object.assign(block.input as object, { _usage: usage }) as T;
 }
 
 export interface Analysis {

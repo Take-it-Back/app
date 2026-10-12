@@ -55,5 +55,9 @@ if (!/noindex/.test(login)) fail("/login should be noindex");
 const missing = await fetch(BASE + "/this-page-does-not-exist");
 if (missing.status !== 404) fail(`missing pages return ${missing.status}, not 404`);
 
+const health = await fetch(BASE + "/api/health").catch(() => null);
+console.log(`${health?.status ?? "ERR"}         /api/health`);
+if (!health || health.status !== 200) { fails++; console.log("  ✗ health check failed"); }
+
 console.log(fails ? `\n${fails} problem(s) found` : "\nAll checks passed");
 process.exit(fails ? 1 : 0);

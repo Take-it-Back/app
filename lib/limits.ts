@@ -20,3 +20,14 @@ export async function logError(supabase: SupabaseClient, area: string, message: 
     /* ignore */
   }
 }
+
+/** Records how many tokens an AI call used, for the cost-per-scan numbers on the admin page. Never throws. */
+export async function recordAiCall(supabase: SupabaseClient, userId: string, kind: string, result: unknown) {
+  try {
+    const u = (result as { _usage?: { model: string; input: number; output: number } } | null)?._usage;
+    if (!u) return;
+    await supabase.from("ai_calls").insert({ user_id: userId, kind, model: u.model, input_tokens: u.input, output_tokens: u.output });
+  } catch {
+    /* ignore */
+  }
+}

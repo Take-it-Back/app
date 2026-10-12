@@ -3,6 +3,7 @@ import { aiConfigured, analyzeDocument, type StatedDeadline } from "./ai";
 import { loadMedia } from "./media";
 import { firstDeadline } from "./rules";
 import { stateContext } from "./stateLaw";
+import { recordAiCall } from "./limits";
 import { todayISO } from "./format";
 import type { Category } from "./types";
 
@@ -35,6 +36,7 @@ export async function analyzeCase(supabase: SupabaseClient, userId: string, case
       const { data: prof } = await supabase.from("profiles").select("language").eq("id", c.user_id).maybeSingle();
       const a = await analyzeDocument(media, context, prof?.language === "es" ? "es" : "en");
       stated = cleanStated(a.deadlines);
+      await recordAiCall(supabase, userId, "analyze", a);
       category = (c.category !== "other" ? c.category : a.category) as Category;
       update = {
         category,
