@@ -22,6 +22,7 @@ export const ORG = {
   url: SITE_URL,
   logo: `${SITE_URL}/icons/icon-512.png`,
   email: "hello@takeitback.app",
+  parentOrganization: { "@type": "Organization", name: "Squared Away Labs", url: "https://www.squaredawaylabs.com" },
 };
 
 export function breadcrumbs(items: [string, string][]) {

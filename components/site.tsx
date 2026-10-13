@@ -30,6 +30,15 @@ export function CtaBand({ title, italic, sub }: { title: string; italic: string;
   );
 }
 
+// Sister apps from Squared Away Labs, the studio that makes Take it back.
+const SISTER_APPS: [string, string, string][] = [
+  ["Kopetta", "https://kopetta.com", "A companion for coffee"],
+  ["Andamos", "https://andamos.app", "Plan your trips"],
+  ["Hey Tribe", "https://www.heytribe.app", "The whole family, finally in sync"],
+  ["Ospelia", "https://www.ospelia.com", "Restaurant operations and marketing"],
+  ["Capitol Receipts", "https://www.capitolreceipts.com", "Follow the money in Congress"],
+];
+
 export function SiteFooter() {
   return (
     <footer style={{ borderTop: "1px solid #EBEBEB" }}>
@@ -62,7 +71,13 @@ export function SiteFooter() {
             <Link href="/terms" style={{ textDecoration: "none" }}>Terms</Link>
           </nav>
         </div>
-        <p className="muted" style={{ margin: 0, paddingTop: 24, borderTop: "1px solid #EBEBEB", fontSize: 13, lineHeight: 1.6 }}>
+        <nav aria-label="More from Squared Away Labs" className="row wrap g8" style={{ paddingTop: 24, borderTop: "1px solid #EBEBEB", fontSize: 14, columnGap: 18, rowGap: 8 }}>
+          <span className="muted">A <a href="https://www.squaredawaylabs.com" style={{ color: "inherit" }}>Squared Away Labs</a> app. Also from us:</span>
+          {SISTER_APPS.map(([name, url, blurb]) => (
+            <a key={name} href={url} title={blurb} style={{ textDecoration: "none" }}>{name}</a>
+          ))}
+        </nav>
+        <p className="muted" style={{ margin: 0, fontSize: 13, lineHeight: 1.6 }}>
           Take it back is not a law firm and does not give legal advice. We provide information and self-help tools. For legal advice, talk to a licensed attorney or your local legal aid office. © 2026 Take it back.
         </p>
       </div>
