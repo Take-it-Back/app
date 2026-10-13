@@ -3,15 +3,6 @@ import { CtaLink, Logo } from "./ui";
 import SiteNav from "./SiteNav";
 import { FEATURES, PROBLEMS } from "@/lib/marketing";
 
-/* Squared Away Labs' other apps, linked from every product site's footer. */
-const STUDIO_APPS = [
-  { name: "Kopetta", href: "https://kopetta.com" },
-  { name: "Andamos", href: "https://andamos.app" },
-  { name: "Hey Tribe", href: "https://www.heytribe.app" },
-  { name: "Ospelia", href: "https://www.ospelia.com" },
-  { name: "Capitol Receipts", href: "https://www.capitolreceipts.com" },
-];
-
 export function SiteHeader() {
   return (
     <header className="site-header">
@@ -80,27 +71,12 @@ export function SiteFooter() {
             <Link href="/terms" style={{ textDecoration: "none" }}>Terms</Link>
           </nav>
         </div>
-<<<<<<< Updated upstream
         <nav aria-label="More from Squared Away Labs" className="row wrap g8" style={{ paddingTop: 24, borderTop: "1px solid #EBEBEB", fontSize: 14, columnGap: 18, rowGap: 8 }}>
           <span className="muted">A <a href="https://www.squaredawaylabs.com" style={{ color: "inherit" }}>Squared Away Labs</a> app. Also from us:</span>
           {SISTER_APPS.map(([name, url, blurb]) => (
             <a key={name} href={url} title={blurb} style={{ textDecoration: "none" }}>{name}</a>
           ))}
         </nav>
-=======
-        {/* The studio and its other apps. Squared Away Labs owns all six; each links to the others. */}
-        <p className="muted" style={{ margin: 0, paddingTop: 24, borderTop: "1px solid #EBEBEB", fontSize: 14, lineHeight: 1.7 }}>
-          Made by <a href="https://www.squaredawaylabs.com" style={{ fontWeight: 600 }}>Squared Away Labs</a>
-          <span aria-hidden> · </span>
-          Also from the studio:{" "}
-          {STUDIO_APPS.map((a, i) => (
-            <span key={a.href}>
-              {i > 0 && <span aria-hidden> · </span>}
-              <a href={a.href} style={{ fontWeight: 600 }}>{a.name}</a>
-            </span>
-          ))}
-        </p>
->>>>>>> Stashed changes
         <p className="muted" style={{ margin: 0, fontSize: 13, lineHeight: 1.6 }}>
           Take it back is not a law firm and does not give legal advice. We provide information and self-help tools. For legal advice, talk to a licensed attorney or your local legal aid office. © 2026 Take it back.
         </p>
