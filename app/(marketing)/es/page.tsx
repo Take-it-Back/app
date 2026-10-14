@@ -40,7 +40,7 @@ export default function Espanol() {
             <CtaLink href="/login?mode=signup&lang=es">Empieza gratis</CtaLink>
             <Link href="/legal-aid" className="btn-plain" style={{ minHeight: 52 }}>Ayuda legal gratis</Link>
           </div>
-          <span className="muted small">Gratis para empezar. Información y herramientas de autoayuda, no asesoría legal. La app está en inglés por ahora; tus resúmenes y explicaciones pueden estar en español.</span>
+          <span className="muted small">Gratis para empezar. Información y herramientas de autoayuda, no asesoría legal. La app está en inglés por ahora; tus resúmenes y explicaciones pueden estar en español. Las apps para iPhone y Android llegan pronto.</span>
         </div>
         <div style={{ flex: "1 1 360px", minWidth: 0, display: "flex", justifyContent: "center" }}>
           <Phone kind="found" s="medical" label="Lo que encontramos en una factura del hospital" />

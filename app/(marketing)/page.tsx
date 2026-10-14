@@ -5,6 +5,7 @@ import { CtaLink } from "@/components/ui";
 import { CtaBand } from "@/components/site";
 import { Desktop, Peek, Phone } from "@/components/screens";
 import FeatureIcon from "@/components/FeatureIcon";
+import AppsComingSoon from "@/components/AppsComingSoon";
 import { FAQ_GROUPS, FEATURES, PROBLEMS, type ProblemSlug, type ShotKind } from "@/lib/marketing";
 
 const PROBLEM_PEEK: Record<ProblemSlug, { kind: ShotKind; tone: "gray" | "orange" | "ink" }> = {
@@ -45,7 +46,7 @@ export default function Home() {
             <CtaLink href="/login?mode=signup">Start free</CtaLink>
             <Link href="/how-it-works" className="btn-plain" style={{ minHeight: 52 }}>See how it works</Link>
           </div>
-          <span className="muted small">Free to start. Works on any phone or computer. Information and self-help tools, not legal advice.</span>
+          <span className="muted small">Free to start. Works in any phone or computer browser today; iPhone and Android apps are coming soon. Information and self-help tools, not legal advice.</span>
         </div>
         <div style={{ flex: "1 1 420px", minWidth: 0, display: "flex", justifyContent: "center", alignItems: "flex-end", gap: 16, position: "relative" }}>
           <div className="hide-sm" style={{ marginBottom: 40, transform: "rotate(-4deg)" }}><Phone kind="scan" s="medical" size="sm" label="Scanning a hospital bill" /></div>
@@ -186,9 +187,11 @@ export default function Home() {
         <div>
           <div className="wrap-1200 row wrap g32" style={{ alignItems: "center", gap: 48 }}>
             <div className="stack g16" style={{ flex: "1 1 320px" }}>
-              <span className="eyebrow" style={{ fontSize: 13 }}>Phone and computer</span>
+              <span className="eyebrow" style={{ fontSize: 13 }}>Phone and computer · apps coming soon</span>
               <h2 className="h-l" style={{ fontSize: "clamp(34px, 3.8vw, 50px)" }}>Snap it on your phone. <em className="o">Finish</em> it at your desk.</h2>
               <p className="lede" style={{ fontSize: 17 }}>Your cases sync everywhere. Edit letters on a big screen, print your case packet, and see every fight at a glance.</p>
+              <p style={{ margin: 0, fontSize: 16 }}><strong>iPhone and Android apps are coming soon.</strong> Until then, open takeitback.app on your phone and add it to your home screen. It works like an app, with deadline alerts.</p>
+              <AppsComingSoon />
             </div>
             <div className="shot-stage" style={{ flex: "2 1 520px", minWidth: 0, display: "block", padding: "clamp(20px, 3vw, 40px)" }}><Desktop s="insurance" /></div>
           </div>

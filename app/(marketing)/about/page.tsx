@@ -48,7 +48,7 @@ export default function AboutPage() {
         </div>
         </div>
       </section>
-      <CtaBand title="Take it" italic="back." sub="Free to start. Works on any phone or computer." />
+      <CtaBand title="Take it" italic="back." sub="Free to start. Works on any phone or computer. iPhone and Android apps coming soon." />
     </main>
   );
 }
