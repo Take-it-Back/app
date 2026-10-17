@@ -57,9 +57,9 @@ export default async function AdminPage() {
 
   return (
     <main className="app-main wide">
-      <div className="page-head">
+      <div className="page-head" style={{ flexWrap: "wrap" }}>
         <h1 className="page-title">Admin</h1>
-        <span className="row g8"><Link href="/app/admin/rules" className="btn-plain">State rules review</Link><Link href="/app/admin/emails" className="btn-plain">Emails</Link><span className="tag tag-orange">Only admins see this</span></span>
+        <span className="row wrap g8"><Link href="/app/admin/rules" className="btn-plain">State rules review</Link><Link href="/app/admin/emails" className="btn-plain">Emails</Link><span className="tag tag-orange">Only admins see this</span></span>
       </div>
 
       <div className="stack g20">

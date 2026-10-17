@@ -251,7 +251,7 @@ export default function Home() {
             </details>
           ))}
         </div>
-        <Link href="/faq" style={{ fontWeight: 500 }}>More questions →</Link>
+        <Link href="/faq" style={{ fontWeight: 500, display: "inline-block", padding: "10px 0" }}>More questions →</Link>
       </section>
 
       <CtaBand title="Got a bill that feels" italic="wrong?" sub="Find out where you stand in a minute. It's free to start." />

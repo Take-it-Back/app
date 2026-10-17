@@ -32,7 +32,7 @@ export default function FaqPage() {
                 <section key={p.slug} className="stack g12">
                   <h3 className="serif" style={{ margin: 0, fontSize: 28, fontWeight: 400 }}>{p.name}</h3>
                   <Faq items={p.faqs} openFirst={false} />
-                  <Link href={`/fight/${p.slug}`} style={{ fontWeight: 500 }}>How to fight {p.name.toLowerCase()} →</Link>
+                  <Link href={`/fight/${p.slug}`} style={{ fontWeight: 500, display: "inline-block", padding: "10px 0" }}>How to fight {p.name.toLowerCase()} →</Link>
                 </section>
               ))}
             </div>

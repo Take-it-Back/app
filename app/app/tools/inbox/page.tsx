@@ -28,7 +28,7 @@ export default async function InboxPage() {
           {!enabled && <p className="panel-gray" style={{ margin: 0 }}>Email forwarding is being switched on. Your address is ready below and will start working soon.</p>}
           <div className="panel-orange stack g12">
             <span className="small" style={{ color: "#A8441F" }}>Your private address</span>
-            <span className="serif" style={{ fontSize: "clamp(20px, 6vw, 28px)", wordBreak: "break-all" }}>{address}</span>
+            <span className="serif" style={{ fontSize: "clamp(18px, 5vw, 28px)", overflowWrap: "anywhere" }}>{address ? <>{address.split("@")[0]}<wbr />@{address.split("@")[1]}</> : null}</span>
             {address && <CopyButton text={address} label="Copy address" />}
           </div>
           <section>

@@ -100,11 +100,11 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
             <div className="stats" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", maxWidth: 640 }}>
               <div className="panel-orange stack">
                 <span className="small" style={{ color: "#A8441F" }}>{yours ? `${yours.title} by ${shortDate(yours.due_date)}` : "Your deadline"}</span>
-                <span className="big-num">{yours ? relDays(daysUntil(yours.due_date)) : "—"}</span>
+                {yours ? <span className="big-num">{relDays(daysUntil(yours.due_date))}</span> : <><span className="serif" style={{ fontSize: 26 }}>Not set</span><a href="#dates" className="small" style={{ color: "#A8441F", fontWeight: 500, padding: "10px 0", margin: "-6px 0 -10px" }}>Add a date</a></>}
               </div>
               <div className="card stack" style={{ borderRadius: 22 }}>
                 <span className="small muted">{theirs ? `${theirs.title}` : "Their deadline"}</span>
-                <span className="big-num">{theirs ? relDays(daysUntil(theirs.due_date)) : "—"}</span>
+                {theirs ? <span className="big-num">{relDays(daysUntil(theirs.due_date))}</span> : <span className="serif muted" style={{ fontSize: 26 }}>None yet</span>}
                 {theirs && <span className="small muted">by {shortDate(theirs.due_date)}</span>}
               </div>
             </div>
@@ -188,7 +188,7 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
         </div>
 
         <div className="b stack g20">
-          <section>
+          <section id="dates">
             <div className="sec-head"><h2>Dates</h2></div>
             <div className="card">
             <div className="stack" style={{ marginTop: 4 }}>
