@@ -51,7 +51,14 @@ export default function LoginForm() {
         setNotice("If that email has an account, a reset link is on its way.");
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      const msg = err instanceof Error ? err.message : "";
+      setError(
+        /rate limit|too many/i.test(msg) ? "We're getting a lot of sign-ups right now. Please try again in a few minutes."
+        : /invalid login credentials/i.test(msg) ? "That email or password doesn't match. Try again or reset your password."
+        : /email not confirmed/i.test(msg) ? "Please confirm your email first. Check your inbox for the link we sent."
+        : /already registered/i.test(msg) ? "That email already has an account. Sign in instead."
+        : msg || "Something went wrong. Please try again."
+      );
     } finally {
       setBusy(false);
     }
