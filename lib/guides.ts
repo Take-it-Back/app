@@ -1,4 +1,5 @@
 import type { ProblemSlug } from "./marketing";
+import { EXTRA_GUIDES } from "./guidesExtra";
 
 // Plain-English guides for search. General information, not legal advice.
 export type GuideBlock = { h: string; p?: string[]; list?: string[]; steps?: [string, string][] };
@@ -17,7 +18,7 @@ export type Guide = {
   table?: "debt" | "smallclaims";
 };
 
-export const GUIDES: Guide[] = [
+const BASE_GUIDES: Guide[] = [
   {
     slug: "how-to-dispute-a-medical-bill",
     title: "How to dispute a medical bill, step by step",
@@ -292,6 +293,28 @@ export const GUIDES: Guide[] = [
     cta: "We'll write your complaint from your case history.",
   },
 ];
+
+export const GUIDES: Guide[] = [...BASE_GUIDES, ...EXTRA_GUIDES];
+
+/** Which state-by-state topic (lib/lawPages.ts) each guide links to. */
+export const GUIDE_LAW_TOPIC: Record<string, string> = {
+  "how-to-dispute-a-medical-bill": "medical-debt",
+  "how-to-get-an-itemized-medical-bill": "medical-debt",
+  "hospital-financial-assistance-charity-care": "medical-debt",
+  "medical-debt-and-your-credit-report": "medical-debt",
+  "no-surprises-act-explained": "medical-debt",
+  "how-to-appeal-a-health-insurance-denial": "insurance-appeals",
+  "internal-vs-external-review-insurance-appeal": "insurance-appeals",
+  "common-health-insurance-denial-reasons": "insurance-appeals",
+  "how-to-get-your-security-deposit-back": "security-deposit",
+  "security-deposit-return-deadlines-by-state": "security-deposit",
+  "how-to-demand-repairs-from-your-landlord": "tenant-repairs",
+  "eviction-notices-explained": "tenant-repairs",
+  "statute-of-limitations-on-debt-by-state": "debt-time-limit",
+  "debt-validation-letter": "debt-time-limit",
+  "what-debt-collectors-cant-do": "debt-time-limit",
+  "small-claims-court-limits-by-state": "small-claims",
+};
 
 export const guideBySlug = (slug: string) => GUIDES.find((g) => g.slug === slug);
 export const guidesFor = (problem: ProblemSlug) => GUIDES.filter((g) => g.problem === problem);
