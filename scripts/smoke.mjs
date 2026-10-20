@@ -7,7 +7,7 @@ const PUBLIC = [
   "/fight/medical-bills", "/fight/insurance-denials", "/fight/landlords", "/fight/debt-collectors",
   "/features/letters", "/features/state-rules", "/features/send-for-you", "/guides/how-to-dispute-a-medical-bill", "/guides/security-deposit-return-deadlines-by-state",
   "/privacy", "/health-data-privacy", "/terms", "/es", "/legal-aid/pennsylvania", "/guides/statute-of-limitations-on-debt-by-state",
-  "/guides/how-to-get-an-itemized-medical-bill", "/guides/category/renters", "/guides/category/medical-bills", "/states", "/states/pennsylvania", "/laws/security-deposit", "/laws/security-deposit/pennsylvania", "/laws/debt-time-limit/pennsylvania", "/laws/medical-debt/pennsylvania",
+  "/guides/how-to-get-an-itemized-medical-bill", "/guides/category/renters", "/tools", "/tools/deadline-finder", "/tools/letter-builder", "/tools/deposit-deadline", "/es/guias", "/guides/category/medical-bills", "/states", "/states/pennsylvania", "/laws/security-deposit", "/laws/security-deposit/pennsylvania", "/laws/debt-time-limit/pennsylvania", "/laws/medical-debt/pennsylvania",
 ];
 const PRIVATE = ["/app", "/app/cases", "/app/tools", "/app/admin"];
 const FILES = ["/sitemap.xml", "/robots.txt", "/manifest.webmanifest", "/og.png", "/sw.js", "/offline.html"];

@@ -62,9 +62,11 @@ export function SiteFooter() {
             <Link href="/pricing" style={{ textDecoration: "none" }}>Pricing</Link>
             <Link href="/faq" style={{ textDecoration: "none" }}>FAQ</Link>
             <Link href="/guides" style={{ textDecoration: "none" }}>Guides</Link>
+            <Link href="/tools" style={{ textDecoration: "none" }}>Free tools</Link>
             <Link href="/states" style={{ textDecoration: "none" }}>Rules by state</Link>
             <Link href="/legal-aid" style={{ textDecoration: "none" }}>Free legal aid</Link>
             <Link href="/es" lang="es" hrefLang="es" style={{ textDecoration: "none" }}>En español</Link>
+            <Link href="/es/guias" lang="es" hrefLang="es" style={{ textDecoration: "none" }}>Guías en español</Link>
             <Link href="/about" style={{ textDecoration: "none" }}>About</Link>
             <a href="mailto:hello@takeitback.app" style={{ textDecoration: "none" }}>Contact us</a>
             <Link href="/privacy" style={{ textDecoration: "none" }}>Privacy</Link>
