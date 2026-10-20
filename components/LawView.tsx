@@ -14,7 +14,7 @@ function FactCard({ f }: { f: Fact }) {
     <div className="card stack g4" style={{ borderRadius: 22, padding: "18px 22px" }}>
       <span className="eyebrow">{f.label}</span>
       <span style={{ fontSize: 18, lineHeight: 1.5 }}>{f.text}</span>
-      {f.url && <a href={f.url} target="_blank" rel="noopener noreferrer" className="muted small">Source</a>}
+      {f.url && <a href={f.url} target="_blank" rel="noopener noreferrer" className="muted small tap">Source</a>}
     </div>
   );
 }
@@ -107,8 +107,8 @@ export function LawStateView({ topic, state }: { topic: LawTopic; state: string 
 
         <section>
           <h2 className="serif" style={{ fontSize: 26, margin: "0 0 12px", fontWeight: 400 }}>{topic.name} in other states</h2>
-          <div className="row wrap" style={{ columnGap: 16, rowGap: 8, fontSize: 15 }}>
-            {LAW_STATES.filter((s) => s !== state).map((s) => <Link key={s} href={`/laws/${topic.slug}/${lawStateSlug(s)}`}>{s}</Link>)}
+          <div className="row wrap" style={{ columnGap: 16, rowGap: 0, fontSize: 15 }}>
+            {LAW_STATES.filter((s) => s !== state).map((s) => <Link key={s} href={`/laws/${topic.slug}/${lawStateSlug(s)}`} className="tap">{s}</Link>)}
           </div>
         </section>
 

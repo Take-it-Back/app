@@ -43,7 +43,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
         ]}
       />
       <article style={{ maxWidth: 760, margin: "0 auto", padding: "clamp(40px, 6vw, 72px) 24px 0" }}>
-        <Link href="/es/guias" className="muted" style={{ fontSize: 14, textDecoration: "none" }}>← Todas las guías</Link>
+        <Link href="/es/guias" className="muted tap" style={{ fontSize: 14, textDecoration: "none" }}>← Todas las guías</Link>
         <div style={{ marginTop: 18, borderRadius: 24, overflow: "hidden" }}>
           <GuideCover slug={g.slug} category={en.category} icon={en.icon} ratio="2.4 / 1" />
         </div>
@@ -87,7 +87,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
           <h2 className="serif" style={{ fontSize: 26, margin: "0 0 12px", fontWeight: 400 }}>Más guías</h2>
           <div className="stack g8">
             {others.map((r) => <Link key={r.slug} href={`/es/guias/${r.slug}`} className="list-row" style={{ fontWeight: 500 }}>{r.title}</Link>)}
-            <Link href="/es/guias" style={{ fontWeight: 600, fontSize: 15 }}>Todas las guías →</Link>
+            <Link href="/es/guias" className="tap" style={{ fontWeight: 600, fontSize: 15 }}>Todas las guías →</Link>
           </div>
         </section>
       </article>

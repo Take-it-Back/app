@@ -19,7 +19,7 @@ export default function LetterBox({ title, to, lines }: { title: string; to: str
       </div>
       <div className="row wrap g8" style={{ marginTop: 12, alignItems: "center" }}>
         <button type="button" className="chip" onClick={copy} style={{ background: "var(--ink)", color: "#fff", borderColor: "var(--ink)" }}>{copied ? "Copied" : "Copy letter"}</button>
-        <Link href="/login?mode=signup" style={{ fontWeight: 600, fontSize: 15 }}>Have us fill this in from your case →</Link>
+        <Link href="/login?mode=signup" className="tap" style={{ fontWeight: 600, fontSize: 15 }}>Have us fill this in from your case →</Link>
       </div>
     </section>
   );
