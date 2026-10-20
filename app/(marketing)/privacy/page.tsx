@@ -22,7 +22,7 @@ export default function Privacy() {
         <h2 className="serif" style={{ fontSize: 26, margin: "16px 0 0" }}>Text messages</h2>
         <p>Texts are off unless you turn them on. When on, we send at most one deadline reminder a day, between 8am and 8pm your time, with no case details in the message. Reply STOP to cancel or HELP for help. We keep a record of when you agreed. Your number is never sold or used for marketing.</p>
         <h2 className="serif" style={{ fontSize: 26, margin: "16px 0 0" }}>Website analytics</h2>
-        <p>We use Google Analytics on our public website to count visits and see which pages help people, with Google&apos;s advertising features turned off. It never runs inside the signed-in app, so it never sees your documents, cases or health information.</p>
+        <p>We use Google Analytics on our public website to count visits and see which pages help people, with Google&apos;s advertising features turned off. It never runs inside the signed-in app, so it never sees your documents, cases or health information. We also turn it off on our public pages about medical bills and health insurance.</p>
         <h2 className="serif" style={{ fontSize: 26, margin: "16px 0 0" }}>Payments</h2>
         <p>Payments are handled by Stripe. We never see or store your full card number.</p>
         <h2 className="serif" style={{ fontSize: 26, margin: "16px 0 0" }}>Your state privacy rights</h2>

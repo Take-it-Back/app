@@ -1,0 +1,346 @@
+import type { Guide } from "./guides";
+
+// More guides. Same rules as lib/guides.ts: plain English, general information, not legal advice.
+// State-specific numbers live in lib/state-law and are linked from each guide's "your state" panel.
+export const EXTRA_GUIDES: Guide[] = [
+  {
+    slug: "how-to-get-an-itemized-medical-bill",
+    title: "How to get an itemized medical bill, and what to look for",
+    description: "An itemized bill lists every charge with its billing code. Here's how to ask for one, how to read it, and the errors that show up most often.",
+    kicker: "Medical bills",
+    updated: "2026-10-18",
+    problem: "medical-bills",
+    intro: "A summary bill says \"hospital services: $9,400.\" An itemized bill says what each charge was, when it happened and what code it was billed under. You can't dispute what you can't see, so this is the first thing to ask for.",
+    blocks: [
+      {
+        h: "Step by step",
+        steps: [
+          ["Call the billing office", "Say: \"I'd like an itemized statement with billing codes for this account.\" Write down the date, the name of the person and what they promise."],
+          ["Ask for the right document", "For a hospital stay, ask for the itemized statement and the UB-04 claim form. For a doctor's office, ask for the itemized statement and the CMS-1500 claim form."],
+          ["Put it in writing too", "Follow up by email or letter. Ask them to hold the account from collections until you've reviewed the itemized bill."],
+          ["Ask your insurer for the explanation of benefits", "The EOB shows what the plan was billed, what it allowed and what you owe. The itemized bill and the EOB should tell the same story."],
+          ["Go line by line", "Check each charge against what you remember and your records. Circle anything you don't understand."],
+        ],
+      },
+      {
+        h: "Errors that show up often",
+        list: [
+          "The same service billed twice",
+          "A test, medicine or supply you didn't get",
+          "Charges for a room or day after you were discharged",
+          "A service split into several codes when one code covers it (unbundling)",
+          "A more expensive code than the care you received",
+          "A doctor or lab billed as out of network at an in-network hospital",
+          "Charges that insurance already paid or adjusted",
+        ],
+      },
+      {
+        h: "Do you have a right to see your records?",
+        p: ["Yes. Under HIPAA you can ask for a copy of your medical records and billing records, and providers generally have 30 days to respond. If the itemized bill doesn't match what happened, ask for the chart notes for that date as well."],
+      },
+    ],
+    faqs: [
+      ["Do I have to pay while I wait for the itemized bill?", "Usually not. Ask in writing that the account be held from collections while you review it, and keep a copy of that request."],
+      ["What are CPT codes?", "Five-character codes that name a medical service, such as an office visit or an X-ray. HCPCS codes cover supplies and some services. You can look both up on the American Medical Association and CMS websites, or ask the billing office to explain each one."],
+      ["Can I be charged for asking for an itemized bill?", "Providers may charge a reasonable copying fee for medical records in some states, but a billing statement is normally free. If they quote a fee, ask what law it comes from."],
+    ],
+    cta: "Scan your bill and we'll point out the charges that look wrong.",
+  },
+  {
+    slug: "hospital-financial-assistance-charity-care",
+    title: "Hospital financial assistance (charity care): how to apply",
+    description: "Nonprofit hospitals must have a financial assistance policy. Learn who qualifies, what the hospital can't do while you apply, and how to ask.",
+    kicker: "Medical bills",
+    updated: "2026-10-18",
+    problem: "medical-bills",
+    intro: "Most hospitals in the U.S. are nonprofits, and federal tax rules require them to help people who can't afford their bills. Many patients never ask. Asking costs nothing, and the answer can cut a bill by a lot or erase it.",
+    blocks: [
+      {
+        h: "What nonprofit hospitals must do",
+        list: [
+          "Have a written financial assistance policy, and make it easy to find on the hospital website",
+          "Offer a plain-language summary and an application form",
+          "Limit what they charge patients who qualify to roughly what insurers pay, not the full list price",
+          "Wait at least 120 days after the first bill before sending you to collections, reporting you to credit bureaus, suing you or taking other serious collection steps",
+          "Check whether you qualify before taking those steps",
+          "Accept applications for at least 240 days after the first bill",
+        ],
+      },
+      {
+        h: "Step by step",
+        steps: [
+          ["Ask for the policy and the application", "Call the billing office and say: \"I'd like to apply for financial assistance.\" Also look on the hospital website for \"financial assistance\" or \"charity care.\""],
+          ["Check the income limits", "Hospitals usually set eligibility as a multiple of the federal poverty level. Some help people at 400% of the poverty level or more. Many give free care at the lowest incomes and discounts above that."],
+          ["Gather your proof", "Pay stubs, last year's tax return, benefit letters, or a letter explaining that you have no income. Some hospitals accept a signed statement."],
+          ["Apply even if you're unsure", "Rules differ and some hospitals count assets and others don't. Let them decide."],
+          ["Ask for a hold", "Ask in writing that the account be paused while your application is reviewed, and keep a copy."],
+          ["Appeal a denial", "Ask for the reason in writing and whether you can reapply with more information or ask for a review."],
+        ],
+      },
+      {
+        h: "Bills you've already paid",
+        p: ["If you paid a bill and later learn you would have qualified, ask the hospital whether it will review the account and refund the difference. Some will, especially if it was within the application window."],
+      },
+    ],
+    faqs: [
+      ["Does financial assistance affect my credit?", "Applying doesn't. While your application is pending, a nonprofit hospital generally can't report the debt to credit bureaus or sue you."],
+      ["What if my hospital is for-profit or run by a government?", "The federal rule applies to nonprofit hospitals. Many for-profit and public hospitals still have programs, and some states require them. Ask for the policy and check your state's page."],
+      ["Do I have to be uninsured?", "No. Many policies help insured patients with deductibles and coinsurance too. Ask what the policy covers."],
+    ],
+    cta: "We'll help you write the request for financial assistance.",
+  },
+  {
+    slug: "medical-debt-and-your-credit-report",
+    title: "Medical debt and your credit report: what can and can't be reported",
+    description: "What the credit bureaus leave off, which states ban medical debt on credit reports, and how to dispute a medical collection that shouldn't be there.",
+    kicker: "Medical bills",
+    updated: "2026-10-18",
+    problem: "medical-bills",
+    intro: "A medical collection on your credit report can hurt your score and your chances of renting or borrowing. Some of it shouldn't be there. Here's what the rules are, and how to get it removed.",
+    blocks: [
+      {
+        h: "What the three credit bureaus leave off",
+        list: [
+          "Medical collections you have paid",
+          "Medical collections under $500",
+          "Medical debt less than a year past due",
+        ],
+      },
+      {
+        h: "The federal ban that didn't happen",
+        p: ["In January 2025 the CFPB finalized a rule to remove medical debt from credit reports. A federal court struck it down in July 2025 and it never took effect. The bureaus' own policy above still applies, and many states have passed their own laws."],
+      },
+      {
+        h: "States that go further",
+        p: ["Several states bar medical debt from credit reports or limit it, including California, Colorado, Connecticut, Delaware, Illinois, Maine, Maryland, Minnesota, New York, Oregon, Rhode Island, Vermont, Virginia, Washington and the District of Columbia. Some of these laws are being challenged in court, so check the page for your state."],
+      },
+      {
+        h: "How to dispute a medical collection",
+        steps: [
+          ["Get your reports", "You can get free weekly reports from all three bureaus at annualcreditreport.com."],
+          ["Find the problem", "Look for medical collections that you paid, that are under $500, or that are less than a year old. Also look for debts that aren't yours or amounts that are wrong."],
+          ["Dispute with the bureau", "File a dispute online or by mail with each bureau that shows the item. Attach proof, such as a payment receipt or an insurance statement showing the insurer owed the amount."],
+          ["Dispute with the collector", "Send a written dispute to the collector too. They must investigate and report the debt as disputed while they do."],
+          ["Follow up", "Bureaus generally have 30 days to investigate. If the item stays and you have proof it's wrong, file a complaint with the CFPB."],
+        ],
+      },
+    ],
+    faqs: [
+      ["Does paying a medical collection remove it from my report?", "With the three major bureaus, yes. Paid medical collections are left off their reports. Ask the collector for a written confirmation of payment and check the report a few weeks later."],
+      ["Can an insurance dispute keep a bill off my credit?", "Often. If the bill is still being worked out with your insurer, the debt may not be valid yet. Dispute the item and send the insurance records."],
+      ["Does the No Surprises Act help with credit?", "Indirectly. If a bill violates the No Surprises Act, it shouldn't have been billed to you at that amount, and you can dispute it with the collector and the bureaus."],
+    ],
+    cta: "Got a medical collection? Scan the letter and we'll check it.",
+  },
+  {
+    slug: "internal-vs-external-review-insurance-appeal",
+    title: "Internal vs. external review: the two stages of a health insurance appeal",
+    description: "A denied claim has two appeals. The first goes to your plan; the second goes to an independent reviewer who can overrule it. Here's how each works.",
+    kicker: "Insurance denials",
+    updated: "2026-10-18",
+    problem: "insurance-denials",
+    intro: "Most people know they can appeal. Fewer know there are two stages, and that the second one is decided by someone who doesn't work for your insurance company.",
+    blocks: [
+      {
+        h: "Stage 1: internal appeal",
+        p: ["You ask your plan to look at its decision again. You generally have 180 days from the denial notice. The plan generally has 30 days to decide on care you haven't had yet and 60 days on care you've already had. If waiting could harm your health, ask for an expedited appeal, which gets a decision within 72 hours."],
+      },
+      {
+        h: "Stage 2: external review",
+        p: ["If the plan upholds the denial, you can ask for an independent external review, generally within 4 months of the final internal denial. An independent organization reviews your case. If it sides with you, the plan must follow the decision. This is where many denials are overturned."],
+      },
+      {
+        h: "Which rules apply to you",
+        list: [
+          "Individual plans and job-based plans that the insurer pays: your state's rules and its insurance department",
+          "Job-based plans where the employer pays claims itself (self-funded, often called ERISA plans): federal rules, with help from the U.S. Department of Labor at 1-866-444-3272",
+          "Medicaid: a state fair hearing, with its own deadline (see your state page)",
+          "Medicare: its own appeal levels, with deadlines in the denial notice",
+        ],
+      },
+      {
+        h: "Step by step",
+        steps: [
+          ["Find out what kind of plan you have", "Look at your insurance card or plan booklet for \"self-funded.\" If you're not sure, call member services and ask who decides appeals."],
+          ["File the internal appeal on time", "Send it by a method that gives you proof of delivery, and keep a copy."],
+          ["Ask for the plan's file", "You can request the documents and clinical criteria they used, free of charge."],
+          ["Use the outside review", "If the plan says no again, ask in writing for external review and use the form that comes with the final denial."],
+        ],
+      },
+    ],
+    faqs: [
+      ["Do I have to finish the internal appeal first?", "Usually yes. The exceptions are urgent cases, where you can ask for both at the same time, and cases where the plan didn't follow its own rules."],
+      ["Does external review cost anything?", "Many states and the federal process charge little or nothing. Some charge a small fee and waive it if you can't pay."],
+      ["What if the plan misses its deadline?", "In many cases that lets you go straight to external review. Keep dates and proof of when you filed."],
+    ],
+    cta: "Scan your denial and we'll write the appeal.",
+  },
+  {
+    slug: "common-health-insurance-denial-reasons",
+    title: "Common reasons health insurance denies a claim, and what to do about each",
+    description: "Medical necessity, out of network, no prior authorization, coding errors and more. What each denial reason means and how to answer it.",
+    kicker: "Insurance denials",
+    updated: "2026-10-18",
+    problem: "insurance-denials",
+    intro: "The reason on your denial letter tells you how to fight it. Some are paperwork problems that a phone call fixes. Others need your doctor and a formal appeal.",
+    blocks: [
+      {
+        h: "The reasons, and the answer to each",
+        steps: [
+          ["\"Not medically necessary\"", "The plan says you don't need the care. Ask your doctor for a letter explaining why it's needed, with test results, past treatments that didn't work and the guidelines they're relying on. Ask for a reviewer in the same specialty."],
+          ["\"Prior authorization was not obtained\"", "Check whether the office asked. If the provider failed to get approval, ask the plan to review it anyway and push the provider to submit a retroactive request. For emergency care, prior approval generally can't be required."],
+          ["\"Out of network\"", "For emergencies and for out-of-network doctors at an in-network hospital, the No Surprises Act limits what you can be charged. Appeal if you didn't choose the provider. Also ask whether an in-network provider was available."],
+          ["\"Coding or billing error\"", "Often the provider used the wrong code or left something off. Call the provider's billing office and ask them to resubmit a corrected claim."],
+          ["\"Experimental or investigational\"", "Ask for the plan's written policy. Your doctor can cite published studies and guidelines. External review is common for these denials."],
+          ["\"Not a covered benefit\"", "Check your plan documents. If the service is on a list of covered preventive care, such as certain screenings, it should be covered with no cost to you."],
+          ["\"Duplicate claim\" or \"already processed\"", "Ask for the claim number of the original and check that it was paid correctly."],
+          ["\"Filed too late\"", "Ask for the plan's time limit in writing. If the provider filed late, the provider generally can't bill you for it. If you filed late, appeal and explain why."],
+        ],
+      },
+      {
+        h: "Whatever the reason",
+        list: ["Note the claim number and the appeal deadline from the letter", "Ask in writing for the plan's reason in full and the documents it used", "Keep every letter, call date and name"],
+      },
+    ],
+    faqs: [
+      ["Can a plan deny a claim for a pre-existing condition?", "Not on ACA-compliant plans. Those plans can't deny coverage or charge more because of a health condition you had before."],
+      ["Who do I contact if the plan keeps denying?", "Your state insurance department for state-regulated plans, or the U.S. Department of Labor for job-based plans where the employer pays claims. Pick your state to find the right office."],
+    ],
+    cta: "Scan your denial letter and we'll tell you what it means.",
+  },
+  {
+    slug: "what-debt-collectors-cant-do",
+    title: "What debt collectors can't do: your rights under federal law",
+    description: "When a collector can call, what they can't say, and what to do if they cross the line. Includes how to stop calls and how to sue for violations.",
+    kicker: "Debt collectors",
+    updated: "2026-10-18",
+    problem: "debt-collectors",
+    intro: "The Fair Debt Collection Practices Act and the CFPB's Regulation F set rules for outside collectors and debt buyers. Many collectors break them. Knowing the rules gives you something to point to.",
+    blocks: [
+      {
+        h: "Calls and contact",
+        list: [
+          "No calls before 8 a.m. or after 9 p.m. in your time zone",
+          "More than 7 calls in 7 days about the same debt is presumed harassment",
+          "After they talk to you by phone, no new call about that debt for 7 days",
+          "No calls to your workplace if you tell them your employer doesn't allow it",
+          "You can tell them in writing to stop contacting you, or to contact you only in certain ways. They can then contact you only to confirm they're stopping or to tell you about a specific action such as a lawsuit",
+          "Texts and emails must include a simple way to opt out",
+        ],
+      },
+      {
+        h: "What they can't say or do",
+        list: [
+          "Threaten arrest, or threaten legal action they don't intend or can't take",
+          "Lie about the amount, who they are, or whether they are a lawyer or work for the government",
+          "Tell your family, neighbors or employer about the debt. They may only ask others for your contact information",
+          "Use obscene language or threaten or harass you",
+          "Add fees, interest or charges the contract or law doesn't allow",
+          "Sue or threaten to sue on a debt that is past the time limit",
+          "Deposit a postdated check early, or take a payment you didn't agree to",
+        ],
+      },
+      {
+        h: "Who these rules cover",
+        p: ["They apply to third-party collectors and debt buyers. They mostly don't apply to the original creditor collecting its own debt, though state laws often do. Some state laws are tougher than the federal ones."],
+      },
+      {
+        h: "If a collector breaks the rules",
+        steps: [
+          ["Keep a log", "Write down the date, time, number and what was said. Save voicemails, texts, emails and letters."],
+          ["Tell them to stop in writing", "Send a certified letter saying to stop contacting you, or to contact you only in writing."],
+          ["File complaints", "Report to the CFPB at consumerfinance.gov/complaint, the FTC and your state attorney general."],
+          ["Consider suing", "You can sue in federal or state court within one year of the violation. If you win, the court can award up to $1,000 plus damages, court costs and attorney fees. Many consumer lawyers take these cases without upfront fees."],
+        ],
+      },
+    ],
+    faqs: [
+      ["Can a debt collector call me at work?", "Not if you tell them your employer doesn't allow it, and not at times that are inconvenient, such as before 8 a.m. or after 9 p.m."],
+      ["Can they garnish my wages without suing me?", "Generally no. For most consumer debts, a collector needs a court judgment first. Federal student loans, taxes and child support are exceptions."],
+      ["Can I make them stop calling?", "Yes. Send a written request to stop. They can still sue, and the debt still exists, but they must stop the calls and letters."],
+    ],
+    cta: "Collector crossing the line? We'll write the cease-contact letter.",
+  },
+  {
+    slug: "how-to-demand-repairs-from-your-landlord",
+    title: "How to demand repairs from your landlord, in writing",
+    description: "Your landlord has to keep your home livable. Here's how to ask for repairs so you have proof, what a reasonable wait is, and what to do if they ignore you.",
+    kicker: "Landlords",
+    updated: "2026-10-18",
+    problem: "landlords",
+    intro: "Nearly every state requires a landlord to keep a rental safe and livable: working heat and water, locks, no leaks or pests, and wiring and plumbing that work. The way you ask matters as much as the problem.",
+    blocks: [
+      {
+        h: "Step by step",
+        steps: [
+          ["Write it down", "Send a dated letter or email that names the problem, the room, when it began and what you want fixed. A text or phone call is hard to prove later."],
+          ["Keep proof", "Dated photos and video, your messages, and any receipts for things the problem damaged."],
+          ["Give a reasonable time", "Many states expect 14 to 30 days for ordinary repairs, and much less for no heat, no water, no working lock or a gas smell."],
+          ["Send a second notice", "If nothing happens, send a short follow-up by certified mail that mentions the first request. It sets up whatever you do next."],
+          ["Call the inspector", "Report serious problems to your city or county code enforcement. A written inspection report is strong evidence."],
+          ["Choose your remedy with advice", "Depending on your state, that may include repair and deduct, rent withholding, rent escrow, ending the lease, or suing. Each has strict steps. See your state page and call legal aid before you act."],
+        ],
+      },
+      {
+        h: "Protect yourself",
+        list: [
+          "Keep paying rent unless a lawyer or your state's rules tell you otherwise. Withholding rent the wrong way can get you evicted",
+          "Don't fix things yourself and deduct the cost unless your state allows it and you've followed its notice steps",
+          "Many states ban retaliation. A landlord who raises your rent, cuts services or starts an eviction soon after you complain may be breaking the law",
+          "Let the landlord in with proper notice. Refusing entry for repairs can hurt your case",
+        ],
+      },
+    ],
+    faqs: [
+      ["What counts as an emergency repair?", "No heat in cold weather, no water, a gas leak, a broken lock, a sewage backup or electrical hazards. Call the landlord right away, then confirm in writing."],
+      ["Can my landlord evict me for asking for repairs?", "In most states that is illegal retaliation, especially soon after a complaint. Keep your records, and see your state page for how long the protection lasts."],
+      ["What if the problem is mold?", "Document it with photos, report it in writing and ask for the cause to be fixed, not just painted over. Mold from a leak is generally the landlord's job to repair."],
+    ],
+    cta: "Landlord won't fix it? We'll write the repair demand for your state.",
+  },
+  {
+    slug: "eviction-notices-explained",
+    title: "Eviction notices explained: what each one means and how much time you have",
+    description: "Pay-or-quit, cure-or-quit and no-fault notices. What a landlord must do before evicting you, what they can't do, and what to do the day you get a notice.",
+    kicker: "Landlords",
+    updated: "2026-10-18",
+    problem: "landlords",
+    intro: "An eviction notice is not an eviction. It's the first step. A landlord generally has to give you notice, file a case in court and win before anyone can make you leave. What you do in the first few days matters most.",
+    blocks: [
+      {
+        h: "The main kinds of notice",
+        list: [
+          "Pay or quit: you owe rent. Pay the full amount by the deadline, or move out. Deadlines are often 3 to 14 days, depending on the state.",
+          "Cure or quit: you broke a lease rule, such as having an unapproved pet. Fix the problem by the deadline to stay.",
+          "Unconditional quit: you must leave, and fixing the problem doesn't help. Used for serious or repeat violations in some states.",
+          "No-fault or end-of-lease notice: the landlord is ending a month-to-month tenancy or not renewing. Notice is often 30 to 90 days, and some states and cities require a reason.",
+        ],
+      },
+      {
+        h: "What a landlord can't do",
+        list: [
+          "Change your locks, remove your door or belongings, or shut off utilities to force you out. In nearly every state that is illegal \"self-help\" eviction",
+          "Evict you without going through court",
+          "Evict you in retaliation for a repair request or complaint, or because of your race, family status, disability or other protected status",
+        ],
+      },
+      {
+        h: "The day you get a notice",
+        steps: [
+          ["Read it closely", "Find the type of notice, the date it was served, the deadline and what they say you owe or did."],
+          ["Don't ignore it", "Even if you plan to move, respond. A court judgment can follow you on a rental history and credit report."],
+          ["Call legal aid", "Free legal help is the single best step. Many programs give priority to people facing eviction. Pick your state on our legal aid page."],
+          ["Look for rental assistance", "Call 211 or your local housing agency. Some programs pay back rent directly to the landlord."],
+          ["Gather your records", "Lease, rent receipts, messages with the landlord, photos of any problems, and the notice itself."],
+          ["Answer the court papers", "If the landlord files a case, you'll get a summons. The deadline to respond can be as short as a few days. Go to the hearing even if you haven't found a lawyer."],
+        ],
+      },
+    ],
+    faqs: [
+      ["How long does an eviction take?", "From notice to a court order can take a few weeks to a few months, depending on the state, the court and whether you contest it. Don't count on delays."],
+      ["Does an eviction go on my record?", "A court case can show up on tenant screening reports even if you win or settle. Ask legal aid whether you can have it sealed or negotiate a dismissal."],
+      ["Do I have to leave when the notice period ends?", "No. Only a court order, carried out by the sheriff or marshal, can remove you. But if the case is filed, you must respond and show up."],
+    ],
+    cta: "Got a notice? We'll explain it and write your response.",
+  },
+];

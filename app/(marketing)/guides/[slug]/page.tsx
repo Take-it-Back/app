@@ -6,7 +6,8 @@ import { notFound } from "next/navigation";
 import { CtaBand } from "@/components/site";
 import { CtaLink } from "@/components/ui";
 import Faq from "@/components/Faq";
-import { GUIDES, guideBySlug } from "@/lib/guides";
+import { GUIDES, GUIDE_LAW_TOPIC, guideBySlug } from "@/lib/guides";
+import { topicBySlug } from "@/lib/lawPages";
 import { DEPOSIT_RULES } from "@/lib/deposits";
 import { problemBySlug } from "@/lib/marketing";
 import { pageMeta, JsonLd, breadcrumbs, faqPage, SITE_URL } from "@/lib/seo";
@@ -27,6 +28,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   const g = guideBySlug((await params).slug);
   if (!g) notFound();
   const p = problemBySlug(g.problem)!;
+  const law = topicBySlug(GUIDE_LAW_TOPIC[g.slug] || "");
   const related = GUIDES.filter((x) => x.slug !== g.slug && x.problem === g.problem).concat(GUIDES.filter((x) => x.problem !== g.problem)).slice(0, 3);
 
   return (
@@ -59,6 +61,13 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           <span style={{ fontSize: 16, fontWeight: 500 }}>{g.cta}</span>
           <CtaLink href="/login?mode=signup" variant="orange">Start free</CtaLink>
         </div>
+
+        {law && (
+          <div className="panel-gray row wrap between g12" style={{ margin: "8px 0 8px", alignItems: "center" }}>
+            <span style={{ fontSize: 16 }}>The rules change by state. See what your state says about {law.name.toLowerCase()}.</span>
+            <Link href={`/laws/${law.slug}`} style={{ fontWeight: 600 }}>Pick your state →</Link>
+          </div>
+        )}
 
         {g.depositTable && (
           <section style={{ marginTop: 32 }}>
