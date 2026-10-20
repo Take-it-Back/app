@@ -6,7 +6,9 @@ import { notFound } from "next/navigation";
 import { CtaBand } from "@/components/site";
 import { CtaLink } from "@/components/ui";
 import Faq from "@/components/Faq";
-import { GUIDES, GUIDE_LAW_TOPIC, guideBySlug } from "@/lib/guides";
+import { GUIDES, GUIDE_LAW_TOPIC, guideBySlug, readMinutes } from "@/lib/guides";
+import GuideCover from "@/components/GuideCover";
+import { categoryBySlug, kindLabel } from "@/lib/guideMeta";
 import { topicBySlug } from "@/lib/lawPages";
 import { DEPOSIT_RULES } from "@/lib/deposits";
 import { problemBySlug } from "@/lib/marketing";
@@ -27,9 +29,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
   const g = guideBySlug((await params).slug);
   if (!g) notFound();
-  const p = problemBySlug(g.problem)!;
+  const cat = categoryBySlug(g.category)!;
+  const p = problemBySlug(g.problem ?? cat.problem ?? "");
   const law = topicBySlug(GUIDE_LAW_TOPIC[g.slug] || "");
-  const related = GUIDES.filter((x) => x.slug !== g.slug && x.problem === g.problem).concat(GUIDES.filter((x) => x.problem !== g.problem)).slice(0, 3);
+  const related = GUIDES.filter((x) => x.slug !== g.slug && x.category === g.category).slice(0, 4);
 
   return (
     <main>
@@ -46,16 +49,19 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             author: { "@id": `${SITE_URL}/#org` },
             publisher: { "@type": "Organization", "@id": `${SITE_URL}/#org`, name: "Take it back", logo: { "@type": "ImageObject", url: `${SITE_URL}/icons/icon-512.png` } },
           },
-          breadcrumbs([["Home", "/"], ["Guides", "/guides"], [g.title, `/guides/${g.slug}`]]),
+          breadcrumbs([["Home", "/"], ["Guides", "/guides"], [cat.name, `/guides/category/${cat.slug}`], [g.title, `/guides/${g.slug}`]]),
           faqPage(g.faqs),
         ]}
       />
       <article style={{ maxWidth: 760, margin: "0 auto", padding: "clamp(40px, 6vw, 72px) 24px 0" }}>
         <Link href="/guides" className="muted" style={{ fontSize: 14, textDecoration: "none" }}>← All guides</Link>
-        <span className="eyebrow" style={{ display: "block", margin: "18px 0 10px", fontSize: 13 }}>{g.kicker}</span>
+        <div style={{ marginTop: 18, borderRadius: 24, overflow: "hidden" }}>
+          <GuideCover slug={g.slug} category={g.category} icon={g.icon} ratio="2.4 / 1" />
+        </div>
+        <Link href={`/guides/category/${cat.slug}`} className="eyebrow" style={{ display: "block", margin: "22px 0 10px", fontSize: 13, textDecoration: "none" }}>{cat.name}</Link>
         <h1 className="h-xl" style={{ fontSize: "clamp(38px, 5vw, 58px)" }}>{g.title}</h1>
         <p className="lede" style={{ marginTop: 16 }}>{g.intro}</p>
-        <p className="muted small" style={{ marginTop: 10 }}>Updated {longDate(g.updated + "T12:00:00Z")} · General information, not legal advice.</p>
+        <p className="muted small" style={{ marginTop: 10 }}>{kindLabel(g.kind)} · {readMinutes(g)} min read · Updated {longDate(g.updated + "T12:00:00Z")} · General information, not legal advice.</p>
 
         <div className="panel-orange row wrap between g12" style={{ margin: "24px 0 8px", alignItems: "center" }}>
           <span style={{ fontSize: 16, fontWeight: 500 }}>{g.cta}</span>
@@ -152,17 +158,26 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         </section>
 
         <section style={{ marginTop: 40 }}>
-          <Link href={`/fight/${p.slug}`} className="card stack g4" style={{ textDecoration: "none", borderRadius: 22 }}>
-            <span className="eyebrow">How Take it back helps</span>
-            <span className="serif" style={{ fontSize: 24 }}>{p.seoTitle}</span>
-            <span className="muted small">{p.menu}</span>
-          </Link>
+          {p ? (
+            <Link href={`/fight/${p.slug}`} className="card stack g4" style={{ textDecoration: "none", borderRadius: 22 }}>
+              <span className="eyebrow">How Take it back helps</span>
+              <span className="serif" style={{ fontSize: 24 }}>{p.seoTitle}</span>
+              <span className="muted small">{p.menu}</span>
+            </Link>
+          ) : (
+            <Link href="/how-it-works" className="card stack g4" style={{ textDecoration: "none", borderRadius: 22 }}>
+              <span className="eyebrow">How Take it back helps</span>
+              <span className="serif" style={{ fontSize: 24 }}>Scan the letter. We find what's wrong and write the reply.</span>
+              <span className="muted small">See how it works →</span>
+            </Link>
+          )}
         </section>
 
         <section style={{ marginTop: 40 }}>
-          <h2 className="serif" style={{ fontSize: 26, margin: "0 0 12px", fontWeight: 400 }}>More guides</h2>
+          <h2 className="serif" style={{ fontSize: 26, margin: "0 0 12px", fontWeight: 400 }}>More in {cat.name.toLowerCase()}</h2>
           <div className="stack g8">
             {related.map((r) => <Link key={r.slug} href={`/guides/${r.slug}`} className="list-row" style={{ fontWeight: 500 }}>{r.title}</Link>)}
+            <Link href={`/guides/category/${cat.slug}`} style={{ fontWeight: 600, fontSize: 15 }}>All {cat.name.toLowerCase()} guides →</Link>
           </div>
         </section>
       </article>
