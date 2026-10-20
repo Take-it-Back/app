@@ -25,6 +25,10 @@ export default function GuidesPage() {
       <section className="wrap-1200" style={{ paddingTop: 24 }}>
         <GuideBrowser guides={CARDS} />
       </section>
+      <section className="wrap-1200 stack g12" style={{ paddingTop: 56 }}>
+        <h2 className="serif" style={{ fontSize: 32, margin: 0, fontWeight: 400 }}>Free tools</h2>
+        <p className="muted" style={{ margin: 0, fontSize: 16 }}>Find your deadline, build a dispute letter or check your deposit deadline. <Link href="/tools">Open the tools</Link></p>
+      </section>
       <section className="wrap-1200 stack g12" style={{ paddingTop: 48 }}>
         <h2 className="serif" style={{ fontSize: 32, margin: 0, fontWeight: 400 }}>Rules by state</h2>
         <p className="muted" style={{ margin: 0, fontSize: 16 }}>Deadlines, limits and penalties for all 50 states and DC. <Link href="/states">Pick your state</Link></p>

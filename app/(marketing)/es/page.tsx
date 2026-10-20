@@ -77,6 +77,10 @@ export default function Espanol() {
         </div>
       </section>
 
+      <section className="wrap-1200 stack g12 m-section" style={{ maxWidth: 760 }}>
+        <h2 className="serif" style={{ fontSize: 32, margin: 0, fontWeight: 400 }}>Guías en español</h2>
+        <p className="muted" style={{ margin: 0, fontSize: 17 }}>Pasos claros para pelear una factura médica, un cobrador, un abuso del casero o un error de crédito. <Link href="/es/guias">Ver las guías</Link></p>
+      </section>
       <section className="wrap-1200 stack g16 m-section" style={{ maxWidth: 760 }}>
         <h2 className="h-l">Precio <em className="o">claro</em></h2>
         <p className="lede" style={{ margin: 0 }}>Gratis: 3 escaneos al mes con un resumen y los próximos pasos. Premium: $9.99 al mes o $59 al año, con 7 días gratis. Escribe tus cartas, vigila tus fechas y lee sus respuestas. Se renueva automáticamente hasta que canceles, y puedes cancelar en línea cuando quieras.</p>

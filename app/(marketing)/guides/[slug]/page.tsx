@@ -8,6 +8,9 @@ import { CtaLink } from "@/components/ui";
 import Faq from "@/components/Faq";
 import { GUIDES, GUIDE_LAW_TOPIC, guideBySlug, readMinutes } from "@/lib/guides";
 import GuideCover from "@/components/GuideCover";
+import LetterBox from "@/components/LetterBox";
+import { ANSWERS, LETTERS } from "@/lib/guideExtras";
+import { esGuideBySlug } from "@/lib/guideEs";
 import { categoryBySlug, kindLabel } from "@/lib/guideMeta";
 import { topicBySlug } from "@/lib/lawPages";
 import { DEPOSIT_RULES } from "@/lib/deposits";
@@ -23,7 +26,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const g = guideBySlug((await params).slug);
   if (!g) return {};
   const m = pageMeta({ title: g.title, description: g.description, path: `/guides/${g.slug}` });
-  return { ...m, openGraph: { ...m.openGraph, type: "article" } };
+  const es = esGuideBySlug(g.slug);
+  const alternates = es ? { ...m.alternates, languages: { en: `/guides/${g.slug}`, es: `/es/guias/${es.slug}` } } : m.alternates;
+  return { ...m, alternates, openGraph: { ...m.openGraph, type: "article" } };
 }
 
 export default async function GuidePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -32,6 +37,9 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   const cat = categoryBySlug(g.category)!;
   const p = problemBySlug(g.problem ?? cat.problem ?? "");
   const law = topicBySlug(GUIDE_LAW_TOPIC[g.slug] || "");
+  const answer = ANSWERS[g.slug];
+  const letter = LETTERS[g.slug];
+  const es = esGuideBySlug(g.slug);
   const related = GUIDES.filter((x) => x.slug !== g.slug && x.category === g.category).slice(0, 4);
 
   return (
@@ -62,6 +70,16 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         <h1 className="h-xl" style={{ fontSize: "clamp(38px, 5vw, 58px)" }}>{g.title}</h1>
         <p className="lede" style={{ marginTop: 16 }}>{g.intro}</p>
         <p className="muted small" style={{ marginTop: 10 }}>{kindLabel(g.kind)} · {readMinutes(g)} min read · Updated {longDate(g.updated + "T12:00:00Z")} · General information, not legal advice.</p>
+
+        {answer && (
+          <div className="panel-gray stack g8" style={{ margin: "24px 0 0" }}>
+            <span className="eyebrow">Short answer</span>
+            <p style={{ margin: 0, fontSize: 18, lineHeight: 1.55 }}>{answer}</p>
+          </div>
+        )}
+        {es && (
+          <p style={{ margin: "14px 0 0", fontSize: 15 }}><Link href={`/es/guias/${es.slug}`} hrefLang="es" lang="es">Leer esta guía en español →</Link></p>
+        )}
 
         <div className="panel-orange row wrap between g12" style={{ margin: "24px 0 8px", alignItems: "center" }}>
           <span style={{ fontSize: 16, fontWeight: 500 }}>{g.cta}</span>
@@ -151,6 +169,8 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
             )}
           </section>
         ))}
+
+        {letter && <LetterBox title={letter.title} to={letter.to} lines={letter.lines} />}
 
         <section style={{ marginTop: 40 }}>
           <h2 className="serif" style={{ fontSize: 30, margin: "0 0 12px", fontWeight: 400 }}>Questions</h2>
