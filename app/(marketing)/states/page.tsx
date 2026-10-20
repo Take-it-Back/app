@@ -30,8 +30,8 @@ export default function StatesIndex() {
         </div>
         <div className="stack g12">
           <h2 className="serif" style={{ fontSize: 30, margin: 0, fontWeight: 400 }}>By state</h2>
-          <div className="row wrap" style={{ columnGap: 20, rowGap: 10, fontSize: 17 }}>
-            {LAW_STATES.map((s) => <Link key={s} href={`/states/${lawStateSlug(s)}`}>{s}</Link>)}
+          <div className="row wrap" style={{ columnGap: 20, rowGap: 0, fontSize: 17 }}>
+            {LAW_STATES.map((s) => <Link key={s} href={`/states/${lawStateSlug(s)}`} className="tap">{s}</Link>)}
           </div>
         </div>
       </section>

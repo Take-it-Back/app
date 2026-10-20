@@ -62,11 +62,11 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         ]}
       />
       <article style={{ maxWidth: 760, margin: "0 auto", padding: "clamp(40px, 6vw, 72px) 24px 0" }}>
-        <Link href="/guides" className="muted" style={{ fontSize: 14, textDecoration: "none" }}>← All guides</Link>
+        <Link href="/guides" className="muted tap" style={{ fontSize: 14, textDecoration: "none" }}>← All guides</Link>
         <div style={{ marginTop: 18, borderRadius: 24, overflow: "hidden" }}>
           <GuideCover slug={g.slug} category={g.category} icon={g.icon} ratio="2.4 / 1" />
         </div>
-        <Link href={`/guides/category/${cat.slug}`} className="eyebrow" style={{ display: "block", margin: "22px 0 10px", fontSize: 13, textDecoration: "none" }}>{cat.name}</Link>
+        <Link href={`/guides/category/${cat.slug}`} className="eyebrow tap" style={{ display: "flex", margin: "12px 0 0", fontSize: 13, textDecoration: "none" }}>{cat.name}</Link>
         <h1 className="h-xl" style={{ fontSize: "clamp(38px, 5vw, 58px)" }}>{g.title}</h1>
         <p className="lede" style={{ marginTop: 16 }}>{g.intro}</p>
         <p className="muted small" style={{ marginTop: 10 }}>{kindLabel(g.kind)} · {readMinutes(g)} min read · Updated {longDate(g.updated + "T12:00:00Z")} · General information, not legal advice.</p>
@@ -78,7 +78,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           </div>
         )}
         {es && (
-          <p style={{ margin: "14px 0 0", fontSize: 15 }}><Link href={`/es/guias/${es.slug}`} hrefLang="es" lang="es">Leer esta guía en español →</Link></p>
+          <p style={{ margin: "6px 0 0", fontSize: 15 }}><Link href={`/es/guias/${es.slug}`} className="tap" hrefLang="es" lang="es">Leer esta guía en español →</Link></p>
         )}
 
         <div className="panel-orange row wrap between g12" style={{ margin: "24px 0 8px", alignItems: "center" }}>
@@ -89,7 +89,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         {law && (
           <div className="panel-gray row wrap between g12" style={{ margin: "8px 0 8px", alignItems: "center" }}>
             <span style={{ fontSize: 16 }}>The rules change by state. See what your state says about {law.name.toLowerCase()}.</span>
-            <Link href={`/laws/${law.slug}`} style={{ fontWeight: 600 }}>Pick your state →</Link>
+            <Link href={`/laws/${law.slug}`} className="tap" style={{ fontWeight: 600 }}>Pick your state →</Link>
           </div>
         )}
 
@@ -197,7 +197,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           <h2 className="serif" style={{ fontSize: 26, margin: "0 0 12px", fontWeight: 400 }}>More in {cat.name.toLowerCase()}</h2>
           <div className="stack g8">
             {related.map((r) => <Link key={r.slug} href={`/guides/${r.slug}`} className="list-row" style={{ fontWeight: 500 }}>{r.title}</Link>)}
-            <Link href={`/guides/category/${cat.slug}`} style={{ fontWeight: 600, fontSize: 15 }}>All {cat.name.toLowerCase()} guides →</Link>
+            <Link href={`/guides/category/${cat.slug}`} className="tap" style={{ fontWeight: 600, fontSize: 15 }}>All {cat.name.toLowerCase()} guides →</Link>
           </div>
         </section>
       </article>

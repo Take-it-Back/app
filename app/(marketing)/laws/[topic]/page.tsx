@@ -38,7 +38,7 @@ export default async function LawTopicIndex({ params }: { params: Promise<{ topi
             <tbody>
               {LAW_STATES.map((s) => (
                 <tr key={s}>
-                  <td><Link href={`/laws/${t.slug}/${lawStateSlug(s)}`} style={{ fontWeight: 600 }}>{s}</Link></td>
+                  <td><Link href={`/laws/${t.slug}/${lawStateSlug(s)}`} className="tap" style={{ fontWeight: 600 }}>{s}</Link></td>
                   {t.cols.map(([h, f]) => <td key={h} data-label={h}>{f(s)}</td>)}
                 </tr>
               ))}

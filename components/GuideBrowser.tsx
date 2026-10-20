@@ -84,7 +84,7 @@ export default function GuideBrowser({ guides }: { guides: GuideCardData[] }) {
         {active ? (
           <>
             {results.length} {results.length === 1 ? "guide" : "guides"} found.{" "}
-            <button type="button" onClick={() => { setQ(""); setCat("all"); setKind("all"); }} style={{ background: "none", border: 0, padding: 0, font: "inherit", color: "var(--orange-ink)", textDecoration: "underline", cursor: "pointer" }}>Clear filters</button>
+            <button type="button" onClick={() => { setQ(""); setCat("all"); setKind("all"); }} style={{ background: "none", border: 0, padding: "10px 4px", minHeight: 44, font: "inherit", color: "var(--orange-ink)", textDecoration: "underline", cursor: "pointer" }}>Clear filters</button>
           </>
         ) : "Pick a topic above, search, or browse every topic below."}
       </div>
@@ -110,7 +110,7 @@ export default function GuideBrowser({ guides }: { guides: GuideCardData[] }) {
                     <h2 id={`cat-${c.slug}`} className="serif" style={{ fontSize: 32, margin: 0, fontWeight: 400 }}>{c.name}</h2>
                     <p className="muted" style={{ margin: 0, fontSize: 16 }}>{c.blurb}</p>
                   </div>
-                  <Link href={`/guides/category/${c.slug}`} style={{ fontWeight: 600, fontSize: 15 }}>All {list.length} guides →</Link>
+                  <Link href={`/guides/category/${c.slug}`} className="tap" style={{ fontWeight: 600, fontSize: 15 }}>All {list.length} guides →</Link>
                 </div>
                 <div className="grid-auto" style={GRID}>{list.slice(0, 3).map((g) => <GuideCard key={g.slug} g={g} />)}</div>
               </section>
