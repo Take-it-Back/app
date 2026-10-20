@@ -207,7 +207,7 @@ export const CREDIT_STUDENT_GUIDES: Guide[] = [
       {
         h: "The difference in plain terms",
         list: [
-          "Credit freeze: locks your credit file so most lenders can't open a new account using it. You unlock (thaw) it when you need credit.",
+          "Credit freeze: locks your credit file so most lenders can't open a new account using it. You lift (thaw) it when you need credit.",
           "Fraud alert: tells lenders to take extra steps to confirm it is really you before opening credit. Your file stays open.",
           "Both are free under federal law.",
           "Neither one changes your credit score.",

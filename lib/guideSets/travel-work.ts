@@ -213,7 +213,7 @@ export const TRAVEL_WORK_GUIDES: Guide[] = [
         steps: [
           ["Take screenshots before you check in", "Capture the price page, the confirmation email and the fee description. Do this again if the site changes."],
           ["Ask the front desk to remove or reduce the fee", "Politely ask a manager, show your screenshot and say you were not told about the fee when you booked. Many hotels remove it for a reason like this."],
-          ["Pay with a credit card", "If a hotel will not fix a charge, a card gives you leverage. Under the Fair Credit Billing Act you can dispute billing errors, generally within 60 days of the statement date."],
+          ["Pay with a credit card", "If a hotel will not fix a charge, a card gives you more power to push back. Under the Fair Credit Billing Act you can dispute billing errors, generally within 60 days of the statement date."],
           ["Write to the hotel corporate office", "Send a short email with the facts, your confirmation number, what was advertised and what you were charged. Ask for a refund of a specific amount."],
           ["Dispute with the card issuer", "If corporate does not respond, file a dispute with your card company and attach your documents."],
           ["File a complaint", "Report it to your state attorney general and at reportfraud.ftc.gov. A complaint helps regulators spot repeat offenders."],

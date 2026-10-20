@@ -101,7 +101,7 @@ export const BANKING_INSURANCE_GUIDES: Guide[] = [
       },
     ],
     faqs: [
-      ["Is a debit card riskier than a credit card?", "Often, yes. The money leaves your account right away, and you may have to cover bills while the bank investigates. Credit card disputes keep the money on the issuer's books, not yours."],
+      ["Is a debit card riskier than a credit card?", "Often, yes. The money leaves your account right away, and you may have to cover bills while the bank investigates. With a credit card, the disputed money is the issuer's while you argue about it."],
       ["Does it matter if my card was still in my wallet?", "The loss limits can differ when only the account number was stolen and the card was never lost. The 60-day window from your statement is the safest deadline to follow."],
       ["Can I just call, or do I need to write?", "A call is a good first step, but follow it with a written notice so there is a record of the date you reported the problem."],
     ],
@@ -409,6 +409,7 @@ export const BANKING_INSURANCE_GUIDES: Guide[] = [
         h: "Settlements and lawsuits",
         p: [
           "Big breaches sometimes lead to class action settlements. If you are eligible, the notice usually says how to file a claim. Use only the settlement website listed in an official notice, and never pay to file a claim.",
+          "You usually don't need to do anything to stay in a class action, but the notice will list deadlines if you want to file a claim, opt out or object. Read it before the dates pass, and keep a copy of anything you submit.",
         ],
       },
     ],
@@ -462,7 +463,7 @@ export const BANKING_INSURANCE_GUIDES: Guide[] = [
         h: "Where to report",
         list: [
           "Forward spam texts to 7726 (SPAM). Most major carriers accept it.",
-          "Report scams to the FTC at reportfraud.ftc.gov.",
+          "Report scams to the Federal Trade Commission at reportfraud.ftc.gov.",
           "Report unwanted calls and texts to the FCC through fcc.gov/consumers.",
           "Tell your bank right away if you shared account details or sent money.",
           "Free services like donotcall.gov limit legitimate telemarketers. They don't stop scammers.",
@@ -482,7 +483,7 @@ export const BANKING_INSURANCE_GUIDES: Guide[] = [
     icon: "car",
     kind: "how-to",
     title: "Auto insurance claim lowball offer or denial: what to do",
-    description: "How to respond when an auto insurer offers too little or denies a claim: get the reasons in writing, document damage, counter the offer and use your state's complaint process.",
+    description: "What to do when an auto insurer offers too little or denies a claim: get reasons in writing, document damage, counter the offer, file a state complaint.",
     kicker: "Insurance claims",
     updated: "2026-10-20",
     intro: "Your car was damaged, and the insurance company's offer is far below what repairs will cost, or it denied your claim. You don't have to accept the first number. The rules for insurers are set by each state, so this guide covers the general process and who to ask for the details.",
@@ -538,7 +539,7 @@ export const BANKING_INSURANCE_GUIDES: Guide[] = [
       {
         h: "Read the denial letter closely",
         p: [
-          "The letter should name the policy provision it relied on. Common reasons are that the damage came from an excluded cause (flood and earthquake are usually excluded and need separate coverage), that it was gradual wear or lack of maintenance, that the loss was below the deductible, that the claim was late, or that the damage wasn't covered peril. Compare the reason with your actual policy, not a summary.",
+          "The letter should name the policy provision it relied on. Common reasons are that the damage came from an excluded cause (flood and earthquake are usually excluded and need separate coverage), that it was gradual wear or lack of maintenance, that the loss was below the deductible, that the claim was late, or that the cause of the damage isn't a covered event. Compare the reason with your actual policy, not a summary.",
         ],
       },
       {
@@ -666,6 +667,7 @@ export const BANKING_INSURANCE_GUIDES: Guide[] = [
         h: "Be careful with timing",
         p: [
           "Claims against the at-fault driver have a time limit set by state law. Settling your whole claim and signing a release can end your right to ask for diminished value later, so raise it before you sign.",
+          "Insurers often start with a low figure or say the repair restored the car fully. A clear appraisal and a few matching listings give you something concrete to point to. If the answer is still no, ask for the reason in writing, because that tells you whether the issue is the state's rule, the policy wording or the amount.",
         ],
       },
     ],
@@ -772,7 +774,7 @@ export const BANKING_INSURANCE_GUIDES: Guide[] = [
       {
         h: "If the payment seems too low",
         p: [
-          "Ask for an itemized explanation. Send proof of value for any items the insurer undervalued, and ask for a supervisor review in writing. If you still disagree, your policy may have an appraisal process, and your state department of insurance takes complaints about claim handling.",
+          "Ask for an itemized explanation of how each item was valued and depreciated. Send proof of value for any items the insurer undervalued, such as receipts, photos or a listing for the same product, and ask for a supervisor review in writing. If you still disagree, your policy may have an appraisal process, and your state department of insurance takes complaints about claim handling.",
         ],
       },
     ],

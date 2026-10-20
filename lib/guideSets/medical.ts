@@ -97,7 +97,7 @@ export const MEDICAL_GUIDES: Guide[] = [
     ],
     faqs: [
       ["Can a hospital refuse a payment plan?", "Some can. Nonprofit hospitals must have a financial assistance policy, and many offer payment plans as part of it. If you're refused, ask to speak to a supervisor or to the patient advocate."],
-      ["Should I put a medical bill on a credit card?", "Usually it's better to avoid it. A hospital plan often has no interest, while a credit card does, and you lose some of your leverage to negotiate."],
+      ["Should I put a medical bill on a credit card?", "Usually it's better to avoid it. A hospital plan often has no interest, while a credit card does, and you lose some of your room to negotiate."],
       ["Will a payment plan hurt my credit?", "A plan with the provider is usually not reported while you keep up the payments. Ask the provider to confirm this in writing."],
       ["What if I'm already in collections?", "You can still negotiate with the collector, and you have rights under the Fair Debt Collection Practices Act. Ask for a written agreement before you pay."],
     ],
@@ -109,7 +109,7 @@ export const MEDICAL_GUIDES: Guide[] = [
     icon: "coin",
     kind: "rights",
     title: "Good faith estimates for uninsured and self-pay patients",
-    description: "If you have no insurance or choose not to use it, the No Surprises Act says providers must give you a written price estimate. Learn how to get one and what to do if the bill is higher.",
+    description: "If you have no insurance or choose not to use it, the No Surprises Act says providers must give you a written price estimate. How to get one, and what to do if the bill is higher.",
     kicker: "Medical bills",
     updated: "2026-10-20",
     intro: "You're scheduling care and you don't have insurance, or you plan to pay on your own. Under the federal No Surprises Act, the provider has to tell you the expected cost before you show up. That written price is called a good faith estimate.",

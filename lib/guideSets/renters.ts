@@ -78,7 +78,7 @@ export const RENTERS_GUIDES: Guide[] = [
           ["Count the days", "Compare the date you received the notice with the date the new rent starts. Keep the envelope or the email with its timestamp."],
           ["Look up your local rules", "Start at /states for your state, then your city or county housing office. Ask whether there is a notice requirement or a cap."],
           ["Ask about the reason", "Landlords often have room to move. Ask politely whether they would accept a smaller increase or a longer lease at the new price."],
-          ["Compare the market", "Look at similar units nearby. If your new rent is at or below what others pay, you may have little leverage. If it is well above, you can say so."],
+          ["Compare the market", "Look at similar units nearby. If your new rent is at or below what others pay, you may have little room to push back. If it is well above, you can say so."],
           ["Reply in writing", "Tell the landlord what you will do. If you plan to stay, ask for the new terms in writing. If you plan to leave, give notice that follows your lease and state law."],
         ],
       },
