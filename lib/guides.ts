@@ -1,5 +1,15 @@
 import type { ProblemSlug } from "./marketing";
-import { EXTRA_GUIDES } from "./guidesExtra";
+import type { GuideCategory, GuideKind, IconKey } from "./guideMeta";
+import { categoryBySlug } from "./guideMeta";
+import { EXTRA_GUIDES } from "./guideSets/first-batch";
+import { MEDICAL_GUIDES } from "./guideSets/medical";
+import { RENTERS_GUIDES } from "./guideSets/renters";
+import { DEBT_GUIDES } from "./guideSets/debt";
+import { CREDIT_STUDENT_GUIDES } from "./guideSets/credit-student";
+import { BANKING_INSURANCE_GUIDES } from "./guideSets/banking-insurance";
+import { AUTO_HOME_GUIDES } from "./guideSets/auto-home";
+import { SHOPPING_UTILITIES_GUIDES } from "./guideSets/shopping-utilities";
+import { TRAVEL_WORK_GUIDES } from "./guideSets/travel-work";
 
 // Plain-English guides for search. General information, not legal advice.
 export type GuideBlock = { h: string; p?: string[]; list?: string[]; steps?: [string, string][] };
@@ -9,7 +19,11 @@ export type Guide = {
   description: string;
   kicker: string;
   updated: string;
-  problem: ProblemSlug;
+  category: GuideCategory;
+  icon: IconKey;
+  kind: GuideKind;
+  /** The fight page this guide belongs to, when there is one. */
+  problem?: ProblemSlug;
   intro: string;
   blocks: GuideBlock[];
   faqs: [string, string][];
@@ -21,6 +35,9 @@ export type Guide = {
 const BASE_GUIDES: Guide[] = [
   {
     slug: "how-to-dispute-a-medical-bill",
+    category: "medical-bills",
+    icon: "receipt",
+    kind: "how-to",
     title: "How to dispute a medical bill, step by step",
     description: "Medical bills often contain errors. Here's how to get an itemized bill, spot double charges and surprise fees, ask for financial help and dispute the bill in writing.",
     kicker: "Medical bills",
@@ -57,6 +74,9 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "how-to-appeal-a-health-insurance-denial",
+    category: "health-insurance",
+    icon: "shield",
+    kind: "how-to",
     title: "How to appeal a health insurance denial",
     description: "A denied claim isn't final. Learn the appeal deadlines, what to include, how long insurers have to decide, and when you can ask for an outside review.",
     kicker: "Insurance denials",
@@ -89,6 +109,9 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "how-to-get-your-security-deposit-back",
+    category: "renters",
+    icon: "key",
+    kind: "how-to",
     title: "How to get your security deposit back",
     description: "Your landlord has a deadline to return your deposit or explain deductions. Here's how to document move-out, send a demand letter and take it to small claims if needed.",
     kicker: "Landlords",
@@ -119,6 +142,9 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "security-deposit-return-deadlines-by-state",
+    category: "renters",
+    icon: "calendar",
+    kind: "explainer",
     title: "Security deposit return deadlines by state",
     description: "How long landlords have to return a security deposit in all 50 states and DC, in one table, with what to do if they're late.",
     kicker: "Landlords",
@@ -139,6 +165,9 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "statute-of-limitations-on-debt-by-state",
+    category: "debt",
+    icon: "clock",
+    kind: "explainer",
     title: "Statute of limitations on debt by state",
     description: "How long a debt collector has to sue you in all 50 states and DC, whether a payment restarts the clock, and what to do if a debt is too old.",
     kicker: "Debt collectors",
@@ -173,6 +202,9 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "small-claims-court-limits-by-state",
+    category: "courts-complaints",
+    icon: "gavel",
+    kind: "explainer",
     title: "Small claims court limits by state",
     description: "The most you can sue for in small claims court in all 50 states and DC, the court's name, filing fees and whether lawyers are allowed.",
     kicker: "Small claims",
@@ -199,6 +231,9 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "debt-validation-letter",
+    category: "debt",
+    icon: "envelope",
+    kind: "letter",
     title: "Debt validation: how to make a debt collector prove it",
     description: "A debt collector has to prove you owe the debt. Learn your 30-day window, what a validation request does, and what not to say to a collector.",
     kicker: "Debt collectors",
@@ -233,6 +268,9 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "no-surprises-act-explained",
+    category: "medical-bills",
+    icon: "shield",
+    kind: "rights",
     title: "The No Surprises Act, explained",
     description: "What the No Surprises Act protects you from, which bills it covers, how good faith estimates work if you're uninsured, and how to file a complaint.",
     kicker: "Medical bills",
@@ -265,6 +303,9 @@ const BASE_GUIDES: Guide[] = [
   },
   {
     slug: "how-to-file-a-cfpb-complaint",
+    category: "courts-complaints",
+    icon: "megaphone",
+    kind: "how-to",
     title: "How to file a complaint with the CFPB",
     description: "The Consumer Financial Protection Bureau forwards your complaint to the company and tracks its response. Here's what it covers and how to file a strong complaint.",
     kicker: "Debt collectors",
@@ -294,7 +335,10 @@ const BASE_GUIDES: Guide[] = [
   },
 ];
 
-export const GUIDES: Guide[] = [...BASE_GUIDES, ...EXTRA_GUIDES];
+export const GUIDES: Guide[] = [
+  ...BASE_GUIDES, ...EXTRA_GUIDES, ...MEDICAL_GUIDES, ...RENTERS_GUIDES, ...DEBT_GUIDES, ...CREDIT_STUDENT_GUIDES,
+  ...BANKING_INSURANCE_GUIDES, ...AUTO_HOME_GUIDES, ...SHOPPING_UTILITIES_GUIDES, ...TRAVEL_WORK_GUIDES,
+];
 
 /** Which state-by-state topic (lib/lawPages.ts) each guide links to. */
 export const GUIDE_LAW_TOPIC: Record<string, string> = {
@@ -317,4 +361,10 @@ export const GUIDE_LAW_TOPIC: Record<string, string> = {
 };
 
 export const guideBySlug = (slug: string) => GUIDES.find((g) => g.slug === slug);
-export const guidesFor = (problem: ProblemSlug) => GUIDES.filter((g) => g.problem === problem);
+export const guidesFor = (problem: ProblemSlug) => GUIDES.filter((g) => (g.problem ?? categoryBySlug(g.category)?.problem) === problem);
+export const guidesIn = (category: GuideCategory) => GUIDES.filter((g) => g.category === category);
+/** Rough reading time, from the words in the guide. */
+export const readMinutes = (g: Guide) => {
+  const words = [g.intro, ...g.blocks.flatMap((b) => [...(b.p ?? []), ...(b.list ?? []), ...(b.steps ?? []).flat()]), ...g.faqs.flat()].join(" ").split(/\s+/).length;
+  return Math.max(2, Math.round(words / 220));
+};

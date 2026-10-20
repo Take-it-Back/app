@@ -1,10 +1,13 @@
-import type { Guide } from "./guides";
+import type { Guide } from "../guides";
 
 // More guides. Same rules as lib/guides.ts: plain English, general information, not legal advice.
 // State-specific numbers live in lib/state-law and are linked from each guide's "your state" panel.
 export const EXTRA_GUIDES: Guide[] = [
   {
     slug: "how-to-get-an-itemized-medical-bill",
+    category: "medical-bills",
+    icon: "document",
+    kind: "how-to",
     title: "How to get an itemized medical bill, and what to look for",
     description: "An itemized bill lists every charge with its billing code. Here's how to ask for one, how to read it, and the errors that show up most often.",
     kicker: "Medical bills",
@@ -48,6 +51,9 @@ export const EXTRA_GUIDES: Guide[] = [
   },
   {
     slug: "hospital-financial-assistance-charity-care",
+    category: "medical-bills",
+    icon: "cross",
+    kind: "rights",
     title: "Hospital financial assistance (charity care): how to apply",
     description: "Nonprofit hospitals must have a financial assistance policy. Learn who qualifies, what the hospital can't do while you apply, and how to ask.",
     kicker: "Medical bills",
@@ -91,6 +97,9 @@ export const EXTRA_GUIDES: Guide[] = [
   },
   {
     slug: "medical-debt-and-your-credit-report",
+    category: "medical-bills",
+    icon: "chart",
+    kind: "explainer",
     title: "Medical debt and your credit report: what can and can't be reported",
     description: "What the credit bureaus leave off, which states ban medical debt on credit reports, and how to dispute a medical collection that shouldn't be there.",
     kicker: "Medical bills",
@@ -134,6 +143,9 @@ export const EXTRA_GUIDES: Guide[] = [
   },
   {
     slug: "internal-vs-external-review-insurance-appeal",
+    category: "health-insurance",
+    icon: "scale",
+    kind: "explainer",
     title: "Internal vs. external review: the two stages of a health insurance appeal",
     description: "A denied claim has two appeals. The first goes to your plan; the second goes to an independent reviewer who can overrule it. Here's how each works.",
     kicker: "Insurance denials",
@@ -177,6 +189,9 @@ export const EXTRA_GUIDES: Guide[] = [
   },
   {
     slug: "common-health-insurance-denial-reasons",
+    category: "health-insurance",
+    icon: "alert",
+    kind: "explainer",
     title: "Common reasons health insurance denies a claim, and what to do about each",
     description: "Medical necessity, out of network, no prior authorization, coding errors and more. What each denial reason means and how to answer it.",
     kicker: "Insurance denials",
@@ -210,6 +225,9 @@ export const EXTRA_GUIDES: Guide[] = [
   },
   {
     slug: "what-debt-collectors-cant-do",
+    category: "debt",
+    icon: "stop",
+    kind: "rights",
     title: "What debt collectors can't do: your rights under federal law",
     description: "When a collector can call, what they can't say, and what to do if they cross the line. Includes how to stop calls and how to sue for violations.",
     kicker: "Debt collectors",
@@ -263,6 +281,9 @@ export const EXTRA_GUIDES: Guide[] = [
   },
   {
     slug: "how-to-demand-repairs-from-your-landlord",
+    category: "renters",
+    icon: "wrench",
+    kind: "how-to",
     title: "How to demand repairs from your landlord, in writing",
     description: "Your landlord has to keep your home livable. Here's how to ask for repairs so you have proof, what a reasonable wait is, and what to do if they ignore you.",
     kicker: "Landlords",
@@ -300,6 +321,9 @@ export const EXTRA_GUIDES: Guide[] = [
   },
   {
     slug: "eviction-notices-explained",
+    category: "renters",
+    icon: "alert",
+    kind: "explainer",
     title: "Eviction notices explained: what each one means and how much time you have",
     description: "Pay-or-quit, cure-or-quit and no-fault notices. What a landlord must do before evicting you, what they can't do, and what to do the day you get a notice.",
     kicker: "Landlords",
