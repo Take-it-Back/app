@@ -47,10 +47,10 @@ export const DEBT_GUIDES: Guide[] = [
       },
     ],
     faqs: [
-      ["Does this work on the original creditor?", "No. The FDCPA covers third-party collectors and debt buyers, not usually the company you first owed. Some states have laws that cover original creditors, so check with your attorney general."],
+      ["Does this work on the original creditor?", "No. The FDCPA covers third-party collectors and many debt buyers, not usually the company you first owed. Some states have laws that cover original creditors, so check with your attorney general."],
       ["Can they still call after I send it?", "They may contact you only to confirm receipt or to tell you about a specific action, like a lawsuit. Other calls break the rule, and you should log them."],
       ["Will the debt go away?", "No. The debt stays, and so does the collector's right to sue if the deadline to sue has not passed."],
-      ["Is there another way to limit calls?", "Yes. You can tell a collector in writing which times or channels you do not want, or that you only want to be contacted in writing. A CFPB rule called Regulation F also limits how often a collector may call, and rules like this change, so check consumerfinance.gov."],
+      ["Is there another way to limit calls?", "Yes. You can tell a collector in writing which times or channels you do not want, or that you only want to be contacted in writing. A CFPB rule called Regulation F also limits how often a collector may call you about a debt, and sets rules for texts and emails. Rules like this change, so check consumerfinance.gov."],
     ],
     cta: "Scan the collector's letter and Take it Back will draft a stop-contact or validation letter and track the dates for you.",
   },
@@ -223,7 +223,7 @@ export const DEBT_GUIDES: Guide[] = [
       {
         h: "Money that is often protected",
         list: [
-          "Social Security, SSI, VA benefits and some other federal benefits that were deposited directly into your account. A federal rule requires banks to automatically protect a set amount of recently deposited federal benefits, so check the current rule at consumerfinance.gov.",
+          "Social Security, SSI, VA benefits and some other federal benefits that were deposited directly into your account. A federal rule requires banks to automatically protect a set amount of recently deposited federal benefits. Ask your bank how it applies the rule, and ask legal aid to confirm the current details.",
           "Child support you received, in many states",
           "Public assistance and unemployment benefits, in many states",
           "A basic amount of money in the account, in some states",
@@ -376,7 +376,7 @@ export const DEBT_GUIDES: Guide[] = [
       {
         h: "Why the type matters",
         p: [
-          "The federal Fair Debt Collection Practices Act (FDCPA) covers third-party collectors and debt buyers, including the right to ask for validation and to make them stop contacting you. It usually does not apply to original creditors collecting their own debts, though state laws sometimes do.",
+          "The federal Fair Debt Collection Practices Act (FDCPA) covers third-party collectors and many debt buyers, including the right to ask for validation and to make them stop contacting you. It usually does not apply to original creditors collecting their own debts, though state laws sometimes do.",
           "Debt buyers have to prove they own your account if you are sued. Records get lost when accounts are sold, so the amount and ownership can be wrong. That is one reason to ask for proof before paying anyone.",
         ],
       },

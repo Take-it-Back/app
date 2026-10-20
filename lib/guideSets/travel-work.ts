@@ -71,7 +71,7 @@ export const TRAVEL_WORK_GUIDES: Guide[] = [
         h: "Flights to or from Europe (EU261)",
         p: [
           "The European Union has a regulation known as EU261. It can pay set amounts, in euros, for long delays, cancellations and denied boarding. It generally applies to flights leaving an EU airport on any airline, and to flights landing in the EU on an EU airline.",
-          "For delays, the key number is how late you arrived at your final destination. A delay of three hours or more can qualify. The amount depends on the distance of the flight and usually falls in a range of a few hundred euros per passenger.",
+          "For delays, the key number is how late you arrived at your final destination. Today a delay of three hours or more can qualify, though a reform agreed in 2026 would raise that threshold once it takes effect, so check the current rules. The amount depends on the distance of the flight and usually falls in a range of a few hundred euros per passenger.",
           "Airlines do not owe compensation when the cause is an extraordinary circumstance, such as severe weather or a security problem. Technical faults that are part of normal operation usually do not count as extraordinary. Airlines often deny claims on this ground, and you can push back.",
         ],
       },
@@ -170,7 +170,7 @@ export const TRAVEL_WORK_GUIDES: Guide[] = [
       {
         h: "When the rule does not apply",
         p: [
-          "The compensation rules generally do not cover you if you missed check-in or gate deadlines, if the airline swapped to a smaller plane for safety or weight reasons, or if you were removed for safety or conduct reasons. Check-in and gate deadlines are in the airline's contract of carriage, so arrive early and keep your check-in time on record.",
+          "The compensation rules generally do not cover you if you missed check-in or gate deadlines, if the airline swapped in a smaller plane for safety or operational reasons, if you were rebooked to arrive within an hour of your original time, or if you were removed for safety or conduct reasons. Check-in and gate deadlines are in the airline's contract of carriage, so arrive early and keep your check-in time on record.",
         ],
       },
       {
@@ -389,7 +389,7 @@ export const TRAVEL_WORK_GUIDES: Guide[] = [
         h: "What federal law requires",
         p: [
           "The Fair Labor Standards Act (FLSA) says covered employees must be paid at least 1.5 times their regular rate for hours over 40 in a workweek. Each workweek counts separately, so you cannot average two weeks. Some states add daily overtime, so check yours.",
-          "Not everyone gets overtime. Workers who qualify as exempt, such as certain executives, administrators and professionals, are excluded. To be exempt you generally must meet a pay level and a duties test. Having a salary or a title like manager is not enough on its own. The salary levels change, so check dol.gov/agencies/whd for current rules.",
+          "Not everyone gets overtime. Workers who qualify as exempt, such as certain executives, administrators and professionals, are excluded. To be exempt you generally must meet a pay level and a duties test. Having a salary or a title like manager is not enough on its own. The federal salary level is currently $684 a week ($35,568 a year), after a court struck down the 2024 increase. Some states set higher levels, so check dol.gov/agencies/whd and your state for current rules.",
         ],
       },
       {
@@ -560,7 +560,7 @@ export const TRAVEL_WORK_GUIDES: Guide[] = [
         h: "If you are still being treated",
         p: [
           "Ask your doctor and the agency whether you can get treatment while the appeal is pending. Some states have processes for urgent care. If you have health insurance, ask whether it will cover care in the meantime and understand it may seek repayment later.",
-          "It is illegal in every state to fire you only for filing a claim, though the details vary. If you think you were punished for filing, tell the agency and see a lawyer quickly.",
+          "Most states make it illegal to fire you only for filing a claim, though the details vary. If you think you were punished for filing, tell the agency and see a lawyer quickly.",
         ],
       },
     ],

@@ -183,7 +183,7 @@ export const CREDIT_STUDENT_GUIDES: Guide[] = [
       },
       {
         h: "Exceptions to know about",
-        p: ["The 7-year limit does not apply when a report is requested for a credit application of $150,000 or more, for life insurance of $150,000 or more, or for a job paying $75,000 or more a year. Rules for medical debt on credit reports have changed more than once, so check consumerfinance.gov for the current state of them. Some states set shorter limits than federal law."],
+        p: ["The 7-year limit does not apply when a report is requested for a credit application of $150,000 or more, for life insurance of $150,000 or more, or for a job paying $75,000 or more a year. Medical debt is treated differently in practice. A 2025 federal rule that would have kept it off reports was struck down by a court, so there is no federal ban today. The three bureaus say they voluntarily leave off paid medical collections and medical debt under $500, and wait a year before reporting unpaid medical debt, and some states add their own limits. Those are bureau policies that can change, so check each bureau's site and your state's rules. Some states set shorter limits than federal law."],
       },
     ],
     faqs: [
@@ -315,7 +315,7 @@ export const CREDIT_STUDENT_GUIDES: Guide[] = [
         list: [
           "Goodwill letter: if the original creditor or collector has a good relationship with you, you can ask politely for removal. It is a request, not a right.",
           "Time-barred debt: if the debt is very old, a payment may restart your state's deadline to sue, so talk to a consumer attorney or legal aid first.",
-          "Medical collections: rules for how they appear on credit reports have changed several times. Check consumerfinance.gov and your state's rules before paying.",
+          "Medical collections: the three bureaus say they leave off paid medical collections and medical debt under $500, but that is their own policy, not a federal rule, and it can change. Check each bureau's site and your state's rules before paying.",
           "Identity theft: file at identitytheft.gov and ask the bureaus to block the account.",
         ],
       },
@@ -434,8 +434,8 @@ export const CREDIT_STUDENT_GUIDES: Guide[] = [
           ["Read the response closely", "Check what the bureau says it checked. Ask in writing for a description of how it investigated and who it contacted. The law lets you request this."],
           ["Send new proof", "If you didn't include documents the first time, send them now. A new dispute with new information is not frivolous."],
           ["Dispute directly with the furnisher", "Write to the bank, lender or collector that reported the item. Send the same proof and ask it to correct the record and tell all three bureaus."],
-          ["Add a consumer statement", "You can add a short statement of up to 100 words to your file explaining your side. Future readers of your report will see it."],
-          ["File a complaint", "Complain at consumerfinance.gov/complaint to the CFPB, and to your state attorney general's office. Companies generally respond to CFPB complaints, and you get a record of their answer."],
+          ["Add a consumer statement", "You can add a short statement to your file explaining your side. The bureau may limit its length. Future readers of your report will see it."],
+          ["File a complaint", "Complain at consumerfinance.gov/complaint to the CFPB, and to your state attorney general's office. Check consumerfinance.gov for how the CFPB is handling complaints right now. Your attorney general's office is a second route."],
           ["Talk to a consumer attorney", "If the error is costing you money, speak to a lawyer, a legal aid office or a consumer law group."],
         ],
       },
@@ -523,7 +523,7 @@ export const CREDIT_STUDENT_GUIDES: Guide[] = [
           "Your family size usually counts, so more dependents can lower the payment",
           "You have to recertify your income and family size regularly, usually once a year",
           "Payments can be low, sometimes very low, if your income is low",
-          "After a long period of qualifying payments, such as 20 to 25 years under many plans, any remaining balance may be forgiven",
+          "After a long period of qualifying payments, often 20 to 30 years depending on the plan, any remaining balance may be forgiven",
           "Plans generally apply to federal loans, not to private loans",
         ],
       },
@@ -655,8 +655,9 @@ export const CREDIT_STUDENT_GUIDES: Guide[] = [
         list: [
           "A federal loan generally goes into default after about 270 days without a payment",
           "The full balance can become due immediately",
-          "The government can take your tax refund and certain federal benefit payments",
+          "The government can take your tax refund and some other federal payments",
           "It can garnish your wages without a court order, usually after giving you notice and a chance to object",
+          "The government has paused and restarted these collections at different times, so check studentaid.gov for what is happening now",
           "You lose access to more federal student aid until the default is resolved",
           "The default is reported to the credit bureaus",
         ],
@@ -664,7 +665,7 @@ export const CREDIT_STUDENT_GUIDES: Guide[] = [
       {
         h: "Ways out of default",
         steps: [
-          ["Rehabilitation", "You agree to a reasonable monthly payment and make a set number of on-time payments in a row, historically nine payments within ten months. After you complete it, the default is removed from your credit report, though the late payments before it may remain. This is generally available once per loan."],
+          ["Rehabilitation", "You agree to a reasonable monthly payment and make a set number of on-time payments in a row, historically nine payments within ten months. After you complete it, the default is removed from your credit report, though the late payments before it may remain. It has generally been available once per loan, but that limit and the payment rules are changing, so check studentaid.gov."],
           ["Consolidation", "You combine defaulted loans into a new Direct Consolidation Loan. This usually requires you to make a few payments first or to agree to an income-driven plan. It gets you out of default faster than rehabilitation but may not remove the default notation from your credit history."],
           ["Paying in full or settling", "Rarely possible, but you can ask the collection agency or the Department of Education what settlement options exist."],
         ],
@@ -753,7 +754,7 @@ export const CREDIT_STUDENT_GUIDES: Guide[] = [
       },
       {
         h: "Common reasons for each",
-        p: ["Deferment is tied to specific situations, such as being enrolled at least half-time in school, unemployment, economic hardship or certain military service. Forbearance is more flexible. It is often used for financial difficulty, medical bills, a change in employment or other temporary problems. Some forbearances are granted at the servicer's discretion, and some are required in certain situations. Both have limits on how long you can use them."],
+        p: ["Deferment is tied to specific situations, such as being enrolled at least half-time in school, unemployment, economic hardship or certain military service. Some of these reasons are being phased out for newer loans, so check studentaid.gov. Forbearance is more flexible. It is often used for financial difficulty, medical bills, a change in employment or other temporary problems. Some forbearances are granted at the servicer's discretion, and some are required in certain situations. Both have limits on how long you can use them."],
       },
       {
         h: "Before you apply",

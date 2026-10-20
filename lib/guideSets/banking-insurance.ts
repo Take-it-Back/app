@@ -168,7 +168,7 @@ export const BANKING_INSURANCE_GUIDES: Guide[] = [
     description: "Ask your bank to refund overdraft or NSF fees. Learn what to check, how to ask by phone or letter, and when to file a complaint. Includes a sample letter.",
     kicker: "Banks, fraud & scams",
     updated: "2026-10-20",
-    intro: "Your bank charged you an overdraft or returned item fee, maybe several at once. Banks refund these more often than people expect, especially if you ask politely, ask in writing and have a reason. Rules on overdraft fees have been under review, so check consumerfinance.gov for the current picture.",
+    intro: "Your bank charged you an overdraft or returned item fee, maybe several at once. Banks refund these more often than people expect, especially if you ask politely, ask in writing and have a reason. A 2024 federal rule that would have capped overdraft fees at the largest banks was repealed by Congress in 2025, so most limits come from your account terms, your state and the debit card opt-in rule below.",
     blocks: [
       {
         h: "Two fees, two meanings",
@@ -241,7 +241,7 @@ export const BANKING_INSURANCE_GUIDES: Guide[] = [
         h: "Step by step",
         steps: [
           ["Call and ask what is needed to lift the hold", "Write down the name, date and what they say. Ask what documents would end the review and how long it normally takes."],
-          ["Ask for the balance", "Whether the bank freezes or closes the account, you should receive your remaining money. Ask how it will be sent, by check or transfer, and when."],
+          ["Ask for the balance", "If the bank closes the account, it should send you your remaining money. If it only froze the account, ask when the hold will end. Either way, ask how and when the money will reach you, by check or transfer."],
           ["Ask for the reason in writing", "Banks sometimes cannot explain a fraud review, but they should be able to tell you whether a legal order or an ordinary review is the cause."],
           ["Check for a legal order", "If the hold came from a garnishment or levy, you should have been sent papers. Some federal benefits, such as Social Security, are protected from most creditors. Tell the bank, and contact legal aid quickly if it won't release them."],
           ["Move direct deposits and bills", "Open a new account elsewhere and update your employer, benefits and autopay, so you don't miss payments."],

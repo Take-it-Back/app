@@ -406,7 +406,7 @@ export const MEDICAL_GUIDES: Guide[] = [
       },
     ],
     faqs: [
-      ["Does parity apply to every plan?", "It covers most group health plans and many individual plans. Some plans are exempt, such as certain small or self-insured government plans. Ask your plan or your state insurance department."],
+      ["Does parity apply to every plan?", "It covers most group health plans and many individual plans. Some plans are exempt, such as grandfathered individual plans and certain self-insured government plans that opted out. Ask your plan or your state insurance department."],
       ["Can my plan limit therapy visits?", "A visit limit that is stricter than the limits on comparable medical care may violate parity. Ask the plan to explain."],
       ["What if my therapist is out of network?", "Check the plan's rules and its network directory. If the plan has no in-network provider who can see you in a reasonable time, tell the plan and ask for an exception."],
     ],
@@ -470,7 +470,7 @@ export const MEDICAL_GUIDES: Guide[] = [
       {
         h: "The five levels of Original Medicare",
         steps: [
-          ["Level 1: redetermination", "A Medicare contractor looks at the claim again. You generally have 120 days from the date on your Medicare Summary Notice (MSN) to ask."],
+          ["Level 1: redetermination", "A Medicare contractor looks at the claim again. You generally have 120 days from the date you receive your Medicare Summary Notice (MSN) to ask."],
           ["Level 2: reconsideration", "An independent contractor reviews the case. You'll get a letter with the deadline, which is usually 180 days."],
           ["Level 3: hearing", "An administrative law judge hears your case, often by phone or video. A minimum dollar amount applies, and it changes each year."],
           ["Level 4: Appeals Council", "The Medicare Appeals Council reviews the judge's decision. Your deadline is on the decision letter."],
@@ -573,7 +573,7 @@ export const MEDICAL_GUIDES: Guide[] = [
           ["Compare prices", "Get the COBRA premium and compare it to marketplace plans with the same doctors and drugs. Check whether your providers and medicines are covered."],
           ["Apply on the marketplace within the window", "Don't wait until day 59. Coverage starts based on when you enroll, so earlier is better. You'll need proof of the loss, such as a letter."],
           ["If you choose COBRA, pay on time", "After you elect it, there is a grace period for the first payment, generally 45 days. A missed payment can end coverage."],
-          ["Don't skip coverage", "Ask about care you had recently. A gap can lead to large bills, and some tax and plan rules apply."],
+          ["Don't skip coverage", "Ask about care you had recently. A gap can lead to large bills, and a few states charge a penalty for going without coverage."],
         ],
       },
       {

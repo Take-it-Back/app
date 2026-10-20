@@ -69,8 +69,8 @@ export const SHOPPING_UTILITIES_GUIDES: Guide[] = [
       {
         h: "What the rules say",
         p: [
-          "A federal law called ROSCA (the Restore Online Shoppers' Confidence Act) requires online sellers to clearly disclose the terms of a subscription, get your express consent before charging you, and offer a simple way to cancel. The FTC has also tried to adopt a stricter \"click to cancel\" rule, but that rule has been challenged in court and its status may change. Check ftc.gov for what applies today.",
-          "Whatever the final rule, a company that signs you up online and makes you jump through hoops to leave, or hides the renewal terms, may be breaking existing law. Your state may have its own automatic renewal law as well.",
+          "A federal law called ROSCA (the Restore Online Shoppers' Confidence Act) requires online sellers to clearly disclose the terms of a subscription, get your express consent before charging you, and offer a simple way to cancel. The FTC adopted a stricter \"click to cancel\" rule in 2024, but a federal appeals court threw it out in July 2025, so it is not in effect. The FTC has said it plans to try again, so check ftc.gov for what applies today.",
+          "Even without that rule, a company that signs you up online and makes you jump through hoops to leave, or hides the renewal terms, may be breaking existing law. Your state may have its own automatic renewal law as well.",
         ],
       },
       {
@@ -315,7 +315,7 @@ export const SHOPPING_UTILITIES_GUIDES: Guide[] = [
           "Purchases you made by mail, phone or online, unless the sale started with an in-person visit",
           "Real estate, insurance and securities",
           "Emergency repairs that you asked for",
-          "Items you requested the seller to come and deliver, with certain conditions",
+          "Arts or crafts sold at a fair, mall or similar venue",
           "Sales that fall under the dollar limits above",
         ],
       },

@@ -473,7 +473,7 @@ export const RENTERS_GUIDES: Guide[] = [
           "Race and color",
           "Religion",
           "National origin",
-          "Sex, which HUD interprets to include sexual orientation and gender identity (check hud.gov for the current rules)",
+          "Sex. HUD's position on sexual orientation and gender identity has changed in recent years, and many states and cities protect them by law. Check hud.gov and your state's rules",
           "Familial status, meaning families with children under 18 and people expecting a child",
           "Disability, including a right to ask for reasonable accommodations such as an assistance animal, and reasonable modifications",
         ],

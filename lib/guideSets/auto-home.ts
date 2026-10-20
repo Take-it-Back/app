@@ -96,7 +96,7 @@ export const AUTO_HOME_GUIDES: Guide[] = [
       },
       {
         h: "About federal rules",
-        p: ["The Federal Trade Commission has worked on rules for dealer pricing and fees. Court cases have changed what is in force, and rules like these change often. Check ftc.gov for what applies now."],
+        p: ["The FTC's 2023 CARS Rule, which targeted car dealer pricing and add-on practices, was struck down by a federal appeals court in January 2025 and is not in effect. The FTC's separate 2025 fees rule covers only live-event tickets and short-term lodging, not car sales. The FTC can still act against deceptive dealer pricing under its general authority, and many states have their own dealer rules. Check ftc.gov for what applies now."],
       },
     ],
     faqs: [
@@ -337,7 +337,7 @@ export const AUTO_HOME_GUIDES: Guide[] = [
       },
     ],
     faqs: [
-      ["Does a private seller need a Buyers Guide?", "No. The Used Car Rule applies to dealers who sell several cars a year. Private sales are usually as is, and state law covers fraud."],
+      ["Does a private seller need a Buyers Guide?", "No. The Used Car Rule applies to dealers who sell five or more used cars in a year. Private sales are usually as is, and state law covers fraud."],
       ["Can the dealer change the Buyers Guide after I sign?", "The dealer should give you the final version. If it differs from what was posted, that may be a violation. Keep a photo."],
       ["Does as is mean no recourse for any defect?", "It limits claims for ordinary repairs, but not for lies or hidden title problems."],
     ],
