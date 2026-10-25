@@ -48,6 +48,7 @@ jobs:
           KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ISSUER: ${{ secrets.ASC_ISSUER_ID }}
           VERSION: ${{ github.event.inputs.version || github.ref_name }}
+          GOOGLE_IOS_CLIENT_ID: ${{ vars.NEXT_PUBLIC_GOOGLE_IOS_CLIENT_ID }}
         run: |
           VERSION="${VERSION#ios-v}"
           xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release \
@@ -56,6 +57,8 @@ jobs:
             -authenticationKeyPath "$RUNNER_TEMP/keys/AuthKey_${KEY_ID}.p8" \
             -authenticationKeyID "$KEY_ID" -authenticationKeyIssuerID "$ISSUER" \
             DEVELOPMENT_TEAM="$TEAM" CODE_SIGN_STYLE=Automatic \
+            ${GOOGLE_IOS_CLIENT_ID:+GOOGLE_IOS_CLIENT_ID="$GOOGLE_IOS_CLIENT_ID"} \
+            ${GOOGLE_IOS_CLIENT_ID:+GOOGLE_REVERSED_CLIENT_ID="com.googleusercontent.apps.${GOOGLE_IOS_CLIENT_ID%.apps.googleusercontent.com}"} \
             MARKETING_VERSION="$VERSION" CURRENT_PROJECT_VERSION="${{ github.run_number }}"
 
       - name: Upload to App Store Connect

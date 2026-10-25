@@ -24,7 +24,9 @@ export default function Privacy() {
         <h2 className="serif" style={{ fontSize: 26, margin: "16px 0 0" }}>Website analytics</h2>
         <p>We use Google Analytics on our public website to count visits and see which pages help people, with Google&apos;s advertising features turned off. It never runs inside the signed-in app, so it never sees your documents, cases or health information. We also turn it off on our public pages about medical bills and health insurance.</p>
         <h2 className="serif" style={{ fontSize: 26, margin: "16px 0 0" }}>Payments</h2>
-        <p>Payments are handled by Stripe. We never see or store your full card number.</p>
+        <p>Payments on our website are handled by Stripe, and subscriptions bought in our iPhone app are handled by Apple. We never see or store your full card number.</p>
+        <h2 className="serif" style={{ fontSize: 26, margin: "16px 0 0" }}>Signing in with Apple or Google</h2>
+        <p>If you sign in with Apple or Google, we receive your name and email address from them (or the private relay address Apple gives you), and nothing else. We don&apos;t post anything or read anything from those accounts. If you delete your account after signing in with Apple in our iPhone app, we also tell Apple to remove our access.</p>
         <h2 className="serif" style={{ fontSize: 26, margin: "16px 0 0" }}>Your state privacy rights</h2>
         <p>Wherever you live, you can see, download, correct or delete your information, and we never sell or share it for targeted advertising. Residents of states with privacy laws (including California, Washington, Nevada, Connecticut, Colorado, Virginia, Oregon and Texas) have these rights by law; we give them to everyone. If we turn down a request, you can appeal by replying to our answer.</p>
         <h2 className="serif" style={{ fontSize: 26, margin: "16px 0 0" }}>Your control</h2>

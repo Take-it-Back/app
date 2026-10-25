@@ -305,6 +305,13 @@ export async function deleteAccount() {
     const { data: files } = await supabase.storage.from("case-files").list(`${user.id}/${dir.name}`, { limit: 1000 });
     if (files?.length) await supabase.storage.from("case-files").remove(files.map((f) => `${user.id}/${dir.name}/${f.name}`));
   }
+  // If they signed in with Apple from the iPhone app, tell Apple to cut off our access too.
+  const { data: apple } = await supabase.rpc("take_apple_refresh_token");
+  const tok = (apple as { refresh_token: string; client_id: string }[] | null)?.[0];
+  if (tok) {
+    const { revokeAppleToken } = await import("@/lib/appleSignin");
+    await revokeAppleToken(tok.refresh_token, tok.client_id).catch(() => false);
+  }
   const { error } = await supabase.rpc("delete_my_account");
   if (error) throw new Error(error.message);
   await supabase.auth.signOut();

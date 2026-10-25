@@ -23,6 +23,8 @@ const config: CapacitorConfig = {
     SplashScreen: { launchShowDuration: 3000, launchAutoHide: true, backgroundColor: "#F6F4EF", showSpinner: false },
     PushNotifications: { presentationOptions: ["banner", "sound", "list"] },
     StatusBar: { style: "LIGHT", overlaysWebView: true },
+    // Only Apple and Google are used; leaving the others out keeps their SDKs out of the app.
+    SocialLogin: { providers: { google: true, apple: true, facebook: false, twitter: false } },
   },
 };
 
