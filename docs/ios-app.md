@@ -13,12 +13,14 @@ Web deploys reach the app instantly; only native changes (plugins, Info.plist, i
   Product IDs: lib/appleProducts.ts. Stripe and Apple never overwrite each other's active subscription.
 - Push: `device_tokens` table, `/api/push/device`, lib/apns.ts (token-based APNs). `sendPushToSelf` sends to web push and APNs.
 - Universal links: app/.well-known/apple-app-site-association (needs APPLE_TEAM_ID).
-- Sign in with Apple: components/AppleSignIn.tsx, shown when NEXT_PUBLIC_APPLE_SIGNIN=1.
+- Apple/Google sign-in: components/SocialSignIn.tsx (web: Supabase OAuth; app: @capgo/capacitor-social-login + signInWithIdToken).
+  Buttons show when the provider is on in Supabase (lib/authProviders.ts). Apple tokens are revoked on account deletion (lib/appleSignin.ts).
+  The Supabase Apple secret is renewed monthly by .github/workflows/apple-auth-secret.yml.
 
 ## Env (Vercel)
 APPLE_TEAM_ID, APPLE_APP_ID (numeric, enables Production receipt checks), APNS_KEY_ID, APNS_TEAM_ID, APNS_PRIVATE_KEY
 (the .p8 text), optional APPLE_BUNDLE_ID (default app.takeitback), APNS_SANDBOX=1 only for Xcode debug builds,
-NEXT_PUBLIC_APPLE_SIGNIN=1.
+NEXT_PUBLIC_GOOGLE_WEB_CLIENT_ID, NEXT_PUBLIC_GOOGLE_IOS_CLIENT_ID (also a GitHub variable of the same name for the iPhone build).
 
 ## Build
 `npx cap sync ios` after changing plugins or capacitor.config.ts. Releases: GitHub Actions → "iPhone app" →
