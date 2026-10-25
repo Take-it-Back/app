@@ -36,7 +36,7 @@ export default function FeaturesPage() {
           <div className="inner row wrap between g24" style={{ alignItems: "center" }}>
             <div className="stack g8" style={{ flex: "1 1 420px" }}>
               <h2 className="h-l" style={{ fontSize: "clamp(32px, 3.6vw, 46px)" }}>Free shows the problem. <em className="o">Premium</em> fixes it.</h2>
-              <p className="muted" style={{ margin: 0, fontSize: 17 }}>Scan, plain answers and real help are free. Letters, deadlines, tracking and replies are Premium, with a 7-day free trial.</p>
+              <p className="muted" style={{ margin: 0, fontSize: 17 }}>Scan, plain answers and real help are free. Letters, deadlines, tracking and replies come with Premium, or unlock a single case for $24.99.</p>
             </div>
             <CtaLink href="/pricing" variant="orange">Compare plans</CtaLink>
           </div>

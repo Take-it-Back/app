@@ -1,50 +1,13 @@
 // Daily deadline reminders. Runs from pg_cron once a day (18:30 UTC, inside 8am-8pm in every US time zone).
 // Email: through the app's /api/email/remind route, which renders the branded reminder and sends it with Resend.
 // Texts through Twilio (TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_FROM); phone alerts through /api/push/remind.
-// Only Premium accounts get reminders. Idempotent: each deadline is reminded at most once per day (last_reminded_on).
+// Premium accounts get reminders for every case; others only for cases unlocked with a case pass.
+// Idempotent: each deadline is reminded at most once per day (last_reminded_on).
 // Texts and alerts: only 8am-8pm in the person's local time, at most one a day, never with case names or health details.
-// Data retention (off until RETENTION_ENABLED=true is set as a function secret): uploaded files on cases closed
-// more than RETENTION_DAYS ago (default 365) are deleted.
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
 
 const SITE = Deno.env.get("SITE_URL") ?? "https://www.takeitback.app";
-const RETENTION_DAYS = Number(Deno.env.get("RETENTION_DAYS") ?? 365);
-const BUCKET = "case-files";
-
-// Deletes the uploaded files (photos, PDFs) on cases that were closed, won or settled more than
-// RETENTION_DAYS ago. The case itself, its summary, letters and timeline stay until the person deletes them.
-// deno-lint-ignore no-explicit-any
-async function retentionSweep(admin: any) {
-  const cutoff = new Date(Date.now() - RETENTION_DAYS * 86400000).toISOString();
-  const { data: cases, error } = await admin
-    .from("cases")
-    .select("id, user_id, closed_at, updated_at")
-    .in("status", ["won", "settled", "closed"])
-    .or(`closed_at.lt.${cutoff},and(closed_at.is.null,updated_at.lt.${cutoff})`)
-    .limit(200);
-  if (error) return { error: error.message };
-  let files = 0, swept = 0;
-  for (const c of cases ?? []) {
-    const { data: docs } = await admin.from("documents").select("id, storage_path").eq("case_id", c.id);
-    if (!docs?.length) continue;
-    const paths = docs.map((d: { storage_path: string }) => d.storage_path).filter(Boolean);
-    if (paths.length) {
-      const { error: rmErr } = await admin.storage.from(BUCKET).remove(paths);
-      if (rmErr) continue; // try again tomorrow
-    }
-    await admin.from("documents").delete().in("id", docs.map((d: { id: string }) => d.id));
-    await admin.from("events").insert({
-      case_id: c.id,
-      user_id: c.user_id,
-      title: "Files deleted",
-      detail: `This case closed more than ${Math.round(RETENTION_DAYS / 30)} months ago, so its ${docs.length} uploaded file${docs.length > 1 ? "s were" : " was"} deleted. Your summary, letters and timeline are still here.`,
-    });
-    files += docs.length;
-    swept++;
-  }
-  return { cases: swept, files };
-}
 
 const TZ: Record<string, string> = {
   Alabama: "America/Chicago", Alaska: "America/Anchorage", Arizona: "America/Phoenix", Arkansas: "America/Chicago", California: "America/Los_Angeles",
@@ -94,10 +57,21 @@ Deno.serve(async () => {
   const byUser = new Map<string, typeof due>();
   for (const r of due) byUser.set(r.user_id, [...(byUser.get(r.user_id) ?? []), r]);
 
+  // Cases unlocked with a case pass get reminders even without Premium.
+  const caseIds = [...new Set(due.map((r) => r.case_id))];
+  const passCases = new Set<string>();
+  if (caseIds.length) {
+    const { data: passes } = await admin.from("case_passes").select("case_id").in("case_id", caseIds).is("revoked_at", null).gt("expires_at", now.toISOString());
+    for (const p of passes ?? []) passCases.add(p.case_id);
+  }
+
   let sent = 0, held = 0, pushes = 0, emails = 0;
-  for (const [userId, items] of byUser) {
+  for (const [userId, all] of byUser) {
     const { data: prof } = await admin.from("profiles").select("full_name, remind_email, plan, plan_status, phone, sms_opt_in, sms_consent_at, state").eq("id", userId).maybeSingle();
-    if (!prof || prof.plan !== "premium" || !["active", "trialing", "past_due"].includes(prof.plan_status ?? "")) continue;
+    if (!prof) continue;
+    const premium = prof.plan === "premium" && ["active", "trialing", "past_due"].includes(prof.plan_status ?? "");
+    const items = premium ? all : all.filter((i) => passCases.has(i.case_id));
+    if (!items.length) continue;
     const daytime = (() => { const h = localHour(prof.state, now); return h >= 8 && h < 20; })();
     const mine = items.filter((i) => i.owner === "you");
     const soonest = mine.map((i) => i.due_date).sort()[0];
@@ -151,7 +125,5 @@ Deno.serve(async () => {
       await admin.from("deadlines").update({ last_reminded_on: today }).in("id", items.map((i) => i.id));
     }
   }
-  let retention: unknown = "off";
-  if (Deno.env.get("RETENTION_ENABLED") === "true") try { retention = await retentionSweep(admin); } catch (e) { retention = { error: String(e) }; }
-  return Response.json({ ok: true, sent, emails, pushes, textsHeld: held, retention });
+  return Response.json({ ok: true, sent, emails, pushes, textsHeld: held });
 });

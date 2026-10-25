@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 import { periodEnd, stripe } from "@/lib/stripe";
-import { applyBilling, PRICES } from "@/lib/plan";
+import { applyBilling, grantCasePass, PRICES, revokeCasePass } from "@/lib/plan";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { sendEmail } from "@/lib/email";
 import { paymentFailedEmail, referralRewardEmail, renewalReminderEmail, subscriptionEndedEmail, subscriptionStartedEmail, trialEndingEmail, type Email } from "@/lib/emails/templates";
@@ -64,7 +64,20 @@ export async function POST(request: Request) {
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, { auth: { persistSession: false } });
 
   try {
-    if (event.type === "checkout.session.completed") {
+    if (event.type === "checkout.session.completed" && (event.data.object as Stripe.Checkout.Session).metadata?.kind === "case_pass") {
+      const s = event.data.object as Stripe.Checkout.Session;
+      const caseId = s.metadata?.case_id;
+      const userId = s.metadata?.user_id;
+      if (s.payment_status === "paid" && caseId && userId) {
+        const ref = typeof s.payment_intent === "string" ? s.payment_intent : s.payment_intent?.id || s.id;
+        await grantCasePass(supabase, { userId, caseId, ref, source: "stripe", amount: s.amount_total });
+      }
+    } else if (event.type === "charge.refunded") {
+      // A refunded case pass stops unlocking the case.
+      const ch = event.data.object as Stripe.Charge;
+      const pi = typeof ch.payment_intent === "string" ? ch.payment_intent : ch.payment_intent?.id;
+      if (pi && ch.metadata?.kind !== "send" && ch.refunded) await revokeCasePass(supabase, pi);
+    } else if (event.type === "checkout.session.completed") {
       const s = event.data.object as Stripe.Checkout.Session;
       if (s.subscription && s.client_reference_id) {
         const sub = await stripe().subscriptions.retrieve(typeof s.subscription === "string" ? s.subscription : s.subscription.id);

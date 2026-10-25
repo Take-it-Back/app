@@ -25,7 +25,7 @@ export async function POST(request: Request) {
   if (!caseId) return NextResponse.json({ error: "Missing case." }, { status: 400 });
   if (!kindInfo(kind)) return NextResponse.json({ error: "Unknown letter type." }, { status: 400 });
   if (!(await getCasePremium(supabase, user.id, caseId)))
-    return NextResponse.json({ error: "Letters are part of Premium. Start a free 7-day trial to draft this.", upgrade: true }, { status: 402 });
+    return NextResponse.json({ error: "Letters are part of Premium. Unlock this case or try Premium to draft this.", upgrade: true }, { status: 402 });
 
   const limit = await useAi(supabase, user.id, "letter");
   if (!limit.ok) return NextResponse.json({ error: limit.error }, { status: 429 });

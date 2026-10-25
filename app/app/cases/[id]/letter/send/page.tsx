@@ -40,7 +40,7 @@ export default async function SendPage({ params, searchParams }: { params: Promi
       </div>
 
       {!premium ? (
-        <Upsell title="We'll mail or fax it for you" body="Certified mail with tracking, or a fax with delivery confirmation, without finding a printer or a post office." />
+        <Upsell caseId={id} userId={user.id} title="We'll mail or fax it for you" body="Certified mail with tracking, or a fax with delivery confirmation, without finding a printer or a post office." />
       ) : (
         <div className="stack g20">
           {err && <p className="error" role="alert">{err}</p>}

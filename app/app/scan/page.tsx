@@ -16,8 +16,8 @@ export default async function ScanPage() {
     return (
       <main className="app-main">
         <BackLink href="/app" />
-        <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 8px" }}>That's {FREE_SCANS_PER_MONTH} this <em className="o">month</em></h1>
-        <p className="muted" style={{ margin: "0 0 20px" }}>Free includes {FREE_SCANS_PER_MONTH} scans a month. Your next free scans arrive on the 1st.</p>
+        <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 8px" }}>You&apos;ve used this month&apos;s <em className="o">free scan</em></h1>
+        <p className="muted" style={{ margin: "0 0 20px" }}>Free includes {FREE_SCANS_PER_MONTH} scan a month, and your next one arrives on the 1st. Premium scans as many as you need.</p>
         <Upsell title="Scan as much as you need" />
       </main>
     );

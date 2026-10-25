@@ -102,7 +102,7 @@ export default async function FoundPage({ params, searchParams }: { params: Prom
           </section>
         )}
 
-        {c.red_flag ? <CtaLink href="/app/help" variant="orange" block>Find real help now</CtaLink> : !premium ? <Upsell title="Want us to write the letter?" /> : <WriteLetterButton caseId={id} kind={c.next_steps?.[0]?.letter_kind || (c.category === "insurance" ? "appeal" : c.category === "debt" ? "validation" : "dispute")} />}
+        {c.red_flag ? <CtaLink href="/app/help" variant="orange" block>Find real help now</CtaLink> : !premium ? <Upsell caseId={id} userId={user.id} title="Want us to write the letter?" /> : <WriteLetterButton caseId={id} kind={c.next_steps?.[0]?.letter_kind || (c.category === "insurance" ? "appeal" : c.category === "debt" ? "validation" : "dispute")} />}
         <p className="muted small center" style={{ margin: 0 }}>Information, not legal advice. Check every date against your own letter.</p>
       </div>
     </main>

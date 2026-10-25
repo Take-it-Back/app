@@ -68,7 +68,8 @@ export async function analyzeCase(supabase: SupabaseClient, userId: string, case
   const rows = stated.map((d) => ({ case_id: caseId, user_id: userId, title: d.title.slice(0, 80), due_date: d.date!, owner: d.owner, rule_note: `From the letter: “${d.quote.slice(0, 200)}”` }));
   if (!stated.some((d) => d.owner === "you")) rows.unshift({ case_id: caseId, user_id: userId, title: fd.title, due_date: fd.due, owner: "you", rule_note: fd.note });
   await Promise.all([
-    premium ? supabase.from("deadlines").insert(rows) : Promise.resolve(),
+    // Free plan: keep the dates so they appear the moment the case is unlocked (case pass or Premium).
+    premium ? supabase.from("deadlines").insert(rows) : supabase.from("cases").update({ pending_deadlines: rows.map(({ title, due_date, owner, rule_note }) => ({ title, due_date, owner, rule_note })) }).eq("id", caseId),
     supabase.from("events").insert({ case_id: caseId, user_id: userId, title: eventTitle, detail: docs?.length ? `${docs.length} page${docs.length > 1 ? "s" : ""} added` : null }),
   ]);
   return { ok: true as const, warning: aiError };

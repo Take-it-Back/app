@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { stripe, stripeConfigured } from "@/lib/stripe";
-import { PRICES, TRIAL_DAYS, getPlan, renewalTerms } from "@/lib/plan";
+import { PRICES, TRIAL_DAYS, TRIAL_PLAN, getPlan, renewalTerms } from "@/lib/plan";
 
 export async function POST(request: Request) {
   const origin = new URL(request.url).origin;
@@ -19,7 +19,8 @@ export async function POST(request: Request) {
   if (plan.premium) return NextResponse.redirect(`${origin}/app/you`, { status: 303 });
   // Auto-renewal laws: the person must tick the box agreeing to the renewal terms; keep a record of what they agreed to.
   if (form.get("agree") !== "on") return NextResponse.redirect(`${origin}/app/upgrade?error=agree`, { status: 303 });
-  const trial = !plan.status;
+  // The free trial is for new subscribers on the yearly plan.
+  const trial = !plan.status && which === TRIAL_PLAN;
   // Free months earned from referrals (banked before they had a subscription) extend the trial.
   const { data: prof } = await supabase.from("profiles").select("referral_credit_months").eq("id", user.id).maybeSingle();
   const banked = Math.min(12, prof?.referral_credit_months || 0);

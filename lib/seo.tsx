@@ -45,7 +45,8 @@ export const APP_LD = {
   description: "Fight unfair medical bills, insurance denials, landlords and debt collectors. Get your rights in plain English, letters written for you, and every deadline tracked.",
   offers: [
     { "@type": "Offer", name: "Free", price: "0", priceCurrency: "USD" },
-    { "@type": "Offer", name: "Premium monthly", price: "9.99", priceCurrency: "USD" },
+    { "@type": "Offer", name: "Case pass (one case, 60 days)", price: "24.99", priceCurrency: "USD" },
+    { "@type": "Offer", name: "Premium monthly", price: "14.99", priceCurrency: "USD" },
     { "@type": "Offer", name: "Premium yearly", price: "59", priceCurrency: "USD" },
   ],
   publisher: { "@id": `${SITE_URL}/#org` },

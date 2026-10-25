@@ -52,7 +52,7 @@ export default async function EscalatePage({ params }: { params: Promise<{ id: s
               </div>
             ))}
           </div>
-          {!premium && <div style={{ marginTop: 12 }}><Upsell compact title="We'll write the complaint from your case history" /></div>}
+          {!premium && <div style={{ marginTop: 12 }}><Upsell caseId={id} userId={user.id} compact title="We'll write the complaint from your case history" /></div>}
         </section>
 
         {premium && extraKinds.length > 0 && (
@@ -74,7 +74,7 @@ export default async function EscalatePage({ params }: { params: Promise<{ id: s
                 <p className="muted small" style={{ margin: "4px 0 0" }}>Check your reports for free first at <a href="https://www.annualcreditreport.com" target="_blank" rel="noopener noreferrer">annualcreditreport.com</a>.</p>
               </div>
             ) : (
-              <Upsell compact title="Dispute letters to all three credit bureaus" />
+              <Upsell caseId={id} userId={user.id} compact title="Dispute letters to all three credit bureaus" />
             )}
           </section>
         )}

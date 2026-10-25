@@ -18,7 +18,7 @@ export default async function LetterPage({ params, searchParams }: { params: Pro
       <main className="app-main">
         <BackLink href={`/app/cases/${id}`} />
         <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 20px" }}>Your <em className="o">letter</em></h1>
-        <Upsell title="Want us to write the letter?" body="Premium drafts a firm, polite letter that cites the right rules, ready to print or email." />
+        <Upsell caseId={id} userId={user.id} title="Want us to write the letter?" body="Premium drafts a firm, polite letter that cites the right rules, ready to print or email." />
       </main>
     );
   }

@@ -79,7 +79,7 @@ export default async function CallsPage({ params, searchParams }: { params: Prom
         <section>
           <div className="sec-head"><h2>Log this call</h2></div>
           {!premium ? (
-            <Upsell compact title="Keep a record of every call, with follow-up reminders" />
+            <Upsell caseId={id} userId={user.id} compact title="Keep a record of every call, with follow-up reminders" />
           ) : (
             <form action={logCall.bind(null, id)} className="card stack g12">
               {saved && <p className="notice" role="status">Call saved to your timeline.</p>}

@@ -159,7 +159,7 @@ export const FEATURES: Feature[] = [
     headline: ["Just take a", "photo"],
     lede: "Point your phone at the bill, denial or notice. We read it, find the dates and amounts, and ask a few quick questions.",
     plan: "both",
-    planNote: "Free includes 3 scans a month. Premium is unlimited.",
+    planNote: "Free includes 1 scan a month. Premium is unlimited.",
     shot: "scan",
     shots: [["scan", "medical"], ["questions", "medical"], ["found", "medical"]],
     story: [
@@ -433,7 +433,7 @@ export const PROBLEMS: Problem[] = [
 export const problemBySlug = (slug: string) => PROBLEMS.find((p) => p.slug === slug);
 
 export const PLAN_ROWS: [string, string, string][] = [
-  ["Scan bills, denials and notices", "3 a month", "Unlimited"],
+  ["Scan bills, denials and notices", "1 a month", "Unlimited"],
   ["Plain-English summary", "Yes", "Yes"],
   ["General next steps and red flags", "Yes", "Yes"],
   ["Your state's rules on every case", "Yes", "Yes"],
@@ -473,9 +473,10 @@ export const FAQ_GROUPS: { title: string; items: [string, string][] }[] = [
   {
     title: "Plans and pricing",
     items: [
-      ["What's free?", "Up to 3 scans a month, a plain-English summary, general next steps, red flags and the legal aid finder."],
+      ["What's free?", "1 scan a month, a plain-English summary, what we found and how much you could save, your state's rules, red flags and the legal aid finder."],
+      ["Can I pay for just one case?", "Yes. After a free scan, tap Unlock just this case: $24.99 once, no subscription. You get everything Premium does for that case for 60 days."],
       ["What does Premium add?", "Every problem in full with the rule behind it, letters written for you, deadline tracking and reminders, reply decoding, your case file and a printable case packet."],
-      ["How much is Premium?", "$9.99 a month or $59 a year, with a 7-day free trial. It renews automatically until you cancel, and you can cancel online anytime."],
+      ["How much is Premium?", "$59 a year, with a 7-day free trial for new subscribers, or $14.99 a month. It renews automatically until you cancel, and you can cancel online anytime. In the iPhone app the yearly plan is $59.99."],
       ["Do you take a cut of what I save?", "Never. You keep 100% of what you save or recover."],
       ["Do I get anything for inviting friends?", "Yes. Share your link from Settings. When a friend starts Premium, you each get a month free."],
     ],

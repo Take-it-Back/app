@@ -45,7 +45,7 @@ export default async function SharePage({ params, searchParams }: { params: Prom
           ))}
         </div>
       ) : !premium ? (
-        <Upsell title="Fight it together" body="Add a family member or friend so they can see the case, write letters and get reminders with you." />
+        <Upsell caseId={id} userId={user.id} title="Fight it together" body="Add a family member or friend so they can see the case, write letters and get reminders with you." />
       ) : (
         <div className="stack g24">
           {err && <p className="error" role="alert">{err}</p>}

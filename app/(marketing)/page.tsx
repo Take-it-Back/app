@@ -207,13 +207,13 @@ export default function Home() {
           <div className="card stack g12" style={{ padding: 30, borderRadius: 26 }}>
             <span style={{ fontWeight: 500, fontSize: 18 }}>Free</span>
             <span className="serif" style={{ fontSize: 52, lineHeight: 1 }}>$0</span>
-            <p className="muted" style={{ margin: 0 }}>Know where you stand. 3 scans a month, a plain-English summary, your state's rules, red flags and the legal aid finder.</p>
+            <p className="muted" style={{ margin: 0 }}>Know where you stand. 1 scan a month, a plain-English summary, your state's rules, red flags and the legal aid finder. Need help with just that one? Unlock the case for $24.99, once.</p>
             <Link prefetch={false} href="/login?mode=signup" className="btn-plain" style={{ alignSelf: "flex-start", minHeight: 48, borderColor: "#1A1A1A" }}>Start free</Link>
           </div>
           <div className="card stack g12" style={{ padding: 30, borderRadius: 26, border: "2px solid #BF4F28" }}>
             <span style={{ fontWeight: 500, fontSize: 18 }}>Premium</span>
-            <span className="serif" style={{ fontSize: 52, lineHeight: 1 }}>$9.99<span className="muted" style={{ fontFamily: "var(--sans)", fontSize: 16 }}> a month</span></span>
-            <p className="muted" style={{ margin: 0 }}>We do the work. Letters written and sent for you, deadlines read from your letters with alerts, replies explained. Or $59 a year.</p>
+            <span className="serif" style={{ fontSize: 52, lineHeight: 1 }}>$59<span className="muted" style={{ fontFamily: "var(--sans)", fontSize: 16 }}> a year</span></span>
+            <p className="muted" style={{ margin: 0 }}>We do the work on every case. Letters written and sent for you, deadlines read from your letters with alerts, replies explained. 7 days free, or $14.99 a month.</p>
             <CtaLink href="/pricing" variant="orange">Try 7 days free</CtaLink>
           </div>
         </div>

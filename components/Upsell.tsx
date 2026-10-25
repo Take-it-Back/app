@@ -1,4 +1,6 @@
 import { CtaLink } from "./ui";
+import UnlockCase from "./UnlockCase";
+import { CASE_PASS, PRICES, TRIAL_DAYS } from "@/lib/plan";
 
 const DEFAULT_POINTS = ["Letters written for you, ready to send", "Every deadline tracked, with reminders", "Their replies read and explained", "All your papers in one case file"];
 
@@ -7,11 +9,16 @@ export default function Upsell({
   body = "Free gives you the lay of the land. Premium does the work: it writes the letters, tracks every date and stays with you until it's settled.",
   points = DEFAULT_POINTS,
   compact = false,
+  caseId,
+  userId,
 }: {
   title?: string;
   body?: string;
   points?: string[];
   compact?: boolean;
+  /** On a case page: also offer to unlock just this case. */
+  caseId?: string;
+  userId?: string;
 }) {
   return (
     <section className="upsell" aria-label="Premium">
@@ -31,9 +38,14 @@ export default function Upsell({
         </ul>
       )}
       <div className="row g12 wrap" style={{ marginTop: 18 }}>
-        <CtaLink href="/app/upgrade" variant="orange">Try it free for 7 days</CtaLink>
-        <span className="small" style={{ color: "#BDBDBD" }}>Then $9.99 a month. Cancel anytime.</span>
+        <CtaLink href="/app/upgrade" variant="orange">Try Premium free for {TRIAL_DAYS} days</CtaLink>
+        <span className="small" style={{ color: "#BDBDBD" }}>On the yearly plan, then {PRICES.yearly.label} a year. Or {PRICES.monthly.label} a month. Cancel anytime.</span>
       </div>
+      {caseId && (
+        <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid #3A3A3A" }}>
+          <UnlockCase caseId={caseId} userId={userId} label={CASE_PASS.label} days={CASE_PASS.days} />
+        </div>
+      )}
     </section>
   );
 }

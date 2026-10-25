@@ -1,15 +1,22 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 
 export const PRICES = {
-  monthly: { amount: 999, label: "$9.99", interval: "month" as const, per: "a month" },
+  monthly: { amount: 1499, label: "$14.99", interval: "month" as const, per: "a month" },
   yearly: { amount: 5900, label: "$59", interval: "year" as const, per: "a year" },
 };
+/** What the yearly plan saves against paying monthly for a year, in percent. */
+export const YEARLY_SAVES = Math.round((1 - PRICES.yearly.amount / (PRICES.monthly.amount * 12)) * 100);
+/** The free trial is offered on the yearly plan only. */
 export const TRIAL_DAYS = 7;
-export const FREE_SCANS_PER_MONTH = 3;
+export const TRIAL_PLAN = "yearly" as const;
+export const FREE_SCANS_PER_MONTH = 1;
+/** One-time unlock of a single case. */
+export const CASE_PASS = { amount: 2499, label: "$24.99", days: 60 };
 
 /** The auto-renewal terms shown next to the button and saved with the person's consent (California ARL and similar laws). */
-export function renewalTerms(which: keyof typeof PRICES, trial: boolean, from = new Date(), freeMonths = 0) {
+export function renewalTerms(which: keyof typeof PRICES, trialEligible: boolean, from = new Date(), freeMonths = 0) {
   const p = PRICES[which];
+  const trial = trialEligible && which === TRIAL_PLAN;
   const days = (trial ? TRIAL_DAYS : 0) + freeMonths * 30;
   const first = new Date(from.getTime() + days * 86400000).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/New_York" });
   return days > 0
@@ -56,4 +63,26 @@ export async function applyBilling(
     p_period_end: args.periodEnd ? new Date(args.periodEnd * 1000).toISOString() : null,
   });
   if (error) throw new Error(error.message);
+}
+
+/** Records a paid case pass through the locked-down database function. Safe to call twice for the same payment. */
+export async function grantCasePass(
+  supabase: SupabaseClient,
+  args: { userId: string; caseId: string; ref: string; source: "stripe" | "apple"; amount: number | null }
+) {
+  const { data, error } = await supabase.rpc("grant_case_pass", {
+    p_secret: process.env.BILLING_SECRET,
+    p_user: args.userId,
+    p_case: args.caseId,
+    p_ref: args.ref,
+    p_source: args.source,
+    p_days: CASE_PASS.days,
+    p_amount: args.amount,
+  });
+  if (error) throw new Error(error.message);
+  return data as string;
+}
+
+export async function revokeCasePass(supabase: SupabaseClient, ref: string) {
+  await supabase.rpc("revoke_case_pass", { p_secret: process.env.BILLING_SECRET, p_ref: ref });
 }

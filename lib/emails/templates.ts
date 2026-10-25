@@ -136,7 +136,7 @@ export function subscriptionEndedEmail(o: { name?: string | null }): Email {
       body:
         p(hi(o.name)) +
         p("You're back on the free plan. Nothing is deleted: your cases, letters and files stay in your account, and you can still download everything.") +
-        list([["Still free", "3 scans a month, plain-English summaries, your state's rules and the legal aid finder."], ["Paused", "Letter writing, deadline reminders and reply reading."]]) +
+        list([["Still free", "1 scan a month, plain-English summaries, your state's rules and the legal aid finder."], ["Paused", "Letter writing, deadline reminders and reply reading."]]) +
         button("Come back to Premium", `${SITE}/app/upgrade`) +
         small("Did we fall short? Reply and tell us. A person reads every message."),
     }),
@@ -217,17 +217,17 @@ export function forwardReceivedEmail(o: { name?: string | null; caseTitle: strin
 
 /** Sample data for the admin preview page. */
 export function emailPreviews(): { key: string; label: string; email: Email }[] {
-  const terms = "Free for 7 days, then $9.99 a month starting October 19, 2026, renewing automatically every month until you cancel. Cancel online anytime in Settings before October 19, 2026 and you won't be charged.";
+  const terms = "Free for 7 days, then $59 a year starting October 19, 2026, renewing automatically every year until you cancel. Cancel online anytime in Settings before October 19, 2026 and you won't be charged.";
   return [
     { key: "welcome", label: "Welcome", email: welcomeEmail("Maria Lopez") },
     { key: "reminder", label: "Deadline reminder", email: reminderEmail("Maria Lopez", [
       { caseTitle: "Riverside Medical · ER bill", title: "Send your dispute letter", due: "Oct 15", owner: "you", days: 1 },
       { caseTitle: "Sunset Properties · deposit", title: "Their reply is due", due: "Oct 11", owner: "them", days: -1 },
     ]) },
-    { key: "sub-started", label: "Premium started (renewal terms)", email: subscriptionStartedEmail({ name: "Maria Lopez", plan: "Premium, monthly", price: "$9.99 a month", trialEnds: "October 19, 2026", firstCharge: "October 19, 2026", terms }) },
-    { key: "trial-ending", label: "Trial ending", email: trialEndingEmail({ name: "Maria Lopez", ends: "October 19, 2026", price: "$9.99 a month" }) },
+    { key: "sub-started", label: "Premium started (renewal terms)", email: subscriptionStartedEmail({ name: "Maria Lopez", plan: "Premium, yearly", price: "$59 a year", trialEnds: "October 19, 2026", firstCharge: "October 19, 2026", terms }) },
+    { key: "trial-ending", label: "Trial ending", email: trialEndingEmail({ name: "Maria Lopez", ends: "October 19, 2026", price: "$59 a year" }) },
     { key: "renewal", label: "Yearly renewal reminder", email: renewalReminderEmail({ name: "Maria Lopez", date: "November 12, 2026", price: "$59" }) },
-    { key: "payment-failed", label: "Payment failed", email: paymentFailedEmail({ name: "Maria Lopez", amount: "$9.99" }) },
+    { key: "payment-failed", label: "Payment failed", email: paymentFailedEmail({ name: "Maria Lopez", amount: "$14.99" }) },
     { key: "sub-ended", label: "Premium ended", email: subscriptionEndedEmail({ name: "Maria Lopez" }) },
     { key: "referral", label: "Referral reward", email: referralRewardEmail({ name: "Maria Lopez", applied: true }) },
     { key: "helper", label: "Helper invite", email: helperInviteEmail({ fromName: "Maria Lopez", caseTitle: "Sunset Properties · deposit" }) },

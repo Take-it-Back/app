@@ -61,7 +61,7 @@ export default async function WritePage({ params }: { params: Promise<{ id: stri
       {c.category === "debt" && c.user_state && <div style={{ marginBottom: 20 }}><DebtClock state={c.user_state} lastPayment={c.last_payment_on ?? null} compact /></div>}
 
       {!premium ? (
-        <Upsell title="Pick a letter. We'll write it." body="Disputes, appeals, payment plans, discounts, records requests and follow-ups, written from your case and ready to send." />
+        <Upsell caseId={id} userId={user.id} title="Pick a letter. We'll write it." body="Disputes, appeals, payment plans, discounts, records requests and follow-ups, written from your case and ready to send." />
       ) : (
         <div className="stack g24">
           {ORDER.map((g) => {

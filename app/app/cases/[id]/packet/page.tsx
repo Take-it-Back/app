@@ -16,7 +16,7 @@ export default async function PacketPage({ params }: { params: Promise<{ id: str
       <main className="app-main">
         <BackLink href={`/app/cases/${id}`} />
         <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 20px" }}>Case <em className="o">packet</em></h1>
-        <Upsell title="One packet with everything" body="Premium builds a printable packet with your timeline, letters and documents for a regulator, lawyer or court." />
+        <Upsell caseId={id} userId={user.id} title="One packet with everything" body="Premium builds a printable packet with your timeline, letters and documents for a regulator, lawyer or court." />
       </main>
     );
   }

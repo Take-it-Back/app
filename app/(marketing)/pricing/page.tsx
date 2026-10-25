@@ -7,7 +7,7 @@ import { Phone } from "@/components/screens";
 import Faq, { PageHead } from "@/components/Faq";
 import { FAQ_GROUPS, PLAN_ROWS } from "@/lib/marketing";
 
-export const metadata: Metadata = pageMeta({ title: "Pricing: free to start, Premium $9.99 a month", description: "Start free with 3 scans a month. Premium is $9.99 a month or $59 a year with a 7-day free trial: letters, deadlines, complaints, reminders and more. Keep 100% of what you save.", path: "/pricing" });
+export const metadata: Metadata = pageMeta({ title: "Pricing: start free, $24.99 for one case, or Premium", description: "Start free with 1 scan a month. Unlock a single case for $24.99, once. Or get Premium for every case: $59 a year with a 7-day free trial, or $14.99 a month. Keep 100% of what you save.", path: "/pricing" });
 
 function Check({ on = true }: { on?: boolean }) {
   return <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={on ? "#BF4F28" : "#9A9A9A"} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flex: "none", marginTop: 4 }}><path d="M5 12l5 5 9-10" /></svg>;
@@ -17,28 +17,39 @@ export default function PricingPage() {
   return (
     <main>
       <JsonLd data={[APP_LD, faqPage([...FAQ_GROUPS[1].items]), breadcrumbs([["Home", "/"], ["Pricing", "/pricing"]])]} />
-      <PageHead eyebrow="Pricing" title="Start free. Let us do the" italic="work" after=" when you're ready." lede="Free tells you where you stand. Premium writes the letters, keeps every date and stays with you until it's settled. You keep 100% of what you save." />
+      <PageHead eyebrow="Pricing" title="Start free. Let us do the" italic="work" after=" when you're ready." lede="Free tells you where you stand. Pay once to fight one bill, or get Premium for every case. You keep 100% of what you save." />
 
       <section className="wrap-1200" style={{ paddingTop: 48 }}>
-        <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20 }}>
+        <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
           <div className="card stack g16" style={{ padding: 32, borderRadius: 28 }}>
             <span style={{ fontWeight: 500, fontSize: 18 }}>Free</span>
             <span className="serif" style={{ fontSize: 60, lineHeight: 1 }}>$0</span>
-            <p className="muted" style={{ margin: 0 }}>Know where you stand.</p>
+            <p className="muted" style={{ margin: 0 }}>See where you stand.</p>
             <ul className="stack g8" style={{ margin: 0, padding: 0, listStyle: "none" }}>
-              {["3 scans a month", "Plain-English summary", "General next steps and deadlines", "Red flags and free legal aid finder"].map((t) => <li key={t} className="row g8" style={{ alignItems: "flex-start" }}><Check on={false} />{t}</li>)}
+              {["1 scan a month", "Plain-English summary", "What we found and how much you could save", "Your state's rules", "Red flags and free legal aid finder"].map((t) => <li key={t} className="row g8" style={{ alignItems: "flex-start" }}><Check on={false} />{t}</li>)}
             </ul>
             <Link prefetch={false} href="/login?mode=signup" className="btn-plain" style={{ alignSelf: "flex-start", minHeight: 48, borderColor: "#1A1A1A", marginTop: "auto" }}>Start free</Link>
+          </div>
+          <div className="card stack g16" style={{ padding: 32, borderRadius: 28 }}>
+            <span style={{ fontWeight: 500, fontSize: 18 }}>One case</span>
+            <span className="serif" style={{ fontSize: 60, lineHeight: 1 }}>$24.99<span className="muted" style={{ fontFamily: "var(--sans)", fontSize: 16 }}> once</span></span>
+            <p className="muted" style={{ margin: 0 }}>For one bill or letter. No subscription, nothing renews.</p>
+            <ul className="stack g8" style={{ margin: 0, padding: 0, listStyle: "none" }}>
+              {["Everything Premium does, for that case", "60 days to see it through", "Letters, deadlines and reminders", "Their replies read and explained"].map((t) => <li key={t} className="row g8" style={{ alignItems: "flex-start" }}><Check />{t}</li>)}
+            </ul>
+            <p className="muted small" style={{ margin: "auto 0 0" }}>Scan your letter free, then tap <strong style={{ color: "#1A1A1A", fontWeight: 600 }}>Unlock just this case</strong>.</p>
+            <Link prefetch={false} href="/login?mode=signup" className="btn-plain" style={{ alignSelf: "flex-start", minHeight: 48, borderColor: "#1A1A1A" }}>Scan your letter</Link>
           </div>
           <div className="card stack g16" style={{ padding: 32, borderRadius: 28, border: "2px solid #BF4F28", position: "relative" }}>
             <span className="tag tag-orange" style={{ position: "absolute", top: -14, left: 28, fontSize: 13, padding: "6px 14px" }}>7 days free</span>
             <span style={{ fontWeight: 500, fontSize: 18 }}>Premium</span>
-            <span className="serif" style={{ fontSize: 60, lineHeight: 1 }}>$9.99<span className="muted" style={{ fontFamily: "var(--sans)", fontSize: 16 }}> a month</span></span>
-            <p className="muted" style={{ margin: 0 }}>Or <strong style={{ color: "#1A1A1A", fontWeight: 600 }}>$59 a year</strong> (save 50%). Renews automatically until you cancel, and you can cancel online anytime.</p>
+            <span className="serif" style={{ fontSize: 60, lineHeight: 1 }}>$59<span className="muted" style={{ fontFamily: "var(--sans)", fontSize: 16 }}> a year</span></span>
+            <p className="muted" style={{ margin: 0 }}>Every case, all year. Or <strong style={{ color: "#1A1A1A", fontWeight: 600 }}>$14.99 a month</strong>. Renews automatically until you cancel, and you can cancel online anytime.</p>
             <ul className="stack g8" style={{ margin: 0, padding: 0, listStyle: "none" }}>
-              {["Unlimited scans", "Every problem in full, with the rule behind it", "Letters written for you", "Deadline tracking with email reminders", "Their replies read and explained", "Case file and printable case packet"].map((t) => <li key={t} className="row g8" style={{ alignItems: "flex-start" }}><Check />{t}</li>)}
+              {["Unlimited scans and cases", "Every problem in full, with the rule behind it", "Letters written for you", "Deadline tracking with reminders", "Their replies read and explained", "Case file, packet, complaints and credit disputes"].map((t) => <li key={t} className="row g8" style={{ alignItems: "flex-start" }}><Check />{t}</li>)}
             </ul>
             <div style={{ marginTop: "auto" }}><CtaLink href="/login?mode=signup&next=/app/upgrade" variant="orange">Start 7-day free trial</CtaLink></div>
+            <span className="muted small">Free trial on the yearly plan for new subscribers.</span>
           </div>
         </div>
       </section>
@@ -77,7 +88,7 @@ export default function PricingPage() {
         <Faq items={[...FAQ_GROUPS[1].items, ["Can I cancel anytime?", "Yes. Cancel from your account in two taps. You keep Premium until the end of the period you paid for."], ["What happens to my cases if I cancel?", "They stay in your account. You can still see your summaries and download your data anytime."]]} />
       </section>
 
-      <CtaBand title="Try Premium free for" italic="7 days." sub="Cancel before it ends and you won't be charged." />
+      <CtaBand title="Try Premium free for" italic="7 days." sub="On the yearly plan. Cancel before it ends and you won't be charged." />
     </main>
   );
 }

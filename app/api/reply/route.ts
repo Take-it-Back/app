@@ -17,7 +17,7 @@ export async function POST(request: Request) {
   const { caseId, documentId } = (await request.json().catch(() => ({}))) as { caseId?: string; documentId?: string };
   if (!caseId || !documentId) return NextResponse.json({ error: "Missing details." }, { status: 400 });
   if (!(await getCasePremium(supabase, user.id, caseId)))
-    return NextResponse.json({ error: "Reading their reply is part of Premium. Start a free 7-day trial to use it.", upgrade: true }, { status: 402 });
+    return NextResponse.json({ error: "Reading their reply is part of Premium. Unlock this case or try Premium to use it.", upgrade: true }, { status: 402 });
   const limit = await useAi(supabase, user.id, "reply");
   if (!limit.ok) return NextResponse.json({ error: limit.error }, { status: 429 });
 

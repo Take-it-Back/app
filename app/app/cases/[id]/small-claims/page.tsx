@@ -89,7 +89,7 @@ export default async function SmallClaimsPage({ params }: { params: Promise<{ id
           {premium ? (
             <WriteLetterCard caseId={id} kind="small_claims_statement" title="Write my statement of claim" blurb="What happened, how much and why, ready to copy onto the court form." />
           ) : (
-            <Upsell compact title="We'll write your statement of claim from your case" />
+            <Upsell caseId={id} userId={user.id} compact title="We'll write your statement of claim from your case" />
           )}
           {letters.filter((l) => l.kind === "small_claims_statement").map((l) => (
             <Link key={l.id} href={`/app/cases/${id}/letter?id=${l.id}`} className="list-row">{kindInfo(l.kind)?.label} · {shortDate(l.created_at)}</Link>

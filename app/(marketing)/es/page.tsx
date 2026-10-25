@@ -83,7 +83,7 @@ export default function Espanol() {
       </section>
       <section className="wrap-1200 stack g16 m-section" style={{ maxWidth: 760 }}>
         <h2 className="h-l">Precio <em className="o">claro</em></h2>
-        <p className="lede" style={{ margin: 0 }}>Gratis: 3 escaneos al mes con un resumen y los próximos pasos. Premium: $9.99 al mes o $59 al año, con 7 días gratis. Escribe tus cartas, vigila tus fechas y lee sus respuestas. Se renueva automáticamente hasta que canceles, y puedes cancelar en línea cuando quieras.</p>
+        <p className="lede" style={{ margin: 0 }}>Gratis: 1 escaneo al mes con un resumen y los próximos pasos. ¿Solo un caso? Desbloquéalo por $24.99, un solo pago, por 60 días. Premium: $14.99 al mes, o $59 al año con 7 días gratis. Escribe tus cartas, vigila tus fechas y lee sus respuestas. Premium se renueva automáticamente hasta que canceles, y puedes cancelar en línea cuando quieras.</p>
         <p className="muted small" style={{ margin: 0 }}>Take it back no es un bufete de abogados y no da asesoría legal. Si te demandaron, tienes fecha de corte o te quieren desalojar, busca <Link href="/legal-aid">ayuda legal gratis</Link> hoy mismo.</p>
         <div><CtaLink href="/login?mode=signup&lang=es">Empieza gratis</CtaLink></div>
       </section>

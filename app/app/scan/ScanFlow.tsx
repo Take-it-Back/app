@@ -78,7 +78,7 @@ export default function ScanFlow({ userId, defaultState }: { userId: string; def
         .insert({ user_id: userId, category: kind, title: KINDS.find((k) => k[0] === kind)?.[1] || "New case", status: "analyzing", received_date: received, insured: kind === "medical" || kind === "insurance" ? insured : null, paid, user_state: state || null })
         .select("id")
         .single();
-      if (ce?.message?.includes("free_limit")) { router.push("/app/scan"); router.refresh(); throw new Error("Free includes 3 scans a month. Try Premium for unlimited scans."); }
+      if (ce?.message?.includes("free_limit")) { router.push("/app/scan"); router.refresh(); throw new Error("Free includes 1 scan a month. Try Premium for unlimited scans."); }
       if (ce || !c) throw new Error(ce?.message || "Couldn't create the case.");
       if (state) await supabase.from("profiles").update({ state }).eq("id", userId);
 

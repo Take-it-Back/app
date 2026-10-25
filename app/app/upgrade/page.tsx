@@ -1,12 +1,12 @@
 import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
 import { BackLink, CtaButton } from "@/components/ui";
-import { PRICES, TRIAL_DAYS, getPlan, renewalTerms } from "@/lib/plan";
+import { CASE_PASS, PRICES, TRIAL_DAYS, YEARLY_SAVES, getPlan, renewalTerms } from "@/lib/plan";
 import { isAppRequest } from "@/lib/appContext";
 import { APPLE_PRODUCTS } from "@/lib/appleProducts";
 import ApplePlans from "@/components/ApplePlans";
 
-const FREE = ["Scan up to 3 papers a month", "A plain-English summary, in English or Spanish", "Your state's rules on every case", "General next steps and red flags", "Free legal aid finder"];
+const FREE = ["1 scan a month", "A plain-English summary, in English or Spanish", "Your state's rules on every case", "General next steps and red flags", "Free legal aid finder"];
 const PREMIUM = ["Unlimited scans", "Every problem we found, in full, with the rule behind it", "Letters written for you, ready to print or email", "Deadlines read from your letters, with email, text and phone alerts", "Their replies read and explained", "Your whole case file and a printable case packet", "Complaints to regulators and credit report disputes", "Certified mail and fax sent for you ($8.99 / $1.99)", "Forward bills by email and add family helpers"];
 
 function Check({ on = true }: { on?: boolean }) {
@@ -55,14 +55,14 @@ export default async function UpgradePage({ searchParams }: { searchParams: Prom
       {canceled && <p className="notice">No problem. Nothing was charged.</p>}
 
       {inApp ? (
-        <ApplePlans ids={APPLE_PRODUCTS} userId={user.id} fallback={{ monthly: PRICES.monthly.label, yearly: PRICES.yearly.label }} trialDays={TRIAL_DAYS} />
+        <ApplePlans ids={APPLE_PRODUCTS} userId={user.id} fallback={{ monthly: PRICES.monthly.label, yearly: "$59.99" }} trialDays={TRIAL_DAYS} />
       ) : (<>
       <div className="plan-grid" style={{ marginTop: 8 }}>
         <form action="/api/stripe/checkout" method="post" className="plan-card hot">
           <input type="hidden" name="plan" value="yearly" />
-          <span className="row between"><span className="eyebrow">Yearly</span><span className="tag tag-orange">Save 50%</span></span>
+          <span className="row between"><span className="eyebrow">Yearly</span><span className="tag tag-orange">Save {YEARLY_SAVES}%</span></span>
           <span><span className="big-num">{PRICES.yearly.label}</span> <span className="muted">{PRICES.yearly.per}</span></span>
-          <span className="muted small">About $4.92 a month, billed once a year.</span>
+          <span className="muted small">About ${(PRICES.yearly.amount / 1200).toFixed(2)} a month, billed once a year.{trial ? ` ${TRIAL_DAYS} days free first.` : ""}</span>
           <Agree text={renewalTerms("yearly", trial, new Date(), banked)} />
           <CtaButton type="submit" variant="orange" block>{trial ? `Start ${TRIAL_DAYS}-day free trial` : "Choose yearly"}</CtaButton>
         </form>
@@ -72,11 +72,13 @@ export default async function UpgradePage({ searchParams }: { searchParams: Prom
           <span><span className="big-num">{PRICES.monthly.label}</span> <span className="muted">{PRICES.monthly.per}</span></span>
           <span className="muted small">Cancel anytime from your account.</span>
           <Agree text={renewalTerms("monthly", trial, new Date(), banked)} />
-          <CtaButton type="submit" variant="ink" block>{trial ? `Start ${TRIAL_DAYS}-day free trial` : "Choose monthly"}</CtaButton>
+          <CtaButton type="submit" variant="ink" block>Choose monthly</CtaButton>
         </form>
       </div>
-      {trial && <p className="muted small" style={{ marginTop: 12 }}>You won&apos;t be charged today. We&apos;ll email you before your trial ends, and before each yearly renewal.</p>}
+      {trial && <p className="muted small" style={{ marginTop: 12 }}>The free trial is on the yearly plan: you won&apos;t be charged today, and we&apos;ll email you before it ends and before each renewal.</p>}
       </>)}
+
+      <p className="panel-gray" style={{ marginTop: 20, fontSize: 15 }}>Only need help with one bill or letter? Open the case and choose <strong>Unlock just this case</strong>: {CASE_PASS.label} once, no subscription, for {CASE_PASS.days} days.</p>
 
       <div className="plan-grid" style={{ marginTop: 28 }}>
         <section className="card stack g12">

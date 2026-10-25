@@ -96,7 +96,7 @@ export default async function AdminPage() {
                 <thead><tr><th scope="col">Action</th><th scope="col">Runs</th><th scope="col">Avg tokens in / out</th><th scope="col">Est. cost each</th></tr></thead>
                 <tbody>{costRows.map((c) => <tr key={c.kind}><td>{c.kind === "analyze" ? "Scan" : c.kind === "letter" ? "Letter" : "Reply read"}</td><td data-label="Runs">{c.calls}</td><td data-label="Tokens">{Number(c.avg_in).toLocaleString()} / {Number(c.avg_out).toLocaleString()}</td><td data-label="Cost">${c.cost.toFixed(3)}</td></tr>)}</tbody>
               </table>
-              <p className="muted small" style={{ margin: "10px 0 0" }}>Estimated at ${pin} / ${pout} per million tokens in / out ({costRows[0]?.model}). Premium at $9.99 a month covers about {Math.floor(9.99 / Math.max(0.001, costRows.find((c) => c.kind === "analyze")?.cost || 0.05))} scans.</p>
+              <p className="muted small" style={{ margin: "10px 0 0" }}>Estimated at ${pin} / ${pout} per million tokens in / out ({costRows[0]?.model}). Premium at $14.99 a month covers about {Math.floor(14.99 / Math.max(0.001, costRows.find((c) => c.kind === "analyze")?.cost || 0.05))} scans.</p>
             </div>
           ) : <p className="muted" style={{ margin: "8px 0 0" }}>No AI runs yet. Numbers appear once the AI key is added and people scan.</p>}
         </section>

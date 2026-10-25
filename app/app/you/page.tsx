@@ -50,7 +50,7 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
         ) : (
           <div className="panel-gray stack g8">
             <span className="serif" style={{ fontSize: 22 }}>You're on <em className="o">Free</em></span>
-            <span className="small muted">3 scans a month with a summary and general next steps. Premium writes your letters, tracks every deadline and reads their replies.</span>
+            <span className="small muted">1 scan a month with a summary and general next steps. Premium writes your letters, tracks every deadline and reads their replies, on every case.</span>
             <CtaLink href="/app/upgrade" variant="orange">See Premium</CtaLink>
             {plan.customer && !inApp && <form action="/api/stripe/portal" method="post"><button className="btn-text small">Billing history</button></form>}
           </div>

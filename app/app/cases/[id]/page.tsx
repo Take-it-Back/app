@@ -12,18 +12,27 @@ import { getCasePremium } from "@/lib/plan";
 import Upsell from "@/components/Upsell";
 import StateRules from "@/components/StateRules";
 
-export default async function CasePage({ params }: { params: Promise<{ id: string }> }) {
+export default async function CasePage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ unlocked?: string; error?: string; canceled?: string }> }) {
   const { id } = await params;
+  const { unlocked, error: payError, canceled } = await searchParams;
   const { supabase, user } = await requireUser();
-  const [{ data: cData }, { data: dl }, { data: ev }, { data: lt }, { count: docCount }, plan] = await Promise.all([
+  const [{ data: cData }, { data: dl0 }, { data: ev }, { data: lt }, { count: docCount }, plan, { data: passes }] = await Promise.all([
     supabase.from("cases").select("*").eq("id", id).maybeSingle(),
     supabase.from("deadlines").select("*").eq("case_id", id).order("due_date"),
     supabase.from("events").select("*").eq("case_id", id).order("happened_at", { ascending: false }),
     supabase.from("letters").select("*").eq("case_id", id).order("created_at", { ascending: false }),
     supabase.from("documents").select("id", { count: "exact", head: true }).eq("case_id", id),
     getCasePremium(supabase, user.id, id).then((premium) => ({ premium })),
+    supabase.from("case_passes").select("expires_at").eq("case_id", id).is("revoked_at", null).gt("expires_at", new Date().toISOString()).order("expires_at", { ascending: false }).limit(1),
   ]);
   if (!cData) notFound();
+  // Dates read from the letter on the free plan show up once the case is unlocked.
+  let dl = dl0;
+  if (plan.premium && cData.pending_deadlines && !(dl || []).length) {
+    await supabase.rpc("unlock_case_deadlines", { p_case: id });
+    ({ data: dl } = await supabase.from("deadlines").select("*").eq("case_id", id).order("due_date"));
+  }
+  const passUntil = (passes?.[0]?.expires_at as string | undefined) ?? null;
   const c = cData as CaseRow;
   const deadlines = (dl || []) as DeadlineRow[];
   const events = (ev || []) as EventRow[];
@@ -50,9 +59,12 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
               <span style={{ fontSize: 15 }}>{c.red_flag_reason || "Something here moves fast."} Tap for free legal aid in your state.</span>
             </Link>
           )}
+          {payError === "confirm" && <p className="notice" role="alert" style={{ margin: 0 }}>We couldn&apos;t confirm your payment yet. If you were charged, this case unlocks within a minute.</p>}
+          {payError === "billing" && <p className="notice" role="alert" style={{ margin: 0 }}>Payments aren&apos;t switched on yet. Please try again soon.</p>}
+          {canceled && <p className="notice" style={{ margin: 0 }}>No problem. Nothing was charged.</p>}
           {c.summary && <p style={{ margin: 0, fontSize: 17 }}>{c.summary}</p>}
           <CtaLink href={`/app/cases/${id}/found`} variant="ink" block>See where you stand</CtaLink>
-          <Upsell title="Track this fight from start to finish" />
+          <Upsell caseId={id} userId={user.id} title="Track this fight from start to finish" />
           <form action={deleteCase.bind(null, id)}>
             <ConfirmSubmit message="Delete this case and its files? This can't be undone." className="btn-text" style={{ color: "#A8441F" }}>Delete this case and its files</ConfirmSubmit>
           </form>
@@ -77,6 +89,9 @@ export default async function CasePage({ params }: { params: Promise<{ id: strin
           {[c.counterparty, c.amount_at_stake ? `${money(c.amount_at_stake)} at stake` : null].filter(Boolean).join(" · ")}
         </span>
       </div>
+
+      {unlocked && <p className="notice" role="status" style={{ marginBottom: 16 }}>This case is unlocked. Your letters, deadlines and reply help are ready.</p>}
+      {passUntil && <p className="muted small" style={{ margin: "-8px 0 16px" }}>Unlocked until {shortDate(passUntil.slice(0, 10))}. <Link href="/app/upgrade">Premium</Link> covers every case.</p>}
 
       {c.red_flag && !done && (
         <Link href={`/app/help?${new URLSearchParams({ ...(c.user_state ? { state: c.user_state } : {}), ...(c.category === "landlord" ? { focus: "tenant" } : {}) })}`} className="panel-orange stack g4" style={{ textDecoration: "none", marginBottom: 20 }}>

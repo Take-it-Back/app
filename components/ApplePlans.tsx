@@ -6,7 +6,7 @@ import { haptic } from "@/lib/native";
 import { CtaButton } from "@/components/ui";
 
 type Ids = { monthly: string; yearly: string };
-type Prod = { identifier: string; priceString: string; introEligible: boolean };
+type Prod = { identifier: string; priceString: string; price: number; introEligible: boolean };
 
 async function plugin() {
   const m = await import("@capgo/native-purchases");
@@ -32,7 +32,7 @@ export default function ApplePlans({ ids, userId, fallback, trialDays }: { ids: 
         const { NP, SUBS } = await plugin();
         const { products } = await NP.getProducts({ productIdentifiers: [ids.monthly, ids.yearly], productType: SUBS });
         const map: Record<string, Prod> = {};
-        for (const p of products) map[p.identifier] = { identifier: p.identifier, priceString: p.priceString, introEligible: Boolean((p as { isEligibleForIntroOffer?: boolean }).isEligibleForIntroOffer ?? p.introductoryPrice) };
+        for (const p of products) map[p.identifier] = { identifier: p.identifier, priceString: p.priceString, price: p.price, introEligible: Boolean((p as { isEligibleForIntroOffer?: boolean }).isEligibleForIntroOffer ?? p.introductoryPrice) };
         setProds(map);
       } catch {
         setMsg("We couldn't reach the App Store. Check your connection and try again.");
@@ -84,8 +84,13 @@ export default function ApplePlans({ ids, userId, fallback, trialDays }: { ids: 
     }
   }
 
+  const saves = (() => {
+    const m = prods[ids.monthly];
+    const y = prods[ids.yearly];
+    return m?.price && y?.price ? Math.round((1 - y.price / (m.price * 12)) * 100) : 67;
+  })();
   const price = (which: keyof Ids) => prods[ids[which]]?.priceString || fallback[which];
-  const trial = (which: keyof Ids) => prods[ids[which]]?.introEligible ?? true;
+  const trial = (which: keyof Ids) => prods[ids[which]]?.introEligible ?? which === "yearly";
   const terms = (which: keyof Ids) =>
     `${trial(which) ? `Free for ${trialDays} days, then ` : ""}${price(which)} a ${which === "yearly" ? "year" : "month"}. Charged to your Apple ID${trial(which) ? " when the trial ends" : ""}, renewing automatically unless you cancel at least 24 hours before the end of the period. Cancel anytime in your iPhone's Settings → Apple ID → Subscriptions.`;
 
@@ -94,7 +99,7 @@ export default function ApplePlans({ ids, userId, fallback, trialDays }: { ids: 
       {msg && <p className="notice" role="alert">{msg}</p>}
       <div className="plan-grid" style={{ marginTop: 8 }}>
         <div className="plan-card hot">
-          <span className="row between"><span className="eyebrow">Yearly</span><span className="tag tag-orange">Save 50%</span></span>
+          <span className="row between"><span className="eyebrow">Yearly</span><span className="tag tag-orange">Save {saves}%</span></span>
           <span><span className="big-num">{price("yearly")}</span> <span className="muted">a year</span></span>
           <span className="small" style={{ color: "#3A3A3A" }}>{terms("yearly")}</span>
           <CtaButton type="button" variant="orange" block disabled={Boolean(busy)} onClick={() => buy("yearly")}>{busy === "yearly" ? "Opening App Store…" : trial("yearly") ? `Start ${trialDays}-day free trial` : "Choose yearly"}</CtaButton>

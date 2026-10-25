@@ -17,7 +17,7 @@ export default async function ReplyPage({ params, searchParams }: { params: Prom
       <main className="app-main">
         <BackLink href={`/app/cases/${id}`} />
         <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 20px" }}>Their <em className="o">reply</em></h1>
-        <Upsell title="We'll read their reply for you" body="Premium explains what they said, whether it's a win, and writes your next letter." />
+        <Upsell caseId={id} userId={user.id} title="We'll read their reply for you" body="Premium explains what they said, whether it's a win, and writes your next letter." />
       </main>
     );
   }
