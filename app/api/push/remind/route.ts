@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { pushReady, sendPushToSelf } from "@/lib/push";
+import { anyPushReady, sendPushToSelf } from "@/lib/push";
 
 // Called by the daily-reminders job. The caller passes a Supabase key as the bearer token and we read
 // subscriptions with it, so row security decides what it can reach: only the service key sees other people's
 // devices. The message text is fixed here (never taken from the request), so it can't be misused to send anything else.
 export async function POST(request: Request) {
-  if (!pushReady()) return NextResponse.json({ ok: false, error: "Push not configured" }, { status: 503 });
+  if (!anyPushReady()) return NextResponse.json({ ok: false, error: "Push not configured" }, { status: 503 });
   const key = (request.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
   if (!key) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   const { userId, count, overdue } = (await request.json().catch(() => ({}))) as { userId?: string; count?: number; overdue?: boolean };

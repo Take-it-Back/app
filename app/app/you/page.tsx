@@ -12,12 +12,17 @@ import PushToggle from "@/components/PushToggle";
 import { getPlan } from "@/lib/plan";
 import { CtaLink } from "@/components/ui";
 import { shortDate } from "@/lib/format";
+import { isAppRequest } from "@/lib/appContext";
+import ManageApple from "@/components/ManageApple";
+import NativeSettings from "@/components/NativeSettings";
 
-export default async function YouPage({ searchParams }: { searchParams: Promise<{ reset?: string; saved?: string; consent?: string }> }) {
-  const { reset, saved, consent } = await searchParams;
+export default async function YouPage({ searchParams }: { searchParams: Promise<{ reset?: string; saved?: string; consent?: string; upgraded?: string }> }) {
+  const { reset, saved, consent, upgraded } = await searchParams;
   const { supabase, user } = await requireUser();
   const [{ data: p }, plan] = await Promise.all([supabase.from("profiles").select("*").eq("id", user.id).maybeSingle(), getPlan(supabase, user.id)]);
   const ends = plan.periodEnd ? shortDate(plan.periodEnd.slice(0, 10)) : null;
+  const inApp = await isAppRequest();
+  const apple = plan.source === "apple";
 
   return (
     <main className="app-main">
@@ -30,25 +35,28 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
 
         {reset && <PasswordReset />}
         {saved && <p className="notice" role="status">Saved.</p>}
+        {upgraded && plan.premium && <p className="notice" role="status">You&apos;re on Premium. Thank you.</p>}
 
         {plan.premium ? (
           <div className="panel-orange stack g8">
             <span className="serif" style={{ fontSize: 22 }}>You're on <em className="o">Premium</em></span>
             <span className="small" style={{ color: "#4A4A4A" }}>
-              {plan.status === "trialing" ? `Free trial${ends ? ` until ${ends}` : ""}.` : plan.status === "past_due" ? "Your last payment didn't go through. Please update your card." : ends ? `Renews ${ends}.` : "Active."}
+              {plan.status === "trialing" ? `Free trial${ends ? ` until ${ends}` : ""}.` : plan.status === "past_due" ? (apple ? "Apple couldn't charge your last payment. Check your payment method in your Apple ID settings." : "Your last payment didn't go through. Please update your card.") : ends ? `Renews ${ends}.` : "Active."}
             </span>
-            <form action="/api/stripe/portal" method="post"><button className="btn-plain">Cancel or change plan</button></form>
+            {apple ? <><ManageApple /><span className="muted small">Billed through Apple. Changes and cancellations happen in the App Store.</span></>
+              : inApp ? <span className="muted small">You subscribed on our website. To change or cancel, sign in at takeitback.app.</span>
+              : <form action="/api/stripe/portal" method="post"><button className="btn-plain">Cancel or change plan</button></form>}
           </div>
         ) : (
           <div className="panel-gray stack g8">
             <span className="serif" style={{ fontSize: 22 }}>You're on <em className="o">Free</em></span>
             <span className="small muted">3 scans a month with a summary and general next steps. Premium writes your letters, tracks every deadline and reads their replies.</span>
             <CtaLink href="/app/upgrade" variant="orange">See Premium</CtaLink>
-            {plan.customer && <form action="/api/stripe/portal" method="post"><button className="btn-text small">Billing history</button></form>}
+            {plan.customer && !inApp && <form action="/api/stripe/portal" method="post"><button className="btn-text small">Billing history</button></form>}
           </div>
         )}
 
-        {p?.referral_code && (
+        {p?.referral_code && !inApp && (
           <section className="card stack g8">
             <span className="serif" style={{ fontSize: 22 }}>Give a month, <em className="o">get a month</em></span>
             <span className="small muted">Share your link. When a friend starts Premium, they get a month free and so do you{p.referral_credit_months ? `. You have ${p.referral_credit_months} free month${p.referral_credit_months > 1 ? "s" : ""} waiting` : ""}.</span>
@@ -91,7 +99,7 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
           <label className="row between" style={{ padding: "12px 0", borderBottom: "1px solid #EBEBEB", fontSize: 15 }}>Email me before deadlines<input type="checkbox" role="switch" name="remind_email" defaultChecked={p?.remind_email ?? true} style={{ width: 22, height: 22, accentColor: "#1A1A1A" }} /></label>
           <label className="field" style={{ paddingTop: 12 }}><span style={{ fontSize: 14 }}>Mobile number for text reminders</span><input name="phone" type="tel" inputMode="tel" className="input" placeholder="(555) 555-0123" defaultValue={p?.phone ? p.phone.replace(/^\+1/, "") : ""} autoComplete="tel" /></label>
           <label className="row between" style={{ padding: "12px 0", borderBottom: "1px solid #EBEBEB", fontSize: 15, gap: 12 }}><span className="stack"><span>Text me before deadlines</span><span className="muted small">Premium. By turning this on you agree to get up to 1 text a day from Take it back about your deadlines at this number. Texts never include case details. Msg &amp; data rates may apply. Reply STOP to cancel, HELP for help. Not a condition of purchase. See our <a href="/privacy">privacy policy</a>.</span></span><input type="checkbox" role="switch" name="sms_opt_in" defaultChecked={p?.sms_opt_in ?? false} style={{ width: 22, height: 22, accentColor: "#1A1A1A", flex: "none" }} /></label>
-          <PushToggle canTest={!!p?.is_admin} />
+          {inApp ? <NativeSettings /> : <PushToggle canTest={!!p?.is_admin} />}
           <label className="row between" style={{ padding: "12px 0", fontSize: 15 }}>Morning briefing on Today<input type="checkbox" role="switch" name="morning_briefing" defaultChecked={p?.morning_briefing ?? true} style={{ width: 22, height: 22, accentColor: "#1A1A1A" }} /></label>
           <button className="btn-plain" style={{ alignSelf: "flex-start", background: "#1A1A1A", color: "#fff", borderColor: "#1A1A1A" }}>Save</button>
         </form>
@@ -110,8 +118,9 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
             <span className="list-row muted small">{consent === "withdrawn" ? "Health data consent withdrawn. We'll ask again before your next scan." : "No health data consent on file. We'll ask before your first scan."}</span>
           )}
           <form action="/auth/signout" method="post"><button className="list-row btn-text" style={{ width: "100%", justifyContent: "flex-start", borderBottom: "1px solid #EBEBEB" }}>Sign out</button></form>
+          {apple && plan.premium && <span className="muted small" style={{ paddingTop: 12 }}>Your Premium is billed by Apple. Deleting your account doesn&apos;t stop Apple&apos;s billing, so cancel in the App Store first.</span>}
           <form action={deleteAccount}>
-            <ConfirmSubmit message="Delete your account, every case and every file? This can't be undone." className="btn-text" style={{ color: "#A8441F" }}>Delete my account and everything in it</ConfirmSubmit>
+            <ConfirmSubmit message={apple && plan.premium ? "Delete your account, every case and every file? This can't be undone. Remember to cancel your subscription in the App Store too." : "Delete your account, every case and every file? This can't be undone."} className="btn-text" style={{ color: "#A8441F" }}>Delete my account and everything in it</ConfirmSubmit>
           </form>
         </div>
       </div>

@@ -17,16 +17,16 @@ export function renewalTerms(which: keyof typeof PRICES, trial: boolean, from = 
     : `${p.label} ${p.per}, charged today and renewing automatically every ${p.interval} until you cancel. Cancel online anytime in Settings; you keep Premium until the end of the period you paid for.`;
 }
 
-export type PlanInfo = { premium: boolean; status: string | null; periodEnd: string | null; customer: string | null };
+export type PlanInfo = { premium: boolean; status: string | null; periodEnd: string | null; customer: string | null; source: "stripe" | "apple" | null };
 
 export async function getPlan(supabase: SupabaseClient, userId: string): Promise<PlanInfo> {
   const { data } = await supabase
     .from("profiles")
-    .select("plan, plan_status, current_period_end, stripe_customer_id")
+    .select("plan, plan_status, current_period_end, stripe_customer_id, billing_source")
     .eq("id", userId)
     .maybeSingle();
   const premium = data?.plan === "premium" && ["active", "trialing", "past_due"].includes(data?.plan_status || "");
-  return { premium, status: data?.plan_status ?? null, periodEnd: data?.current_period_end ?? null, customer: data?.stripe_customer_id ?? null };
+  return { premium, status: data?.plan_status ?? null, periodEnd: data?.current_period_end ?? null, customer: data?.stripe_customer_id ?? null, source: (data?.billing_source as PlanInfo["source"]) ?? null };
 }
 
 /** Premium for this case: your own plan, or the case owner's when you're a helper on it. */

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { CtaButton } from "@/components/ui";
+import AppleSignIn from "@/components/AppleSignIn";
 
 export default function LoginForm() {
   const params = useSearchParams();
@@ -72,6 +73,7 @@ export default function LoginForm() {
       <p className="muted" style={{ margin: 0 }}>
         {mode === "signup" ? "Free to start. Takes a minute." : mode === "signin" ? "Sign in to see your cases." : "We'll email you a link."}
       </p>
+      {mode !== "reset" && <AppleSignIn next={next} />}
       {mode === "signup" && (
         <div className="field">
           <label htmlFor="name">Your name</label>

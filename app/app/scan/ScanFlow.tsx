@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import { CtaButton, Mark } from "@/components/ui";
 import { US_STATES } from "@/lib/states";
 import { todayISO } from "@/lib/format";
+import { haptic, isNativeApp } from "@/lib/native";
 
 const KINDS = [
   ["medical", "Medical bill"],
@@ -37,6 +38,29 @@ export default function ScanFlow({ userId, defaultState }: { userId: string; def
     if (ok.length < list.length) setError("Some files were skipped. Use photos (JPG, PNG) or PDFs under 20 MB.");
     else setError(null);
     setFiles((prev) => [...prev, ...ok].slice(0, 8));
+  }
+
+  /** In the iPhone app, use the built-in document scanner (finds the page edges and straightens it). */
+  async function takePhoto() {
+    if (!isNativeApp()) {
+      camRef.current?.click();
+      return;
+    }
+    try {
+      const { DocumentScanner, ResponseType } = await import("@capgo/capacitor-document-scanner");
+      const { scannedImages, status } = await DocumentScanner.scanDocument({ responseType: ResponseType.Base64, maxNumDocuments: 8, croppedImageQuality: 85 });
+      if (status === "cancel" || !scannedImages?.length) return;
+      const pages = scannedImages.map((b64, i) => {
+        const data = b64.replace(/^data:[^,]+,/, "");
+        const bytes = Uint8Array.from(atob(data), (ch) => ch.charCodeAt(0));
+        return new File([bytes], `scan-${Date.now()}-${i + 1}.jpg`, { type: "image/jpeg" });
+      });
+      setError(null);
+      setFiles((prev) => [...prev, ...pages].slice(0, 8));
+      haptic("success");
+    } catch {
+      camRef.current?.click();
+    }
   }
 
   async function submit(e: React.FormEvent) {
@@ -114,7 +138,7 @@ export default function ScanFlow({ userId, defaultState }: { userId: string; def
           )}
         </div>
         <div className="chips">
-          <button type="button" className="chip on" onClick={() => camRef.current?.click()}>Take a photo</button>
+          <button type="button" className="chip on" onClick={takePhoto}>Take a photo</button>
           <button type="button" className="chip" onClick={() => fileRef.current?.click()}>Upload a file</button>
         </div>
         <input ref={camRef} type="file" accept="image/*" capture="environment" className="sr" onChange={(e) => addFiles(e.target.files)} aria-label="Take a photo" />

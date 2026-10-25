@@ -1,6 +1,7 @@
 // Server only: uses the VAPID private key.
 import webpush from "web-push";
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { apnsReady, sendApns } from "@/lib/apns";
 
 export type PushPayload = { title: string; body: string; url?: string };
 type Sub = { id: string; endpoint: string; p256dh: string; auth: string };
@@ -24,7 +25,8 @@ export function pushReady() {
  * Removes subscriptions the push service says are gone (404/410). Returns how many were delivered.
  */
 export async function sendPushToSelf(supabase: SupabaseClient, userId: string, payload: PushPayload) {
-  if (!pushReady()) return { sent: 0, removed: 0, failed: 0 };
+  const app = await sendToApp(supabase, userId, payload);
+  if (!pushReady()) return app;
   const { data } = await supabase.from("push_subscriptions").select("id, endpoint, p256dh, auth").eq("user_id", userId);
   const subs = (data ?? []) as Sub[];
   const body = JSON.stringify(payload);
@@ -44,5 +46,19 @@ export async function sendPushToSelf(supabase: SupabaseClient, userId: string, p
     })
   );
   if (gone.length) await supabase.from("push_subscriptions").delete().in("id", gone);
-  return { sent, removed: gone.length, failed };
+  return { sent: sent + app.sent, removed: gone.length + app.removed, failed: failed + app.failed };
+}
+
+/** True when either web push or iPhone app push is set up. */
+export const anyPushReady = () => pushReady() || apnsReady();
+
+/** iPhone app devices, through Apple's push service. Drops tokens Apple says are no longer valid. */
+async function sendToApp(supabase: SupabaseClient, userId: string, payload: PushPayload) {
+  if (!apnsReady()) return { sent: 0, removed: 0, failed: 0 };
+  const { data } = await supabase.from("device_tokens").select("token").eq("user_id", userId);
+  const tokens = (data ?? []).map((r) => (r as { token: string }).token);
+  const results = await sendApns(tokens, payload);
+  const gone = results.filter((r) => r.status === 410 || r.reason === "BadDeviceToken" || r.reason === "Unregistered").map((r) => r.token);
+  if (gone.length) await supabase.from("device_tokens").delete().in("token", gone);
+  return { sent: results.filter((r) => r.status === 200).length, removed: gone.length, failed: results.filter((r) => r.status !== 200 && !gone.includes(r.token)).length };
 }

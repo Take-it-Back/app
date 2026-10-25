@@ -413,3 +413,8 @@ html, body { overflow-x: clip; }
   .logo { min-height: 44px; }
   input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea { font-size: 16px !important; }
 }
+
+/* Inside the iPhone app */
+html.native-app body { padding-top: env(safe-area-inset-top); }
+html.native-app .soon, html.native-app .web-only { display: none !important; }
+html.native-app { -webkit-tap-highlight-color: transparent; }

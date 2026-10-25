@@ -1,3 +1,4 @@
+import AddToCalendar from "@/components/AddToCalendar";
 import Link from "next/link";
 import { requireUser } from "@/lib/supabase/server";
 import { getPlan } from "@/lib/plan";
@@ -43,7 +44,8 @@ export default async function DatesPage() {
     const p = dayParts(d.due_date);
     const n = daysUntil(d.due_date);
     return (
-      <Link href={`/app/cases/${d.case_id}`} className="list-row">
+      <div className="row" style={{ alignItems: "center" }}>
+      <Link href={`/app/cases/${d.case_id}`} className="list-row grow" style={{ minWidth: 0 }}>
         <span className="stack" style={{ width: 52, alignItems: "center", flex: "none" }}>
           <span className="serif" style={{ fontSize: 30, lineHeight: 1, color: d.owner === "you" && n <= 3 ? "#A8441F" : "#1A1A1A" }}>{p.day}</span>
           <span className="muted" style={{ fontSize: 11.5 }}>{n < 7 && n >= 0 ? p.dow : p.mon}</span>
@@ -51,6 +53,8 @@ export default async function DatesPage() {
         <span className="stack grow"><span style={{ fontWeight: 500, fontSize: 15 }}>{d.title}</span><span className="muted small">{title(d.case_id)}</span></span>
         <span className={`tag ${d.owner === "you" ? "tag-orange" : "tag-gray"}`}>{d.owner === "you" ? "Yours" : "Theirs"}</span>
       </Link>
+      <AddToCalendar title={d.title} date={d.due_date} caseTitle={title(d.case_id)} url={`/app/cases/${d.case_id}`} />
+      </div>
     );
   };
 
