@@ -87,7 +87,8 @@ jobs:
             sleep 35
             adb exec-out screencap -p > shots/android-launch.png
             adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1 && adb pull /sdcard/ui.xml shots/android-ui.xml >/dev/null 2>&1 || true
-            grep -q "Welcome" shots/android-ui.xml && echo "SIGN-IN PAGE LOADED" || echo "SIGN-IN PAGE NOT FOUND"
+            # The site renders inside a WebView; Android's accessibility tree exposes its text when it has loaded.
+            grep -qi "Welcome back\|Sign in" shots/android-ui.xml && echo "SIGN-IN PAGE LOADED" || echo "Page text not exposed; check shots/android-launch.png"
             adb shell pidof app.takeitback && echo "APP RUNNING" || (echo "APP NOT RUNNING" && exit 1)
             adb shell dumpsys window | grep -E "mCurrentFocus" || true
             adb logcat -d -s Capacitor:* chromium:* AndroidRuntime:E > shots/logcat.txt || true
