@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { isNativeApp } from "@/lib/native";
+import { isNativeApp, nativePlatform } from "@/lib/native";
 import type { Providers } from "@/lib/authProviders";
 
 const GOOGLE_IOS = process.env.NEXT_PUBLIC_GOOGLE_IOS_CLIENT_ID;
@@ -25,13 +25,16 @@ const GoogleLogo = () => (
 export default function SocialSignIn({ providers, next }: { providers: Providers; next: string }) {
   const router = useRouter();
   const [native, setNative] = useState(false);
+  const [android, setAndroid] = useState(false);
   const [busy, setBusy] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
-  useEffect(() => setNative(isNativeApp()), []);
+  useEffect(() => { setNative(isNativeApp()); setAndroid(nativePlatform() === "android"); }, []);
 
   // In the app, Google needs its iPhone client ID (Google blocks its web sign-in inside apps).
-  const showGoogle = providers.google && (!native || Boolean(GOOGLE_IOS));
-  const showApple = providers.apple;
+  // In the iPhone app Google needs its iPhone client ID; on Android it uses the web client ID with the phone's Google account.
+  const showGoogle = providers.google && (!native || (android ? Boolean(GOOGLE_WEB) : Boolean(GOOGLE_IOS)));
+  // Sign in with Apple is offered on the web and iPhone; Android users have Google and email.
+  const showApple = providers.apple && !android;
   if (!showGoogle && !showApple) return null;
 
   async function finish(provider: "apple" | "google", idToken: string, nonce: string | undefined, name?: string) {
@@ -69,7 +72,7 @@ export default function SocialSignIn({ providers, next }: { providers: Providers
         // Lets us revoke Apple's access if this account is ever deleted (Apple requires it).
         if (res.authorizationCode) fetch("/api/auth/apple-token", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ code: res.authorizationCode }) }).catch(() => {});
       } else {
-        await SocialLogin.initialize({ google: { iOSClientId: GOOGLE_IOS, iOSServerClientId: GOOGLE_WEB, webClientId: GOOGLE_WEB, mode: "online" } });
+        await SocialLogin.initialize({ google: android ? { webClientId: GOOGLE_WEB, mode: "online" } : { iOSClientId: GOOGLE_IOS, iOSServerClientId: GOOGLE_WEB, webClientId: GOOGLE_WEB, mode: "online" } });
         const r = await SocialLogin.login({ provider: "google", options: { scopes: ["email", "profile"], nonce: hashed } });
         const res = r.result as { idToken?: string | null };
         if (!res.idToken) throw new Error("No token from Google");

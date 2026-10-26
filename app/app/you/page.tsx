@@ -24,6 +24,9 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
   const ends = plan.periodEnd ? shortDate(plan.periodEnd.slice(0, 10)) : null;
   const inApp = await isAppRequest();
   const apple = plan.source === "apple";
+  const google = plan.source === "google";
+  const storeBilled = apple || google;
+  const storeName = google ? "Google Play" : "the App Store";
 
   return (
     <main id="main" className="app-main">
@@ -42,9 +45,9 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
           <div className="panel-orange stack g8">
             <span className="serif" style={{ fontSize: 22 }}>You're on <em className="o">Premium</em></span>
             <span className="small" style={{ color: "#4A4A4A" }}>
-              {plan.status === "trialing" ? `Free trial${ends ? ` until ${ends}` : ""}.` : plan.status === "past_due" ? (apple ? "Apple couldn't charge your last payment. Check your payment method in your Apple ID settings." : "Your last payment didn't go through. Please update your card.") : ends ? `Renews ${ends}.` : "Active."}
+              {plan.status === "trialing" ? `Free trial${ends ? ` until ${ends}` : ""}.` : plan.status === "past_due" ? (google ? "Google Play couldn't charge your last payment. Check your payment method in Google Play." : apple ? "Apple couldn't charge your last payment. Check your payment method in your Apple ID settings." : "Your last payment didn't go through. Please update your card.") : ends ? `Renews ${ends}.` : "Active."}
             </span>
-            {apple ? <><ManageApple /><span className="muted small">Billed through Apple. Changes and cancellations happen in the App Store.</span></>
+            {storeBilled ? <><ManageApple store={google ? "google" : "apple"} /><span className="muted small">Billed through {google ? "Google Play" : "Apple"}. Changes and cancellations happen in {storeName}.</span></>
               : inApp ? <span className="muted small">You subscribed on our website. To change or cancel, sign in at takeitback.app.</span>
               : <form action="/api/stripe/portal" method="post"><button className="btn-plain">Cancel or change plan</button></form>}
           </div>
@@ -119,9 +122,9 @@ export default async function YouPage({ searchParams }: { searchParams: Promise<
             <span className="list-row muted small">{consent === "withdrawn" ? "Health data consent withdrawn. We'll ask again before your next scan." : "No health data consent on file. We'll ask before your first scan."}</span>
           )}
           <form action="/auth/signout" method="post"><button className="list-row btn-text" style={{ width: "100%", justifyContent: "flex-start", borderBottom: "1px solid #EBEBEB" }}>Sign out</button></form>
-          {apple && plan.premium && <span className="muted small" style={{ paddingTop: 12 }}>Your Premium is billed by Apple. Deleting your account doesn&apos;t stop Apple&apos;s billing, so cancel in the App Store first.</span>}
+          {storeBilled && plan.premium && <span className="muted small" style={{ paddingTop: 12 }}>Your Premium is billed by {google ? "Google Play" : "Apple"}. Deleting your account doesn&apos;t stop that billing, so cancel in {storeName} first.</span>}
           <form action={deleteAccount}>
-            <ConfirmSubmit message={apple && plan.premium ? "Delete your account, every case and every file? This can't be undone. Remember to cancel your subscription in the App Store too." : "Delete your account, every case and every file? This can't be undone."} className="btn-text" style={{ color: "#A8441F" }}>Delete my account and everything in it</ConfirmSubmit>
+            <ConfirmSubmit message={storeBilled && plan.premium ? `Delete your account, every case and every file? This can't be undone. Remember to cancel your subscription in ${storeName} too.` : "Delete your account, every case and every file? This can't be undone."} className="btn-text" style={{ color: "#A8441F" }}>Delete my account and everything in it</ConfirmSubmit>
           </form>
         </div>
       </div>

@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { isNativeApp } from "@/lib/native";
+import { isNativeApp, nativePlatform } from "@/lib/native";
 import { LOCK_KEY, registerPush } from "@/components/NativeSettings";
 import { PENDING_PASS_KEY } from "@/components/UnlockCase";
-import { APPLE_CASE_PASS } from "@/lib/appleProducts";
+import { APPLE_CASE_PASS, GOOGLE_CASE_PASS } from "@/lib/appleProducts";
 
 const SITE_HOSTS = ["www.takeitback.app", "takeitback.app"];
 
@@ -69,7 +69,23 @@ export default function NativeBridge() {
       // A case pass that was paid for but not unlocked (app closed or network dropped): finish it now.
       const { Preferences } = await import("@capacitor/preferences");
       const pendingCase = (await Preferences.get({ key: PENDING_PASS_KEY })).value;
+      const android = nativePlatform() === "android";
       const { transactions } = await NativePurchases.getUnfinishedTransactions().catch(() => ({ transactions: [] }));
+      if (android) {
+        for (const t of transactions.filter((x) => x.productIdentifier === GOOGLE_CASE_PASS && x.purchaseToken)) {
+          if (!pendingCase) break;
+          const r = await fetch("/api/google/verify", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ kind: "case_pass", purchaseToken: t.purchaseToken, caseId: pendingCase }) });
+          if (r.ok) { await Preferences.remove({ key: PENDING_PASS_KEY }); router.refresh(); }
+        }
+        // Re-check Google Play subscriptions (renewals and cancellations also arrive through Google's notifications).
+        const { purchases } = await NativePurchases.getPurchases({ productType: PURCHASE_TYPE.SUBS });
+        const tokens = purchases.map((p) => p.purchaseToken).filter(Boolean);
+        if (tokens.length) {
+          const r = await fetch("/api/google/verify", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ kind: "subscription", purchaseToken: tokens }) });
+          if (r.ok) router.refresh();
+        }
+        return;
+      }
       for (const t of transactions.filter((x) => x.productIdentifier === APPLE_CASE_PASS && x.jwsRepresentation)) {
         if (!pendingCase) break;
         const r = await fetch("/api/apple/casepass", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ jws: t.jwsRepresentation, caseId: pendingCase }) });

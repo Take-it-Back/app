@@ -1,0 +1,46 @@
+# Compiles the iPhone app for the iOS Simulator (no Apple account needed), installs it, launches it
+# and takes screenshots. Proves the project builds and starts; signing and App Store upload are in ios.yml.
+name: iPhone app (simulator check)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ios/**", "capacitor.config.ts", ".github/workflows/ios-simulator.yml"]
+
+jobs:
+  simulator:
+    runs-on: macos-15
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx cap sync ios
+      - name: Pick the newest Xcode
+        run: sudo xcode-select -s "$(ls -d /Applications/Xcode*.app | sort -V | tail -1)" && xcodebuild -version
+      - name: Build for the simulator
+        run: |
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build CODE_SIGNING_ALLOWED=NO build | tail -40
+          test -d build/Build/Products/Debug-iphonesimulator/App.app
+      - name: Launch on a simulated iPhone
+        run: |
+          mkdir -p shots
+          DEVICE=$(xcrun simctl list devices available -j | python3 -c "import json,sys; d=json.load(sys.stdin)['devices']; c=[x for r,v in d.items() if 'iOS' in r for x in v if x['name'].startswith('iPhone')]; print(c[-1]['udid'])")
+          xcrun simctl boot "$DEVICE"
+          xcrun simctl bootstatus "$DEVICE" -b
+          xcrun simctl install "$DEVICE" build/Build/Products/Debug-iphonesimulator/App.app
+          xcrun simctl launch "$DEVICE" app.takeitback
+          sleep 30
+          xcrun simctl io "$DEVICE" screenshot shots/iphone-launch.png
+          xcrun simctl spawn "$DEVICE" launchctl list | grep -i takeitback && echo "APP RUNNING" || (echo "APP NOT RUNNING" && exit 1)
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: iphone-simulator
+          path: shots/

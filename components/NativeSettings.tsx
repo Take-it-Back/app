@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { haptic } from "@/lib/native";
+import { haptic, nativePlatform } from "@/lib/native";
 
 export const LOCK_KEY = "tib_faceid_lock";
 
@@ -11,6 +11,8 @@ const sw = { width: 22, height: 22, accentColor: "#1A1A1A", flex: "none" } as co
 /** Registers this phone with Apple and saves its token. Resolves with the token, or null if not allowed. */
 export async function registerPush(ask: boolean): Promise<string | null> {
   const { PushNotifications } = await import("@capacitor/push-notifications");
+  // Android shows alerts in a named channel people can control in system settings.
+  if (nativePlatform() === "android") await PushNotifications.createChannel({ id: "deadlines", name: "Deadline reminders", description: "Before your deadlines and when a reply is overdue", importance: 4 }).catch(() => {});
   let perm = await PushNotifications.checkPermissions();
   if (perm.receive === "prompt" && ask) perm = await PushNotifications.requestPermissions();
   if (perm.receive !== "granted") return null;
@@ -20,7 +22,7 @@ export async function registerPush(ask: boolean): Promise<string | null> {
     PushNotifications.addListener("registrationError", () => { clearTimeout(t); resolve(null); });
     PushNotifications.register().catch(() => resolve(null));
   });
-  if (token) await fetch("/api/push/device", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ token }) });
+  if (token) await fetch("/api/push/device", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ token, platform: nativePlatform() === "android" ? "android" : "ios" }) });
   return token;
 }
 
@@ -43,7 +45,7 @@ export default function NativeSettings() {
       try {
         const { NativeBiometric } = await import("@capgo/capacitor-native-biometric");
         const a = await NativeBiometric.isAvailable({ useFallback: true });
-        if (a.isAvailable) setBio(a.biometryType === 2 ? "Face ID" : a.biometryType === 1 ? "Touch ID" : "your passcode");
+        if (a.isAvailable) setBio(a.biometryType === 2 ? "Face ID" : a.biometryType === 1 ? "Touch ID" : a.biometryType === 3 ? "your fingerprint" : a.biometryType === 4 ? "face unlock" : "your screen lock");
         const { Preferences } = await import("@capacitor/preferences");
         setLock((await Preferences.get({ key: LOCK_KEY })).value === "1");
       } catch {}
@@ -55,7 +57,7 @@ export default function NativeSettings() {
     if (on) {
       const tok = await registerPush(true).catch(() => null);
       if (tok) { setPush("on"); setMsg("Phone alerts are on. We'll nudge you before deadlines."); haptic("success"); }
-      else { setPush("denied"); setMsg("Alerts are blocked. Turn on notifications for Take it back in your iPhone's Settings."); }
+      else { setPush("denied"); setMsg("Alerts are blocked. Turn on notifications for Take it back in your phone's Settings."); }
     } else {
       const { PushNotifications } = await import("@capacitor/push-notifications");
       await fetch("/api/push/device", { method: "DELETE", headers: { "content-type": "application/json" }, body: "{}" }).catch(() => {});
@@ -82,7 +84,7 @@ export default function NativeSettings() {
     <>
       {push !== "loading" && (
         <label className="row between" style={row}>
-          <span className="stack"><span>Phone alerts before deadlines</span>{push === "denied" && <span className="muted small">Blocked in your iPhone&apos;s Settings → Notifications.</span>}</span>
+          <span className="stack"><span>Phone alerts before deadlines</span>{push === "denied" && <span className="muted small">{nativePlatform() === "android" ? "Blocked in your phone's Settings → Apps → Take it back → Notifications." : "Blocked in your iPhone's Settings → Notifications."}</span>}</span>
           <input type="checkbox" role="switch" checked={push === "on"} onChange={(e) => togglePush(e.target.checked)} style={sw} />
         </label>
       )}

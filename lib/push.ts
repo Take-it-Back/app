@@ -2,6 +2,7 @@
 import webpush from "web-push";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { apnsReady, sendApns } from "@/lib/apns";
+import { fcmReady, sendFcm } from "@/lib/google";
 
 export type PushPayload = { title: string; body: string; url?: string };
 type Sub = { id: string; endpoint: string; p256dh: string; auth: string };
@@ -49,16 +50,23 @@ export async function sendPushToSelf(supabase: SupabaseClient, userId: string, p
   return { sent: sent + app.sent, removed: gone.length + app.removed, failed: failed + app.failed };
 }
 
-/** True when either web push or iPhone app push is set up. */
-export const anyPushReady = () => pushReady() || apnsReady();
+/** True when web push or app push (iPhone or Android) is set up. */
+export const anyPushReady = () => pushReady() || apnsReady() || fcmReady();
 
-/** iPhone app devices, through Apple's push service. Drops tokens Apple says are no longer valid. */
+/** App devices: iPhones through Apple's push service, Android through Firebase. Drops tokens that are no longer valid. */
 async function sendToApp(supabase: SupabaseClient, userId: string, payload: PushPayload) {
-  if (!apnsReady()) return { sent: 0, removed: 0, failed: 0 };
-  const { data } = await supabase.from("device_tokens").select("token").eq("user_id", userId);
-  const tokens = (data ?? []).map((r) => (r as { token: string }).token);
-  const results = await sendApns(tokens, payload);
-  const gone = results.filter((r) => r.status === 410 || r.reason === "BadDeviceToken" || r.reason === "Unregistered").map((r) => r.token);
+  if (!apnsReady() && !fcmReady()) return { sent: 0, removed: 0, failed: 0 };
+  const { data } = await supabase.from("device_tokens").select("token, platform").eq("user_id", userId);
+  const rows = (data ?? []) as { token: string; platform: string }[];
+  const ios = rows.filter((r) => r.platform !== "android").map((r) => r.token);
+  const android = rows.filter((r) => r.platform === "android").map((r) => r.token);
+  const [apple, google] = await Promise.all([apnsReady() ? sendApns(ios, payload) : [], fcmReady() ? sendFcm(android, payload) : []]);
+  const gone = [
+    ...apple.filter((r) => r.status === 410 || r.reason === "BadDeviceToken" || r.reason === "Unregistered").map((r) => r.token),
+    ...google.filter((r) => r.gone).map((r) => r.token),
+  ];
   if (gone.length) await supabase.from("device_tokens").delete().in("token", gone);
-  return { sent: results.filter((r) => r.status === 200).length, removed: gone.length, failed: results.filter((r) => r.status !== 200 && !gone.includes(r.token)).length };
+  const sent = apple.filter((r) => r.status === 200).length + google.filter((r) => r.ok).length;
+  const total = apple.length + google.length;
+  return { sent, removed: gone.length, failed: total - sent - gone.length };
 }

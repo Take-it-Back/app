@@ -4,6 +4,11 @@
 
 type CapWindow = { Capacitor?: { isNativePlatform?: () => boolean; getPlatform?: () => string } };
 
+export function nativePlatform(): "ios" | "android" | null {
+  if (!isNativeApp()) return null;
+  return (window as unknown as CapWindow).Capacitor?.getPlatform?.() === "android" ? "android" : "ios";
+}
+
 export function isNativeApp() {
   if (typeof window === "undefined") return false;
   return Boolean((window as unknown as CapWindow).Capacitor?.isNativePlatform?.());

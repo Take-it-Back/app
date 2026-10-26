@@ -24,7 +24,7 @@ export function renewalTerms(which: keyof typeof PRICES, trialEligible: boolean,
     : `${p.label} ${p.per}, charged today and renewing automatically every ${p.interval} until you cancel. Cancel online anytime in Settings; you keep Premium until the end of the period you paid for.`;
 }
 
-export type PlanInfo = { premium: boolean; status: string | null; periodEnd: string | null; customer: string | null; source: "stripe" | "apple" | null };
+export type PlanInfo = { premium: boolean; status: string | null; periodEnd: string | null; customer: string | null; source: "stripe" | "apple" | "google" | null };
 
 export async function getPlan(supabase: SupabaseClient, userId: string): Promise<PlanInfo> {
   const { data } = await supabase
@@ -68,7 +68,7 @@ export async function applyBilling(
 /** Records a paid case pass through the locked-down database function. Safe to call twice for the same payment. */
 export async function grantCasePass(
   supabase: SupabaseClient,
-  args: { userId: string; caseId: string; ref: string; source: "stripe" | "apple"; amount: number | null }
+  args: { userId: string; caseId: string; ref: string; source: "stripe" | "apple" | "google"; amount: number | null }
 ) {
   const { data, error } = await supabase.rpc("grant_case_pass", {
     p_secret: process.env.BILLING_SECRET,

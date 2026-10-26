@@ -1,0 +1,115 @@
+# Builds the Android app, runs it on an Android emulator (launch + screenshots), and, when the Play
+# keys are set, signs it and uploads it to the Play Console internal testing track.
+#
+# Optional repository secrets:
+#   ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD  (upload key)
+#   GOOGLE_SERVICES_JSON          Firebase config for Android phone alerts (contents of google-services.json)
+#   PLAY_SERVICE_ACCOUNT_JSON     Google Play service account allowed to upload releases
+name: Android app
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version name shown in Google Play (e.g. 1.0)"
+        required: true
+        default: "1.0"
+      upload:
+        description: "Upload to the Play internal testing track (needs Play keys)"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths: ["android/**", "capacitor.config.ts", ".github/workflows/android.yml"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      ANDROID_VERSION_NAME: ${{ github.event.inputs.version || '1.0' }}
+      ANDROID_VERSION_CODE: ${{ github.run_number }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - run: npm ci
+      - run: npx cap sync android
+
+      - name: Firebase config (phone alerts)
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        if: env.GOOGLE_SERVICES_JSON != ''
+        run: printf '%s' "$GOOGLE_SERVICES_JSON" > android/app/google-services.json
+
+      - name: Upload key
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        if: env.KEYSTORE != ''
+        run: |
+          echo "$KEYSTORE" | base64 -d > "$RUNNER_TEMP/upload.jks"
+          echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/upload.jks" >> "$GITHUB_ENV"
+
+      - name: Build
+        working-directory: android
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: ./gradlew --no-daemon assembleDebug bundleRelease
+
+      - name: Turn on hardware acceleration for the emulator
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Run on an emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          target: google_apis
+          arch: x86_64
+          profile: pixel_7
+          disable-animations: true
+          script: |
+            mkdir -p shots
+            adb install -r android/app/build/outputs/apk/debug/app-debug.apk
+            adb shell am start -W -n app.takeitback/.MainActivity
+            sleep 30
+            adb exec-out screencap -p > shots/android-launch.png
+            adb shell pidof app.takeitback && echo "APP RUNNING" || (echo "APP NOT RUNNING" && exit 1)
+            adb shell dumpsys window | grep -E "mCurrentFocus" || true
+            adb logcat -d -s Capacitor:* chromium:* AndroidRuntime:E > shots/logcat.txt || true
+            adb shell input keyevent KEYCODE_BACK
+            sleep 3
+            adb exec-out screencap -p > shots/android-after-back.png
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: android-build
+          path: |
+            android/app/build/outputs/apk/debug/app-debug.apk
+            android/app/build/outputs/bundle/release/app-release.aab
+            shots/
+
+      - name: Upload to Play internal testing
+        if: github.event.inputs.upload == 'true'
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: app.takeitback
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+          track: internal
+          status: draft
+
+      - name: Clean up the key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/upload.jks"

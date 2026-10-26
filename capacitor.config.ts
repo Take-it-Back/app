@@ -13,17 +13,25 @@ const config: CapacitorConfig = {
     // Pages that stay inside the app instead of opening Safari (mail/fax checkout, Supabase auth).
     allowNavigation: ["takeitback.app", "www.takeitback.app", "checkout.stripe.com", "*.supabase.co"],
   },
+  // Both apps add this to their browser user agent so the site knows it's running inside the app.
+  appendUserAgent: "TakeItBackApp/1",
   ios: {
-    appendUserAgent: "TakeItBackApp/1",
     contentInset: "never",
     backgroundColor: "#F6F4EF",
     limitsNavigationsToAppBoundDomains: false,
+  },
+  android: {
+    backgroundColor: "#F6F4EF",
+    allowMixedContent: false,
+    captureInput: true,
+    webContentsDebuggingEnabled: false,
   },
   plugins: {
     SplashScreen: { launchShowDuration: 3000, launchAutoHide: true, backgroundColor: "#F6F4EF", showSpinner: false },
     PushNotifications: { presentationOptions: ["banner", "sound", "list"] },
     StatusBar: { style: "LIGHT", overlaysWebView: true },
     // Only Apple and Google are used; leaving the others out keeps their SDKs out of the app.
+    SystemBars: { insetsHandling: "native", initialViewportFitValueHint: "cover" },
     SocialLogin: { providers: { google: true, apple: true, facebook: false, twitter: false } },
   },
 };

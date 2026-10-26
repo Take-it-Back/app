@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Take it back</string>
+    <string name="title_activity_main">Take it back</string>
+    <string name="package_name">app.takeitback</string>
+    <string name="custom_url_scheme">app.takeitback</string>
+</resources>

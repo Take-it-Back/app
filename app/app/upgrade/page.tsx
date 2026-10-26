@@ -2,8 +2,9 @@ import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
 import { BackLink, CtaButton } from "@/components/ui";
 import { CASE_PASS, PRICES, TRIAL_DAYS, YEARLY_SAVES, getPlan, renewalTerms } from "@/lib/plan";
-import { isAppRequest } from "@/lib/appContext";
-import { APPLE_PRODUCTS } from "@/lib/appleProducts";
+import { appPlatform } from "@/lib/appContext";
+import GooglePlans from "@/components/GooglePlans";
+import { APPLE_PRODUCTS, GOOGLE_PREMIUM } from "@/lib/appleProducts";
 import ApplePlans from "@/components/ApplePlans";
 
 const FREE = ["1 scan a month", "A plain-English summary, in English or Spanish", "Your state's rules on every case", "General next steps and red flags", "Free legal aid finder"];
@@ -37,7 +38,8 @@ export default async function UpgradePage({ searchParams }: { searchParams: Prom
   const trial = !plan.status;
   const { data: prof } = await supabase.from("profiles").select("referral_credit_months").eq("id", user.id).maybeSingle();
   const banked = Math.min(12, prof?.referral_credit_months || 0);
-  const inApp = await isAppRequest();
+  const platform = await appPlatform();
+  const inApp = platform !== null;
 
   return (
     <main id="main" className="app-main wide">
@@ -55,7 +57,11 @@ export default async function UpgradePage({ searchParams }: { searchParams: Prom
       {canceled && <p className="notice">No problem. Nothing was charged.</p>}
 
       {inApp ? (
-        <ApplePlans ids={APPLE_PRODUCTS} userId={user.id} fallback={{ monthly: PRICES.monthly.label, yearly: "$59.99" }} trialDays={TRIAL_DAYS} />
+        platform === "android" ? (
+          <GooglePlans productId={GOOGLE_PREMIUM} userId={user.id} fallback={{ monthly: PRICES.monthly.label, yearly: "$59.99" }} trialDays={TRIAL_DAYS} saves={YEARLY_SAVES} />
+        ) : (
+          <ApplePlans ids={APPLE_PRODUCTS} userId={user.id} fallback={{ monthly: PRICES.monthly.label, yearly: "$59.99" }} trialDays={TRIAL_DAYS} />
+        )
       ) : (<>
       <div className="plan-grid" style={{ marginTop: 8 }}>
         <form action="/api/stripe/checkout" method="post" className="plan-card hot">
@@ -90,7 +96,7 @@ export default async function UpgradePage({ searchParams }: { searchParams: Prom
           {PREMIUM.map((f) => <span key={f} className="row g8" style={{ alignItems: "flex-start", fontSize: 15 }}><Check />{f}</span>)}
         </section>
       </div>
-      <p className="muted small" style={{ marginTop: 16 }}>{inApp ? "Payment through your Apple ID." : "Secure checkout by Stripe."} Information, not legal advice.</p>
+      <p className="muted small" style={{ marginTop: 16 }}>{platform === "android" ? "Payment through Google Play." : inApp ? "Payment through your Apple ID." : "Secure checkout by Stripe."} Information, not legal advice.</p>
     </main>
   );
 }
