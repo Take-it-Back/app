@@ -78,12 +78,16 @@ jobs:
           arch: x86_64
           profile: pixel_7
           disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -dns-server 8.8.8.8,1.1.1.1
           script: |
             mkdir -p shots
+            for i in $(seq 1 30); do adb shell ping -c 1 -W 2 www.takeitback.app >/dev/null 2>&1 && echo "EMULATOR ONLINE" && break; sleep 4; done
             adb install -r android/app/build/outputs/apk/debug/app-debug.apk
             adb shell am start -W -n app.takeitback/.MainActivity
-            sleep 30
+            sleep 35
             adb exec-out screencap -p > shots/android-launch.png
+            adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1 && adb pull /sdcard/ui.xml shots/android-ui.xml >/dev/null 2>&1 || true
+            grep -q "Welcome" shots/android-ui.xml && echo "SIGN-IN PAGE LOADED" || echo "SIGN-IN PAGE NOT FOUND"
             adb shell pidof app.takeitback && echo "APP RUNNING" || (echo "APP NOT RUNNING" && exit 1)
             adb shell dumpsys window | grep -E "mCurrentFocus" || true
             adb logcat -d -s Capacitor:* chromium:* AndroidRuntime:E > shots/logcat.txt || true
