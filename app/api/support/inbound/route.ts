@@ -53,7 +53,7 @@ export async function POST(request: Request) {
   // Skip bounces, auto-replies and mailing lists so they don't open requests.
   const auto = header(r.headers, "auto-submitted");
   const precedence = header(r.headers, "precedence");
-  if (/mailer-daemon|postmaster|no-?reply|bounce/i.test(email) || (auto && auto.toLowerCase() !== "no") || /bulk|list|junk/i.test(precedence) || header(r.headers, "list-unsubscribe")) {
+  if (/mailer-daemon|postmaster|no-?reply|bounce/i.test(email) || email.endsWith("@takeitback.app") || (auto && auto.toLowerCase() !== "no") || /bulk|list|junk/i.test(precedence) || header(r.headers, "list-unsubscribe")) {
     return NextResponse.json({ ok: true, skipped: "automated" });
   }
   const body = newText(r) || "(The email had no text. Check Resend for attachments.)";
