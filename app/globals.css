@@ -425,3 +425,4 @@ html.native-app { -webkit-tap-highlight-color: transparent; }
 .upsell .eyebrow, .on-dark .o { color: #E8875F !important; }
 .strip:focus-visible { outline: 2px solid #BF4F28; outline-offset: 4px; }
 .panel-orange .serif .o, .panel-gray .serif .o, .card .serif .o { color: #A8441F; }
+.s-dark .s-eyebrow, .s-dark > span:first-child { color: #E8875F !important; }
