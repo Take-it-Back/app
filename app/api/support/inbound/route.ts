@@ -47,6 +47,8 @@ export async function POST(request: Request) {
   if (!res.ok) return NextResponse.json({ error: "Could not fetch email" }, { status: res.status === 404 ? 200 : 502 });
   const r = (await res.json()) as Received;
 
+  // This Resend account also serves other apps' domains; only mail to takeitback.app belongs here.
+  if (!(r.to || []).some((x) => /@takeitback\.app>?$/i.test(x.trim()))) return NextResponse.json({ ok: true, skipped: "other domain" });
   const { name, email } = parseFrom(r.from || "");
   // Skip bounces, auto-replies and mailing lists so they don't open requests.
   const auto = header(r.headers, "auto-submitted");
