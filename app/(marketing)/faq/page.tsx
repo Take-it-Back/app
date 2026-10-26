@@ -11,7 +11,7 @@ export default function FaqPage() {
   return (
     <main id="main">
       <JsonLd data={[faqPage([...FAQ_GROUPS.flatMap((g) => g.items), ...PROBLEMS.flatMap((p) => p.faqs)]), breadcrumbs([["Home", "/"], ["FAQ", "/faq"]])]} />
-      <PageHead eyebrow="FAQ" title="Good" italic="questions" after="." lede="Can't find what you need? Email hello@takeitback.app and a person will write back." />
+      <PageHead eyebrow="FAQ" title="Good" italic="questions" after="." lede="Can't find what you need? Send us a message on the support page and a person will write back." />
       <div className="stack g48" style={{ maxWidth: 820, margin: "0 auto", padding: "48px 24px 0", gap: 56 }}>
         {FAQ_GROUPS.map((g) => (
           <section key={g.title} className="stack g16">

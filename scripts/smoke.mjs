@@ -3,7 +3,7 @@
 const BASE = (process.argv[2] || process.env.SMOKE_URL || "https://www.takeitback.app").replace(/\/$/, "");
 
 const PUBLIC = [
-  "/", "/how-it-works", "/pricing", "/faq", "/fight", "/features", "/guides",
+  "/", "/how-it-works", "/pricing", "/faq", "/support", "/status", "/fight", "/features", "/guides",
   "/fight/medical-bills", "/fight/insurance-denials", "/fight/landlords", "/fight/debt-collectors",
   "/features/letters", "/features/state-rules", "/features/send-for-you", "/guides/how-to-dispute-a-medical-bill", "/guides/security-deposit-return-deadlines-by-state",
   "/privacy", "/health-data-privacy", "/terms", "/es", "/legal-aid/pennsylvania", "/guides/statute-of-limitations-on-debt-by-state",

@@ -215,6 +215,58 @@ export function forwardReceivedEmail(o: { name?: string | null; caseTitle: strin
   };
 }
 
+/** Support: confirms we got a message. Never repeats the message itself (so the form can't be used to send spam). */
+export function supportReceivedEmail(o: { name?: string | null; number: number; subject: string; link: string }): Email {
+  return {
+    subject: `We got your message [#${o.number}]`,
+    html: emailLayout({
+      preheader: "A person reads every message. Here's your link to follow the conversation.",
+      title: "We got your message.",
+      accent: "message",
+      body:
+        p(hi(o.name)) +
+        p(`Thanks for writing. A person reads every message, and we usually reply within one business day. Your request number is <strong>#${o.number}</strong>.`) +
+        panel([["Request", `#${o.number}`], ["About", esc(o.subject)]]) +
+        button("See the conversation", o.link) +
+        small("You can also reply to this email to add more. Keep the request number in the subject so it joins the same conversation.") +
+        small(`Court date, lawsuit or eviction? Don't wait on us. <a href="${SITE}/legal-aid" style="color:#5E5E5E">Find free legal aid near you</a>.`),
+    }),
+    text: `${hiText(o.name)}\n\nThanks for writing. A person reads every message, and we usually reply within one business day. Your request number is #${o.number} (${o.subject}).\n\nSee the conversation: ${o.link}\n\nYou can also reply to this email. Keep #${o.number} in the subject.\n\nCourt date, lawsuit or eviction? Find free legal aid: ${SITE}/legal-aid`,
+  };
+}
+
+/** Support: our reply, sent to the person. */
+export function supportReplyEmail(o: { name?: string | null; number: number; subject: string; body: string; link: string }): Email {
+  const paras = o.body.split(/\n{2,}/).map((x) => p(esc(x).replace(/\n/g, "<br>"))).join("");
+  return {
+    subject: `Re: ${o.subject} [#${o.number}]`,
+    html: emailLayout({
+      preheader: o.body.slice(0, 120),
+      title: "We replied to your message.",
+      accent: "replied",
+      body: p(hi(o.name)) + paras + button("Reply or see the conversation", o.link) + small(`Request #${o.number}. You can also reply to this email.`),
+    }),
+    text: `${hiText(o.name)}\n\n${o.body}\n\nReply or see the conversation: ${o.link}\n\nRequest #${o.number}. You can also reply to this email.`,
+  };
+}
+
+/** Support: tells the team a message came in. */
+export function supportTeamEmail(o: { number: number; subject: string; from: string; name?: string | null; body: string; topic?: string; platform?: string; isNew: boolean; link: string; via?: string }): Email {
+  const meta: [string, string][] = [["From", esc(o.name ? `${o.name} <${o.from}>` : o.from)], ["Request", `#${o.number}`]];
+  if (o.topic) meta.push(["Topic", esc(o.topic)]);
+  if (o.platform) meta.push(["Sent from", esc(o.platform)]);
+  if (o.via) meta.push(["Came in by", esc(o.via)]);
+  return {
+    subject: `${o.isNew ? "New request" : "New reply"} #${o.number}: ${o.subject}`,
+    html: emailLayout({
+      preheader: o.body.slice(0, 120),
+      title: o.isNew ? "New support request" : "They replied",
+      body: panel(meta) + p(esc(o.body).replace(/\n/g, "<br>")) + button("Answer in the dashboard", o.link) + small("Answer from the dashboard so the reply is saved with the request."),
+    }),
+    text: `${o.isNew ? "New request" : "New reply"} #${o.number} from ${o.name ? `${o.name} <${o.from}>` : o.from}\n\n${o.body}\n\nAnswer: ${o.link}`,
+  };
+}
+
 /** Sample data for the admin preview page. */
 export function emailPreviews(): { key: string; label: string; email: Email }[] {
   const terms = "Free for 7 days, then $59 a year starting October 19, 2026, renewing automatically every year until you cancel. Cancel online anytime in Settings before October 19, 2026 and you won't be charged.";
@@ -233,5 +285,8 @@ export function emailPreviews(): { key: string; label: string; email: Email }[] 
     { key: "helper", label: "Helper invite", email: helperInviteEmail({ fromName: "Maria Lopez", caseTitle: "Sunset Properties · deposit" }) },
     { key: "sent", label: "Letter mailed for you", email: letterSentEmail({ name: "Maria Lopez", method: "mail", to: "Midland Credit Management", caseId: "demo", tracking: "9407 1118 9876 5432 1012 34" }) },
     { key: "forward", label: "Forwarded bill received", email: forwardReceivedEmail({ name: "Maria Lopez", caseTitle: "Mercy Hospital statement", caseId: "demo", files: 2 }) },
+    { key: "support-received", label: "Support: message received", email: supportReceivedEmail({ name: "Maria Lopez", number: 1042, subject: "My scan is stuck", link: `${SITE}/app/support` }) },
+    { key: "support-reply", label: "Support: our reply", email: supportReplyEmail({ name: "Maria Lopez", number: 1042, subject: "My scan is stuck", body: "Thanks for letting us know. We restarted the reading on your case, and it finished a minute ago.\n\nIf anything still looks off, reply here.", link: `${SITE}/app/support` }) },
+    { key: "support-team", label: "Support: new request (to team)", email: supportTeamEmail({ number: 1042, subject: "My scan is stuck", from: "maria@example.com", name: "Maria Lopez", body: "I scanned my ER bill an hour ago and it still says reading.", topic: "Scanning", platform: "iPhone app", isNew: true, link: `${SITE}/app/admin/support` }) },
   ];
 }

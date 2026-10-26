@@ -30,7 +30,7 @@ export function TabBar() {
       <Link href="/app/cases" className={on("/app/cases") ? "on" : ""}><Icon d={I.cases} />Cases</Link>
       <Link href="/app/scan" aria-label="Scan a document" className="scan"><Icon d={scanIcon} size={24} /></Link>
       <Link href="/app/dates" className={on("/app/dates") ? "on" : ""}><Icon d={I.dates} />Dates</Link>
-      <Link href="/app/tools" className={["/app/tools", "/app/you", "/app/help", "/app/upgrade", "/app/admin"].some(on) ? "on" : ""}><Icon d={I.more} />More</Link>
+      <Link href="/app/tools" className={["/app/tools", "/app/you", "/app/help", "/app/support", "/app/upgrade", "/app/admin"].some(on) ? "on" : ""}><Icon d={I.more} />More</Link>
     </nav>
   );
 }
@@ -62,6 +62,7 @@ export function SideBar({ name, counts, admin = false }: { name: string; counts:
         <span className="side-group">Support</span>
         {link("/app/tools", "Tools", path.startsWith("/app/tools"))}
         {link("/app/help", "Get real help", path.startsWith("/app/help"))}
+        {link("/app/support", "Contact support", path.startsWith("/app/support"))}
         {admin && link("/app/admin", "Admin", path.startsWith("/app/admin"))}
       </nav>
       <Link href="/app/you" className="row g12" style={{ marginTop: "auto", borderTop: "1px solid #EBEBEB", padding: "16px 8px 0", textDecoration: "none" }}>

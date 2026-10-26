@@ -4,6 +4,7 @@ export type Tool = { name: string; blurb: string; href: string; group: string; i
 const pick = (to: string, label: string) => `/app/tools/pick?to=${encodeURIComponent(to)}&label=${encodeURIComponent(label)}`;
 
 export const TOOLS: Tool[] = [
+  { group: "Get help", name: "Contact support", blurb: "Questions about the app, billing or a scan", href: "/app/support", icon: "M4 5h16v11H8l-4 4zM8 10h8M8 13h5" },
   { group: "Get help", name: "Get real help", blurb: "Free legal aid and agencies near you", href: "/app/help", icon: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 8v5M12 16h.01", tone: "orange" },
   { group: "Fight a case", name: "Write a letter", blurb: "Disputes, appeals, demands and follow-ups", href: pick("write", "Write a letter"), icon: "M4 6h16v12H4zM4 7l8 6 8-6", premium: true },
   { group: "Fight a case", name: "Lower my bill", blurb: "Discounts, payment plans, financial help", href: pick("write", "Lower my bill"), icon: "M12 3v18M17 7.5a4 4 0 0 0-4-2.5H11a3 3 0 0 0 0 6h2a3 3 0 0 1 0 6h-2a4 4 0 0 1-4-2.5", premium: true },

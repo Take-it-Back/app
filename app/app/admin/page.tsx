@@ -35,7 +35,8 @@ export default async function AdminPage() {
       </main>
     );
   }
-  const [{ data, error }, { data: costs }] = await Promise.all([supabase.rpc("admin_overview"), supabase.rpc("admin_ai_costs")]);
+  const [{ data, error }, { data: costs }, { data: support }] = await Promise.all([supabase.rpc("admin_overview"), supabase.rpc("admin_ai_costs"), supabase.rpc("support_admin_list", { p_status: "open" })]);
+  const openSupport = (support as { counts?: { open?: number } } | null)?.counts?.open ?? 0;
   // Estimated AI cost: token counts are exact; the per-million prices are settings (AI_PRICE_IN / AI_PRICE_OUT, in dollars).
   const pin = Number(process.env.AI_PRICE_IN || 2), pout = Number(process.env.AI_PRICE_OUT || 10);
   const costRows = ((costs as { kind: string; calls: number; avg_in: number; avg_out: number; model: string }[] | null) || []).map((c) => ({ ...c, cost: (Number(c.avg_in) * pin + Number(c.avg_out) * pout) / 1e6 }));
@@ -69,7 +70,7 @@ export default async function AdminPage() {
     <main id="main" className="app-main wide">
       <div className="page-head" style={{ flexWrap: "wrap" }}>
         <h1 className="page-title">Admin</h1>
-        <span className="row wrap g8"><Link href="/app/admin/rules" className="btn-plain">State rules review</Link><Link href="/app/admin/emails" className="btn-plain">Emails</Link><span className="tag tag-orange">Only admins see this</span></span>
+        <span className="row wrap g8"><Link href="/app/admin/support" className="btn-plain" style={openSupport ? { background: "#1A1A1A", color: "#fff", borderColor: "#1A1A1A" } : undefined}>Support inbox{openSupport ? ` · ${openSupport} waiting` : ""}</Link><Link href="/status" className="btn-plain">Status</Link><Link href="/app/admin/rules" className="btn-plain">State rules review</Link><Link href="/app/admin/emails" className="btn-plain">Emails</Link><span className="tag tag-orange">Only admins see this</span></span>
       </div>
 
       <div className="stack g20">

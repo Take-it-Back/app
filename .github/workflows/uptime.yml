@@ -1,0 +1,51 @@
+# Uptime alarm. Every 5 minutes, from GitHub's servers:
+#   1. checks the website, sign-in and app/database directly (retrying once, so a single blip doesn't alarm), and
+#   2. reads the minute-by-minute monitor that runs inside Supabase, which also catches outages between these runs.
+# A failed run means something is down; GitHub emails the account that owns this workflow
+# (Settings → Notifications → Actions → "Only notify for failed workflows" should be on).
+# Public history: https://www.takeitback.app/status
+name: Uptime
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+concurrency:
+  group: uptime
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      SITE: https://www.takeitback.app
+      SUPABASE_URL: https://uzogyqreputvggefnxiy.supabase.co
+      # The public (publishable) key, the same one every browser gets. Not a secret.
+      SUPABASE_KEY: sb_publishable_6cqN0tOTNMdmwoUQOmrRkQ_MV33gomh
+    steps:
+      - name: Website, sign-in and app
+        run: |
+          fail=0
+          for path in / /login /api/health; do
+            ok=0
+            for attempt in 1 2; do
+              code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 20 -A "TakeItBackUptime/1" "$SITE$path" || echo 000)
+              if [ "$code" = "200" ]; then ok=1; break; fi
+              sleep 20
+            done
+            echo "$path -> $code"
+            if [ "$ok" != "1" ]; then echo "::error::$SITE$path is down (HTTP $code)"; fail=1; fi
+          done
+          exit $fail
+      - name: Minute-by-minute monitor
+        if: always()
+        run: |
+          json=$(curl -s --max-time 20 -X POST "$SUPABASE_URL/rest/v1/rpc/uptime_status" -H "apikey: $SUPABASE_KEY" -H "Content-Type: application/json" -d '{}')
+          echo "$json" | jq '{checked_at, parts: [.parts[] | {name, up, uptime_24h}], ongoing: [.incidents[] | select(.ongoing)]}'
+          node -e '
+            const s = JSON.parse(process.argv[1]);
+            const age = (Date.now() - new Date(s.checked_at).getTime()) / 60000;
+            let bad = 0;
+            if (!s.checked_at || age > 10) { console.log(`::error::The Supabase monitor has not checked in ${Math.round(age)} minutes`); bad = 1; }
+            for (const p of s.parts) if (!p.up) { console.log(`::error::${p.name} is down (seen by the Supabase monitor)`); bad = 1; }
+            process.exit(bad);
+          ' "$json"
