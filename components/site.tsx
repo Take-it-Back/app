@@ -75,7 +75,7 @@ export function SiteFooter() {
           </nav>
         </div>
         <nav aria-label="More from Squared Away Labs" className="row wrap g8" style={{ paddingTop: 24, borderTop: "1px solid #EBEBEB", fontSize: 14, columnGap: 18, rowGap: 8 }}>
-          <span className="muted">A <a href="https://www.squaredawaylabs.com" style={{ color: "inherit" }}>Squared Away Labs</a> app. Also from us:</span>
+          <span className="muted">A <a href="https://www.squaredawaylabs.com" style={{ color: "inherit", display: "inline-block", padding: "4px 0" }}>Squared Away Labs</a> app. Also from us:</span>
           {SISTER_APPS.map(([name, url, blurb]) => (
             <a key={name} href={url} title={blurb} style={{ textDecoration: "none" }}>{name}</a>
           ))}

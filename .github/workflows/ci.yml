@@ -1,0 +1,29 @@
+# Every push and pull request: type-check and build. A failing check blocks a bad change before it deploys.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: https://uzogyqreputvggefnxiy.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'ci-placeholder' }}
+      NEXT_PUBLIC_SITE_URL: https://www.takeitback.app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Type check
+        run: npx tsc --noEmit
+      - name: Dependency audit (production, high and above)
+        run: npm audit --omit=dev --audit-level=critical
+      - name: Build
+        run: npm run build

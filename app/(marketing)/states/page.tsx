@@ -13,7 +13,7 @@ export const metadata: Metadata = pageMeta({
 
 export default function StatesIndex() {
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["State laws", "/states"]])} />
       <PageHead eyebrow="State laws" title="Your rights, in" italic="your state" after="." lede="The rules change from state to state. Pick yours, or start with a topic. General information, not legal advice." />
       <section className="wrap-1200 stack g32" style={{ paddingTop: 40 }}>

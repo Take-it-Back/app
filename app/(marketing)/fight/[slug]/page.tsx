@@ -27,7 +27,7 @@ export default async function ProblemPage({ params }: { params: Promise<{ slug: 
   const c = SCENARIOS[p.scenario];
 
   return (
-    <main>
+    <main id="main">
       <JsonLd data={[breadcrumbs([["Home", "/"], ["Who we fight", "/fight"], [p.name, `/fight/${p.slug}`]]), faqPage(p.faqs)]} />
       <section className="wrap-1200 row wrap" style={{ paddingTop: "clamp(40px, 6vw, 72px)", gap: 56, alignItems: "center" }}>
         <div className="stack g16" style={{ flex: "1 1 460px", minWidth: 0 }}>
@@ -70,7 +70,7 @@ export default async function ProblemPage({ params }: { params: Promise<{ slug: 
           <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>{c.counterparty}, <em className="o">start to finish</em></h2>
           <p className="lede" style={{ fontSize: 17 }}>{c.summary}</p>
         </div>
-        <div className="strip">
+        <div className="strip" tabIndex={0} role="region" aria-label="Examples, scroll sideways">
           <div>
             {([
               ["scan", "Snap it"],

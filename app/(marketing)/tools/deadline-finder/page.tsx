@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMeta({
 
 export default function Page() {
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Free tools", "/tools"], ["Deadline finder: how long do you have?", "/tools/deadline-finder"]])} />
       <PageHead eyebrow="Free tool" title="When is your" italic="deadline" after="." lede="Pick what you need to do and the date the clock started. Nothing you enter is saved or sent." />
       <section className="wrap-1200" style={{ paddingTop: 32, maxWidth: 820 }}>

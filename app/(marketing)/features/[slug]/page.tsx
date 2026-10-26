@@ -23,7 +23,7 @@ export default async function FeaturePage({ params }: { params: Promise<{ slug: 
   const [main, ...others] = f.shots;
 
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Features", "/features"], [f.name, `/features/${f.slug}`]])} />
       <section className="wrap-1200 stack g16" style={{ paddingTop: "clamp(40px, 6vw, 72px)" }}>
         <Link href="/features" className="muted" style={{ fontSize: 14, textDecoration: "none", padding: "10px 0", alignSelf: "flex-start" }}>← All features</Link>

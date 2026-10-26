@@ -27,7 +27,7 @@ export default async function WinPage({ params }: { params: Promise<{ id: string
   const w = await getWin((await params).id);
   if (!w) notFound();
   return (
-    <main style={{ maxWidth: 640, margin: "0 auto", padding: "64px 24px 96px" }} className="stack g24">
+    <main id="main" style={{ maxWidth: 640, margin: "0 auto", padding: "64px 24px 96px" }} className="stack g24">
       <div className="panel-gray stack g12" style={{ alignItems: "center", textAlign: "center", padding: "40px 24px", borderRadius: 28 }}>
         <Mark size={48} />
         <span className="eyebrow">Someone just took it back</span>

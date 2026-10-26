@@ -11,7 +11,7 @@ export const metadata: Metadata = { title: "Sign in", description: "Sign in to T
 export default async function LoginPage() {
   const providers = await enabledProviders();
   return (
-    <main style={{ minHeight: "100vh", display: "flex", flexDirection: "column", padding: "32px 24px" }}>
+    <main id="main" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", padding: "32px 24px" }}>
       <Logo />
       <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 0" }}>
         <Suspense>

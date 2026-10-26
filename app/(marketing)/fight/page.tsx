@@ -11,7 +11,7 @@ export const metadata: Metadata = pageMeta({ title: "Who we fight: hospitals, in
 
 export default function HelpWithPage() {
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["What we fight", "/fight"]])} />
       <PageHead eyebrow="Who we fight" title="Four industries that count on you" italic="giving up" after="." lede="Take it back is on your side, never theirs. We help patients, policyholders, renters and consumers push back, with no legal knowledge needed." />
       <section className="wrap-1200 stack g20" style={{ paddingTop: 48 }}>

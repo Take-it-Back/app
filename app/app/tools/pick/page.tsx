@@ -17,7 +17,7 @@ export default async function PickCase({ searchParams }: { searchParams: Promise
   if (cases.length === 1) redirect(`/app/cases/${cases[0].id}/${to}`);
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <BackLink href="/app/tools" />
       <div className="stack g4" style={{ margin: "6px 0 18px" }}>
         <h1 className="page-title" style={{ fontSize: 36 }}>{label.slice(0, 60)}</h1>

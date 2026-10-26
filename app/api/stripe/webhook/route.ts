@@ -63,6 +63,10 @@ export async function POST(request: Request) {
 
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, { auth: { persistSession: false } });
 
+  // Stripe can send the same event more than once; handle each one once.
+  const { data: seen } = await supabase.rpc("stripe_event_seen", { p_secret: process.env.BILLING_SECRET, p_id: event.id });
+  if (seen) return NextResponse.json({ received: true, duplicate: true });
+
   try {
     if (event.type === "checkout.session.completed" && (event.data.object as Stripe.Checkout.Session).metadata?.kind === "case_pass") {
       const s = event.data.object as Stripe.Checkout.Session;
@@ -109,7 +113,9 @@ export async function POST(request: Request) {
       const inv = event.data.object as Stripe.Invoice;
       if (inv.amount_due > 0) await mailCustomer(custId(inv.customer), (name) => paymentFailedEmail({ name, amount: usd(inv.amount_due) }));
     } else if (event.type.startsWith("customer.subscription.")) {
-      const sub = event.data.object as Stripe.Subscription;
+      // Events can arrive out of order, so use the subscription as it is now, not as the event describes it.
+      const evSub = event.data.object as Stripe.Subscription;
+      const sub = await stripe().subscriptions.retrieve(evSub.id).catch(() => evSub);
       const userId = (sub.metadata?.user_id as string) || null;
       await applyBilling(supabase, { userId, customer: custId(sub.customer), subscription: sub.id, status: sub.status, periodEnd: periodEnd(sub) });
       if (event.type === "customer.subscription.deleted") await mailCustomer(custId(sub.customer), (name) => subscriptionEndedEmail({ name }));
@@ -118,5 +124,6 @@ export async function POST(request: Request) {
     console.error(e);
     return NextResponse.json({ error: "Update failed" }, { status: 500 });
   }
+  await supabase.rpc("stripe_event_done", { p_secret: process.env.BILLING_SECRET, p_id: event.id, p_type: event.type });
   return NextResponse.json({ received: true });
 }

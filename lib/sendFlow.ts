@@ -2,7 +2,7 @@ import { sendEmail } from "./email";
 import { letterSentEmail } from "./emails/templates";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { stripe } from "./stripe";
-import { dispatchSend, SEND_PRICES, type Address, type SendMethod } from "./send";
+import { dispatchSend, SEND_PRICES, setSendStatus, type Address, type SendMethod } from "./send";
 import { markLetterSent } from "./actions";
 import { todayISO } from "./format";
 
@@ -15,7 +15,10 @@ export async function completeSend(supabase: SupabaseClient, sendId: string) {
   if (!send.stripe_session) return { ok: false as const, error: "Payment not found", ...base };
   const session = await stripe().checkout.sessions.retrieve(send.stripe_session);
   if (session.payment_status !== "paid" || session.metadata?.send_id !== send.id) return { ok: false as const, error: "Payment not completed", ...base };
-  if (send.status === "pending_payment") await supabase.from("sends").update({ status: "paid" }).eq("id", send.id);
+  // The amount paid must match the service being sent (stops paying for a fax and getting certified mail).
+  const expected = SEND_PRICES[send.method as SendMethod]?.cents;
+  if (!expected || (session.amount_total ?? 0) < expected || send.price_cents !== expected) return { ok: false as const, error: "Payment doesn't match this request", ...base };
+  if (send.status === "pending_payment") await setSendStatus(supabase, send.id, "paid", null, null);
 
   const addr = send.to_address as { to: Address; from: Address } | null;
   const result = await dispatchSend(supabase, { ...send, to_address: addr?.to ?? null }, addr?.from ?? null);

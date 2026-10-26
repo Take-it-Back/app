@@ -71,6 +71,8 @@ export default function ScanFlow({ userId, defaultState }: { userId: string; def
     }
     setError(null);
     const supabase = createClient();
+    let createdId: string | null = null;
+    const uploaded: string[] = [];
     try {
       setBusy("Saving your document…");
       const { data: c, error: ce } = await supabase
@@ -80,15 +82,20 @@ export default function ScanFlow({ userId, defaultState }: { userId: string; def
         .single();
       if (ce?.message?.includes("free_limit")) { router.push("/app/scan"); router.refresh(); throw new Error("Free includes 1 scan a month. Try Premium for unlimited scans."); }
       if (ce || !c) throw new Error(ce?.message || "Couldn't create the case.");
+      createdId = c.id;
       if (state) await supabase.from("profiles").update({ state }).eq("id", userId);
 
       for (const [i, f] of files.entries()) {
         const safe = f.name.replace(/[^a-zA-Z0-9._-]/g, "_").slice(-60);
         const path = `${userId}/${c.id}/${Date.now()}-${i}-${safe}`;
         const { error: ue } = await supabase.storage.from("case-files").upload(path, f, { contentType: f.type });
-        if (ue) throw new Error(ue.message);
-        await supabase.from("documents").insert({ case_id: c.id, user_id: userId, kind: "original", storage_path: path, file_name: f.name, mime_type: f.type, label: files.length > 1 ? `Page ${i + 1}` : "Original document" });
+        if (ue) throw new Error("The upload didn't finish. Check your connection and try again.");
+        uploaded.push(path);
+        const { error: de } = await supabase.from("documents").insert({ case_id: c.id, user_id: userId, kind: "original", storage_path: path, file_name: f.name, mime_type: f.type, label: files.length > 1 ? `Page ${i + 1}` : "Original document" });
+        if (de) throw new Error("We couldn't save your document. Please try again.");
       }
+      // Everything is saved; from here a failure leaves a case the person can retry from.
+      createdId = null;
 
       setBusy("Reading the fine print…");
       const res = await fetch("/api/analyze", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ caseId: c.id }) });
@@ -97,6 +104,11 @@ export default function ScanFlow({ userId, defaultState }: { userId: string; def
       router.push(`/app/cases/${c.id}/found${json.warning ? `?note=${encodeURIComponent(json.warning)}` : ""}`);
       router.refresh();
     } catch (err) {
+      // An upload that didn't finish shouldn't leave an empty case behind or use up a free scan.
+      if (createdId) {
+        if (uploaded.length) await supabase.storage.from("case-files").remove(uploaded).catch(() => {});
+        await supabase.from("cases").delete().eq("id", createdId);
+      }
       setBusy(null);
       setError(err instanceof Error ? err.message : "Something went wrong.");
     }

@@ -17,7 +17,7 @@ export default async function LegalAidIndex({ searchParams }: { searchParams: Pr
   const st = stateFromZip(zip);
   if (st) redirect(`/legal-aid/${stateSlug(st)}`);
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Legal aid", "/legal-aid"]])} />
       <PageHead eyebrow="Legal aid" title="Free legal help," italic="near you" after="." lede="Legal aid offices help people who can't afford a lawyer with evictions, debt lawsuits, medical bills and insurance denials. Here's who to call in your state." />
       <section className="wrap" style={{ maxWidth: 820, margin: "0 auto", padding: "0 24px 48px" }}>

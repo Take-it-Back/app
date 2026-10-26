@@ -18,9 +18,10 @@ async function ctx() {
 
 export async function saveLetter(letterId: string, fields: { body: string; subject: string; recipient: string }) {
   const { supabase } = await ctx();
-  const { error } = await supabase.from("letters").update(fields).eq("id", letterId);
-  if (error) throw new Error(error.message);
-  return { ok: true };
+  const { data, error } = await supabase.from("letters").update(fields).eq("id", letterId).select("id");
+  // Row security can quietly skip the update (for example a helper who was removed); report that too.
+  if (error || !data?.length) return { ok: false as const, error: "Your changes weren't saved. Please try again." };
+  return { ok: true as const };
 }
 
 export async function markLetterSent(letterId: string, method: string, sentDate: string) {
@@ -228,7 +229,7 @@ export async function setCaseLaw(caseId: string, formData: FormData) {
 
 export async function recordHealthConsent() {
   const { supabase, user } = await ctx();
-  const { error } = await supabase.from("profiles").update({ health_consent_at: new Date().toISOString() }).eq("id", user.id);
+  const { error } = await supabase.rpc("set_health_consent", { p_on: true });
   if (error) {
     await logError(supabase, "consent", error.message, "/app/scan", user.id);
     throw new Error("We couldn't save your consent. Please try again.");
@@ -239,7 +240,7 @@ export async function recordHealthConsent() {
 /** Withdraw consent to collect health information. Existing cases stay; new scans and forwarded bills ask again. */
 export async function withdrawHealthConsent() {
   const { supabase, user } = await ctx();
-  await supabase.from("profiles").update({ health_consent_at: null }).eq("id", user.id);
+  await supabase.rpc("set_health_consent", { p_on: false });
   revalidatePath("/app", "layout");
   redirect("/app/you?consent=withdrawn");
 }
@@ -274,7 +275,8 @@ export async function updateProfile(formData: FormData) {
   const smsOn = Boolean(phone) && formData.get("sms_opt_in") === "on";
   const { data: before } = await supabase.from("profiles").select("sms_opt_in, sms_consent_at, phone").eq("id", user.id).maybeSingle();
   // Keep a record of when they agreed to texts (and to which number); clear it when they turn texts off.
-  const smsConsentAt = !smsOn ? null : before?.sms_opt_in && before.sms_consent_at && before.phone === phone ? before.sms_consent_at : new Date().toISOString();
+  // The time is stamped by the database; we only say whether the earlier agreement still applies.
+  const keepConsent = Boolean(before?.sms_opt_in && before.sms_consent_at && before.phone === phone);
   await supabase
     .from("profiles")
     .update({
@@ -285,7 +287,6 @@ export async function updateProfile(formData: FormData) {
       morning_briefing: formData.get("morning_briefing") === "on",
       phone: phone || null,
       sms_opt_in: smsOn,
-      sms_consent_at: smsConsentAt,
       address_line1: String(formData.get("address_line1") || "").trim().slice(0, 120) || null,
       address_line2: String(formData.get("address_line2") || "").trim().slice(0, 120) || null,
       address_city: String(formData.get("address_city") || "").trim().slice(0, 80) || null,
@@ -293,6 +294,7 @@ export async function updateProfile(formData: FormData) {
       address_zip: String(formData.get("address_zip") || "").trim().slice(0, 10) || null,
     })
     .eq("id", user.id);
+  await supabase.rpc("set_sms_consent", { p_on: smsOn, p_keep: keepConsent });
   revalidatePath("/app", "layout");
   redirect("/app/you?saved=1");
 }
@@ -304,6 +306,20 @@ export async function deleteAccount() {
   for (const dir of caseDirs || []) {
     const { data: files } = await supabase.storage.from("case-files").list(`${user.id}/${dir.name}`, { limit: 1000 });
     if (files?.length) await supabase.storage.from("case-files").remove(files.map((f) => `${user.id}/${dir.name}/${f.name}`));
+  }
+  // Stop web billing first: a deleted account must not keep being charged.
+  const { data: billing } = await supabase.from("profiles").select("stripe_customer_id, stripe_subscription_id").eq("id", user.id).maybeSingle();
+  if (billing?.stripe_customer_id) {
+    const { stripe, stripeConfigured } = await import("@/lib/stripe");
+    if (stripeConfigured()) {
+      try {
+        // Deleting the customer cancels their subscriptions right away and removes their saved card and details.
+        await stripe().customers.del(billing.stripe_customer_id);
+      } catch (e) {
+        await logError(supabase, "delete-account", `Stripe cleanup failed: ${e instanceof Error ? e.message : "unknown"}`, "/app/you", user.id);
+        throw new Error("We couldn't cancel your subscription automatically, so your account wasn't deleted yet. Please try again or email hello@takeitback.app.");
+      }
+    }
   }
   // If they signed in with Apple from the iPhone app, tell Apple to cut off our access too.
   const { data: apple } = await supabase.rpc("take_apple_refresh_token");

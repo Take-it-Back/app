@@ -4,6 +4,7 @@ import { requireUser } from "@/lib/supabase/server";
 import { BackLink, CategoryIcon, CtaLink, StatusTag } from "@/components/ui";
 import { UploadButton, WriteLetterButton } from "@/components/CaseActions";
 import ConfirmSubmit from "@/components/ConfirmSubmit";
+import SubmitButton from "@/components/SubmitButton";
 import { CATEGORY_INFO, daysUntil } from "@/lib/rules";
 import { money, relDays, shortDate } from "@/lib/format";
 import { addDeadline, addNote, closeCase, deleteCase, toggleDeadline, updateCaseBasics, updateDeadline } from "@/lib/actions";
@@ -45,7 +46,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
 
   if (!plan.premium) {
     return (
-      <main className="app-main">
+      <main id="main" className="app-main">
         <BackLink href="/app/cases" />
         <div className="stack g8" style={{ margin: "8px 0 20px" }}>
           <span className="tag tag-gray row g4" style={{ alignSelf: "flex-start" }}><CategoryIcon category={c.category} size={14} />{info.label}</span>
@@ -74,7 +75,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
   }
 
   return (
-    <main className="app-main wide">
+    <main id="main" className="app-main wide">
       <div className="row between no-print">
         <BackLink href="/app/cases" />
       </div>
@@ -195,7 +196,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
                 </div>
                 <input name="title" className="input" placeholder="e.g. Called billing, spoke to Dana" required aria-label="Title" />
                 <textarea name="detail" className="input" rows={3} placeholder="Reference numbers, what they said…" aria-label="Details" />
-                <button className="btn-plain" style={{ alignSelf: "flex-start", background: "#1A1A1A", color: "#fff", borderColor: "#1A1A1A" }}>Save note</button>
+                <SubmitButton className="btn-plain" style={{ alignSelf: "flex-start", background: "#1A1A1A", color: "#fff", borderColor: "#1A1A1A" }}>Save note</SubmitButton>
               </form>
             </details>
           </div>
@@ -223,7 +224,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
                     <form action={updateDeadline.bind(null, d.id)} className="row g8">
                       <label className="sr" htmlFor={`due-${d.id}`}>Change date</label>
                       <input id={`due-${d.id}`} type="date" name="due_date" defaultValue={d.due_date} className="input" style={{ minHeight: 40, padding: "6px 12px", maxWidth: 180 }} />
-                      <button className="btn-text small">Change date</button>
+                      <SubmitButton className="btn-text small">Change date</SubmitButton>
                     </form>
                   )}
                 </div>
@@ -237,7 +238,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
                     <label className="chip"><input type="radio" name="owner" value="you" defaultChecked />Mine</label>
                     <label className="chip"><input type="radio" name="owner" value="them" />Theirs</label>
                   </div>
-                  <button className="btn-plain" style={{ alignSelf: "flex-start" }}>Add date</button>
+                  <SubmitButton className="btn-plain" style={{ alignSelf: "flex-start" }}>Add date</SubmitButton>
                 </form>
               </details>
             </div>
@@ -270,7 +271,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
                   <label className="chip"><input type="radio" name="outcome" value="closed" />Let it go</label>
                 </div>
                 <label className="field"><span style={{ fontSize: 14 }}>Money saved or recovered</span><input name="amount" inputMode="decimal" className="input" placeholder="$0" /></label>
-                <button className="btn-plain" style={{ alignSelf: "flex-start" }}>Close this case</button>
+                <SubmitButton className="btn-plain" style={{ alignSelf: "flex-start" }}>Close this case</SubmitButton>
               </form>
             </section>
           )}
@@ -281,7 +282,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
               <label className="field"><span style={{ fontSize: 14 }}>Case name</span><input name="title" defaultValue={c.title} className="input" /></label>
               <label className="field"><span style={{ fontSize: 14 }}>Who it's with</span><input name="counterparty" defaultValue={c.counterparty || ""} className="input" /></label>
               <label className="field"><span style={{ fontSize: 14 }}>Amount at stake</span><input name="amount_at_stake" defaultValue={c.amount_at_stake ?? ""} inputMode="decimal" className="input" /></label>
-              <button className="btn-plain" style={{ alignSelf: "flex-start" }}>Save</button>
+              <SubmitButton className="btn-plain" style={{ alignSelf: "flex-start" }}>Save</SubmitButton>
             </form>
             <form action={deleteCase.bind(null, id)} style={{ marginTop: 16, borderTop: "1px solid #EBEBEB", paddingTop: 12 }}>
               <ConfirmSubmit message="Delete this case, its letters and all its files? This can't be undone." className="btn-text" style={{ color: "#A8441F" }}>Delete this case and its files</ConfirmSubmit>

@@ -16,7 +16,7 @@ const PROMISES: [string, string][] = [
 
 export default function AboutPage() {
   return (
-    <main>
+    <main id="main">
       <PageHead eyebrow="About" title="The system counts on you" italic="giving up" after="." />
       <section className="wrap-1200 row wrap" style={{ paddingTop: 40, gap: 56, alignItems: "flex-start" }}>
         <div className="stack g16" style={{ flex: "1 1 460px" }}>

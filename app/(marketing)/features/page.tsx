@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMeta({ title: "Features: scan, letters, de
 
 export default function FeaturesPage() {
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Features", "/features"]])} />
       <PageHead eyebrow="Features" title="Everything you need to" italic="fight back" after="." lede="Eight tools that work together, from the moment a letter arrives to the day it's settled." />
       <section className="wrap-1200" style={{ paddingTop: 48 }}>

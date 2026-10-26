@@ -15,7 +15,7 @@ function Check({ on = true }: { on?: boolean }) {
 
 export default function PricingPage() {
   return (
-    <main>
+    <main id="main">
       <JsonLd data={[APP_LD, faqPage([...FAQ_GROUPS[1].items]), breadcrumbs([["Home", "/"], ["Pricing", "/pricing"]])]} />
       <PageHead eyebrow="Pricing" title="Start free. Let us do the" italic="work" after=" when you're ready." lede="Free tells you where you stand. Pay once to fight one bill, or get Premium for every case. You keep 100% of what you save." />
 

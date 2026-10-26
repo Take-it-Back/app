@@ -15,7 +15,7 @@ export default async function LetterPage({ params, searchParams }: { params: Pro
   const { supabase, user } = await requireUser();
   if (!(await getCasePremium(supabase, user.id, id))) {
     return (
-      <main className="app-main">
+      <main id="main" className="app-main">
         <BackLink href={`/app/cases/${id}`} />
         <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 20px" }}>Your <em className="o">letter</em></h1>
         <Upsell caseId={id} userId={user.id} title="Want us to write the letter?" body="Premium drafts a firm, polite letter that cites the right rules, ready to print or email." />
@@ -31,7 +31,7 @@ export default async function LetterPage({ params, searchParams }: { params: Pro
   const { data: sends } = letter ? await supabase.from("sends").select("id, method, status, error, created_at, to_name, fax_number").eq("letter_id", letter.id).order("created_at", { ascending: false }) : { data: [] };
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <div className="row between">
         <BackLink href={`/app/cases/${id}`} />
         {letter && <Link href={`/app/cases/${id}/letter/print?id=${letter.id}`} className="btn-plain" target="_blank">Print or save PDF</Link>}

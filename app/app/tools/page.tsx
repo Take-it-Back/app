@@ -23,7 +23,7 @@ export default async function ToolsPage() {
   const groups = Array.from(new Set(TOOLS.map((t) => t.group)));
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <h1 className="page-title" style={{ marginBottom: 18 }}>More</h1>
       <div className="stack g24">
         <Link href="/app/you" className="card row g12" style={{ textDecoration: "none", alignItems: "center", borderRadius: 22 }}>

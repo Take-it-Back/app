@@ -18,7 +18,7 @@ const TOOL_LIST = [
 
 export default function ToolsPage() {
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Free tools", "/tools"]])} />
       <PageHead eyebrow="Free tools" title="Quick answers you can use" italic="right now" after="." lede="These run in your browser. Nothing you type is saved or sent anywhere. General information, not legal advice." />
       <section className="wrap-1200" style={{ paddingTop: 32 }}>

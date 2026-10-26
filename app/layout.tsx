@@ -3,6 +3,7 @@ import { Caveat, Fraunces, Outfit } from "next/font/google";
 import "./globals.css";
 import PwaRegister from "@/components/PwaRegister";
 import NativeBridge from "@/components/NativeBridge";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const fraunces = Fraunces({ subsets: ["latin"], style: ["normal", "italic"], axes: ["opsz"], display: "swap", variable: "--font-serif" });
 const outfit = Outfit({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap", variable: "--font-sans" });
@@ -39,9 +40,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${fraunces.variable} ${outfit.variable} ${caveat.variable}`}>
       <body>
+        <a href="#main" className="skip-link">Skip to content</a>
         {children}
         <PwaRegister />
         <NativeBridge />
+        <SpeedInsights />
       </body>
     </html>
   );

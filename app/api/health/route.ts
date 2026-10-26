@@ -14,9 +14,12 @@ export async function GET() {
   } catch {
     db = false;
   }
+  // Names only (never values) of required settings that are missing.
+  const missing = ["NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_ANON_KEY", "NEXT_PUBLIC_SITE_URL", "BILLING_SECRET"].filter((k) => !process.env[k]);
   const body = {
-    ok: db,
+    ok: db && !missing.length,
     db,
+    missing,
     ms: Date.now() - t0,
     services: {
       ai: Boolean(process.env.ANTHROPIC_API_KEY),
@@ -25,7 +28,10 @@ export async function GET() {
       push: Boolean(process.env.VAPID_PRIVATE_KEY),
       mail: Boolean(process.env.LOB_API_KEY),
       fax: Boolean(process.env.TELNYX_API_KEY),
+      apple_payments: Boolean(process.env.APPLE_APP_ID),
+      apple_push: Boolean(process.env.APNS_KEY_ID && process.env.APNS_PRIVATE_KEY),
+      universal_links: Boolean(process.env.APPLE_TEAM_ID),
     },
   };
-  return NextResponse.json(body, { status: db ? 200 : 503, headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json(body, { status: body.ok ? 200 : 503, headers: { "Cache-Control": "no-store" } });
 }

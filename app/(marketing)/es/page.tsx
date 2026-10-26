@@ -29,7 +29,7 @@ const STEPS = [
 
 export default function Espanol() {
   return (
-    <main lang="es">
+    <main id="main" lang="es">
       <JsonLd data={[ORG, { "@type": "WebPage", "@id": `${SITE_URL}/es`, url: `${SITE_URL}/es`, inLanguage: "es-US", name: "Take it back en español" }, { ...APP_LD, inLanguage: ["en-US", "es-US"] }]} />
       <section className="wrap-1200 row wrap" style={{ paddingTop: "clamp(48px, 7vw, 88px)", gap: 56, alignItems: "center" }}>
         <div className="stack g20" style={{ flex: "1 1 480px", minWidth: 0 }}>

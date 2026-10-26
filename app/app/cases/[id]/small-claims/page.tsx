@@ -39,7 +39,7 @@ export default async function SmallClaimsPage({ params }: { params: Promise<{ id
   ];
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <BackLink href={`/app/cases/${id}/escalate`} />
       <div className="stack g4" style={{ margin: "6px 0 18px" }}>
         <h1 className="page-title" style={{ fontSize: 38 }}>Small claims <em className="o">kit</em></h1>

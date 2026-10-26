@@ -8,7 +8,7 @@ export default function AppError({ error, reset }: { error: Error & { digest?: s
     fetch("/api/log-error", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: `${error.message}${error.digest ? ` (${error.digest})` : ""}`, path: location.pathname }) }).catch(() => {});
   }, [error]);
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <div className="stack g16" style={{ paddingTop: 48 }}>
         <span className="hand" style={{ fontSize: 30, color: "#A8441F" }}>that didn&apos;t work</span>
         <h1 className="page-title">Something went <em className="o">wrong</em></h1>

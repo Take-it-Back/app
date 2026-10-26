@@ -16,7 +16,7 @@ export default async function EmailsPreview() {
     ["App emails", "Sent by the app through Resend, automatically.", emailPreviews().map((e) => ({ key: e.key, label: e.label, subject: e.email.subject, html: e.email.html }))],
   ];
   return (
-    <main className="app-main wide">
+    <main id="main" className="app-main wide">
       <BackLink href="/app/admin" />
       <h1 className="page-title" style={{ margin: "6px 0 18px" }}>Emails</h1>
       {groups.map(([title, note, items]) => (

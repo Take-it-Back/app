@@ -51,7 +51,7 @@ export default async function Today({ searchParams }: { searchParams: Promise<{ 
 
   if (!cases.length) {
     return (
-      <main className="app-main">
+      <main id="main" className="app-main">
         <div className="page-head">
           <h1 className="page-title">Today</h1>
           <Link href="/app/scan" aria-label="Add a document" className="icon-btn"><PlusIcon /></Link>
@@ -79,7 +79,7 @@ export default async function Today({ searchParams }: { searchParams: Promise<{ 
         : { href: "/app/scan", label: "Scan a new document" };
 
   return (
-    <main className="app-main wide">
+    <main id="main" className="app-main wide">
       <div className="page-head">
         <h1 className="page-title">Today</h1>
         <Link href="/app/scan" aria-label="Add a document" className="icon-btn"><PlusIcon /></Link>

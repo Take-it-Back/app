@@ -17,7 +17,7 @@ export const metadata: Metadata = pageMeta({
 
 export default function GuiasPage() {
   return (
-    <main lang="es">
+    <main id="main" lang="es">
       <JsonLd data={breadcrumbs([["Inicio", "/es"], ["Guías", "/es/guias"]])} />
       <PageHead eyebrow="Guías" title="Conozca sus derechos," italic="en palabras sencillas" after="." lede="Guías paso a paso para las peleas que la mayoría pierde por no saber qué hacer. Información general, no consejo legal." />
       <section className="wrap-1200" style={{ paddingTop: 32 }}>

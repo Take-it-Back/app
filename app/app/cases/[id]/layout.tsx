@@ -1,7 +1,16 @@
+import { notFound } from "next/navigation";
 import CaseTabs from "@/components/CaseTabs";
+import { requireUser } from "@/lib/supabase/server";
+
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 export default async function CaseLayout({ children, params }: { children: React.ReactNode; params: Promise<{ id: string }> }) {
   const { id } = await params;
+  // A case that doesn't exist or isn't yours (or shared with you) is a real 404 on every case page.
+  if (!UUID.test(id)) notFound();
+  const { supabase } = await requireUser();
+  const { data } = await supabase.from("cases").select("id").eq("id", id).maybeSingle();
+  if (!data) notFound();
   return (
     <div className="case-wrap">
       <CaseTabs id={id} />

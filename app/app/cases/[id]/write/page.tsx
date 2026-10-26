@@ -34,7 +34,7 @@ export default async function WritePage({ params }: { params: Promise<{ id: stri
       : undefined;
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <BackLink href={`/app/cases/${id}`} />
       <div className="stack g4" style={{ margin: "6px 0 18px" }}>
         <h1 className="page-title" style={{ fontSize: 38 }}>Your <em className="o">letters</em></h1>

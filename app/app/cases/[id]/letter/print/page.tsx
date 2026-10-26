@@ -12,7 +12,7 @@ export default async function PrintLetter({ params, searchParams }: { params: Pr
   const l = data?.[0];
   if (!l) notFound();
   return (
-    <main className="app-main" style={{ maxWidth: 720 }}>
+    <main id="main" className="app-main" style={{ maxWidth: 720 }}>
       <div className="no-print row between" style={{ marginBottom: 24 }}>
         <span className="muted small">Print it, or choose “Save as PDF” in the print window.</span>
         <PrintButton />

@@ -14,7 +14,7 @@ export default async function ScanPage() {
   ]);
   if (!plan.premium && used >= FREE_SCANS_PER_MONTH) {
     return (
-      <main className="app-main">
+      <main id="main" className="app-main">
         <BackLink href="/app" />
         <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 8px" }}>You&apos;ve used this month&apos;s <em className="o">free scan</em></h1>
         <p className="muted" style={{ margin: "0 0 20px" }}>Free includes {FREE_SCANS_PER_MONTH} scan a month, and your next one arrives on the 1st. Premium scans as many as you need.</p>
@@ -24,14 +24,14 @@ export default async function ScanPage() {
   }
   if (!profile?.health_consent_at) {
     return (
-      <main className="app-main">
+      <main id="main" className="app-main">
         <BackLink href="/app" />
         <HealthConsent next="/app/scan" />
       </main>
     );
   }
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <ScanFlow userId={user.id} defaultState={profile?.state || ""} />
     </main>
   );

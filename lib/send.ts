@@ -84,14 +84,19 @@ export async function dispatchSend(supabase: SupabaseClient, send: SendRow, from
     }
   } catch (e) {
     const error = e instanceof Error ? e.message : "Sending failed";
-    await supabase.from("sends").update({ status: "failed", error, updated_at: new Date().toISOString() }).eq("id", send.id);
+    await setSendStatus(supabase, send.id, "failed", null, error);
     await logError(supabase, `send-${send.method}`, error, `/app/cases/${send.case_id}`);
     return { ok: false as const, error };
   }
 
   await Promise.all([
-    supabase.from("sends").update({ status: "sent", provider_id: providerId, error: null, updated_at: new Date().toISOString() }).eq("id", send.id),
+    setSendStatus(supabase, send.id, "sent", providerId ?? null, null),
     supabase.from("documents").insert({ case_id: send.case_id, user_id: c.user_id, kind: "proof", storage_path: path, file_name: `${send.method === "mail" ? "Mailed" : "Faxed"} letter.pdf`, mime_type: "application/pdf", label: `${send.method === "mail" ? "Certified mail" : "Fax"} copy` }),
   ]);
   return { ok: true as const, providerId };
+}
+
+/** Send status is changed by the server only (the database refuses it from the browser). A sent letter stays sent. */
+export async function setSendStatus(supabase: SupabaseClient, id: string, status: "paid" | "sent" | "failed", provider: string | null, error: string | null) {
+  await supabase.rpc("send_set_status", { p_secret: process.env.BILLING_SECRET, p_id: id, p_status: status, p_provider: provider, p_error: error });
 }

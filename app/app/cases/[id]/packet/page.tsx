@@ -13,7 +13,7 @@ export default async function PacketPage({ params }: { params: Promise<{ id: str
   const { supabase, user } = await requireUser();
   if (!(await getCasePremium(supabase, user.id, id))) {
     return (
-      <main className="app-main">
+      <main id="main" className="app-main">
         <BackLink href={`/app/cases/${id}`} />
         <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 20px" }}>Case <em className="o">packet</em></h1>
         <Upsell caseId={id} userId={user.id} title="One packet with everything" body="Premium builds a printable packet with your timeline, letters and documents for a regulator, lawyer or court." />
@@ -34,7 +34,7 @@ export default async function PacketPage({ params }: { params: Promise<{ id: str
   const { data: signed } = docs.length ? await supabase.storage.from("case-files").createSignedUrls(docs.map((d) => d.storage_path), 60 * 60) : { data: [] as { signedUrl: string | null }[] };
 
   return (
-    <main className="app-main" style={{ maxWidth: 820 }}>
+    <main id="main" className="app-main" style={{ maxWidth: 820 }}>
       <div className="no-print row between" style={{ marginBottom: 16 }}>
         <BackLink href={`/app/cases/${id}`} />
         <PrintButton label="Print or save as PDF" />

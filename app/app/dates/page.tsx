@@ -17,7 +17,7 @@ export default async function DatesPage() {
   const { supabase, user } = await requireUser();
   if (!(await getPlan(supabase, user.id)).premium) {
     return (
-      <main className="app-main">
+      <main id="main" className="app-main">
         <BackLink href="/app" />
         <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 20px" }}>Your <em className="o">dates</em></h1>
         <Upsell title="Never miss a deadline" body="Premium works out every deadline from the rules, tracks the other side's dates too, and emails you before anything is due." />
@@ -59,7 +59,7 @@ export default async function DatesPage() {
   };
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <div className="page-head"><h1 className="page-title">Dates</h1></div>
       <div className="card" style={{ display: "grid", gridTemplateColumns: "repeat(7, minmax(0, 1fr))", textAlign: "center", padding: "14px 10px", marginBottom: 20 }}>
         {week.map((iso, i) => {

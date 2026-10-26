@@ -27,7 +27,7 @@ export default async function StateHub({ params }: { params: Promise<{ state: st
   if (!s) notFound();
   const slug = lawStateSlug(s);
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["State laws", "/states"], [s, `/states/${slug}`]])} />
       <PageHead eyebrow="State laws" title="Your rights in" italic={s} after="." lede={`The ${s} rules that matter most for deposits, repairs, old debts, medical bills and insurance denials. General information, not legal advice.`} />
       <section className="wrap-1200 stack g24" style={{ paddingTop: 32 }}>

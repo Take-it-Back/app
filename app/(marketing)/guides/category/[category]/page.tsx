@@ -29,7 +29,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
   const list = guidesIn(c.slug);
   if (!list.length) notFound();
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Guides", "/guides"], [c.name, `/guides/category/${c.slug}`]])} />
       <PageHead eyebrow={`Guides · ${c.name}`} title={c.name} italic="guides" after="." lede={c.blurb} />
       <section className="wrap-1200" style={{ paddingTop: 32 }}>

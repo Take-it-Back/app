@@ -27,6 +27,13 @@ export async function POST(request: Request) {
   if (!(await getCasePremium(supabase, user.id, caseId)))
     return NextResponse.json({ error: "Letters are part of Premium. Unlock this case or try Premium to draft this.", upgrade: true }, { status: 402 });
 
+  // A double tap or repeated request returns the draft that was just made instead of writing another.
+  if (!instructions) {
+    const since = new Date(Date.now() - 30_000).toISOString();
+    const { data: recent } = await supabase.from("letters").select("id").eq("case_id", caseId).eq("kind", kind).eq("status", "draft").gte("created_at", since).order("created_at", { ascending: false }).limit(1);
+    if (recent?.length) return NextResponse.json({ ok: true, letterId: recent[0].id, duplicate: true });
+  }
+
   const limit = await useAi(supabase, user.id, "letter");
   if (!limit.ok) return NextResponse.json({ error: limit.error }, { status: 429 });
 

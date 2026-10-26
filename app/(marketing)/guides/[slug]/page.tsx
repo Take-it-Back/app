@@ -43,7 +43,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   const related = GUIDES.filter((x) => x.slug !== g.slug && x.category === g.category).slice(0, 4);
 
   return (
-    <main>
+    <main id="main">
       <JsonLd
         data={[
           {

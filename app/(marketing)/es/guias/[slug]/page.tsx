@@ -30,7 +30,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
   if (!g || !en) notFound();
   const others = ES_GUIDES.filter((x) => x.slug !== g.slug).slice(0, 4);
   return (
-    <main lang="es">
+    <main id="main" lang="es">
       <JsonLd
         data={[
           {

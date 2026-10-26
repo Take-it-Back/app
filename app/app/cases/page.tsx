@@ -34,7 +34,7 @@ export default async function CasesPage({ searchParams }: { searchParams: Promis
   const q = (v: string) => `/app/cases?f=${v}${cat ? `&c=${cat}` : ""}`;
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <div className="page-head">
         <h1 className="page-title">{cat && cat in CATEGORY_INFO ? CATEGORY_INFO[cat as Category].label : "Cases"}</h1>
         <Link href="/app/scan" aria-label="New case" className="icon-btn"><PlusIcon /></Link>

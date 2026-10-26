@@ -22,7 +22,7 @@ export default async function LawTopicIndex({ params }: { params: Promise<{ topi
   const t = topicBySlug((await params).topic);
   if (!t) notFound();
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["State laws", "/states"], [t.name, `/laws/${t.slug}`]])} />
       <PageHead eyebrow="State laws" title={t.name} italic="by state" after="." lede={t.indexLede} />
       <section className="wrap-1200 stack g24" style={{ paddingTop: 32 }}>

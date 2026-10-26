@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { CtaButton } from "@/components/ui";
 import { markLetterSent, saveLetter } from "@/lib/actions";
@@ -28,22 +28,62 @@ export default function LetterEditor({ letter, caseId }: { letter: LetterRow; ca
   const [sharing, setSharing] = useState(false);
   const [pending, start] = useTransition();
   const sent = letter.status === "sent";
+  const draftKey = `tib_letter_${letter.id}`;
+  const saved = useRef({ body: letter.body, subject: letter.subject || "", recipient: letter.recipient || "" });
+  const dirty = body !== saved.current.body || subject !== saved.current.subject || recipient !== saved.current.recipient;
 
   function flash(msg: string) {
     setToast(msg);
     setTimeout(() => setToast(null), 2600);
   }
 
+  // Bring back changes that never reached the server (closed tab, lost connection, expired sign-in).
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(draftKey);
+      if (!raw) return;
+      const d = JSON.parse(raw) as { body: string; subject: string; recipient: string; at: number };
+      if (d.body !== letter.body || d.subject !== (letter.subject || "") || d.recipient !== (letter.recipient || "")) {
+        setBody(d.body); setSubject(d.subject); setRecipient(d.recipient);
+        flash("We brought back your unsaved changes");
+      } else localStorage.removeItem(draftKey);
+    } catch {}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Keep a copy on this device while editing, save to the account after a short pause, and warn before leaving.
+  useEffect(() => {
+    if (!dirty || sent) return;
+    try { localStorage.setItem(draftKey, JSON.stringify({ body, subject, recipient, at: Date.now() })); } catch {}
+    const t = setTimeout(() => { persist(false); }, 2500);
+    const warn = (e: BeforeUnloadEvent) => { e.preventDefault(); };
+    window.addEventListener("beforeunload", warn);
+    return () => { clearTimeout(t); window.removeEventListener("beforeunload", warn); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [body, subject, recipient]);
+
+  async function persist(show: boolean) {
+    const fields = { body, subject, recipient };
+    try {
+      const r = await saveLetter(letter.id, fields);
+      if (!r.ok) { if (show) flash(r.error); return false; }
+      saved.current = fields;
+      try { localStorage.removeItem(draftKey); } catch {}
+      if (show) flash("Saved");
+      return true;
+    } catch {
+      if (show) flash("Not saved. Check your connection or sign in again. Your text is kept on this device.");
+      return false;
+    }
+  }
+
   function save() {
-    start(async () => {
-      await saveLetter(letter.id, { body, subject, recipient });
-      flash("Saved");
-    });
+    start(async () => { await persist(true); });
   }
 
   function send() {
     start(async () => {
-      await saveLetter(letter.id, { body, subject, recipient });
+      if (!(await persist(true))) return;
       await markLetterSent(letter.id, method, sentDate);
       router.push(`/app/cases/${caseId}?sent=1`);
       router.refresh();
@@ -132,7 +172,7 @@ export default function LetterEditor({ letter, caseId }: { letter: LetterRow; ca
             </fieldset>
             <label className="field"><span style={{ fontSize: 14 }}>Date sent</span><input type="date" className="input" value={sentDate} max={todayISO()} onChange={(e) => setSentDate(e.target.value)} /></label>
             <CtaButton type="button" onClick={send} disabled={pending} block>{pending ? "Saving…" : "I've sent it"}</CtaButton>
-            <p className="muted small" style={{ margin: 0 }}>Print or save the PDF, sign it, and send it. Certified mail sent for you is coming soon.</p>
+            <p className="muted small" style={{ margin: 0 }}>Print or save the PDF, sign it, and send it. Or <a href={`/app/cases/${caseId}/letter/send?id=${letter.id}`}>have us send it</a> by certified mail or fax.</p>
           </section>
         )}
         {!sent && (

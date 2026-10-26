@@ -1,4 +1,5 @@
 import Link from "next/link";
+import SubmitButton from "@/components/SubmitButton";
 import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
 import { BackLink, CtaLink } from "@/components/ui";
@@ -24,7 +25,7 @@ export default async function WonPage({ params }: { params: Promise<{ id: string
   const won = c.status === "won" || c.status === "settled";
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <BackLink href="/app/cases" />
       <div className="stack g20" style={{ marginTop: 6 }}>
         <div className="stack g8">
@@ -61,7 +62,7 @@ export default async function WonPage({ params }: { params: Promise<{ id: string
             ) : (
               <>
                 <span className="small muted">Share a card with {c.outcome_amount ? "the amount and " : ""}the type of fight, and nothing else. Friends who join from your link get a free month, and so do you when they go Premium.</span>
-                <form action={shareWin.bind(null, id)}><button className="btn-plain">Make my win card</button></form>
+                <form action={shareWin.bind(null, id)}><SubmitButton className="btn-plain">Make my win card</SubmitButton></form>
               </>
             )}
           </section>

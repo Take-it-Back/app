@@ -7,7 +7,7 @@ export const metadata: Metadata = pageMeta({ title: "Terms", description: "The s
 export default function Terms() {
   return (
     <>
-      <main className="stack g16" style={{ maxWidth: 720, margin: "0 auto", padding: "72px 24px 96px", fontSize: 16, lineHeight: 1.65 }}>
+      <main id="main" className="stack g16" style={{ maxWidth: 720, margin: "0 auto", padding: "72px 24px 96px", fontSize: 16, lineHeight: 1.65 }}>
         <span className="eyebrow">Terms</span>
         <h1 className="h-l">The <em className="o">short</em> version</h1>
         <p className="muted">Last updated October 9, 2026. Full terms will be finalized with counsel before general launch.</p>

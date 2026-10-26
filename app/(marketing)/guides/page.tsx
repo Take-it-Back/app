@@ -19,7 +19,7 @@ const CARDS: GuideCardData[] = GUIDES.map((g) => ({
 
 export default function GuidesPage() {
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Guides", "/guides"]])} />
       <PageHead eyebrow="Guides" title="Know your rights, in" italic="plain English" after="." lede="Step-by-step guides for the fights most people lose by default. General information, not legal advice." />
       <section className="wrap-1200" style={{ paddingTop: 24 }}>

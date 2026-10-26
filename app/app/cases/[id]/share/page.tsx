@@ -4,6 +4,7 @@ import { getCasePremium } from "@/lib/plan";
 import { BackLink } from "@/components/ui";
 import Upsell from "@/components/Upsell";
 import ConfirmSubmit from "@/components/ConfirmSubmit";
+import SubmitButton from "@/components/SubmitButton";
 import CopyButton from "@/components/CopyButton";
 import { inviteHelper, removeHelper } from "@/lib/actions";
 import { shortDate } from "@/lib/format";
@@ -28,7 +29,7 @@ export default async function SharePage({ params, searchParams }: { params: Prom
     `${me?.full_name || "I"} added you as a helper on "${c.title}" in Take it back. Create a free account with ${email} at ${site}/login?mode=signup and it will show up in your cases.`;
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <BackLink href={`/app/cases/${id}`} />
       <div className="stack g4" style={{ margin: "6px 0 18px" }}>
         <h1 className="page-title" style={{ fontSize: 38 }}>Get a <em className="o">helper</em></h1>
@@ -56,7 +57,7 @@ export default async function SharePage({ params, searchParams }: { params: Prom
               <input type="checkbox" name="share_consent" required style={{ width: 20, height: 20, accentColor: "#1A1A1A", flex: "none", marginTop: 2 }} />
               <span>I agree to share this case with this person, including any health information in its documents and letters. I can remove them anytime.</span>
             </label>
-            <button className="btn-plain" style={{ alignSelf: "flex-start", background: "#1A1A1A", color: "#fff", borderColor: "#1A1A1A" }}>Add helper</button>
+            <SubmitButton className="btn-plain" style={{ alignSelf: "flex-start", background: "#1A1A1A", color: "#fff", borderColor: "#1A1A1A" }}>Add helper</SubmitButton>
             <span className="muted small">They&apos;ll see this case only, not your other cases. They can&apos;t delete it.</span>
           </form>
 

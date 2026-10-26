@@ -14,7 +14,7 @@ export default async function ReplyPage({ params, searchParams }: { params: Prom
   const { supabase, user } = await requireUser();
   if (!(await getCasePremium(supabase, user.id, id))) {
     return (
-      <main className="app-main">
+      <main id="main" className="app-main">
         <BackLink href={`/app/cases/${id}`} />
         <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 20px" }}>Their <em className="o">reply</em></h1>
         <Upsell caseId={id} userId={user.id} title="We'll read their reply for you" body="Premium explains what they said, whether it's a win, and writes your next letter." />
@@ -29,7 +29,7 @@ export default async function ReplyPage({ params, searchParams }: { params: Prom
   const a = (d?.analysis || null) as ReplyAnalysis | null;
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <div className="row between">
         <BackLink href={`/app/cases/${id}`} />
         {d && <span className="muted small">Added {shortDate(d.created_at)}</span>}

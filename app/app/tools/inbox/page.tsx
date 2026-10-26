@@ -13,7 +13,7 @@ export default async function InboxPage() {
   const address = p?.inbox_token ? `${p.inbox_token}@${domain}` : null;
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <BackLink href="/app/tools" />
       <div className="stack g4" style={{ margin: "6px 0 18px" }}>
         <h1 className="page-title" style={{ fontSize: 38 }}>Forward bills by <em className="o">email</em></h1>

@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Page not found", robots: { index: fa
 
 export default function NotFound() {
   return (
-    <main className="stack g20" style={{ minHeight: "100vh", alignItems: "center", justifyContent: "center", textAlign: "center", padding: 24 }}>
+    <main id="main" className="stack g20" style={{ minHeight: "100vh", alignItems: "center", justifyContent: "center", textAlign: "center", padding: 24 }}>
       <Logo />
       <span className="hand" style={{ fontSize: 34, color: "#A8441F" }}>hmm, nothing here</span>
       <h1 className="h-l" style={{ maxWidth: 560 }}>We couldn&apos;t find that <em className="o">page</em>.</h1>

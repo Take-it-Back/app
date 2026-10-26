@@ -5,6 +5,7 @@ import { requireUser } from "@/lib/supabase/server";
 import { CATEGORY_INFO, STATUS_INFO } from "@/lib/rules";
 import { money, shortDate } from "@/lib/format";
 import type { Category, CaseStatus } from "@/lib/types";
+import AdminMfa from "@/components/AdminMfa";
 
 export const metadata: Metadata = { title: "Admin", robots: { index: false } };
 
@@ -25,13 +26,22 @@ export default async function AdminPage() {
   const { supabase, user } = await requireUser();
   const { data: me } = await supabase.from("profiles").select("is_admin").eq("id", user.id).maybeSingle();
   if (!me?.is_admin) notFound();
+  const { data: aal } = await supabase.auth.mfa.getAuthenticatorAssuranceLevel();
+  if (aal?.currentLevel !== "aal2") {
+    return (
+      <main id="main" className="app-main wide">
+        <h1 className="page-title" style={{ marginBottom: 16 }}>Admin</h1>
+        <AdminMfa />
+      </main>
+    );
+  }
   const [{ data, error }, { data: costs }] = await Promise.all([supabase.rpc("admin_overview"), supabase.rpc("admin_ai_costs")]);
   // Estimated AI cost: token counts are exact; the per-million prices are settings (AI_PRICE_IN / AI_PRICE_OUT, in dollars).
   const pin = Number(process.env.AI_PRICE_IN || 2), pout = Number(process.env.AI_PRICE_OUT || 10);
   const costRows = ((costs as { kind: string; calls: number; avg_in: number; avg_out: number; model: string }[] | null) || []).map((c) => ({ ...c, cost: (Number(c.avg_in) * pin + Number(c.avg_out) * pout) / 1e6 }));
   if (error || !data) {
     return (
-      <main className="app-main wide">
+      <main id="main" className="app-main wide">
         <h1 className="page-title">Admin</h1>
         <p className="error" role="alert">Couldn&apos;t load the overview: {error?.message || "no data"}</p>
       </main>
@@ -56,7 +66,7 @@ export default async function AdminPage() {
   const catTotal = Object.values(o.by_category).reduce((a, b) => a + b, 0) || 1;
 
   return (
-    <main className="app-main wide">
+    <main id="main" className="app-main wide">
       <div className="page-head" style={{ flexWrap: "wrap" }}>
         <h1 className="page-title">Admin</h1>
         <span className="row wrap g8"><Link href="/app/admin/rules" className="btn-plain">State rules review</Link><Link href="/app/admin/emails" className="btn-plain">Emails</Link><span className="tag tag-orange">Only admins see this</span></span>

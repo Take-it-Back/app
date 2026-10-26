@@ -18,7 +18,7 @@ const STEPS: { n: string; title: string; italic: string; body: string; points: s
 
 export default function HowItWorks() {
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["How it works", "/how-it-works"]])} />
       <PageHead eyebrow="How it works" title="One denied MRI, from letter to" italic="settled" after="." lede="Here's how a real kind of fight plays out in Take it back, screen by screen. The same steps work for bills, landlords and collectors." />
 

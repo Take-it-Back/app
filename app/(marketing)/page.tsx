@@ -33,7 +33,7 @@ export const metadata: Metadata = pageMeta({
 
 export default function Home() {
   return (
-    <main>
+    <main id="main">
       <JsonLd data={[ORG, { "@type": "WebSite", "@id": `${SITE_URL}/#site`, url: SITE_URL, name: "Take it back", publisher: { "@id": `${SITE_URL}/#org` } }, APP_LD]} />
       <section className="wrap-1200 row wrap" style={{ paddingTop: "clamp(48px, 7vw, 88px)", gap: 56, alignItems: "center" }}>
         <div className="stack g20" style={{ flex: "1 1 480px", minWidth: 0 }}>
@@ -84,7 +84,7 @@ export default function Home() {
             </div>
             <Link href="/how-it-works" className="btn-plain">Walk through a full case</Link>
           </div>
-          <div className="strip">
+          <div className="strip" tabIndex={0} role="region" aria-label="Examples, scroll sideways">
             <div>
               {STEPS.map((st, i) => (
                 <figure key={st.title}>

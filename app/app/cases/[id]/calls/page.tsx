@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { requireUser } from "@/lib/supabase/server";
 import { getCasePremium } from "@/lib/plan";
 import { BackLink } from "@/components/ui";
+import SubmitButton from "@/components/SubmitButton";
 import Upsell from "@/components/Upsell";
 import { SCRIPTS } from "@/lib/scripts";
 import { logCall } from "@/lib/actions";
@@ -24,7 +25,7 @@ export default async function CallsPage({ params, searchParams }: { params: Prom
   const calls = (ev || []) as EventRow[];
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <BackLink href={`/app/cases/${id}`} />
       <div className="stack g4" style={{ margin: "6px 0 18px" }}>
         <h1 className="page-title" style={{ fontSize: 38 }}>Before you <em className="o">call</em></h1>
@@ -87,7 +88,7 @@ export default async function CallsPage({ params, searchParams }: { params: Prom
               <label className="field"><span>Reference number</span><input name="ref" className="input" placeholder="e.g. 88213" /></label>
               <label className="field"><span>What they said or promised</span><textarea name="detail" className="input" rows={3} placeholder="e.g. Will remove the duplicate charge within 2 weeks" /></label>
               <label className="field"><span>Follow up by (optional)</span><input name="follow" type="date" className="input" style={{ maxWidth: 220 }} /></label>
-              <button className="btn-plain" style={{ alignSelf: "flex-start", background: "#1A1A1A", color: "#fff", borderColor: "#1A1A1A" }}>Save call</button>
+              <SubmitButton className="btn-plain" style={{ alignSelf: "flex-start", background: "#1A1A1A", color: "#fff", borderColor: "#1A1A1A" }}>Save call</SubmitButton>
             </form>
           )}
         </section>

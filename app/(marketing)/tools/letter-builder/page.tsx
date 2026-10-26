@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMeta({
 
 export default function Page() {
   return (
-    <main>
+    <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Free tools", "/tools"], ["Free dispute letter builder", "/tools/letter-builder"]])} />
       <PageHead eyebrow="Free tool" title="Build your" italic="letter" after="." lede="Answer a few questions and copy the letter. Nothing you type is saved or sent." />
       <section className="wrap-1200" style={{ paddingTop: 32, maxWidth: 820 }}>

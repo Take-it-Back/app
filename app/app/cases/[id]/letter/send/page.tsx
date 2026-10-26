@@ -32,7 +32,7 @@ export default async function SendPage({ params, searchParams }: { params: Promi
   const fromState = p?.address_state && p.address_state.length === 2 ? p.address_state : p?.address_state ? ABBR[p.address_state] : "";
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <BackLink href={`/app/cases/${id}/letter?id=${letter.id}`} />
       <div className="stack g4" style={{ margin: "6px 0 18px" }}>
         <h1 className="page-title" style={{ fontSize: 38 }}>We&apos;ll <em className="o">send</em> it</h1>

@@ -11,7 +11,7 @@ const H2 = { fontSize: 26, margin: "16px 0 0" } as const;
 
 export default function HealthDataPrivacy() {
   return (
-    <main className="stack g16" style={{ maxWidth: 720, margin: "0 auto", padding: "72px 24px 96px", fontSize: 16, lineHeight: 1.65 }}>
+    <main id="main" className="stack g16" style={{ maxWidth: 720, margin: "0 auto", padding: "72px 24px 96px", fontSize: 16, lineHeight: 1.65 }}>
       <JsonLd data={breadcrumbs([["Home", "/"], ["Privacy", "/privacy"], ["Health data", "/health-data-privacy"]])} />
       <span className="eyebrow">Privacy</span>
       <h1 className="h-l">Consumer health data <em className="o">privacy policy</em></h1>
@@ -29,6 +29,7 @@ export default function HealthDataPrivacy() {
       <ul>
         <li><strong>Service providers that run the app for us</strong>, under contracts that let them use it only to do that: Anthropic (AI that reads documents and drafts letters, under terms that don&apos;t allow training on it), Supabase (database and file storage) and Vercel (hosting).</li>
         <li><strong>Messaging providers</strong>, only for the message involved: Resend (emails to you), Postmark (bills you forward to us), and Twilio (text reminders, which never include case details).</li>
+        <li><strong>Payment and app store providers</strong>: Stripe (website payments) and Apple (iPhone app purchases and phone alerts). They receive billing details or a device token, never your documents.</li>
         <li><strong>Mail and fax providers</strong>, Lob (certified mail) and Telnyx (fax), only for a letter you ask us to send, and only that letter.</li>
         <li><strong>People you invite</strong> as helpers on a case, only after you agree to share that case with them. You can remove a helper anytime.</li>
         <li><strong>Anyone else only if the law requires it</strong>, such as a valid court order.</li>

@@ -40,7 +40,7 @@ export default async function UpgradePage({ searchParams }: { searchParams: Prom
   const inApp = await isAppRequest();
 
   return (
-    <main className="app-main wide">
+    <main id="main" className="app-main wide">
       <BackLink href="/app" />
       <div className="stack g8" style={{ margin: "8px 0 20px" }}>
         <h1 className="page-title" style={{ fontSize: 40 }}>Let us do the <em className="o">work</em></h1>

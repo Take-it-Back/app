@@ -42,7 +42,7 @@ export default function LoginForm({ providers }: { providers: Providers }) {
           setNotice("Check your email for a link to confirm your account. Then come back and sign in.");
         }
       } else if (mode === "signin") {
-        const login = email.trim().toLowerCase() === "admin" ? "admin@takeitback.app" : email.trim();
+        const login = email.trim();
         const { error } = await supabase.auth.signInWithPassword({ email: login, password });
         if (error) throw error;
         router.push(next);
@@ -83,15 +83,15 @@ export default function LoginForm({ providers }: { providers: Providers }) {
       )}
       <div className="field">
         <label htmlFor="email">Email</label>
-        <input id="email" type={mode === "signin" ? "text" : "email"} inputMode="email" autoCapitalize="none" spellCheck={false} className="input" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete={mode === "signin" ? "username" : "email"} required />
+        <input id="email" aria-invalid={error ? true : undefined} aria-describedby={error ? "login-error" : undefined} type={mode === "signin" ? "text" : "email"} inputMode="email" autoCapitalize="none" spellCheck={false} className="input" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete={mode === "signin" ? "username" : "email"} required />
       </div>
       {mode !== "reset" && (
         <div className="field">
           <label htmlFor="password">Password</label>
-          <input id="password" type="password" className="input" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete={mode === "signup" ? "new-password" : "current-password"} minLength={8} required />
+          <input id="password" aria-invalid={error ? true : undefined} aria-describedby={error ? "login-error" : undefined} type="password" className="input" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete={mode === "signup" ? "new-password" : "current-password"} minLength={8} required />
         </div>
       )}
-      {error && <p className="error" role="alert" style={{ margin: 0 }}>{error}</p>}
+      {error && <p id="login-error" className="error" role="alert" style={{ margin: 0 }}>{error}</p>}
       {notice && <p className="panel-gray" role="status" style={{ margin: 0, fontSize: 15 }}>{notice}</p>}
       <CtaButton block disabled={busy} variant="ink">
         {busy ? "One moment…" : mode === "signup" ? "Create my account" : mode === "signin" ? "Sign in" : "Send reset link"}

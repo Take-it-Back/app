@@ -27,7 +27,7 @@ export async function POST(request: Request) {
   const trialDays = (trial ? TRIAL_DAYS : 0) + banked * 30;
   const terms = renewalTerms(which, trial, new Date(), banked);
   const agreedAt = new Date().toISOString();
-  await supabase.from("profiles").update({ renewal_consent_at: agreedAt, renewal_consent_text: terms }).eq("id", user.id);
+  await supabase.rpc("set_renewal_consent", { p_text: terms });
 
   const session = await stripe().checkout.sessions.create({
     mode: "subscription",

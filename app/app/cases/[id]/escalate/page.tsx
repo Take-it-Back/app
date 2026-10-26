@@ -24,7 +24,7 @@ export default async function EscalatePage({ params }: { params: Promise<{ id: s
   const showCredit = c.category !== "landlord" && c.category !== "insurance";
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <BackLink href={`/app/cases/${id}`} />
       <div className="stack g4" style={{ margin: "6px 0 18px" }}>
         <h1 className="page-title" style={{ fontSize: 38 }}>Turn up the <em className="o">pressure</em></h1>

@@ -25,8 +25,6 @@ const OK_TYPES = ["application/pdf", "image/jpeg", "image/png", "image/webp"];
 function authorized(request: Request) {
   const secret = process.env.INBOUND_SECRET;
   if (!secret) return false;
-  const url = new URL(request.url);
-  if (url.searchParams.get("key") === secret) return true;
   const auth = request.headers.get("authorization") || "";
   if (auth.startsWith("Basic ")) {
     const [, pass] = Buffer.from(auth.slice(6), "base64").toString().split(":");

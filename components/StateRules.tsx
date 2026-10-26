@@ -3,6 +3,7 @@ import { US_STATES } from "@/lib/states";
 import { setCaseLaw } from "@/lib/actions";
 import { shortDate } from "@/lib/format";
 import type { CaseRow } from "@/lib/types";
+import SubmitButton from "@/components/SubmitButton";
 
 /** Debt clock warning, shown on the case and before payment or settlement letters. */
 export function DebtClock({ state, lastPayment, compact = false }: { state: string | null; lastPayment: string | null; compact?: boolean }) {
@@ -70,7 +71,7 @@ export default function StateRules({ c }: { c: CaseRow }) {
                 <input type="date" name="last_payment_on" className="input" defaultValue={c.last_payment_on || ""} max={new Date().toISOString().slice(0, 10)} />
               </label>
             )}
-            <button className="btn-plain" style={{ alignSelf: "flex-start" }}>Save</button>
+            <SubmitButton className="btn-plain" style={{ alignSelf: "flex-start" }}>Save</SubmitButton>
           </form>
         )}
       </div>

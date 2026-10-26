@@ -18,7 +18,7 @@ export default async function HelpPage({ searchParams }: { searchParams: Promise
   const fromZip = stateFromZip(zip);
   const state = fromZip || (pick && AID_STATES.includes(pick) ? pick : null) || prof?.state || null;
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <div className="stack g16">
         <h1 className="page-title" style={{ fontSize: 38 }}>Get a real <em className="o">person</em></h1>
         <div className="panel-orange stack g4">

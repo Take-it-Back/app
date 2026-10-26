@@ -9,7 +9,7 @@ export const metadata: Metadata = pageMeta({ title: "FAQ: how Take it back works
 
 export default function FaqPage() {
   return (
-    <main>
+    <main id="main">
       <JsonLd data={[faqPage([...FAQ_GROUPS.flatMap((g) => g.items), ...PROBLEMS.flatMap((p) => p.faqs)]), breadcrumbs([["Home", "/"], ["FAQ", "/faq"]])]} />
       <PageHead eyebrow="FAQ" title="Good" italic="questions" after="." lede="Can't find what you need? Email hello@takeitback.app and a person will write back." />
       <div className="stack g48" style={{ maxWidth: 820, margin: "0 auto", padding: "48px 24px 0", gap: 56 }}>

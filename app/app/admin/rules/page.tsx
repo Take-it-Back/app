@@ -37,7 +37,7 @@ export default async function RulesReview({ searchParams }: { searchParams: Prom
   const cols = Array.from(new Set(rows.flatMap(([, r]) => Object.keys(r))));
 
   return (
-    <main className="app-main wide">
+    <main id="main" className="app-main wide">
       <BackLink href="/app/admin" />
       <div className="stack g8" style={{ margin: "6px 0 18px" }}>
         <h1 className="page-title">State rules review</h1>

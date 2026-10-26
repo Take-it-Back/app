@@ -26,7 +26,7 @@ export default async function FoundPage({ params, searchParams }: { params: Prom
   const rule = !premium ? firstDeadline(c.category, c.received_date || c.created_at.slice(0, 10), c.insured, c.user_state) : null;
 
   return (
-    <main className="app-main">
+    <main id="main" className="app-main">
       <div className="row between">
         <BackLink href={`/app/cases/${id}`} />
         <span className="tag tag-orange">{CATEGORY_INFO[c.category].label}</span>

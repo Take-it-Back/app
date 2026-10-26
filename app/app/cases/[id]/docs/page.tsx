@@ -14,7 +14,7 @@ export default async function DocsPage({ params }: { params: Promise<{ id: strin
   const { supabase, user } = await requireUser();
   if (!(await getCasePremium(supabase, user.id, id))) {
     return (
-      <main className="app-main">
+      <main id="main" className="app-main">
         <BackLink href={`/app/cases/${id}`} />
         <h1 className="page-title" style={{ fontSize: 38, margin: "6px 0 20px" }}>Case <em className="o">file</em></h1>
         <Upsell caseId={id} userId={user.id} title="Keep every paper in one place" body="Premium keeps their letters, your proof and every note together, ready when you need it." />
@@ -33,7 +33,7 @@ export default async function DocsPage({ params }: { params: Promise<{ id: strin
     : { data: [] as { signedUrl: string | null }[] };
 
   return (
-    <main className="app-main wide">
+    <main id="main" className="app-main wide">
       <div className="row between">
         <BackLink href={`/app/cases/${id}`} />
         <UploadButton caseId={id} userId={user.id} ownerId={c.user_id} kind="evidence" label="Add a file" />
