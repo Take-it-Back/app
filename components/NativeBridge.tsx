@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { isNativeApp } from "@/lib/native";
 import { LOCK_KEY, registerPush } from "@/components/NativeSettings";
+import { PENDING_PASS_KEY } from "@/components/UnlockCase";
+import { APPLE_CASE_PASS } from "@/lib/appleProducts";
 
 const SITE_HOSTS = ["www.takeitback.app", "takeitback.app"];
 
@@ -64,6 +66,19 @@ export default function NativeBridge() {
     registerPush(false).catch(() => {});
     (async () => {
       const { NativePurchases, PURCHASE_TYPE } = await import("@capgo/native-purchases");
+      // A case pass that was paid for but not unlocked (app closed or network dropped): finish it now.
+      const { Preferences } = await import("@capacitor/preferences");
+      const pendingCase = (await Preferences.get({ key: PENDING_PASS_KEY })).value;
+      const { transactions } = await NativePurchases.getUnfinishedTransactions().catch(() => ({ transactions: [] }));
+      for (const t of transactions.filter((x) => x.productIdentifier === APPLE_CASE_PASS && x.jwsRepresentation)) {
+        if (!pendingCase) break;
+        const r = await fetch("/api/apple/casepass", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ jws: t.jwsRepresentation, caseId: pendingCase }) });
+        if (r.ok) {
+          await NativePurchases.finishTransaction({ transactionId: t.transactionId }).catch(() => {});
+          await Preferences.remove({ key: PENDING_PASS_KEY });
+          router.refresh();
+        }
+      }
       const { purchases } = await NativePurchases.getPurchases({ productType: PURCHASE_TYPE.SUBS, onlyCurrentEntitlements: true });
       const jws = purchases.map((p) => p.jwsRepresentation).filter(Boolean);
       if (jws.length) {

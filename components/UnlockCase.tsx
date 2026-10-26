@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { haptic, isNativeApp } from "@/lib/native";
 import { APPLE_CASE_PASS } from "@/lib/appleProducts";
 
+export const PENDING_PASS_KEY = "tib_pending_case_pass";
+
 /** One-time unlock of a single case. Web: Stripe checkout. iPhone app: Apple purchase. */
 export default function UnlockCase({ caseId, label, days, userId, tone = "dark" }: { caseId: string; label: string; days: number; userId?: string; tone?: "dark" | "light" }) {
   const router = useRouter();
@@ -30,13 +32,17 @@ export default function UnlockCase({ caseId, label, days, userId, tone = "dark" 
     setMsg(null);
     try {
       const { NativePurchases, PURCHASE_TYPE } = await import("@capgo/native-purchases");
-      // Not finished until our server has unlocked the case, so a failed unlock can be retried.
+      // Not finished until our server has unlocked the case. The case is remembered on the phone so the
+      // app can finish the unlock on next launch if this step fails (see NativeBridge).
+      const { Preferences } = await import("@capacitor/preferences");
+      await Preferences.set({ key: PENDING_PASS_KEY, value: caseId });
       const tx = await NativePurchases.purchaseProduct({ productIdentifier: APPLE_CASE_PASS, productType: PURCHASE_TYPE.INAPP, appAccountToken: userId, autoAcknowledgePurchases: false });
       if (!tx.jwsRepresentation) throw new Error("No receipt from Apple");
       const r = await fetch("/api/apple/casepass", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ jws: tx.jwsRepresentation, caseId }) });
       const d = (await r.json().catch(() => ({}))) as { ok?: boolean; error?: string };
       if (!d.ok) throw new Error(d.error || "We couldn't unlock this case.");
       await NativePurchases.acknowledgePurchase({ purchaseToken: tx.transactionId }).catch(() => {});
+      await Preferences.remove({ key: PENDING_PASS_KEY });
       haptic("success");
       router.push(`/app/cases/${caseId}?unlocked=1`);
       router.refresh();

@@ -37,7 +37,7 @@ export const verifyTransaction = (jws: string) => firstOk((v) => v.verifyAndDeco
 export const verifyRenewalInfo = (jws: string) => firstOk((v) => v.verifyAndDecodeRenewalInfo(jws));
 export const verifyNotification = (payload: string) => firstOk((v) => v.verifyAndDecodeNotification(payload));
 
-export type AppleState = { originalTx: string; status: string; periodEnd: string | null; userHint: string | null };
+export type AppleState = { originalTx: string; status: string; periodEnd: string | null; userHint: string | null; signedAt: string | null };
 
 /** Maps a verified transaction (plus renewal info, when Apple sends it) to the statuses the rest of the app uses. */
 export function appleState(tx: JWSTransactionDecodedPayload, renewal?: JWSRenewalInfoDecodedPayload | null): AppleState | null {
@@ -56,6 +56,8 @@ export function appleState(tx: JWSTransactionDecodedPayload, renewal?: JWSRenewa
     status,
     periodEnd: end ? new Date(end).toISOString() : null,
     userHint: tx.appAccountToken || renewal?.appAccountToken || null,
+    // When Apple signed this information; older updates arriving late are ignored.
+    signedAt: tx.signedDate || renewal?.signedDate ? new Date(Math.max(tx.signedDate ?? 0, renewal?.signedDate ?? 0)).toISOString() : null,
   };
 }
 
@@ -67,6 +69,7 @@ export async function applyApple(supabase: SupabaseClient, userId: string | null
     p_original_tx: s.originalTx,
     p_status: s.status,
     p_period_end: s.periodEnd,
+    p_signed_at: s.signedAt,
   });
   if (error) throw new Error(error.message);
   return (data as string | null) ?? null;
