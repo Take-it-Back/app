@@ -3,7 +3,7 @@
 #
 # Optional repository secrets:
 #   ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD, ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD  (upload key)
-#   GOOGLE_SERVICES_JSON          Firebase config for Android phone alerts (contents of google-services.json)
+#   GOOGLE_SERVICES_JSON          Optional override; android/app/google-services.json is committed (Firebase config, not secret)
 #   PLAY_SERVICE_ACCOUNT_JSON     Google Play service account allowed to upload releases
 name: Android app
 

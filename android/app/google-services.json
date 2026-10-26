@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1031847618510",
+    "project_id": "take-it-back-305e0",
+    "storage_bucket": "take-it-back-305e0.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1031847618510:android:2709c488791ba6a8b9ed9f",
+        "android_client_info": {
+          "package_name": "app.takeitback"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2tla9R7BZL7vAdRBvGo3eZy7Hwcsgz14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
