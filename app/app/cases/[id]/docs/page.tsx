@@ -47,7 +47,7 @@ export default async function DocsPage({ params }: { params: Promise<{ id: strin
           const url = signed?.[i]?.signedUrl || "#";
           const isImg = d.mime_type?.startsWith("image/");
           return (
-            <a key={d.id} href={url} target="_blank" rel="noreferrer" className="card stack g8" style={{ padding: 12, borderRadius: 20, textDecoration: "none" }}>
+            <a key={d.id} href={url} target="_blank" rel="noreferrer" className="card stack g8" style={{ padding: 12, borderRadius: 12, textDecoration: "none" }}>
               <div style={{ height: 120, borderRadius: 10, background: "#F3F3F3", overflow: "hidden", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 {isImg && url !== "#" ? (
                   // eslint-disable-next-line @next/next/no-img-element

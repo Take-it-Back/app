@@ -18,7 +18,7 @@ export default function SupportThread({ messages, staffView = false }: { message
         return (
           <li key={i} className="stack g4" style={{ alignItems: mine ? "flex-end" : "flex-start" }}>
             <span className="muted" style={{ fontSize: 12 }}>{m.from_staff ? "Take it back support" : staffView ? "Customer" : "You"} · {when(m.created_at)}</span>
-            <div style={{ maxWidth: 620, whiteSpace: "pre-wrap", overflowWrap: "anywhere", fontSize: 15, lineHeight: 1.55, padding: "12px 16px", borderRadius: 18, background: m.from_staff ? "var(--orange-soft)" : "var(--gray-soft)" }}>{m.body}</div>
+            <div style={{ maxWidth: 620, whiteSpace: "pre-wrap", overflowWrap: "anywhere", fontSize: 15, lineHeight: 1.55, padding: "12px 16px", borderRadius: 12, background: m.from_staff ? "var(--orange-soft)" : "var(--gray-soft)" }}>{m.body}</div>
           </li>
         );
       })}

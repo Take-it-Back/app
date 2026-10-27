@@ -11,7 +11,7 @@ export const LAW_DATA_DATE = "2026-10-11";
 
 function FactCard({ f }: { f: Fact }) {
   return (
-    <div className="card stack g4" style={{ borderRadius: 22, padding: "18px 22px" }}>
+    <div className="card stack g4" style={{ borderRadius: 12, padding: "18px 22px" }}>
       <span className="eyebrow">{f.label}</span>
       <span style={{ fontSize: 18, lineHeight: 1.5 }}>{f.text}</span>
       {f.url && <a href={f.url} target="_blank" rel="noopener noreferrer" className="muted small tap">Source</a>}
@@ -84,13 +84,13 @@ export function LawStateView({ topic, state }: { topic: LawTopic; state: string 
         </section>
 
         <section className="stack g12">
-          <Link href={`/guides/${topic.guide}`} className="card stack g4" style={{ textDecoration: "none", borderRadius: 22 }}>
+          <Link href={`/guides/${topic.guide}`} className="card stack g4" style={{ textDecoration: "none", borderRadius: 12 }}>
             <span className="eyebrow">Read the full guide</span>
             <span className="serif" style={{ fontSize: 24 }}>The step-by-step guide that goes with this page</span>
             <span className="muted small">Includes what to say and what not to do.</span>
           </Link>
           {aid && (
-            <Link href={`/legal-aid/${lawStateSlug(state)}`} className="card stack g4" style={{ textDecoration: "none", borderRadius: 22 }}>
+            <Link href={`/legal-aid/${lawStateSlug(state)}`} className="card stack g4" style={{ textDecoration: "none", borderRadius: 12 }}>
               <span className="eyebrow">Need a lawyer?</span>
               <span className="serif" style={{ fontSize: 24 }}>Free legal help in {state}</span>
               <span className="muted small">Phone numbers and websites for free civil legal aid.</span>

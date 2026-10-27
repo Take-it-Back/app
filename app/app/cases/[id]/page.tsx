@@ -65,7 +65,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
           {canceled && <p className="notice" style={{ margin: 0 }}>No problem. Nothing was charged.</p>}
           {c.summary && <p style={{ margin: 0, fontSize: 17 }}>{c.summary}</p>}
           <CtaLink href={`/app/cases/${id}/found`} variant="ink" block>See where you stand</CtaLink>
-          <Upsell caseId={id} userId={user.id} title="Track this fight from start to finish" />
+          <Upsell caseId={id} userId={user.id} title="Get the letter written and the deadlines tracked" />
           <form action={deleteCase.bind(null, id)}>
             <ConfirmSubmit message="Delete this case and its files? This can't be undone." className="btn-text" style={{ color: "#A8441F" }}>Delete this case and its files</ConfirmSubmit>
           </form>
@@ -118,7 +118,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
                 <span className="small" style={{ color: "#A8441F" }}>{yours ? `${yours.title} by ${shortDate(yours.due_date)}` : "Your deadline"}</span>
                 {yours ? <span className="big-num">{relDays(daysUntil(yours.due_date))}</span> : <><span className="serif" style={{ fontSize: 26 }}>Not set</span><a href="#dates" className="small" style={{ color: "#A8441F", fontWeight: 500, padding: "10px 0", margin: "-6px 0 -10px" }}>Add a date</a></>}
               </div>
-              <div className="card stack" style={{ borderRadius: 22 }}>
+              <div className="card stack" style={{ borderRadius: 12 }}>
                 <span className="small muted">{theirs ? `${theirs.title}` : "Their deadline"}</span>
                 {theirs ? <span className="big-num">{relDays(daysUntil(theirs.due_date))}</span> : <span className="serif muted" style={{ fontSize: 26 }}>None yet</span>}
                 {theirs && <span className="small muted">by {shortDate(theirs.due_date)}</span>}
@@ -131,7 +131,7 @@ export default async function CasePage({ params, searchParams }: { params: Promi
               {c.status === "waiting" ? (
                 <>
                   <UploadButton caseId={id} userId={user.id} ownerId={c.user_id} kind="reply" label="They replied — add their letter" analyze />
-                  <span className="hand muted" style={{ fontSize: 20 }}>no reply by the date? we'll help you follow up</span>
+                  <span className="muted small">If they haven't replied by the date, we'll help you follow up.</span>
                   <WriteLetterButton caseId={id} kind="followup" label="Write a follow-up" variant="ink" />
                   {draft && <Link href={`/app/cases/${id}/letter?id=${draft.id}`} style={{ fontSize: 15, fontWeight: 500 }}>You also have a draft letter</Link>}
                 </>

@@ -21,7 +21,7 @@ export default function GuidesPage() {
   return (
     <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Guides", "/guides"]])} />
-      <PageHead eyebrow="Guides" title="Know your rights, in" italic="plain English" after="." lede="Step-by-step guides for the fights most people lose by default. General information, not legal advice." />
+      <PageHead eyebrow="Guides" title="Guides" lede="Step-by-step guides to disputing bills, denials, deposits, debts and more. General information, not legal advice." />
       <section className="wrap-1200" style={{ paddingTop: 24 }}>
         <GuideBrowser guides={CARDS} />
       </section>
@@ -34,14 +34,14 @@ export default function GuidesPage() {
         <p className="muted" style={{ margin: 0, fontSize: 16 }}>Deadlines, limits and penalties for all 50 states and DC. <Link href="/states">Pick your state</Link></p>
         <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 16 }}>
           {LAW_TOPICS.map((t) => (
-            <Link key={t.slug} href={`/laws/${t.slug}`} className="card stack g8" style={{ textDecoration: "none", padding: 24, borderRadius: 24 }}>
+            <Link key={t.slug} href={`/laws/${t.slug}`} className="card stack g8" style={{ textDecoration: "none", padding: 24, borderRadius: 12 }}>
               <span className="serif" style={{ fontSize: 24, lineHeight: 1.15 }}>{t.indexTitle}</span>
               <span className="muted" style={{ fontSize: 15 }}>{t.indexDesc}</span>
             </Link>
           ))}
         </div>
       </section>
-      <CtaBand title="Rather we just" italic="handle it?" sub="Scan your letter free and we'll show you what's wrong." />
+      <CtaBand title="Scan your letter and see what's wrong." sub="Free, no card needed. Premium writes the letter and tracks the deadlines." />
     </main>
   );
 }

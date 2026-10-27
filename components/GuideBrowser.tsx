@@ -13,7 +13,7 @@ export type GuideCardData = {
 export function GuideCard({ g }: { g: GuideCardData }) {
   const cat = CATEGORIES.find((c) => c.slug === g.category);
   return (
-    <Link href={`/guides/${g.slug}`} className="card stack" style={{ textDecoration: "none", padding: 0, borderRadius: 22, overflow: "hidden", gap: 0 }}>
+    <Link href={`/guides/${g.slug}`} className="card stack" style={{ textDecoration: "none", padding: 0, borderRadius: 12, overflow: "hidden", gap: 0 }}>
       <GuideCover slug={g.slug} category={g.category} icon={g.icon} />
       <span className="stack g8" style={{ padding: "18px 20px 20px", flex: 1 }}>
         <span className="eyebrow" style={{ color: cat?.ink }}>{cat?.name}</span>

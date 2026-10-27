@@ -33,9 +33,8 @@ export default function Espanol() {
       <JsonLd data={[ORG, { "@type": "WebPage", "@id": `${SITE_URL}/es`, url: `${SITE_URL}/es`, inLanguage: "es-US", name: "Take it back en español" }, { ...APP_LD, inLanguage: ["en-US", "es-US"] }]} />
       <section className="wrap-1200 row wrap" style={{ paddingTop: "clamp(48px, 7vw, 88px)", gap: 56, alignItems: "center" }}>
         <div className="stack g20" style={{ flex: "1 1 480px", minWidth: 0 }}>
-          <span className="eyebrow" style={{ fontSize: 13 }}>Contra hospitales · aseguradoras · caseros · cobradores</span>
-          <h1 className="h-xl">Cuentan con que te rindas. <em className="o">Recupéralo</em>.</h1>
-          <p className="lede">Take it back lee la factura, negación o aviso injusto que recibiste, te dice en español qué está mal, escribe la carta para pelearlo y vigila cada fecha límite hasta que se resuelva.</p>
+          <h1 className="h-xl" style={{ fontSize: "clamp(40px, 4.8vw, 62px)" }}>Disputa facturas médicas, negaciones del seguro, caseros y cobradores.</h1>
+          <p className="lede">Take it back lee la factura, negación o aviso que recibiste, te dice en español qué está mal, escribe la carta para pelearlo y vigila cada fecha límite hasta que se resuelva.</p>
           <div className="row wrap g12" style={{ marginTop: 6 }}>
             <CtaLink href="/login?mode=signup&lang=es">Empieza gratis</CtaLink>
             <Link href="/legal-aid" className="btn-plain" style={{ minHeight: 52 }}>Ayuda legal gratis</Link>
@@ -48,10 +47,10 @@ export default function Espanol() {
       </section>
 
       <section className="wrap-1200 stack g24 m-section">
-        <h2 className="h-l">Cuatro peleas que la mayoría <em className="o">pierde sin pelear</em>.</h2>
+        <h2 className="h-l">Con qué te ayudamos</h2>
         <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 18 }}>
           {FIGHTS.map(([t, b, href]) => (
-            <Link key={t} href={href} className="card stack g8" style={{ textDecoration: "none", borderRadius: 22 }}>
+            <Link key={t} href={href} className="card stack g8" style={{ textDecoration: "none", borderRadius: 12 }}>
               <span className="serif" style={{ fontSize: 24 }}>{t}</span>
               <span className="muted" style={{ fontSize: 15 }}>{b}</span>
               <span style={{ fontSize: 14, fontWeight: 500, color: "#A8441F" }}>Pelea →</span>

@@ -25,7 +25,7 @@ export default function GuiasPage() {
           {ES_GUIDES.map((g) => {
             const en = guideBySlug(g.slug);
             return (
-              <Link key={g.slug} href={`/es/guias/${g.slug}`} className="card stack" style={{ textDecoration: "none", padding: 0, borderRadius: 22, overflow: "hidden", gap: 0 }}>
+              <Link key={g.slug} href={`/es/guias/${g.slug}`} className="card stack" style={{ textDecoration: "none", padding: 0, borderRadius: 12, overflow: "hidden", gap: 0 }}>
                 {en && <GuideCover slug={g.slug} category={en.category} icon={en.icon} />}
                 <span className="stack g8" style={{ padding: "18px 20px 20px" }}>
                   <span className="serif" style={{ fontSize: 22, lineHeight: 1.18 }}>{g.title}</span>
@@ -37,7 +37,7 @@ export default function GuiasPage() {
         </div>
         <p className="muted" style={{ marginTop: 28 }}>Más guías en inglés: <Link href="/guides">ver todas</Link>.</p>
       </section>
-      <CtaBand title="¿Prefiere que lo" italic="hagamos por usted?" sub="Escanee su carta gratis y le mostramos qué está mal." />
+      <CtaBand title="Escanee su carta y vea qué está mal." sub="Gratis, sin tarjeta. Premium escribe la carta y vigila las fechas." />
     </main>
   );
 }

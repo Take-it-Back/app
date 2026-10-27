@@ -37,7 +37,7 @@ export default async function EscalatePage({ params }: { params: Promise<{ id: s
           <p className="muted" style={{ margin: "0 0 12px", fontSize: 15 }}>Regulators forward your complaint to the company, and companies usually have to respond. It&apos;s free.</p>
           <div className="stack g12">
             {agencies.map((a) => (
-              <div key={a.key} className="card stack g8" style={{ borderRadius: 22 }}>
+              <div key={a.key} className="card stack g8" style={{ borderRadius: 12 }}>
                 <span className="row between g8" style={{ alignItems: "flex-start" }}>
                   <span className="stack g4"><span style={{ fontWeight: 600, fontSize: 16 }}>{a.name}</span><span className="muted small">{a.what}</span></span>
                 </span>
@@ -79,7 +79,7 @@ export default async function EscalatePage({ params }: { params: Promise<{ id: s
           </section>
         )}
 
-        <Link href={`/app/cases/${id}/small-claims`} className="card stack g4" style={{ textDecoration: "none", borderRadius: 22, background: "#FAFAFA" }}>
+        <Link href={`/app/cases/${id}/small-claims`} className="card stack g4" style={{ textDecoration: "none", borderRadius: 12, background: "#FAFAFA" }}>
           <span className="serif" style={{ fontSize: 24 }}>Small claims <em className="o">kit</em></span>
           <span className="muted small">{c.category === "landlord" ? "Deposit still not back? Get ready to file, step by step." : "When they owe you money and won't pay, small claims court is built for people without lawyers."}</span>
         </Link>

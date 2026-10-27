@@ -21,7 +21,7 @@ export default function StatesIndex() {
           <h2 className="serif" style={{ fontSize: 30, margin: 0, fontWeight: 400 }}>By topic</h2>
           <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 16 }}>
             {LAW_TOPICS.map((t) => (
-              <Link key={t.slug} href={`/laws/${t.slug}`} className="card stack g8" style={{ textDecoration: "none", padding: 24, borderRadius: 24 }}>
+              <Link key={t.slug} href={`/laws/${t.slug}`} className="card stack g8" style={{ textDecoration: "none", padding: 24, borderRadius: 12 }}>
                 <span className="serif" style={{ fontSize: 24, lineHeight: 1.15 }}>{t.indexTitle}</span>
                 <span className="muted" style={{ fontSize: 15 }}>{t.indexDesc}</span>
               </Link>
@@ -35,7 +35,7 @@ export default function StatesIndex() {
           </div>
         </div>
       </section>
-      <CtaBand title="Rather we just" italic="handle it?" sub="Scan your letter free and we'll show you what's wrong." />
+      <CtaBand title="Scan your letter and see what's wrong." sub="Free, no card needed. Premium writes the letter and tracks the deadlines." />
     </main>
   );
 }

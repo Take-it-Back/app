@@ -52,7 +52,6 @@ export default async function CasesPage({ searchParams }: { searchParams: Promis
       </nav>
       {!cases.length ? (
         <div className="stack g12 center" style={{ alignItems: "center", paddingTop: 48 }}>
-          <span className="hand" style={{ fontSize: 32 }}>nothing here yet</span>
           <p className="muted" style={{ margin: 0 }}>Scan a bill, denial or notice to start a case.</p>
           <Link href="/app/scan" className="btn-plain">Scan a document</Link>
         </div>

@@ -45,7 +45,6 @@ export default async function HelpPage({ searchParams }: { searchParams: Promise
             </a>
           ))}
         </div>
-        <span className="hand muted" style={{ fontSize: 24, alignSelf: "center" }}>you're not alone in this</span>
         <p className="muted small" style={{ margin: 0 }}>Question about the app, billing or a scan? <a href="/app/support">Contact our support team</a>.</p>
         <p className="muted small" style={{ margin: 0 }}>Bring your case packet (on any case page) so they can help you faster. If you're in danger, call 911.</p>
       </div>

@@ -14,11 +14,11 @@ export default function Page() {
   return (
     <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Free tools", "/tools"], ["Free dispute letter builder", "/tools/letter-builder"]])} />
-      <PageHead eyebrow="Free tool" title="Build your" italic="letter" after="." lede="Answer a few questions and copy the letter. Nothing you type is saved or sent." />
+      <PageHead eyebrow="Free tool" title="Letter builder" lede="Answer a few questions and copy the letter. Nothing you type is saved or sent." />
       <section className="wrap-1200" style={{ paddingTop: 32, maxWidth: 820 }}>
         <LetterBuilder />
       </section>
-      <CtaBand title="Rather we just" italic="handle it?" sub="Scan your letter free and we'll show you what's wrong." />
+      <CtaBand title="Scan your letter and see what's wrong." sub="Free, no card needed. Premium writes the letter and tracks the deadlines." />
     </main>
   );
 }

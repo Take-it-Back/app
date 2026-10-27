@@ -13,7 +13,6 @@ export default function HealthDataPrivacy() {
   return (
     <main id="main" className="stack g16" style={{ maxWidth: 720, margin: "0 auto", padding: "72px 24px 96px", fontSize: 16, lineHeight: 1.65 }}>
       <JsonLd data={breadcrumbs([["Home", "/"], ["Privacy", "/privacy"], ["Health data", "/health-data-privacy"]])} />
-      <span className="eyebrow">Privacy</span>
       <h1 className="h-l">Consumer health data <em className="o">privacy policy</em></h1>
       <p className="muted">Effective October 12, 2026. This policy covers &ldquo;consumer health data&rdquo; under Washington&apos;s My Health My Data Act, Nevada law (SB 370), Connecticut law and similar state laws. It adds to our main <a href="/privacy">privacy policy</a> and will be finalized with counsel before general launch.</p>
 

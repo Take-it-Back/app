@@ -32,14 +32,13 @@ export default async function WonPage({ params }: { params: Promise<{ id: string
           <span className="tag tag-gray" style={{ alignSelf: "flex-start" }}>{CATEGORY_INFO[c.category].label}</span>
           <h1 className="page-title" style={{ fontSize: 38 }}>{won ? <>You took it <em className="o">back</em>.</> : <>Case <em className="o">closed</em>.</>}</h1>
         </div>
-        <div className="panel-gray stack center" style={{ alignItems: "center", padding: "26px 22px", position: "relative", borderRadius: 26 }}>
+        <div className="panel-gray stack center" style={{ alignItems: "center", padding: "26px 22px", position: "relative", borderRadius: 12 }}>
           <span className="small">{c.status === "settled" ? "Settled" : won ? "Saved or recovered" : "Closed"}</span>
           <span className="serif" style={{ fontSize: 72, lineHeight: 1.05 }}>{c.outcome_amount ? money(c.outcome_amount) : "Done"}</span>
           <span className="small muted">{c.title}{c.closed_at ? ` · closed ${shortDate(c.closed_at)}` : ""}</span>
           {won && (
             <div className="paper" style={{ position: "absolute", right: -6, bottom: -26, transform: "rotate(3deg)", padding: "16px 16px 10px" }}>
               <span className="tape" style={{ width: 56, marginLeft: -28 }} />
-              <span className="hand" style={{ fontSize: 26 }}>you did that.</span>
             </div>
           )}
         </div>

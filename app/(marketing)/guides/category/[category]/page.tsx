@@ -44,7 +44,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
           <Link href="/guides" className="chip">All guides</Link>
         </div>
       </section>
-      <CtaBand title="Rather we just" italic="handle it?" sub="Scan your letter free and we'll show you what's wrong." />
+      <CtaBand title="Scan your letter and see what's wrong." sub="Free, no card needed. Premium writes the letter and tracks the deadlines." />
     </main>
   );
 }

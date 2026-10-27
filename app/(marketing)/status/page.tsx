@@ -42,7 +42,7 @@ export default async function StatusPage() {
         {s?.parts.map((p) => {
           const byDay = new Map(p.days.map((d) => [d.day, d.pct]));
           return (
-            <div key={p.name} className="card stack g12" style={{ borderRadius: 20 }}>
+            <div key={p.name} className="card stack g12" style={{ borderRadius: 12 }}>
               <div className="row between wrap g8" style={{ alignItems: "baseline" }}>
                 <span style={{ fontWeight: 600, fontSize: 17 }}>{p.name}</span>
                 <span className={`tag ${p.up ? "tag-gray" : "tag-orange"}`}>{p.up ? "Working" : "Having trouble"}</span>

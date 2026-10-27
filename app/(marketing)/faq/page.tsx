@@ -11,7 +11,7 @@ export default function FaqPage() {
   return (
     <main id="main">
       <JsonLd data={[faqPage([...FAQ_GROUPS.flatMap((g) => g.items), ...PROBLEMS.flatMap((p) => p.faqs)]), breadcrumbs([["Home", "/"], ["FAQ", "/faq"]])]} />
-      <PageHead eyebrow="FAQ" title="Good" italic="questions" after="." lede="Can't find what you need? Send us a message on the support page and a person will write back." />
+      <PageHead eyebrow="FAQ" title="Questions and answers" lede="Can't find what you need? Send us a message on the support page and a person will write back." />
       <div className="stack g48" style={{ maxWidth: 820, margin: "0 auto", padding: "48px 24px 0", gap: 56 }}>
         {FAQ_GROUPS.map((g) => (
           <section key={g.title} className="stack g16">
@@ -24,8 +24,7 @@ export default function FaqPage() {
         <div className="panel-sec orange">
           <div className="inner stack g24">
             <div className="stack g8">
-              <span className="eyebrow" style={{ fontSize: 13, color: "#A8441F" }}>By problem</span>
-              <h2 className="h-l" style={{ fontSize: "clamp(32px, 3.6vw, 46px)" }}>Questions about your <em className="o">fight</em></h2>
+              <h2 className="h-l" style={{ fontSize: "clamp(32px, 3.6vw, 46px)" }}>Questions by topic</h2>
             </div>
             <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: 28 }}>
               {PROBLEMS.map((p) => (
@@ -39,7 +38,7 @@ export default function FaqPage() {
           </div>
         </div>
       </section>
-      <CtaBand title="Still unsure? Try it" italic="free." sub="Scan one letter and see what we find." />
+      <CtaBand title="Try it on one letter, free." sub="Scan one letter and see what we find." />
     </main>
   );
 }

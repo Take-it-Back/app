@@ -26,7 +26,7 @@ export default async function ToolsPage() {
     <main id="main" className="app-main">
       <h1 className="page-title" style={{ marginBottom: 18 }}>More</h1>
       <div className="stack g24">
-        <Link href="/app/you" className="card row g12" style={{ textDecoration: "none", alignItems: "center", borderRadius: 22 }}>
+        <Link href="/app/you" className="card row g12" style={{ textDecoration: "none", alignItems: "center", borderRadius: 12 }}>
           <Avatar size={48} />
           <span className="stack grow" style={{ minWidth: 0 }}>
             <span style={{ fontWeight: 500, fontSize: 16 }}>{p?.full_name || "Your account"}</span>

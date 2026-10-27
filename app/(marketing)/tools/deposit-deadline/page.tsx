@@ -14,11 +14,11 @@ export default function Page() {
   return (
     <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Free tools", "/tools"], ["Security deposit deadline by state", "/tools/deposit-deadline"]])} />
-      <PageHead eyebrow="Free tool" title="When is your deposit" italic="due?" after="." lede="Choose your state and move-out date. Nothing you enter is saved or sent." />
+      <PageHead eyebrow="Free tool" title="Deposit deadline calculator" lede="Choose your state and move-out date. Nothing you enter is saved or sent." />
       <section className="wrap-1200" style={{ paddingTop: 32, maxWidth: 820 }}>
         <DepositDeadline />
       </section>
-      <CtaBand title="Rather we just" italic="handle it?" sub="Scan your letter free and we'll show you what's wrong." />
+      <CtaBand title="Scan your letter and see what's wrong." sub="Free, no card needed. Premium writes the letter and tracks the deadlines." />
     </main>
   );
 }

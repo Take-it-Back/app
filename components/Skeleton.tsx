@@ -4,7 +4,7 @@ export default function PageSkeleton({ title = true, tiles = 2, rows = 4 }: { ti
       {title && <div className="skel" style={{ height: 40, width: 180, marginBottom: 20 }} />}
       {tiles > 0 && (
         <div className="grid-tiles" style={{ marginBottom: 20 }}>
-          {Array.from({ length: tiles }).map((_, i) => <div key={i} className="skel" style={{ height: 104, borderRadius: 22 }} />)}
+          {Array.from({ length: tiles }).map((_, i) => <div key={i} className="skel" style={{ height: 104, borderRadius: 12 }} />)}
         </div>
       )}
       <div className="stack g12">

@@ -31,7 +31,7 @@ export default async function AppSupportPage({ searchParams }: { searchParams: P
             ))}
           </section>
         )}
-        <section className="card stack g12" style={{ borderRadius: 22 }}>
+        <section className="card stack g12" style={{ borderRadius: 12 }}>
           <h2 className="serif" style={{ margin: 0, fontSize: 26 }}>{tickets?.length ? "Ask something new" : "Send us a message"}</h2>
           <SupportForm signedIn cases={cases || []} topic={topic} caseId={caseId} page="/app/support" />
         </section>
