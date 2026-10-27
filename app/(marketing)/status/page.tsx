@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { createClient } from "@supabase/supabase-js";
-import { pageMeta } from "@/lib/seo";
+import { pageMeta, JsonLd, breadcrumbs } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
   title: "Status: is Take it back working?",
@@ -29,7 +29,7 @@ export default async function StatusPage() {
   const days = Array.from({ length: 30 }, (_, i) => new Date(Date.now() - (29 - i) * 86400000).toISOString().slice(0, 10));
   return (
     <main id="main" className="stack g24" style={{ maxWidth: 820, margin: "0 auto", padding: "72px 24px 96px" }}>
-      <span className="eyebrow">Status</span>
+      <JsonLd data={breadcrumbs([["Home", "/"], ["Status", "/status"]])} />
       <div className={down.length || error ? "panel-orange" : "panel-gray"} style={{ display: "flex", alignItems: "center", gap: 14 }}>
         <span aria-hidden="true" style={{ width: 14, height: 14, borderRadius: 7, flex: "none", background: down.length || error ? "var(--orange)" : "#3C7D4E" }} />
         <span className="stack g4">
