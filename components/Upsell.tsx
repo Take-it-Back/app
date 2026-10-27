@@ -6,7 +6,7 @@ const DEFAULT_POINTS = ["Letters written for you, ready to send", "Every deadlin
 
 export default function Upsell({
   title = "Take the next step with Premium",
-  body = "Free gives you the lay of the land. Premium does the work: it writes the letters, tracks every date and stays with you until it's settled.",
+  body = "Premium writes the letters, reminds you before each deadline, and reads their replies, on every case.",
   points = DEFAULT_POINTS,
   compact = false,
   caseId,
@@ -23,15 +23,14 @@ export default function Upsell({
   return (
     <section className="upsell" aria-label="Premium">
       <div className="stack g8">
-        <span className="eyebrow" style={{ color: "#BF4F28" }}>Premium</span>
         <span className="serif" style={{ fontSize: compact ? 22 : 26, lineHeight: 1.15 }}>{title}</span>
-        {!compact && <span style={{ fontSize: 15, color: "#D9D9D9" }}>{body}</span>}
+        {!compact && <span className="muted" style={{ fontSize: 15 }}>{body}</span>}
       </div>
       {!compact && (
         <ul className="stack g8" style={{ margin: "16px 0 0", padding: 0, listStyle: "none" }}>
           {points.map((p) => (
             <li key={p} className="row g8" style={{ fontSize: 14.5 }}>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BF4F28" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10" /></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10" /></svg>
               {p}
             </li>
           ))}
@@ -39,11 +38,11 @@ export default function Upsell({
       )}
       <div className="row g12 wrap" style={{ marginTop: 18 }}>
         <CtaLink href="/app/upgrade" variant="orange">Try Premium free for {TRIAL_DAYS} days</CtaLink>
-        <span className="small" style={{ color: "#BDBDBD" }}>On the yearly plan, then {PRICES.yearly.label} a year. Or {PRICES.monthly.label} a month. Cancel anytime.</span>
+        <span className="small muted">On the yearly plan, then {PRICES.yearly.label} a year. Or {PRICES.monthly.label} a month. Cancel anytime.</span>
       </div>
       {caseId && (
-        <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid #3A3A3A" }}>
-          <UnlockCase caseId={caseId} userId={userId} label={CASE_PASS.label} days={CASE_PASS.days} />
+        <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid var(--line)" }}>
+          <UnlockCase caseId={caseId} userId={userId} label={CASE_PASS.label} days={CASE_PASS.days} tone="light" />
         </div>
       )}
     </section>
