@@ -108,7 +108,7 @@ export function LetterBuilder() {
           </div>
         ))}
       </div>
-      <div className="card" style={{ padding: 22, borderRadius: 12 }}>
+      <div className="card" style={{ padding: 22, borderRadius: 22 }}>
         <pre aria-label="Your letter" style={{ margin: 0, whiteSpace: "pre-wrap", wordBreak: "break-word", font: "inherit", fontSize: 15.5, lineHeight: 1.65 }}>{text}</pre>
       </div>
       <div className="row wrap g8">

@@ -19,9 +19,9 @@ export default async function LegalAidIndex({ searchParams }: { searchParams: Pr
   return (
     <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Legal aid", "/legal-aid"]])} />
-      <PageHead eyebrow="Legal aid" title="Free legal aid near you" after="." lede="Legal aid offices help people who can't afford a lawyer with evictions, debt lawsuits, medical bills and insurance denials. Here's who to call in your state." />
+      <PageHead eyebrow="Legal aid" title="Free legal help," italic="near you" after="." lede="Legal aid offices help people who can't afford a lawyer with evictions, debt lawsuits, medical bills and insurance denials. Here's who to call in your state." />
       <section className="wrap" style={{ maxWidth: 820, margin: "0 auto", padding: "0 24px 48px" }}>
-        <form method="get" className="card row wrap g12" style={{ alignItems: "flex-end", borderRadius: 12 }}>
+        <form method="get" className="card row wrap g12" style={{ alignItems: "flex-end", borderRadius: 22 }}>
           <label className="field grow" style={{ minWidth: 200 }}><span style={{ fontSize: 15, fontWeight: 500 }}>Your ZIP code</span><input name="zip" inputMode="numeric" pattern="[0-9]{5}" maxLength={5} className="input" placeholder="e.g. 18701" defaultValue={zip || ""} /></label>
           <button className="btn-plain" style={{ minHeight: 48 }}>Find help</button>
           {zip && !st && <p className="small" style={{ color: "#A8441F", margin: 0, width: "100%" }}>We couldn&apos;t match that ZIP code. Pick your state below.</p>}
@@ -31,7 +31,7 @@ export default async function LegalAidIndex({ searchParams }: { searchParams: Pr
           {AID_STATES.map((s) => <li key={s}><Link href={`/legal-aid/${stateSlug(s)}`} style={{ display: "block", padding: "8px 0", fontSize: 16 }}>{s}</Link></li>)}
         </ul>
       </section>
-      <CtaBand title="If you're not in court yet, answer in writing." sub="Scan the bill or letter. We'll find the problems and write what to send." />
+      <CtaBand title="Not in court yet?" italic="Fight it in writing." sub="Scan the bill or letter. We'll find the problems and write what to send." />
     </main>
   );
 }

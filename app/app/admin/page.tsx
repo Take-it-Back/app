@@ -76,7 +76,7 @@ export default async function AdminPage() {
       <div className="stack g20">
         <div className="grid-tiles">
           {tiles.map(([label, value, sub], i) => (
-            <div key={label} className={i === 1 ? "panel-orange stack" : "card stack"} style={{ borderRadius: 12 }}>
+            <div key={label} className={i === 1 ? "panel-orange stack" : "card stack"} style={{ borderRadius: 22 }}>
               <span className="small muted">{label}</span>
               <span className="big-num" style={{ fontSize: 38 }}>{value}</span>
               {sub && <span className="small muted">{sub}</span>}

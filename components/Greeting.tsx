@@ -5,11 +5,11 @@ export default function Greeting({ name, style }: { name: string; style?: React.
   const [part, setPart] = useState("Hello");
   useEffect(() => {
     const h = new Date().getHours();
-    setPart(h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening");
+    setPart(h < 12 ? "Morning" : h < 18 ? "Afternoon" : "Evening");
   }, []);
   return (
-    <span style={{ fontWeight: 600, ...style, fontSize: 17 }}>
-      {part}{name ? `, ${name}` : ""}.
+    <span className="serif" style={{ fontStyle: "italic", color: "#BF4F28", ...style }}>
+      {part}{name ? `, ${name}` : ""} —
     </span>
   );
 }

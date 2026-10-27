@@ -59,10 +59,10 @@ export default async function ReplyPage({ params, searchParams }: { params: Prom
             {a.outcome === "won" ? (
               <div className="paper" style={{ alignSelf: "center", padding: "24px 20px 18px", transform: "rotate(1.5deg)", maxWidth: 300 }}>
                 <span className="tape" />
-                <span className="muted small">Looks like a win. You can close the case on the case page.</span>
+                <span className="hand" style={{ fontSize: 26 }}>looks like you won! close the case on the case page.</span>
               </div>
             ) : (
-              <span className="muted small">A first “no” is common. Most people send a second letter, and many win on that one.</span>
+              <span className="hand muted" style={{ fontSize: 24, alignSelf: "center" }}>a “no” on round one is normal — keep going</span>
             )}
             {a.next_steps?.length > 0 && (
               <section className="card">

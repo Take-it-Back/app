@@ -63,7 +63,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       />
       <article style={{ maxWidth: 760, margin: "0 auto", padding: "clamp(40px, 6vw, 72px) 24px 0" }}>
         <Link href="/guides" className="muted tap" style={{ fontSize: 14, textDecoration: "none" }}>← All guides</Link>
-        <div style={{ marginTop: 18, borderRadius: 12, overflow: "hidden" }}>
+        <div style={{ marginTop: 18, borderRadius: 24, overflow: "hidden" }}>
           <GuideCover slug={g.slug} category={g.category} icon={g.icon} ratio="2.4 / 1" />
         </div>
         <Link href={`/guides/category/${cat.slug}`} className="eyebrow tap" style={{ display: "flex", margin: "12px 0 0", fontSize: 13, textDecoration: "none" }}>{cat.name}</Link>
@@ -96,7 +96,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         {g.depositTable && (
           <section style={{ marginTop: 32 }}>
             <h2 className="serif" style={{ fontSize: 30, margin: "0 0 12px", fontWeight: 400 }}>Deadlines by state</h2>
-            <div className="card" style={{ padding: "8px 12px", borderRadius: 12 }}>
+            <div className="card" style={{ padding: "8px 12px", borderRadius: 22 }}>
               <table className="pt">
                 <thead><tr><th scope="col">State</th><th scope="col">Deadline to return the deposit</th></tr></thead>
                 <tbody>
@@ -113,7 +113,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         {g.table === "debt" && (
           <section style={{ marginTop: 32 }}>
             <h2 className="serif" style={{ fontSize: 30, margin: "0 0 12px", fontWeight: 400 }}>Time limits by state</h2>
-            <div className="card" style={{ padding: "8px 12px", borderRadius: 12 }}>
+            <div className="card" style={{ padding: "8px 12px", borderRadius: 22 }}>
               <table className="pt">
                 <thead><tr><th scope="col">State</th><th scope="col">Years to sue</th><th scope="col">Can a payment or promise restart it?</th></tr></thead>
                 <tbody>
@@ -134,7 +134,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         {g.table === "smallclaims" && (
           <section style={{ marginTop: 32 }}>
             <h2 className="serif" style={{ fontSize: 30, margin: "0 0 12px", fontWeight: 400 }}>Limits by state</h2>
-            <div className="card" style={{ padding: "8px 12px", borderRadius: 12 }}>
+            <div className="card" style={{ padding: "8px 12px", borderRadius: 22 }}>
               <table className="pt">
                 <thead><tr><th scope="col">State</th><th scope="col">Limit</th><th scope="col">Court</th><th scope="col">Filing fee</th></tr></thead>
                 <tbody>
@@ -179,13 +179,13 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
 
         <section style={{ marginTop: 40 }}>
           {p ? (
-            <Link href={`/fight/${p.slug}`} className="card stack g4" style={{ textDecoration: "none", borderRadius: 12 }}>
+            <Link href={`/fight/${p.slug}`} className="card stack g4" style={{ textDecoration: "none", borderRadius: 22 }}>
               <span className="eyebrow">How Take it back helps</span>
               <span className="serif" style={{ fontSize: 24 }}>{p.seoTitle}</span>
               <span className="muted small">{p.menu}</span>
             </Link>
           ) : (
-            <Link href="/how-it-works" className="card stack g4" style={{ textDecoration: "none", borderRadius: 12 }}>
+            <Link href="/how-it-works" className="card stack g4" style={{ textDecoration: "none", borderRadius: 22 }}>
               <span className="eyebrow">How Take it back helps</span>
               <span className="serif" style={{ fontSize: 24 }}>Scan the letter. We find what's wrong and write the reply.</span>
               <span className="muted small">See how it works →</span>

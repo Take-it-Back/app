@@ -119,7 +119,7 @@ export default function ScanFlow({ userId, defaultState }: { userId: string; def
       <div className="stack g16 center" style={{ alignItems: "center", paddingTop: 120 }} role="status" aria-live="polite">
         <span style={{ animation: "wig 1.2s ease infinite", display: "inline-flex" }}><Mark size={56} /></span>
         <span className="serif" style={{ fontSize: 28 }}>{busy}</span>
-        <span className="muted small">This takes about half a minute.</span>
+        <span className="hand muted" style={{ fontSize: 24 }}>this takes about half a minute</span>
       </div>
     );
 
@@ -131,7 +131,7 @@ export default function ScanFlow({ userId, defaultState }: { userId: string; def
       </div>
 
       <section className="stack g12">
-        <div style={{ background: "#222", borderRadius: 12, minHeight: 220, padding: 20, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, color: "#fff", textAlign: "center" }}>
+        <div style={{ background: "#222", borderRadius: 24, minHeight: 220, padding: 20, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 14, color: "#fff", textAlign: "center" }}>
           {files.length ? (
             <div className="stack g8" style={{ width: "100%" }}>
               {files.map((f, i) => (
@@ -140,12 +140,12 @@ export default function ScanFlow({ userId, defaultState }: { userId: string; def
                   <button type="button" onClick={() => setFiles(files.filter((_, j) => j !== i))} className="btn-text" style={{ color: "#fff", fontSize: 14 }}>Remove</button>
                 </div>
               ))}
-              <span className="muted small">Add every page of the letter or bill.</span>
+              <span className="hand" style={{ fontSize: 22 }}>more pages? add them too</span>
             </div>
           ) : (
             <>
               <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#E07A52" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h2" /><path d="M16 4h2a2 2 0 0 1 2 2v2" /><path d="M20 16v2a2 2 0 0 1-2 2h-2" /><path d="M8 20H6a2 2 0 0 1-2-2v-2" /></svg>
-              <span className="muted small">Lay it flat in good light.</span>
+              <span className="hand" style={{ fontSize: 26 }}>hold it flat, in good light</span>
             </>
           )}
         </div>
@@ -187,7 +187,7 @@ export default function ScanFlow({ userId, defaultState }: { userId: string; def
         <div className="field">
           <label htmlFor="received">When did it arrive?</label>
           <input id="received" type="date" className="input" value={received} max={todayISO()} onChange={(e) => setReceived(e.target.value)} required />
-          <span className="muted small">The date on the envelope or email is fine.</span>
+          <span className="hand muted" style={{ fontSize: 20 }}>the date on the envelope or email is fine</span>
         </div>
         <fieldset className="field" style={{ border: 0, padding: 0, margin: 0 }}>
           <legend style={{ fontSize: 15, fontWeight: 500, marginBottom: 8 }}>Have you paid any of it?</legend>

@@ -76,6 +76,7 @@ export default async function DatesPage() {
       </div>
       {!deadlines.length && (
         <div className="stack g8 center" style={{ alignItems: "center", paddingTop: 40 }}>
+          <span className="hand" style={{ fontSize: 32 }}>a calm calendar</span>
           <p className="muted" style={{ margin: 0 }}>Dates appear here when you start a case.</p>
         </div>
       )}

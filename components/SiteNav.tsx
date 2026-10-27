@@ -103,8 +103,9 @@ export default function SiteNav() {
               <Link href="/features" style={{ fontWeight: 500, fontSize: 15, padding: "4px 12px" }}>See all features</Link>
             </div>
             <div className="mega-side">
-              <span className="serif" style={{ fontSize: 24, lineHeight: 1.15 }}>One insurance appeal, start to finish.</span>
-              <span style={{ color: "#D4D4D4", fontSize: 14 }}>A denied MRI, the appeal letter, the deadlines and their reply.</span>
+              <span className="eyebrow" style={{ color: "#F0A07E" }}>New here?</span>
+              <span className="serif" style={{ fontSize: 26, lineHeight: 1.1 }}>From scary letter to <em style={{ color: "#F0A07E" }}>settled</em>, in five steps.</span>
+              <span style={{ color: "#D4D4D4", fontSize: 14 }}>See how a real fight plays out, screen by screen.</span>
               <div style={{ marginTop: "auto" }}><CtaLink href="/how-it-works" variant="light">How it works</CtaLink></div>
             </div>
           </div>
@@ -115,7 +116,8 @@ export default function SiteNav() {
         <div id="mega-who" className="mega" {...hover("who")}>
           <div className="mega-in">
             <div className="stack g12">
-                            <div className="mega-grid">
+              <span className="eyebrow">Fight back against</span>
+              <div className="mega-grid">
                 {PROBLEMS.map((p) => (
                   <Link key={p.slug} href={`/fight/${p.slug}`} className="mega-item">
                     <span className="ico o"><FeatureIcon slug={p.slug} /></span>
@@ -129,8 +131,9 @@ export default function SiteNav() {
               <Link href="/fight" style={{ fontWeight: 500, fontSize: 15, padding: "4px 12px" }}>See everyone we fight</Link>
             </div>
             <div className="mega-side">
-              <span className="serif" style={{ fontSize: 24, lineHeight: 1.15 }}>We're paid by you, never by the companies you're disputing.</span>
-              <span style={{ color: "#D4D4D4", fontSize: 14 }}>For patients, policyholders, renters and borrowers in the US.</span>
+              <span className="eyebrow" style={{ color: "#F0A07E" }}>On your side</span>
+              <span className="serif" style={{ fontSize: 26, lineHeight: 1.1 }}>We work for you. Never for <em style={{ color: "#F0A07E" }}>them</em>.</span>
+              <span style={{ color: "#D4D4D4", fontSize: 14 }}>For patients, policyholders, renters and consumers in the US.</span>
               <div style={{ marginTop: "auto" }}><CtaLink href="/about" variant="light">Why we built it</CtaLink></div>
             </div>
           </div>

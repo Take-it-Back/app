@@ -28,7 +28,7 @@ export default async function WinPage({ params }: { params: Promise<{ id: string
   if (!w) notFound();
   return (
     <main id="main" style={{ maxWidth: 640, margin: "0 auto", padding: "64px 24px 96px" }} className="stack g24">
-      <div className="panel-gray stack g12" style={{ alignItems: "center", textAlign: "center", padding: "40px 24px", borderRadius: 12 }}>
+      <div className="panel-gray stack g12" style={{ alignItems: "center", textAlign: "center", padding: "40px 24px", borderRadius: 28 }}>
         <Mark size={48} />
         <span className="eyebrow">Someone just took it back</span>
         <span className="serif" style={{ fontSize: "clamp(56px, 16vw, 96px)", lineHeight: 1 }}>{w.amount ? money(w.amount) : "Won"}</span>

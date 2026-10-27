@@ -35,7 +35,7 @@ export function list(items: [string, string][]) {
 }
 
 export function emailLayout({ preheader, title, accent, body, footerNote }: { preheader: string; title: string; accent?: string; body: string; footerNote?: string }) {
-  const heading = esc(title); // `accent` is ignored: plain headings read less like a template.
+  const heading = accent ? title.replace(accent, `<em style="font-style:italic;color:${C.orange}">${esc(accent)}</em>`) : esc(title);
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light only"><title>${esc(title)}</title></head>
 <body style="margin:0;padding:0;background:${C.cream}">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0">${esc(preheader)}&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</div>

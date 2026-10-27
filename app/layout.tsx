@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   formatDetection: { telephone: false },
   openGraph: {
     title: "Take it back",
-    description: "Dispute medical bills, insurance denials, landlords and debt collectors. Scan the letter, see what's wrong, and send the reply we write for you.",
+    description: "Fight back against hospitals, insurers, landlords and debt collectors. They count on you giving up. Take it back.",
     url: "https://www.takeitback.app",
     siteName: "Take it back",
     type: "website",

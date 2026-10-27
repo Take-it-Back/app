@@ -40,7 +40,7 @@ export default async function Today({ searchParams }: { searchParams: Promise<{ 
 
   let briefing = "Nothing needs you today. Enjoy it.";
   const bits: string[] = [];
-  if (needsHelp) bits.push(`${needsHelp.title} may need a lawyer or legal aid. Please look at it today`);
+  if (needsHelp) bits.push(`${needsHelp.title} may need a real person — please look today`);
   else if (draftCase) bits.push(`your letter for ${draftCase.title} is ready to send`);
   else if (nextYours) bits.push(`${nextYours.title.toLowerCase()} for ${caseOf(nextYours.case_id)?.title || "a case"} in ${relDays(daysUntil(nextYours.due_date))}`);
   if (nextTheirs) {
@@ -61,7 +61,8 @@ export default async function Today({ searchParams }: { searchParams: Promise<{ 
         <div className="card stack g8"><Greeting name={name} style={{ fontSize: 22 }} /><p style={{ margin: 0 }}>Nothing needs you today. Enjoy it.</p></div>
         <div className="stack g12 center" style={{ alignItems: "center", marginTop: 72 }}>
           <svg width="120" height="88" viewBox="0 0 120 88" aria-hidden="true"><path d="M14 52h92l-8 28H22z" fill="#fff" stroke="#1A1A1A" strokeWidth="1.8" strokeLinejoin="round" /><path d="M14 52l10-16h72l10 16" fill="none" stroke="#1A1A1A" strokeWidth="1.8" strokeLinejoin="round" /><path d="M44 52a16 6 0 0 0 32 0" fill="none" stroke="#1A1A1A" strokeWidth="1.8" /><circle cx="92" cy="18" r="8" fill="#FDEEE7" stroke="#BF4F28" strokeWidth="1.8" /></svg>
-          <p className="muted" style={{ margin: 0, maxWidth: 300 }}>When a bill, denial or notice shows up, scan it and we'll show you what to do next.</p>
+          <span className="hand" style={{ fontSize: 34, lineHeight: 1 }}>a clear desk</span>
+          <p className="muted" style={{ margin: 0, maxWidth: 300 }}>When a bill, denial or notice shows up, snap it and we'll take it from there.</p>
           <div style={{ marginTop: 8 }}><CtaLink href="/app/scan" variant="orange">Scan your first document</CtaLink></div>
           <form action={createDemoCase}><button className="btn-text" style={{ fontSize: 15 }}>Or explore a sample case first</button></form>
         </div>
@@ -88,16 +89,32 @@ export default async function Today({ searchParams }: { searchParams: Promise<{ 
         {toast}
         <InstallPrompt />
         {profile?.morning_briefing !== false && (
-          <div className="card stack g8" style={{ borderRadius: 12 }}>
+          <div className="card stack g8" style={{ borderRadius: 24 }}>
             <Greeting name={name} style={{ fontSize: 24 }} />
             <p style={{ margin: 0, fontSize: 17 }}>{briefing}</p>
           </div>
         )}
 
-        <p className="muted" style={{ margin: 0, fontSize: 15 }}>
-          {open.length} open {open.length === 1 ? "case" : "cases"}{inPlay ? `, ${money(inPlay)} at stake` : ""}{takenBack ? `. ${money(takenBack)} recovered so far` : ""}.
-          {nextYours ? <> Your next deadline: {nextYours.title.toLowerCase()}, {relDays(daysUntil(nextYours.due_date))}.</> : null}
-        </p>
+        <div className="stats">
+          <div className="panel-orange stack">
+            <span className="small" style={{ color: "#A8441F" }}>Next deadline</span>
+            <span className="big-num">{nextYours ? relDays(daysUntil(nextYours.due_date)) : "—"}</span>
+            <span className="small muted" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{nextYours ? caseOf(nextYours.case_id)?.title : "Nothing due"}</span>
+          </div>
+          <div className="panel-gray stack">
+            <span className="small">Taken back</span>
+            <span className="big-num">{money(takenBack)}</span>
+            <span className="small muted">from {won.length} {won.length === 1 ? "win" : "wins"}</span>
+          </div>
+          <div className="card stack" style={{ borderRadius: 22 }}>
+            <span className="small muted">Open fights</span>
+            <span className="big-num">{open.length}</span>
+          </div>
+          <div className="card stack" style={{ borderRadius: 22 }}>
+            <span className="small muted">Still in play</span>
+            <span className="big-num">{money(inPlay)}</span>
+          </div>
+        </div>
 
         <div style={{ maxWidth: 520 }}>
           <CtaLink href={cta.href} variant="orange" block>{cta.label}</CtaLink>
@@ -117,7 +134,7 @@ export default async function Today({ searchParams }: { searchParams: Promise<{ 
             <div className="sec-head"><h2>Your fights <span className="n">{open.length}</span></h2><Link href="/app/cases">See all</Link></div>
             <div className="card" style={{ padding: "4px 18px" }}>
               {open.slice(0, 8).map((c) => <CaseRowLink key={c.id} c={c} viewerId={user.id} deadline={byCase.get(c.id)} />)}
-              {!open.length && <p className="muted">No open cases.</p>}
+              {!open.length && <p className="muted">No open fights. Nice.</p>}
             </div>
           </section>
           <section className="b">

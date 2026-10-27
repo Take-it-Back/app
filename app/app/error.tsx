@@ -10,6 +10,7 @@ export default function AppError({ error, reset }: { error: Error & { digest?: s
   return (
     <main id="main" className="app-main">
       <div className="stack g16" style={{ paddingTop: 48 }}>
+        <span className="hand" style={{ fontSize: 30, color: "#A8441F" }}>that didn&apos;t work</span>
         <h1 className="page-title">Something went <em className="o">wrong</em></h1>
         <p className="muted" style={{ margin: 0 }}>Your cases are safe. Try again, and if it keeps happening, email hello@takeitback.app.</p>
         <div className="row g12 wrap">

@@ -55,7 +55,7 @@ export default async function LetterPage({ params, searchParams }: { params: Pro
             </div>
           ))}
           {letter.status !== "sent" && !["complaint", "small_claims_statement"].includes(letter.kind) && (
-            <Link href={`/app/cases/${id}/letter/send?id=${letter.id}`} className="card row g12" style={{ textDecoration: "none", borderRadius: 12, alignItems: "center" }}>
+            <Link href={`/app/cases/${id}/letter/send?id=${letter.id}`} className="card row g12" style={{ textDecoration: "none", borderRadius: 22, alignItems: "center" }}>
               <span className="tool-ico" style={{ background: "#FDEEE7", color: "#A8441F" }}>✉</span>
               <span className="stack g4 grow"><span style={{ fontWeight: 600 }}>Send it for me</span><span className="muted small">Certified mail with tracking, or fax. No printer needed.</span></span>
               <span style={{ color: "#BF4F28", fontSize: 18 }}>→</span>

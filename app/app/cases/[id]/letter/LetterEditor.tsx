@@ -144,7 +144,7 @@ export default function LetterEditor({ letter, caseId }: { letter: LetterRow; ca
           <span style={{ fontSize: 14 }}>Letter</span>
           <textarea className="input" value={body} onChange={(e) => setBody(e.target.value)} rows={22} readOnly={sent} style={{ fontSize: 15, boxShadow: "0 6px 12px rgba(26,26,26,0.06)" }} />
         </label>
-        <span className="muted small">Fill in anything in [brackets] before you send it.</span>
+        <span className="hand muted" style={{ fontSize: 20 }}>fill in anything in [brackets] before you send</span>
         <div className="row wrap g8">
           {!sent && <button type="button" className="btn-plain" onClick={save} disabled={pending}>Save changes</button>}
           <button type="button" className="btn-plain" onClick={() => { navigator.clipboard.writeText(`${subject}\n\n${body}`); flash("Copied"); }}>Copy text</button>

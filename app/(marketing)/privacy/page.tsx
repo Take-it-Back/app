@@ -8,6 +8,7 @@ export default function Privacy() {
   return (
     <>
       <main id="main" className="stack g16" style={{ maxWidth: 720, margin: "0 auto", padding: "72px 24px 96px", fontSize: 16, lineHeight: 1.65 }}>
+        <span className="eyebrow">Privacy</span>
         <h1 className="h-l">Your papers stay <em className="o">yours</em>.</h1>
         <p className="muted">Last updated October 12, 2026. This page is a plain summary and will be finalized with counsel before general launch.</p>
         <h2 className="serif" style={{ fontSize: 26, margin: "16px 0 0" }}>What we keep</h2>

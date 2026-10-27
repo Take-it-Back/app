@@ -52,6 +52,7 @@ export default async function FoundPage({ params, searchParams }: { params: Prom
           <div className="panel-orange stack" style={{ position: "relative" }}>
             <span className="small muted">You may owe up to</span>
             <span className="big-num">{money(c.potential_savings)} less</span>
+            <span className="hand" style={{ position: "absolute", right: 16, top: 12, fontSize: 22, color: "#A8441F", transform: "rotate(5deg)" }}>worth a letter</span>
           </div>
         ) : null}
 

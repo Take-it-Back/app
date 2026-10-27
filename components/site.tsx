@@ -14,16 +14,17 @@ export function SiteHeader() {
   );
 }
 
-export function CtaBand({ title, italic, sub }: { title: string; italic?: string; sub?: string }) {
-  const es = /[¿ñ]|Escanee/.test(`${title} ${sub || ""}`);
+export function CtaBand({ title, italic, sub }: { title: string; italic: string; sub?: string }) {
   return (
-    <section className="wrap-1200" style={{ paddingTop: 96, paddingBottom: 96 }}>
-      <div className="end-cta">
-        <div className="stack g8" style={{ maxWidth: 720 }}>
-          <h2 className="serif" style={{ margin: 0, fontSize: "clamp(28px, 3vw, 38px)", fontWeight: 400, lineHeight: 1.15 }}>{italic ? `${title} ${italic}` : title}</h2>
-          {sub && <p className="muted" style={{ margin: 0 }}>{sub}</p>}
+    <section style={{ padding: "112px 24px" }}>
+      <div className="row wrap between g32" style={{ maxWidth: 1152, margin: "0 auto", background: "#1A1A1A", borderRadius: 32, padding: "clamp(44px, 7vw, 88px)" }}>
+        <div className="stack g12" style={{ flex: "1 1 460px" }}>
+          <h2 className="serif" style={{ margin: 0, fontSize: "clamp(38px, 4.8vw, 62px)", lineHeight: 1.05, color: "#fff" }}>
+            {title} <em style={{ color: "#F0A07E" }}>{italic}</em>
+          </h2>
+          {sub && <p style={{ margin: 0, fontSize: 17, color: "#D4D4D4" }}>{sub}</p>}
         </div>
-        <CtaLink href="/login?mode=signup">{es ? "Empezar gratis" : "Start free"}</CtaLink>
+        <div className="stack g8"><CtaLink href="/login?mode=signup" variant="light">Start free</CtaLink><span style={{ color: "#BDBDBD", fontSize: 13 }}>No card needed. Premium trial is 7 days free.</span></div>
       </div>
     </section>
   );
@@ -45,7 +46,7 @@ export function SiteFooter() {
         <div className="grid-tiles" style={{ gap: 32 }}>
           <div className="stack g12">
             <Logo />
-            <span className="muted" style={{ fontSize: 14 }}>Help with medical bills, insurance denials, landlords and debt collectors.</span>
+            <span className="muted" style={{ fontSize: 14 }}>Your rights, on the clock.</span>
           </div>
           <nav aria-label="Features" className="stack g8" style={{ fontSize: 15 }}>
             <span className="eyebrow">Features</span>

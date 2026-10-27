@@ -4,12 +4,13 @@ import { pageMeta, JsonLd, breadcrumbs, faqPage } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { CtaBand } from "@/components/site";
 import { CtaLink } from "@/components/ui";
-import { SampleCaseLetter, SampleFindings } from "@/components/SampleDocs";
+import { Phone } from "@/components/screens";
 import Faq from "@/components/Faq";
+import FeatureIcon from "@/components/FeatureIcon";
 import { PROBLEMS, SCENARIOS, problemBySlug } from "@/lib/marketing";
 import { guidesFor } from "@/lib/guides";
 
-const CTA = { medical: "Have a hospital bill?", insurance: "Have a denial letter?", renters: "Waiting on a deposit or a repair?", debt: "Got a collection letter?" } as const;
+const CTA = { medical: "Fighting a hospital bill?", insurance: "Fighting your insurance company?", renters: "Fighting your landlord?", debt: "Fighting a debt collector?" } as const;
 
 export function generateStaticParams() {
   return PROBLEMS.map((p) => ({ slug: p.slug }));
@@ -28,72 +29,122 @@ export default async function ProblemPage({ params }: { params: Promise<{ slug: 
   return (
     <main id="main">
       <JsonLd data={[breadcrumbs([["Home", "/"], ["Who we fight", "/fight"], [p.name, `/fight/${p.slug}`]]), faqPage(p.faqs)]} />
-      <section className="wrap-1200 row wrap" style={{ paddingTop: "clamp(32px, 5vw, 64px)", gap: 56, alignItems: "center" }}>
-        <div className="stack g16" style={{ flex: "1 1 440px", minWidth: 0 }}>
-          <Link href="/fight" className="muted" style={{ fontSize: 14, textDecoration: "none", padding: "10px 0", alignSelf: "flex-start" }}>← Everything we help with</Link>
-          <h1 className="h-xl" style={{ fontSize: "clamp(40px, 4.8vw, 62px)" }}>{p.headline.filter(Boolean).join(" ")}</h1>
+      <section className="wrap-1200 row wrap" style={{ paddingTop: "clamp(40px, 6vw, 72px)", gap: 56, alignItems: "center" }}>
+        <div className="stack g16" style={{ flex: "1 1 460px", minWidth: 0 }}>
+          <Link href="/fight" className="muted" style={{ fontSize: 14, textDecoration: "none", padding: "10px 0", alignSelf: "flex-start" }}>← Everyone we fight</Link>
+          <span className="row g8"><span className="ico o"><FeatureIcon slug={p.slug} /></span><span className="eyebrow" style={{ fontSize: 13 }}>Fight back against {p.name.toLowerCase()}</span></span>
+          <h1 className="h-xl" style={{ fontSize: "clamp(44px, 5.4vw, 70px)" }}>{p.headline[0]} <em className="o">{p.headline[1]}</em>.</h1>
           <p className="lede">{p.lede}</p>
           <div className="row wrap g12" style={{ marginTop: 4 }}>
             <CtaLink href="/login?mode=signup">Scan yours free</CtaLink>
-            <Link href="/how-it-works" className="btn-plain" style={{ minHeight: 50 }}>How it works</Link>
+            <Link href="/how-it-works" className="btn-plain" style={{ minHeight: 52 }}>How it works</Link>
           </div>
         </div>
-        <div style={{ flex: "1 1 440px", minWidth: 0 }}><SampleFindings c={c} /></div>
+        <div style={{ flex: "1 1 360px", display: "flex", justifyContent: "center" }}>
+          <Phone kind="found" s={p.scenario} label={`What we found: ${c.title}`} />
+        </div>
       </section>
 
-      <section className="wrap-1200 m-section stack g20">
-        <h2 className="h-l" style={{ fontSize: "clamp(32px, 3.4vw, 44px)" }}>Common problems</h2>
-        <div className="rule-rows two">
+      <section className="m-section">
+        <div className="panel-sec open">
+        <div className="inner stack g24">
+        <div className="stack g8">
+          <span className="eyebrow" style={{ fontSize: 13 }}>What we catch</span>
+          <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>The things that go <em className="o">wrong</em> most</h2>
+        </div>
+        <ul className="check-list">
           {p.catches.map(([t, b]) => (
-            <div key={t} className="rule-row"><span className="rule-name">{t}</span><span className="muted">{b}</span></div>
+            <li key={t}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#BF4F28" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flex: "none", marginTop: 2 }}><path d="M5 12l5 5 9-10" /></svg>
+              <span className="stack g4"><span style={{ fontWeight: 500, fontSize: 17 }}>{t}</span><span className="muted" style={{ fontSize: 15 }}>{b}</span></span>
+            </li>
           ))}
+        </ul>
+        </div>
         </div>
       </section>
 
-      <section className="wrap-1200 m-section row wrap" style={{ gap: 56, alignItems: "flex-start" }}>
-        <div className="stack g16" style={{ flex: "1 1 400px", minWidth: 0 }}>
-          <h2 className="h-l" style={{ fontSize: "clamp(32px, 3.4vw, 44px)" }}>Example: {c.counterparty}</h2>
-          <p style={{ margin: 0, fontSize: 17, lineHeight: 1.6 }}>{c.summary}</p>
-          <ol className="plain-steps" style={{ fontSize: 16 }}>
-            {[...c.timeline].reverse().map((t) => <li key={t.date + t.text}><strong>{t.date}:</strong> {t.text}</li>)}
-          </ol>
-          <p style={{ margin: 0, fontSize: 16, lineHeight: 1.6 }}><strong>Their reply: {c.reply.verdict}.</strong> {c.reply.said} Next: {c.reply.next}</p>
+      <section className="m-section">
+        <div className="wrap-1200 stack g8" style={{ marginBottom: 28 }}>
+          <span className="eyebrow" style={{ fontSize: 13 }}>A real example</span>
+          <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>{c.counterparty}, <em className="o">start to finish</em></h2>
+          <p className="lede" style={{ fontSize: 17 }}>{c.summary}</p>
         </div>
-        <div style={{ flex: "1 1 440px", minWidth: 0 }}><SampleCaseLetter {...c.letter} /></div>
-      </section>
-
-      <section className="wrap-1200 m-section row wrap" style={{ gap: 56, alignItems: "flex-start" }}>
-        <div className="stack g16" style={{ flex: "1 1 460px", minWidth: 0 }}>
-          <h2 className="h-l" style={{ fontSize: "clamp(32px, 3.4vw, 44px)" }}>The rules we cite</h2>
-          <div className="rule-rows two">
-            {p.rules.map(([t, b]) => <div key={t} className="rule-row"><span className="rule-name">{t}</span><span>{b}</span></div>)}
+        <div className="strip" tabIndex={0} role="region" aria-label="Examples, scroll sideways">
+          <div>
+            {([
+              ["scan", "Snap it"],
+              ["found", "See what's wrong"],
+              ["letter", "Send the letter"],
+              ["tracker", "Track both deadlines"],
+              ["reply", "Decode their reply"],
+            ] as const).map(([k, t], i) => (
+              <figure key={k}>
+                <Phone kind={k} s={p.scenario} size="sm" label={`${t}: ${c.counterparty}`} />
+                <figcaption className="row g8"><span className="serif" style={{ fontSize: 24, color: "#BF4F28", lineHeight: 1 }}>{i + 1}</span><span style={{ fontWeight: 500 }}>{t}</span></figcaption>
+              </figure>
+            ))}
           </div>
-          <p className="muted small" style={{ margin: 0 }}>General information. Rules vary by state and plan, and we check the details on your letter.</p>
-        </div>
-        <div className="stack g12" style={{ flex: "1 1 340px", minWidth: 0 }}>
-          <h3 style={{ margin: 0, fontSize: 18 }}>Plus the rules for your state</h3>
-          <ul style={{ margin: 0, paddingLeft: 20, lineHeight: 1.7 }}>{p.state.map((t) => <li key={t}>{t}</li>)}</ul>
-          <p className="muted" style={{ margin: 0, fontSize: 15 }}>All 50 states and DC, with sources. <Link href="/states">Rules by state</Link> · <Link href="/legal-aid">Free legal aid</Link></p>
         </div>
       </section>
 
-      <section className="wrap-1200 m-section stack g16">
-        <h2 className="h-l" style={{ fontSize: "clamp(32px, 3.4vw, 44px)" }}>What you'll do</h2>
-        <ol className="plain-steps">
-          {p.steps.map(([t, b]) => <li key={t}><strong>{t}.</strong> {b}</li>)}
+      <section className="m-section">
+        <div className="panel-sec ink">
+          <div className="inner row wrap" style={{ gap: 48, alignItems: "flex-start" }}>
+            <div className="stack g12" style={{ flex: "1 1 320px" }}>
+              <span className="eyebrow" style={{ fontSize: 13, color: "#F0A07E" }}>Rules on your side</span>
+              <h2 className="serif" style={{ margin: 0, fontSize: "clamp(32px, 3.6vw, 46px)", lineHeight: 1.1 }}>We name the rule, so they <em className="o">take you seriously</em>.</h2>
+              <p className="muted small" style={{ margin: 0 }}>General information. Rules vary by state and plan, and we'll check the details on your letter.</p>
+              <div className="stack g8" style={{ marginTop: 12, padding: "18px 20px", borderRadius: 18, background: "#262626" }}>
+                <span style={{ fontWeight: 600, color: "#fff" }}>Plus the rules for your state</span>
+                <ul style={{ margin: 0, paddingLeft: 18, color: "#D4D4D4", fontSize: 15, lineHeight: 1.6 }}>
+                  {p.state.map((t) => <li key={t}>{t}</li>)}
+                </ul>
+                <span style={{ fontSize: 14, color: "#BDBDBD" }}>All 50 states and DC, with sources. <Link href="/legal-aid" style={{ color: "#F0A07E" }}>Need a person? Free legal aid near you</Link></span>
+              </div>
+            </div>
+            <div className="stack" style={{ flex: "1 1 420px" }}>
+              {p.rules.map(([t, b], i) => (
+                <div key={t} className="stack g4" style={{ padding: "18px 0", borderBottom: i < p.rules.length - 1 ? "1px solid #333" : 0 }}>
+                  <span style={{ fontWeight: 600, color: "#F0A07E" }}>{t}</span>
+                  <span style={{ fontSize: 16, color: "#D4D4D4" }}>{b}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="m-section">
+        <div className="panel-sec open">
+        <div className="inner stack g32">
+        <div className="stack g8">
+          <span className="eyebrow" style={{ fontSize: 13 }}>Three steps</span>
+          <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>What you'll <em className="o">do</em></h2>
+        </div>
+        <ol className="grid-auto" style={{ margin: 0, padding: 0, listStyle: "none", gap: 36 }}>
+          {p.steps.map(([t, b], i) => (
+            <li key={t} className="stack g8" style={{ borderTop: "1px solid #1A1A1A", paddingTop: 22 }}>
+              <span className="serif" style={{ fontSize: 46, lineHeight: 1, color: "#BF4F28" }}>{i + 1}</span>
+              <h3 style={{ margin: 0, fontSize: 20, fontWeight: 500 }}>{t}</h3>
+              <p className="muted" style={{ margin: 0, fontSize: 16 }}>{b}</p>
+            </li>
+          ))}
         </ol>
+        </div>
+        </div>
       </section>
 
-      <section className="stack g16 m-section" style={{ maxWidth: 820, margin: "0 auto", paddingLeft: 24, paddingRight: 24 }}>
-        <h2 className="h-l" style={{ fontSize: "clamp(32px, 3.4vw, 44px)" }}>Common questions</h2>
+      <section className="stack g24 m-section" style={{ maxWidth: 820, margin: "0 auto", paddingLeft: 24, paddingRight: 24 }}>
+        <h2 className="h-l" style={{ fontSize: "clamp(34px, 4vw, 52px)" }}>Common <em className="o">questions</em></h2>
         <Faq items={p.faqs} />
-        <h3 style={{ margin: "20px 0 0", fontSize: 18 }}>Guides</h3>
-        <div className="stack">
+        <div className="stack g8">
+          <span className="eyebrow" style={{ marginTop: 12 }}>Guides</span>
           {guidesFor(p.slug).map((g) => <Link key={g.slug} href={`/guides/${g.slug}`} className="list-row" style={{ fontWeight: 500 }}>{g.title} →</Link>)}
         </div>
       </section>
 
-      <CtaBand title={`${CTA[p.scenario]} Scan it free.`} sub="See what's wrong in about a minute. No card needed." />
+      <CtaBand title={CTA[p.scenario]} italic="Start here." sub="Scan it free and see where you stand in a minute." />
     </main>
   );
 }

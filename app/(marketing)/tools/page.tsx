@@ -20,11 +20,11 @@ export default function ToolsPage() {
   return (
     <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Free tools", "/tools"]])} />
-      <PageHead eyebrow="Free tools" title="Free tools" lede="These run in your browser. Nothing you type is saved or sent anywhere. General information, not legal advice." />
+      <PageHead eyebrow="Free tools" title="Quick answers you can use" italic="right now" after="." lede="These run in your browser. Nothing you type is saved or sent anywhere. General information, not legal advice." />
       <section className="wrap-1200" style={{ paddingTop: 32 }}>
         <div className="grid-auto" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 16 }}>
           {TOOL_LIST.map((t) => (
-            <Link key={t.href} href={t.href} className="card stack g8" style={{ textDecoration: "none", padding: 26, borderRadius: 12 }}>
+            <Link key={t.href} href={t.href} className="card stack g8" style={{ textDecoration: "none", padding: 26, borderRadius: 24 }}>
               <span className="serif" style={{ fontSize: 26, lineHeight: 1.15 }}>{t.title}</span>
               <span className="muted" style={{ fontSize: 15.5 }}>{t.text}</span>
               <span style={{ fontWeight: 500, color: "#A8441F", fontSize: 14, marginTop: "auto" }}>Open the tool →</span>
@@ -33,7 +33,7 @@ export default function ToolsPage() {
         </div>
         <p className="muted" style={{ marginTop: 28 }}>Want more? <Link href="/guides">Read the guides</Link> or <Link href="/states">see the rules for your state</Link>.</p>
       </section>
-      <CtaBand title="Scan your letter and see what's wrong." sub="Free, no card needed. Premium writes the letter and tracks the deadlines." />
+      <CtaBand title="Rather we just" italic="handle it?" sub="Scan your letter free and we'll show you what's wrong." />
     </main>
   );
 }

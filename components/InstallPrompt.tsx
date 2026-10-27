@@ -44,7 +44,7 @@ export default function InstallPrompt() {
 
   if (!show) return null;
   return (
-    <div className="card row g12" style={{ alignItems: "center", borderRadius: 12, padding: "14px 16px", position: "fixed", left: 12, right: 12, bottom: "calc(96px + env(safe-area-inset-bottom))", maxWidth: 520, margin: "0 auto", zIndex: 45, boxShadow: "0 10px 30px rgba(0,0,0,.14)" }} role="region" aria-label="Install the app">
+    <div className="card row g12" style={{ alignItems: "center", borderRadius: 20, padding: "14px 16px", position: "fixed", left: 12, right: 12, bottom: "calc(96px + env(safe-area-inset-bottom))", maxWidth: 520, margin: "0 auto", zIndex: 45, boxShadow: "0 10px 30px rgba(0,0,0,.14)" }} role="region" aria-label="Install the app">
       <img src="/icons/icon-192.png" alt="" width={44} height={44} style={{ borderRadius: 11, flex: "none" }} />
       <span className="stack grow" style={{ minWidth: 0 }}>
         <span style={{ fontWeight: 500, fontSize: 15 }}>Add Take it back to your home screen</span>

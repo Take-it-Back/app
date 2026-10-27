@@ -30,7 +30,7 @@ export default async function LawTopicIndex({ params }: { params: Promise<{ topi
           <span style={{ fontSize: 16, fontWeight: 500 }}>{t.cta}</span>
           <CtaLink href="/login?mode=signup" variant="orange">Start free</CtaLink>
         </div>
-        <div className="card" style={{ padding: "8px 12px", borderRadius: 12 }}>
+        <div className="card" style={{ padding: "8px 12px", borderRadius: 22 }}>
           <table className="pt">
             <thead>
               <tr><th scope="col">State</th>{t.cols.map(([h]) => <th key={h} scope="col">{h}</th>)}</tr>
@@ -51,7 +51,7 @@ export default async function LawTopicIndex({ params }: { params: Promise<{ topi
           {LAW_TOPICS.filter((x) => x.slug !== t.slug).map((x) => <Link key={x.slug} href={`/laws/${x.slug}`} className="list-row" style={{ fontWeight: 500 }}>{x.indexTitle}</Link>)}
         </div>
       </section>
-      <CtaBand title="Scan your letter and see what's wrong." sub="Free, no card needed. Premium writes the letter and tracks the deadlines." />
+      <CtaBand title="Rather we just" italic="handle it?" sub="Scan your letter free and we'll show you what's wrong." />
     </main>
   );
 }

@@ -12,6 +12,7 @@ const H2 = { fontSize: 26, margin: "16px 0 0" } as const;
 export default function DeleteAccountPage() {
   return (
     <main id="main" className="stack g16" style={{ maxWidth: 720, margin: "0 auto", padding: "72px 24px 96px", fontSize: 16, lineHeight: 1.65 }}>
+      <span className="eyebrow">Your data</span>
       <h1 className="h-l">Delete your <em className="o">account</em></h1>
       <p>You can delete your Take it back account and everything in it at any time. It happens right away and can&apos;t be undone.</p>
 

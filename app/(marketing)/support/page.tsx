@@ -24,9 +24,9 @@ export default async function SupportPage({ searchParams }: { searchParams: Prom
   return (
     <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["Support", "/support"]])} />
-      <PageHead eyebrow="Support" title="Support" lede="Questions about your account, billing, a scan or a letter? Send us a message. A person reads every one, and we usually reply within one business day." />
+      <PageHead eyebrow="Support" title="Talk to a" italic="person" after="." lede="Questions about your account, billing, a scan or a letter? Send us a message. A person reads every one, and we usually reply within one business day." />
       <div className="wrap-1200 row wrap g32" style={{ alignItems: "flex-start", paddingTop: 40, paddingBottom: 96 }}>
-        <section className="card stack g16" style={{ flex: "1 1 520px", padding: "clamp(20px, 3vw, 32px)", borderRadius: 12 }} aria-labelledby="contact">
+        <section className="card stack g16" style={{ flex: "1 1 520px", padding: "clamp(20px, 3vw, 32px)", borderRadius: 24 }} aria-labelledby="contact">
           <h2 id="contact" className="serif" style={{ margin: 0, fontSize: 30 }}>Send us a message</h2>
           {sent && <p className="notice" role="status" style={{ margin: 0 }}>Thanks, we got it.</p>}
           {user ? (
@@ -39,7 +39,7 @@ export default async function SupportPage({ searchParams }: { searchParams: Prom
         <aside className="stack g12" style={{ flex: "1 1 300px" }} aria-label="Other ways to get help">
           <span className="eyebrow">Faster answers</span>
           {QUICK.map(([t, d, href]) => (
-            <Link key={href} href={href} className="card stack g4" style={{ textDecoration: "none", borderRadius: 12, padding: "16px 18px" }}>
+            <Link key={href} href={href} className="card stack g4" style={{ textDecoration: "none", borderRadius: 18, padding: "16px 18px" }}>
               <span style={{ fontWeight: 500 }}>{t} →</span>
               <span className="muted small">{d}</span>
             </Link>

@@ -35,7 +35,7 @@ export default async function StateHub({ params }: { params: Promise<{ state: st
           {LAW_TOPICS.map((t) => {
             const f = t.build(s).facts[0];
             return (
-              <Link key={t.slug} href={`/laws/${t.slug}/${slug}`} className="card stack g8" style={{ textDecoration: "none", padding: 24, borderRadius: 12 }}>
+              <Link key={t.slug} href={`/laws/${t.slug}/${slug}`} className="card stack g8" style={{ textDecoration: "none", padding: 24, borderRadius: 24 }}>
                 <span className="eyebrow">{t.name}</span>
                 {f && <span className="muted small">{f.label}</span>}
                 {f && <span style={{ fontSize: 17, lineHeight: 1.45 }}>{f.text}</span>}
@@ -44,7 +44,7 @@ export default async function StateHub({ params }: { params: Promise<{ state: st
             );
           })}
           {legalAidFor(s) && (
-            <Link href={`/legal-aid/${slug}`} className="card stack g8" style={{ textDecoration: "none", padding: 24, borderRadius: 12 }}>
+            <Link href={`/legal-aid/${slug}`} className="card stack g8" style={{ textDecoration: "none", padding: 24, borderRadius: 24 }}>
               <span className="eyebrow">Free legal aid</span>
               <span style={{ fontSize: 17, lineHeight: 1.45 }}>Phone numbers and websites for free civil legal help in {s}.</span>
               <span style={{ fontWeight: 500, color: "#A8441F", fontSize: 14, marginTop: "auto" }}>Find legal aid →</span>
@@ -53,7 +53,7 @@ export default async function StateHub({ params }: { params: Promise<{ state: st
         </div>
         <p className="muted small" style={{ margin: 0 }}><Link href="/states">All states</Link> · Compiled from state statutes, court and agency sites, and 50-state surveys, checked October 2026. Laws change and exceptions apply.</p>
       </section>
-      <CtaBand title="Scan your letter and see what's wrong." sub="Free, no card needed. Premium writes the letter and tracks the deadlines." />
+      <CtaBand title="Rather we just" italic="handle it?" sub="Scan your letter free and we'll show you what's wrong." />
     </main>
   );
 }

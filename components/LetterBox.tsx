@@ -13,7 +13,7 @@ export default function LetterBox({ title, to, lines }: { title: string; to: str
     <section style={{ marginTop: 40 }} aria-labelledby="sample-letter">
       <h2 id="sample-letter" className="serif" style={{ fontSize: 30, margin: "0 0 6px", fontWeight: 400 }}>{title}</h2>
       <p className="muted" style={{ margin: "0 0 12px", fontSize: 15 }}>Fill in the [BRACKETS], keep a copy, and send it in a way that gives you proof.</p>
-      <div className="card" style={{ padding: 22, borderRadius: 12 }}>
+      <div className="card" style={{ padding: 22, borderRadius: 22 }}>
         <p className="muted small" style={{ margin: "0 0 10px" }}>To: {to}</p>
         {lines.map((l, i) => <p key={i} style={{ margin: "0 0 10px", fontSize: 15.5, lineHeight: 1.65 }}>{l}</p>)}
       </div>

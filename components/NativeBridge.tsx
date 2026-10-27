@@ -120,7 +120,7 @@ export default function NativeBridge() {
   if (!locked || !path.startsWith("/app")) return null;
   return (
     <div role="dialog" aria-modal="true" aria-label="App locked" style={{ position: "fixed", inset: 0, zIndex: 1000, background: "#F6F4EF", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20, padding: 24 }}>
-      <img src="/icons/icon-192.png" width={72} height={72} alt="" style={{ borderRadius: 12 }} />
+      <img src="/icons/icon-192.png" width={72} height={72} alt="" style={{ borderRadius: 18 }} />
       <span className="serif" style={{ fontSize: 28 }}>Take it back is locked</span>
       <button type="button" className="btn btn-ink" onClick={unlock}>Unlock</button>
     </div>

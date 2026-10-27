@@ -44,7 +44,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
       />
       <article style={{ maxWidth: 760, margin: "0 auto", padding: "clamp(40px, 6vw, 72px) 24px 0" }}>
         <Link href="/es/guias" className="muted tap" style={{ fontSize: 14, textDecoration: "none" }}>← Todas las guías</Link>
-        <div style={{ marginTop: 18, borderRadius: 12, overflow: "hidden" }}>
+        <div style={{ marginTop: 18, borderRadius: 24, overflow: "hidden" }}>
           <GuideCover slug={g.slug} category={en.category} icon={en.icon} ratio="2.4 / 1" />
         </div>
         <h1 className="h-xl" style={{ fontSize: "clamp(36px, 5vw, 56px)", marginTop: 22 }}>{g.title}</h1>
@@ -91,7 +91,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
           </div>
         </section>
       </article>
-      <CtaBand title="Escanee su carta y vea qué está mal." sub="Gratis, sin tarjeta. Premium escribe la carta y vigila las fechas." />
+      <CtaBand title="¿Prefiere que lo" italic="hagamos por usted?" sub="Escanee su carta gratis y le mostramos qué está mal." />
     </main>
   );
 }

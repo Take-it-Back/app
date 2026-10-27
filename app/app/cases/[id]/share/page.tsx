@@ -66,7 +66,7 @@ export default async function SharePage({ params, searchParams }: { params: Prom
             {!shares.length && <p className="muted">No one yet.</p>}
             <div className="stack g8">
               {shares.map((s) => (
-                <div key={s.id} className="card stack g8" style={{ borderRadius: 12 }}>
+                <div key={s.id} className="card stack g8" style={{ borderRadius: 20 }}>
                   <span className="row between g8">
                     <span className="stack" style={{ minWidth: 0 }}><span style={{ fontWeight: 500, overflow: "hidden", textOverflow: "ellipsis" }}>{s.helper_email}</span><span className="muted small">{s.accepted_at ? `Joined ${shortDate(s.accepted_at)}` : `Invited ${shortDate(s.created_at)} · waiting for them to sign in`}</span></span>
                     <span className={`tag ${s.accepted_at ? "tag-orange" : "tag-gray"}`}>{s.accepted_at ? "Helping" : "Invited"}</span>

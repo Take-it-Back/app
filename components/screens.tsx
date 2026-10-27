@@ -167,6 +167,7 @@ export function Screen({ kind, s = "medical" }: { kind: ShotKind; s?: ScenarioKe
           <div className="s-o" style={{ textAlign: "center" }}>
             <span className="s-k" style={{ color: "#A8441F" }}>{c.you.label} by {c.you.date}</span>
             <span className="s-num" style={{ fontSize: 44 }}>{c.you.days}</span>
+            <span className="hand" style={{ fontSize: 20 }}>we'll nudge you</span>
           </div>
           <span className="s-k" style={{ textTransform: "uppercase", letterSpacing: 1 }}>Coming up</span>
           {[
@@ -218,6 +219,7 @@ export function Screen({ kind, s = "medical" }: { kind: ShotKind; s?: ScenarioKe
             <span style={{ fontWeight: 600 }}>What to do next</span>
             <span>{c.reply.next}</span>
           </div>
+          <span className="hand muted" style={{ fontSize: 20 }}>round two, ready</span>
           <div style={{ marginTop: "auto" }}><Btn>Write the next letter</Btn></div>
         </>
       );

@@ -2,7 +2,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { pageMeta, JsonLd, breadcrumbs } from "@/lib/seo";
 import { CtaBand } from "@/components/site";
+import { Peek } from "@/components/screens";
 import { PageHead } from "@/components/Faq";
+import FeatureIcon from "@/components/FeatureIcon";
 import { PROBLEMS } from "@/lib/marketing";
 
 export const metadata: Metadata = pageMeta({ title: "Who we fight: hospitals, insurers, landlords, debt collectors", description: "Take it back helps you dispute medical bills, appeal insurance denials, get your deposit back from a landlord and make debt collectors prove it.", path: "/fight" });
@@ -11,20 +13,30 @@ export default function HelpWithPage() {
   return (
     <main id="main">
       <JsonLd data={breadcrumbs([["Home", "/"], ["What we fight", "/fight"]])} />
-      <PageHead eyebrow="Who we fight" title="What we help you dispute" after="." lede="Medical bills, insurance denials, landlords and debt collectors. Pick one to see the common problems, the rules we cite and an example case." />
-      <section className="wrap-1200" style={{ paddingTop: 40 }}>
-        <div className="rule-rows">
-          {PROBLEMS.map((p) => (
-            <Link key={p.slug} href={`/fight/${p.slug}`} className="rule-row">
-              <span className="rule-name">{p.name} →</span>
-              <span>{p.lede}</span>
-              <span className="muted">{p.catches.slice(0, 4).map(([t]) => t).join(", ")}.</span>
-            </Link>
-          ))}
-        </div>
-        <p style={{ margin: "28px 0 0", fontSize: 17, maxWidth: 720 }}><strong>Something else?</strong> Scan it anyway. If it&apos;s outside what we cover, we&apos;ll say so and point you to someone who can help.</p>
+      <PageHead eyebrow="Who we fight" title="Four industries that count on you" italic="giving up" after="." lede="Take it back is on your side, never theirs. We help patients, policyholders, renters and consumers push back, with no legal knowledge needed." />
+      <section className="wrap-1200 stack g20" style={{ paddingTop: 48 }}>
+        {PROBLEMS.map((p, i) => (
+          <Link key={p.slug} href={`/fight/${p.slug}`} className="problem-card" style={{ flexDirection: "row", flexWrap: "wrap", alignItems: "center", gap: 28, padding: 18 }}>
+            <div style={{ flex: "1 1 280px", minWidth: 0, order: i % 2 ? 2 : 0 }}><Peek kind={(["found", "letter", "tracker", "reply"] as const)[i]} s={p.scenario} tone={(["orange", "gray", "ink", "orange"] as const)[i]} /></div>
+            <div className="stack g12" style={{ flex: "2 1 360px", padding: "8px 12px" }}>
+              <span className="row g8"><span className="ico o"><FeatureIcon slug={p.slug} /></span><span className="eyebrow">{p.menu}</span></span>
+              <span className="serif" style={{ fontSize: "clamp(30px, 3.4vw, 42px)", lineHeight: 1.1 }}>{p.name}</span>
+              <span className="muted" style={{ fontSize: 16 }}>{p.lede}</span>
+              <span className="row wrap g8">{p.catches.slice(0, 4).map(([t]) => <span key={t} className="tag tag-gray">{t}</span>)}</span>
+              <span style={{ fontWeight: 500, color: "#A8441F" }}>How to fight {p.name.toLowerCase()} →</span>
+            </div>
+          </Link>
+        ))}
       </section>
-      <CtaBand title="See what's wrong with your letter." sub="Scan your letter free. It takes about a minute." />
+      <section className="m-section">
+        <div className="panel-sec orange">
+        <div className="inner stack g8">
+          <span className="serif" style={{ fontSize: "clamp(30px, 3.4vw, 42px)" }}>Something <em className="o">else</em>?</span>
+          <span style={{ fontSize: 17, color: "#4A4A4A", maxWidth: 640 }}>Scan it anyway. If it's outside what we cover, we'll tell you in plain words and point you to someone who can help.</span>
+        </div>
+        </div>
+      </section>
+      <CtaBand title="See where you" italic="stand." sub="Scan your letter free. It takes about a minute." />
     </main>
   );
 }
